@@ -1,14 +1,15 @@
-import {useMemo, useState} from 'react';
-import {Menu, Disclosure} from '@headlessui/react';
+import { useMemo, useState } from 'react';
+import { Menu } from '@headlessui/react';
 import {
   Link,
   useLocation,
   useSearchParams,
   useNavigate,
 } from '@remix-run/react';
-import {useDebounce} from 'react-use';
+import { useDebounce } from 'react-use';
+import { Disclosure } from '@headlessui/react';
 
-import {Heading, IconFilters, IconCaret, IconXMark, Text} from '~/components';
+import { Heading, IconFilters, IconCaret, IconXMark, Text } from '~/components';
 
 export function SortFilter({
   filters,
@@ -19,38 +20,41 @@ export function SortFilter({
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-      <div className="flex items-center justify-between w-full">
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className={
-            'relative flex items-center justify-center w-8 h-8 focus:ring-primary/5'
-          }
-        >
-          <IconFilters />
-        </button>
-        <SortMenu />
-      </div>
-      <div className="flex flex-col flex-wrap md:flex-row">
-        <div
-          className={`transition-all duration-200 ${
-            isOpen
-              ? 'opacity-100 min-w-full md:min-w-[240px] md:w-[240px] md:pr-8 max-h-full'
-              : 'opacity-0 md:min-w-[0px] md:w-[0px] pr-0 max-h-0 md:max-h-full'
-          }`}
-        >
-          <FiltersDrawer
-            collections={collections}
-            filters={filters}
-            appliedFilters={appliedFilters}
-          />
+      <div className="bg-contrast">
+        <div className="sm:ml-0 sm:w-full">
+          <div className="mb-4 p-4 py-2 font-bold sm:px-6 flex items-center justify-between w-full border-t border-b border-white">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className={
+                'relative flex items-center justify-center w-8 h-8 focus:ring-primary/5'
+              }
+            >
+              <IconFilters />
+            </button>
+            <SortMenu />
+          </div>
         </div>
-        <div className="flex-1">{children}</div>
+        <div className="flex flex-col flex-wrap md:flex-row">
+          <div
+            className={`pl-2 transition-all duration-400 ${isOpen
+                ? 'opacity-100 min-w-full md:min-w-[240px] md:w-[240px] md:pr-8 max-h-full'
+                : 'opacity-0 hidden md:min-w-[0px] md:w-[0px] pr-0 max-h-0 md:max-h-full'
+              }`}
+          >
+            <FiltersDrawer
+              collections={collections}
+              filters={filters}
+              appliedFilters={appliedFilters}
+            />
+          </div>
+          <div className="flex-1">{children}</div>
+        </div>
       </div>
     </>
   );
 }
 
-export function FiltersDrawer({filters = [], appliedFilters = []}) {
+export function FiltersDrawer({ filters = [], appliedFilters = [] }) {
   const [params] = useSearchParams();
   const location = useLocation();
 
@@ -85,7 +89,7 @@ export function FiltersDrawer({filters = [], appliedFilters = []}) {
 
   return (
     <>
-      <nav className="py-8">
+      <nav className="pb-4">
         {appliedFilters.length > 0 ? (
           <div className="pb-8">
             <AppliedFilters filters={appliedFilters} />
@@ -100,7 +104,7 @@ export function FiltersDrawer({filters = [], appliedFilters = []}) {
             (filter) =>
               filter.values.length > 1 && (
                 <Disclosure as="div" key={filter.id} className="w-full">
-                  {({open}) => (
+                  {({ open }) => (
                     <>
                       <Disclosure.Button className="flex justify-between w-full py-4">
                         <Text size="lead">{filter.label}</Text>
@@ -128,7 +132,7 @@ export function FiltersDrawer({filters = [], appliedFilters = []}) {
   );
 }
 
-function AppliedFilters({filters = []}) {
+function AppliedFilters({ filters = [] }) {
   const [params] = useSearchParams();
   const location = useLocation();
   return (
@@ -186,7 +190,7 @@ function getFilterLink(filter, rawInput, params, location) {
 
 const PRICE_RANGE_FILTER_DEBOUNCE = 500;
 
-function PriceRangeFilter({max, min}) {
+function PriceRangeFilter({ max, min }) {
   const location = useLocation();
   const params = useMemo(
     () => new URLSearchParams(location.search),
@@ -209,7 +213,7 @@ function PriceRangeFilter({max, min}) {
       if (minPrice !== '') price.min = minPrice;
       if (maxPrice !== '') price.max = maxPrice;
 
-      const newParams = filterInputToParams('PRICE_RANGE', {price}, params);
+      const newParams = filterInputToParams('PRICE_RANGE', { price }, params);
       navigate(`${location.pathname}?${newParams.toString()}`);
     },
     PRICE_RANGE_FILTER_DEBOUNCE,
@@ -268,7 +272,7 @@ function filterInputToParams(type, rawInput, params) {
         } else if (typeof value === 'boolean') {
           params.set(key, value.toString());
         } else {
-          const {name, value: val} = value;
+          const { name, value: val } = value;
           const allVariants = params.getAll(`variantOption`);
           const newVariant = `${name}:${val}`;
           if (!allVariants.includes(newVariant)) {
@@ -284,7 +288,7 @@ function filterInputToParams(type, rawInput, params) {
 
 export default function SortMenu() {
   const items = [
-    {label: 'Featured', key: 'featured'},
+    { label: 'Featured', key: 'featured' },
     {
       label: 'Price: Low - High',
       key: 'price-low-high',
@@ -310,8 +314,7 @@ export default function SortMenu() {
     <Menu as="div" className="relative z-40">
       <Menu.Button className="flex items-center">
         <span className="px-2">
-          <span className="px-2 font-medium">Sort by:</span>
-          <span>{(activeItem || items[0]).label}</span>
+          <span className="px-2 font-bold ml-32">Sort</span>
         </span>
         <IconCaret />
       </Menu.Button>
@@ -324,9 +327,8 @@ export default function SortMenu() {
           <Menu.Item key={item.label}>
             {() => (
               <Link
-                className={`block text-sm pb-2 px-3 ${
-                  activeItem?.key === item.key ? 'font-bold' : 'font-normal'
-                }`}
+                className={`block text-sm pb-2 px-3 ${activeItem?.key === item.key ? 'font-bold' : 'font-normal'
+                  }`}
                 to={getSortLink(item.key, params, location)}
               >
                 {item.label}
