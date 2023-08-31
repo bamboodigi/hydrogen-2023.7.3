@@ -7,7 +7,15 @@ import {CartForm} from '@shopify/hydrogen';
 import {Heading, Button, IconCheck} from '~/components';
 import {DEFAULT_LOCALE} from '~/lib/utils';
 
-export function CountrySelector() {
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
+
+export function CountrySelector(props) {
+  const { screen } = props;
+  const htmlFor = screen + "-currency";
   const [root] = useMatches();
   const fetcher = useFetcher();
   const closeRef = useRef(null);
@@ -23,6 +31,13 @@ export function CountrySelector() {
   const defaultLocalePrefix = defaultLocale
     ? `${defaultLocale?.language}-${defaultLocale?.country}`
     : '';
+
+    const filteredCountries = Object.entries(countries).reduce((acc, [key, value]) => {
+      if (value.country === "US" || value.country === "CA") {
+        acc[key] = value;
+      }
+      return acc;
+    }, {});
 
   const {ref, inView} = useInView({
     threshold: 0,
@@ -47,24 +62,38 @@ export function CountrySelector() {
   return (
     <section
       ref={observerRef}
-      className="grid w-full gap-4"
+      className={classNames(
+        screen === "mobile" ? 'inline-block' : 'flex',
+      )}
       onMouseLeave={closeDropdown}
     >
-      <Heading size="lead" className="cursor-default" as="h3">
-        Country
-      </Heading>
-      <div className="relative">
+      <label htmlFor={htmlFor} className="sr-only">
+        Currency
+      </label>
+      <div className="">
         <details
-          className="absolute w-full border rounded border-contrast/30 dark:border-white open:round-b-none overflow-clip"
+          className={classNames(
+            screen === "mobile" ? '' : 'bg-contrast',
+            'group relative -ml-2 rounded-md border-transparent'
+          )}
           ref={closeRef}
+          name="currency"
         >
-          <summary className="flex items-center justify-between w-full px-4 py-3 cursor-pointer">
-            {selectedLocale.label}
+          <summary id={htmlFor} className={classNames(
+            screen === "mobile" ? 'border-transparent bg-transparent bg-none text-xl focus:border-transparent focus:outline-none' : 'border border-white bg-contrast bg-none text-sm group-hover:text-white',
+            'flex items-center rounded-md py-0.5 pl-2 pr-5 font-bold text-white focus:ring-0'
+          )}>
+            {selectedLocale.currency}
+
+              <div className="pointer-events-none absolute inset-y-0 right-0.5 flex items-center">
+                <ChevronDownIcon className="h-5 w-5 text-white" aria-hidden="true" />
+              </div>
+
           </summary>
-          <div className="w-full overflow-auto border-t border-contrast/30 dark:border-white bg-contrast/30 max-h-36">
-            {countries &&
-              Object.keys(countries).map((countryPath) => {
-                const countryLocale = countries[countryPath];
+          <div className="border border-white rounded-md absolute top-0 bg-contrast">
+            {filteredCountries &&
+              Object.keys(filteredCountries).map((countryPath) => {
+                const countryLocale = filteredCountries[countryPath];
                 const isSelected =
                   countryLocale.language === selectedLocale.language &&
                   countryLocale.country === selectedLocale.country;
@@ -102,21 +131,15 @@ function Country({closeDropdown, countryLocale, countryUrlPath, isSelected}) {
       }}
     >
       <Button
-        className={clsx([
-          'text-contrast dark:text-primary',
-          'bg-primary dark:bg-contrast w-full p-2 transition rounded flex justify-start',
-          'items-center text-left cursor-pointer py-2 px-4',
-        ])}
+        className={classNames(
+          screen === 'mobile' ? 'text-xl' : 'rounded-md text-sm',
+          'flex items-center py-0.5 pl-2 pr-5 font-bold text-white bg-contrast'
+        )}
         type="submit"
         variant="primary"
         onClick={closeDropdown}
       >
-        {countryLocale.label}
-        {isSelected ? (
-          <span className="ml-2">
-            <IconCheck />
-          </span>
-        ) : null}
+        {countryLocale.currency}
       </Button>
     </ChangeLocaleForm>
   );
