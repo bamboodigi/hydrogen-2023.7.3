@@ -30,7 +30,6 @@ function classNames(...classes) {
 
 
 export function Footer({ config }) {
-  console.log("hi")
   const navigation = config.navigation;
 
   return (
