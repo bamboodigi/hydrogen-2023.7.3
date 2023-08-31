@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { Container } from  '../components';
+import { Container } from  '../../components';
 
 import { missingClass, formatText } from '~/lib/utils';
 
