@@ -10,6 +10,8 @@ import {
   useLoaderData,
   useMatches,
   useRouteError,
+  useEffect,
+  useLocation,
 } from '@remix-run/react';
 import {ShopifySalesChannel, Seo} from '@shopify/hydrogen';
 import invariant from 'tiny-invariant';
@@ -22,8 +24,11 @@ import favicon from '../public/favicon.svg';
 import {GenericError} from './components/GenericError';
 import {NotFound} from './components/NotFound';
 import styles from './styles/app.css';
+import fonts from './styles/custom-font.css';
 import {DEFAULT_LOCALE, parseMenu} from './lib/utils';
 import {useAnalytics} from './hooks/useAnalytics';
+import {useLoadScript} from '@shopify/hydrogen-react';
+import {useJudgeme} from '@judgeme/shopify-hydrogen'
 
 // This is important to avoid re-fetching root queries on sub-navigations
 export const shouldRevalidate = ({formMethod, currentUrl, nextUrl}) => {
@@ -43,6 +48,7 @@ export const shouldRevalidate = ({formMethod, currentUrl, nextUrl}) => {
 export const links = () => {
   return [
     {rel: 'stylesheet', href: styles},
+    {rel: 'stylesheet', href: fonts},
     {
       rel: 'preconnect',
       href: 'https://cdn.shopify.com',
@@ -74,6 +80,15 @@ export async function loader({request, context}) {
       shopId: layout.shop.id,
     },
     seo,
+    judgeme: {
+      shopDomain: context.env.JUDGEME_SHOP_DOMAIN,
+      publicToken: context.env.JUDGEME_PUBLIC_TOKEN,
+      cdnHost: context.env.JUDGEME_CDN_HOST,
+      delay: 700, // optional parameter, default to 500ms
+    },
+    klaviyo: {
+      publicToken: context.env.KLAVIYO_PUBLIC_TOKEN,
+    }
   });
 }
 
@@ -83,6 +98,18 @@ export default function App() {
   const hasUserConsent = true;
 
   useAnalytics(hasUserConsent);
+  
+  // if(pathname.includes('/products/')) {
+  //   useJudgeme(data.judgeme);
+  // }
+  const scriptStatus = useLoadScript("//static.klaviyo.com/onsite/js/klaviyo.js?company_id=" + data.klaviyo.publicToken);
+
+  useEffect(() => {
+    if (scriptStatus === 'done') {
+      // do something
+  //    console.log(scriptStatus);
+    }
+  }, [scriptStatus]);
 
   return (
     <html lang={locale.language}>
