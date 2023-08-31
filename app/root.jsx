@@ -10,9 +10,9 @@ import {
   useLoaderData,
   useMatches,
   useRouteError,
-  useEffect,
   useLocation,
 } from '@remix-run/react';
+import {useEffect} from 'react';
 import {ShopifySalesChannel, Seo} from '@shopify/hydrogen';
 import invariant from 'tiny-invariant';
 
