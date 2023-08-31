@@ -1,9 +1,9 @@
-import {Button, Grid, ProductCard, Link} from '~/components';
-import {getImageLoadingPriority} from '~/lib/const';
-import {useFetcher} from '@remix-run/react';
-import {useEffect, useState} from 'react';
+import { Button, Grid, ProductCard, Link } from '~/components';
+import { getImageLoadingPriority } from '~/lib/const';
+import { useFetcher } from '@remix-run/react';
+import { useEffect, useState } from 'react';
 
-export function ProductGrid({url, collection, ...props}) {
+export function ProductGrid({ url, collection, ...props }) {
   const [initialProducts, setInitialProducts] = useState(
     collection?.products?.nodes || [],
   );
@@ -32,7 +32,7 @@ export function ProductGrid({url, collection, ...props}) {
   useEffect(() => {
     if (!fetcher.data) return;
 
-    const {collection} = fetcher.data;
+    const { collection } = fetcher.data;
 
     setProducts((prev) => [...prev, ...collection.products.nodes]);
     setNextPage(collection.products.pageInfo.hasNextPage);
@@ -54,35 +54,33 @@ export function ProductGrid({url, collection, ...props}) {
 
   return (
     <>
+      {/* <div className="flex items-center justify-center mb-6">
+                  <Button as={PreviousLink} variant="secondary" width="full">
+                    {isLoading ? 'Loading...' : 'Load previous'}
+                  </Button>
+                </div> */}
       <Grid items={3} layout="products" {...props}>
         {products.map((product, i) => (
           !product.tags.includes("custom_patch") ? (
             <ProductCard
-            key={product.id}
-            product={product}
-            loading={getImageLoadingPriority(i)}
-            quickAdd={true}
-          />
-          ): (
-          <ProductCard
-            key={product.id}
-            product={product}
-            loading={getImageLoadingPriority(i)}
-          />
+              key={product.id}
+              product={product}
+              loading={getImageLoadingPriority(i)}
+              quickAdd={true}
+            />
+          ) : (
+            <ProductCard
+              key={product.id}
+              product={product}
+              loading={getImageLoadingPriority(i)}
+            />
           )
         ))}
       </Grid>
-
       {nextPage && (
         <div className="flex items-center justify-center mt-6">
-          <Button
-            disabled={fetcher.state !== 'idle'}
-            variant="secondary"
-            onClick={fetchMoreProducts}
-            width="full"
-            prefetch="intent"
-          >
-            {fetcher.state !== 'idle' ? 'Loading...' : 'Load more products'}
+          <Button as={NextLink} variant="secondary" width="full">
+            {isLoading ? 'Loading...' : 'Load more products'}
           </Button>
         </div>
       )}

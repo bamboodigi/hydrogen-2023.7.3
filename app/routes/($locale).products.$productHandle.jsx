@@ -1,7 +1,7 @@
-import {useRef, Suspense} from 'react';
-import {Disclosure, Listbox} from '@headlessui/react';
-import {defer, redirect} from '@shopify/remix-oxygen';
-import {useLoaderData, Await} from '@remix-run/react';
+import { useRef, Suspense, useEffect } from 'react';
+import { Disclosure, Listbox } from '@headlessui/react';
+import { defer, redirect } from '@shopify/remix-oxygen';
+import { useLoaderData, Await, } from '@remix-run/react';
 import {
   AnalyticsPageType,
   Money,
@@ -18,27 +18,51 @@ import {
   IconClose,
   ProductGallery,
   ProductSwimlane,
-  Section,
+  Container,
   Skeleton,
   Text,
   Link,
   AddToCartButton,
   Button,
+  PartialStarIcon,
+  PatchBuilder,
+  trackViewedProduct, 
+  trackAddedToCart,
 } from '~/components';
-import {getExcerpt} from '~/lib/utils';
-import {seoPayload} from '~/lib/seo.server';
-import {routeHeaders} from '~/data/cache';
-import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
+import { StarIcon } from '@heroicons/react/20/solid'
+import { getExcerpt } from '~/lib/utils';
+import { seoPayload } from '~/lib/seo.server';
+import { CACHE_LONG, routeHeaders } from '~/data/cache';
+import { MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT } from '~/data/fragments';
+
+import {
+  JudgemeMedals,
+  JudgemeCarousel,
+  JudgemeReviewsTab,
+  JudgemePreviewBadge,
+  JudgemeReviewWidget,
+  JudgemeVerifiedBadge,
+  JudgemeAllReviewsCount,
+  JudgemeAllReviewsRating,
+} from "@judgeme/shopify-hydrogen";
+
+import config from '~/data/config.js';
 
 export const headers = routeHeaders;
 
-export async function loader({params, request, context}) {
-  const {productHandle} = params;
+const configProduct = config.webpage.product;
+
+const stars_enabled = configProduct.stars;
+
+export async function loader({ params, request, context }) {
+  console.log("🚀 ~ file: ($locale).products.$productHandle.jsx:58 ~ loader ~ params, request, context:", params, request, context)
+  const { productHandle } = params;
+  
   invariant(productHandle, 'Missing productHandle param, check route filename');
 
   const selectedOptions = getSelectedProductOptions(request);
 
-  const {shop, product} = await context.storefront.query(PRODUCT_QUERY, {
+  const { shop, product } = await context.storefront.query(PRODUCT_QUERY, {
     variables: {
       handle: productHandle,
       selectedOptions,
@@ -47,13 +71,21 @@ export async function loader({params, request, context}) {
     },
   });
 
-  if (!product?.id) {
-    throw new Response('product', {status: 404});
-  }
+  const addon = await context.storefront.query(PRODUCT_QUERY, {
+    variables: {
+      handle: 'add-on-pro-ir-font-color',
+      selectedOptions,
+      country: context.storefront.i18n.country,
+      language: context.storefront.i18n.language,
+    },
+  });
 
-  if (!product.selectedVariant) {
-    return redirectToFirstVariant({product, request});
-  }
+  // console.log(addon.product);
+  // console.log(addon.product.variants);
+  // console.log(addon.product.variants.nodes[0]);
+
+
+  // console.log(product);
 
   // In order to show which variants are available in the UI, we need to query
   // all of them. But there might be a *lot*, so instead separate the variants
@@ -68,10 +100,15 @@ export async function loader({params, request, context}) {
     },
   });
 
-  const recommended = getRecommendedProducts(context.storefront, product.id);
+  if (!product?.id) {
+    throw new Response('product', { status: 404 });
+  }
 
-  // TODO: firstVariant is never used because we will always have a selectedVariant due to redirect
-  // Investigate if we can avoid the redirect for product pages with no search params for first variant
+  if (!product.selectedVariant) {
+    return redirectToFirstVariant({ product, request });
+  }
+
+  const recommended = getRecommendedProducts(context.storefront, product.id);
   const firstVariant = product.variants.nodes[0];
   const selectedVariant = product.selectedVariant ?? firstVariant;
 
@@ -106,7 +143,7 @@ export async function loader({params, request, context}) {
   });
 }
 
-function redirectToFirstVariant({product, request}) {
+function redirectToFirstVariant({ product, request }) {
   const searchParams = new URLSearchParams(new URL(request.url).search);
   const firstVariant = product.variants.nodes[0];
   for (const option of firstVariant.selectedOptions) {
@@ -116,42 +153,81 @@ function redirectToFirstVariant({product, request}) {
   throw redirect(`/products/${product.handle}?${searchParams.toString()}`, 302);
 }
 
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
+
+const demo = false;
+
+const bgColors = ["#d100d1", "#8f00ff", "#ff006d", "#01befe", "#ffdd00", "#000", "#fff", "#ff7d00"];
+const bgColor = "bg-[" + bgColors[0] + "]";
+
+
 export default function Product() {
-  const {product, shop, recommended, variants} = useLoaderData();
-  const {media, title, vendor, descriptionHtml} = product;
-  const {shippingPolicy, refundPolicy} = shop;
+  const { product, shop, recommended, variants } = useLoaderData();
+  const { media, title, vendor, descriptionHtml } = product;
+  const { shippingPolicy, refundPolicy } = shop;
+
+  useEffect(() => {
+    trackViewedProduct(product);
+  },[]);
+
+  // console.log(product);
+
+  let numRatings = product.ratingCount?.value || 0;
+  let rating = product.rating?.value || 0;
+
+  if (numRatings) { numRatings = parseInt(numRatings) }
+
+  const newTitle = title.replace(/ - Sticker$/, '').replace(/ - Limited Edition Patch \+ Sticker$/, '');
 
   return (
     <>
-      <Section className="px-0 md:px-8 lg:px-12">
-        <div className="grid items-start md:gap-6 lg:gap-20 md:grid-cols-2 lg:grid-cols-3">
-          <ProductGallery
-            media={media.nodes}
-            className="w-full lg:col-span-2"
-          />
-          <div className="sticky md:-mb-nav md:top-nav md:-translate-y-nav md:h-screen md:pt-nav hiddenScroll md:overflow-y-scroll">
-            <section className="flex flex-col w-full max-w-xl gap-8 p-6 md:mx-auto md:max-w-sm md:px-0">
-              <div className="grid gap-2">
-                <Heading as="h1" className="whitespace-normal">
-                  {title}
-                </Heading>
-                {vendor && (
+      {
+        product.tags.includes('custom_patch') ? (
+          <>
+            <Container no_max padding="y" className={classNames(
+              demo ? bgColor : "bg-white", "px-0 md:px-8 lg:px-0")}>
+              <div className="md:px-0 md:p-20 xl:px-28 xl:p-28 max-w-screen-2xl mx-auto grid 
+        items-start md:gap-6 lg:gap-0 md:grid-cols-2"
+              >
+                <PatchBuilder product={product} config={configProduct} />
+                </div>
+            </Container>
+          </>
+        ) : (
+          <>
+            <Container no_max padding="y" className={classNames(
+              demo ? bgColor : "bg-white", "px-0 md:px-8 lg:px-0 md:bg-white md:border-b-2 md:border-constrast")}>
+              <div className="md:px-0 md:p-20 xl:px-28 xl:p-28 max-w-screen-2xl mx-auto grid 
+        items-start md:gap-6 lg:gap-0 md:grid-cols-2 md:flex md:items-center md:justify-center"
+              >
+                <ProductGallery
+                  media={media.nodes}
+                  className="w-full justify-center lg:pr-16 md:w-1/2"
+                  demo={demo}
+                />
+                <div className="md:w-1/2 sticky 
+          md:pr-4 xl:pr-16 hiddenScroll 
+          md:overflow-y-scroll bg-white md:bg-transparent 
+          text-contrast border-2 border-t-2 border-l-2 border-r-2 border-black md:border-none rounded-t-2xl">
+                  <section id="product-info" className="flex flex-col w-full max-w-[33rem] gap-6 p-7 lg:pb-0
+            md:mx-auto md:px-0
+            lg:">
+                    <div className="grid gap-2">
+                      <Heading as="h1" className="text-3xl leading-[2rem] pr-5 sm:pr-0 whitespace-normal">
+                        {newTitle}
+                      </Heading>
+                      {product.rating && stars_enabled && (
+                        <>
+                          <Stars key={product.title} rating={rating} reviewCount={numRatings} />
+                        </>
+                      )}
+                      {/* {vendor && (
                   <Text className={'opacity-50 font-medium'}>{vendor}</Text>
-                )}
-              </div>
-              <Suspense fallback={<ProductForm variants={[]} />}>
-                <Await
-                  errorElement="There was a problem loading related products"
-                  resolve={variants}
-                >
-                  {(resp) => (
-                    <ProductForm
-                      variants={resp.product?.variants.nodes || []}
-                    />
-                  )}
-                </Await>
-              </Suspense>
-              <div className="grid gap-4 py-4">
+                )} */}
+                    </div>
+                    {/* <div className="grid gap-4 py-4">
                 {descriptionHtml && (
                   <ProductDetail
                     title="Product Details"
@@ -172,27 +248,51 @@ export default function Product() {
                     learnMore={`/policies/${refundPolicy.handle}`}
                   />
                 )}
+              </div> */}
+                    <div
+                      className="text-md md:text-lg lg:text-2xl leading-[1.45rem] 
+                lg:leading-[1.55rem] tracking-[-.015rem] lg:tracking-[-.015rem] 
+                text-contrast font-[400] prose dark:prose-invert"
+                      dangerouslySetInnerHTML={{ __html: descriptionHtml }}
+                    />
+                    <Suspense fallback={<ProductForm variants={[]} />}>
+                      <Await
+                        errorElement="There was a problem loading related products"
+                        resolve={variants}
+                      >
+                        {(resp) => (
+                          <ProductForm
+                            variants={resp.product?.variants.nodes || []}
+                          />
+                        )}
+                      </Await>
+                    </Suspense>
+                  </section>
+                </div>
               </div>
-            </section>
-          </div>
-        </div>
-      </Section>
-      <Suspense fallback={<Skeleton className="h-32" />}>
-        <Await
-          errorElement="There was a problem loading related products"
-          resolve={recommended}
-        >
-          {(products) => (
-            <ProductSwimlane title="Related Products" products={products} />
-          )}
-        </Await>
-      </Suspense>
+            </Container>
+          </>
+        )
+      }
+      <Container no_max padding="y" className="max-w-screen-2xl xl:py-16 mx-auto px-0 md:px-8 lg:px-0 py-4">
+        <Suspense fallback={<Skeleton className="h-32" />}>
+          <Await
+            errorElement="There was a problem loading related products"
+            resolve={recommended}
+          >
+            {(products) => (
+              <ProductSwimlane center title={configProduct.relatedProductsText} products={products} />
+            )}
+          </Await>
+        </Suspense>
+        {/* <JudgemeReviewWidget id={product.id} /> */}
+      </Container>
     </>
   );
 }
 
-export function ProductForm({variants}) {
-  const {product, analytics, storeDomain} = useLoaderData();
+export function ProductForm({ variants }) {
+  const { product, analytics, storeDomain } = useLoaderData();
 
   const closeRef = useRef(null);
 
@@ -222,7 +322,7 @@ export function ProductForm({variants}) {
           options={product.options}
           variants={variants}
         >
-          {({option}) => {
+          {({ option }) => {
             return (
               <div
                 key={option.name}
@@ -235,7 +335,7 @@ export function ProductForm({variants}) {
                   {option.values.length > 7 ? (
                     <div className="relative w-full">
                       <Listbox>
-                        {({open}) => (
+                        {({ open }) => (
                           <>
                             <Listbox.Button
                               ref={closeRef}
@@ -257,12 +357,12 @@ export function ProductForm({variants}) {
                             >
                               {option.values
                                 .filter((value) => value.isAvailable)
-                                .map(({value, to, isActive}) => (
+                                .map(({ value, to, isActive }) => (
                                   <Listbox.Option
                                     key={`option-${option.name}-${value}`}
                                     value={value}
                                   >
-                                    {({active}) => (
+                                    {({ active }) => (
                                       <Link
                                         to={to}
                                         className={clsx(
@@ -290,7 +390,7 @@ export function ProductForm({variants}) {
                       </Listbox>
                     </div>
                   ) : (
-                    option.values.map(({value, isAvailable, isActive, to}) => (
+                    option.values.map(({ value, isAvailable, isActive, to }) => (
                       <Link
                         key={option.name + value}
                         to={to}
@@ -326,7 +426,9 @@ export function ProductForm({variants}) {
                     quantity: 1,
                   },
                 ]}
-                variant="primary"
+                width="30rem"
+                variant="dark"
+                className="py-4 xl:py-4 rounded-full w-full sm:w-[20rem] xl:w-[25rem]"
                 data-test="add-to-cart"
                 analytics={{
                   products: [productAnalytics],
@@ -335,9 +437,10 @@ export function ProductForm({variants}) {
               >
                 <Text
                   as="span"
-                  className="flex items-center justify-center gap-2"
+                  size="none"
+                  className="flex items-center justify-between gap-2 px-4 text-2xl xl:text-3xl"
                 >
-                  <span>Add to Cart</span> <span>·</span>{' '}
+                  <span>{configProduct.addToCartText}</span> {' '}
                   <Money
                     withoutTrailingZeros
                     data={selectedVariant?.price}
@@ -354,13 +457,13 @@ export function ProductForm({variants}) {
                 </Text>
               </AddToCartButton>
             )}
-            {!isOutOfStock && (
+            {/* {!isOutOfStock && (
               <ShopPayButton
                 width="100%"
                 variantIds={[selectedVariant?.id]}
                 storeDomain={storeDomain}
               />
-            )}
+            )} */}
           </div>
         )}
       </div>
@@ -368,10 +471,10 @@ export function ProductForm({variants}) {
   );
 }
 
-function ProductDetail({title, content, learnMore}) {
+function ProductDetail({ title, content, learnMore }) {
   return (
     <Disclosure key={title} as="div" className="grid w-full gap-2">
-      {({open}) => (
+      {({ open }) => (
         <>
           <Disclosure.Button className="text-left">
             <div className="flex justify-between">
@@ -390,7 +493,7 @@ function ProductDetail({title, content, learnMore}) {
           <Disclosure.Panel className={'pb-4 pt-2 grid gap-2'}>
             <div
               className="prose dark:prose-invert"
-              dangerouslySetInnerHTML={{__html: content}}
+              dangerouslySetInnerHTML={{ __html: content }}
             />
             {learnMore && (
               <div className="">
@@ -406,6 +509,41 @@ function ProductDetail({title, content, learnMore}) {
         </>
       )}
     </Disclosure>
+  );
+}
+
+function Stars({ rating, reviewCount }) {
+  if (rating) {
+    rating = JSON.parse(rating).value;
+    rating = parseFloat(rating);
+  }
+  const remainder = (rating % parseInt(rating)).toFixed(2);
+
+  rating = parseInt(rating);
+  return (
+    <div className="flex items-center gap-2">
+      <p className="sr-only">{rating} out of 5 stars</p>
+      <div className="flex items-center relative">
+        {[0, 1, 2, 3, 4].map((currentRating) => (
+          <StarIcon
+            key={currentRating}
+            className={classNames(
+              rating > currentRating ? 'text-black' : 'text-black star-outline',
+              'h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0'
+            )}
+            aria-hidden="true"
+          />
+        ))}
+        {remainder && (
+          <PartialStarIcon
+            percent={remainder}
+            className="absolute right-0 text-black h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0"
+            aria-hidden="true"
+          />
+        )}
+      </div>
+      <p className="text-sm sm:text-lg text-black font-bold">({reviewCount})</p>
+    </div>
   );
 }
 
@@ -459,6 +597,13 @@ const PRODUCT_QUERY = `#graphql
       handle
       descriptionHtml
       description
+      tags
+      rating: metafield(namespace: "reviews", key: "rating") {
+        value
+      }
+      ratingCount: metafield(namespace: "reviews", key: "rating_count") {
+        value
+      }
       options {
         name
         values
@@ -538,7 +683,7 @@ const RECOMMENDED_PRODUCTS_QUERY = `#graphql
 
 async function getRecommendedProducts(storefront, productId) {
   const products = await storefront.query(RECOMMENDED_PRODUCTS_QUERY, {
-    variables: {productId, count: 12},
+    variables: { productId, count: 12 },
   });
 
   invariant(products, 'No data returned from Shopify API');
@@ -556,5 +701,5 @@ async function getRecommendedProducts(storefront, productId) {
 
   mergedProducts.splice(originalProduct, 1);
 
-  return {nodes: mergedProducts};
+  return { nodes: mergedProducts };
 }
