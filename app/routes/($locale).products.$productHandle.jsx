@@ -55,7 +55,6 @@ const configProduct = config.webpage.product;
 const stars_enabled = configProduct.stars;
 
 export async function loader({ params, request, context }) {
-  console.log("🚀 ~ file: ($locale).products.$productHandle.jsx:58 ~ loader ~ params, request, context:", params, request, context)
   const { productHandle } = params;
   
   invariant(productHandle, 'Missing productHandle param, check route filename');

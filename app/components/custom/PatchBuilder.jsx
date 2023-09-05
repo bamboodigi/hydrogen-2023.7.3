@@ -704,20 +704,20 @@ function Visualizer({ formData, className, ...props }) {
 
 
   useEffect(() => {
-  if(formData.type.toLowerCase() !== 'medical patch') {
-    if (formData.flagReversed) {
-      setFlagStyle(prevStyle => ({ ...prevStyle, transform: `scaleX(-1.5)` }));
-    } else {
-      setFlagStyle(prevStyle => ({ ...prevStyle, transform: `scaleX(1)` }));
+    if (formData.type.toLowerCase() !== 'medical patch') {
+      if (formData.flagReversed) {
+        setFlagStyle(prevStyle => ({ ...prevStyle, transform: `scaleX(-1.5)` }));
+      } else {
+        setFlagStyle(prevStyle => ({ ...prevStyle, transform: `scaleX(1)` }));
+      }
     }
-  }
   }, [formData.flagReversed]);
 
   useEffect(() => {
     if (formData.glowBorder) {
-      setStyle(prevStyle => ({ ...prevStyle, WebkitTextStroke: `2px white`, textStroke : `2px white` }));
+      setStyle(prevStyle => ({ ...prevStyle, WebkitTextStroke: `2px white`, textStroke: `2px white` }));
     } else {
-      setStyle(prevStyle => ({ ...prevStyle, WebkitTextStroke: `initial`, textStroke : `initial` }));
+      setStyle(prevStyle => ({ ...prevStyle, WebkitTextStroke: `initial`, textStroke: `initial` }));
     }
   }, [formData.glowBorder]);
 
@@ -1196,7 +1196,7 @@ function Form({ formData, setFormData, data, config, product }) {
           console.log(steps);
           const textStepIndex = steps.findIndex(step => step.name === 'Text');
           console.log(textStepIndex);
-         
+
           if (textStepIndex !== -1) {
             steps.splice(1, 1);
             // const newSteps = steps.filter(step => step.name !== 'Text');
@@ -1249,7 +1249,7 @@ function Form({ formData, setFormData, data, config, product }) {
           <div className="col-span-6 grid gap-4">
             {stepForm.steps[stepForm.currentStep - 1].input.map((input, i) => {
               const childKey = i.toString();
-       //       console.log("oops")
+              //       console.log("oops")
               return (
                 <div key={childKey}>
                   {input.id.toLowerCase() == "text" ? (
@@ -1650,7 +1650,7 @@ function BuilderATC({ formData, className, config, currentStep, steps }) {
   }
   function getAttributes() {
     const arr = [];
-
+    console.log(formData);
     arr.push(
       { key: "Size", value: formData.size },
       { key: "Price", value: formData.price + "" },
