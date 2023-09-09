@@ -3,7 +3,7 @@ import { getImageLoadingPriority } from '~/lib/const';
 import { useFetcher } from '@remix-run/react';
 import { useEffect, useState } from 'react';
 
-export function ProductGrid({ url, collection, ...props }) {
+export function ProductGrid({ url, collection, previousLink, nextLink, isLoading, ...props }) {
   const [initialProducts, setInitialProducts] = useState(
     collection?.products?.nodes || [],
   );
@@ -79,7 +79,7 @@ export function ProductGrid({ url, collection, ...props }) {
       </Grid>
       {nextPage && (
         <div className="flex items-center justify-center mt-6">
-          <Button as={NextLink} variant="secondary" width="full">
+          <Button as={nextLink} variant="secondary" width="full">
             {isLoading ? 'Loading...' : 'Load more products'}
           </Button>
         </div>

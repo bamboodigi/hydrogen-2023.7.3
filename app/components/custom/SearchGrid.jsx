@@ -8,7 +8,6 @@ export function SearchGrid({url, searchProducts, ...props}) {
     searchProducts || [],
   );
 
-  console.log(searchProducts)
 
   const [nextPage, setNextPage] = useState(
     searchProducts?.pageInfo?.hasNextPage,
@@ -56,7 +55,6 @@ export function SearchGrid({url, searchProducts, ...props}) {
     <>
       <Grid items={3} layout="products" {...props}>
         {searchProducts.map((product, i) => (
-          console.log(product),
           !product.tags.includes("custom_patch") ? (
             <ProductCard
             key={product.id}

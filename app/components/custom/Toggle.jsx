@@ -12,7 +12,7 @@ export function Toggle({defaultValue, className = '', type, variant, ...props}) 
 
 
   useEffect(() => {
-    console.log(enabled);
+//console.log(enabled);
   }, [enabled]);
 
   return (

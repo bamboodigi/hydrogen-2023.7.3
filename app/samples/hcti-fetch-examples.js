@@ -25,6 +25,6 @@ const json = {
     })
     .then(data => {
       // Image URL is available here
-      console.log(data.url)
+    //  console.log(data.url)
     })
     .catch(err => console.error(err));

@@ -1,7 +1,7 @@
 // Import React hooks and components
 import { useState, useEffect, useRef } from 'react';
 import React from 'react';
-import { useLoaderData } from '@remix-run/react';
+import { useLoaderData, useParams } from '@remix-run/react';
 import { ProductDetail, Steps, AddToCartButton, Text, Heading, AdvancedSelect } from '~/components';
 import { getExcerpt } from '~/lib/utils';
 
@@ -90,6 +90,8 @@ export function PatchBuilder({ product, config, ...props }) {
 
 function initFormData(product) {
   const patchType = builderData.type[getBuilderTitle(product).toLowerCase()];
+
+  const params = useParams();
   // console.log(patchType);
   ///////////////////////////////////////////////////////////////////////////////////////////////
   //  FORMDATA OBJ = TEXT, TEXTMAXLENGTH, TEXTLINES, TEXTPLACEHOLDER, TEXTADDITIONAL, TYPE,
@@ -158,6 +160,8 @@ function initFormData(product) {
         formData.price += 4;
     }
   }
+
+  console.log(params);
 
   return formData || {};
 }

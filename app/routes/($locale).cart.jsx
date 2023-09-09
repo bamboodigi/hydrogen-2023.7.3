@@ -1,12 +1,16 @@
 import { Await, useMatches } from '@remix-run/react';
 import invariant from 'tiny-invariant';
+
 import { json } from '@shopify/remix-oxygen';
 import { CartForm } from '@shopify/hydrogen';
+
 
 import { isLocalPath } from '~/lib/utils';
 import { Cart, Container } from '~/components';
 
+
 export async function action({ request, context }) {
+
   const { session, cart } = context;
 
   const [formData, customerAccessToken] = await Promise.all([
@@ -16,6 +20,65 @@ export async function action({ request, context }) {
 
   const { action, inputs } = CartForm.getFormInput(formData);
   invariant(action, 'No cartAction defined');
+
+  // if (isPatchBuilder(action, inputs)) {
+  //   const apiUrl = "https://hcti.io/v1/image";
+
+  //   const apiJson = {
+  //     html: "<div class='test'>Hello!</div>",
+  //     css: ".test { background-color: green; }"
+  //   };
+
+  //   const username = "8cbaa641-7825-4ba5-b109-8d649d4bfa10";
+  //   const password = "ca03849c-eb30-415b-b54d-aa22bc33deae";
+
+  //   const options = {
+  //     method: 'POST',
+  //     body: JSON.stringify(apiJson),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': 'Basic ' + btoa(username + ":" + password)
+  //     }
+  //   }
+
+
+  //   const res = await fetch(apiUrl, options).catch((error) => {
+  //     console.error(error);
+  //   });
+
+  //   //     // console.log(await res.text());
+
+  //   //     // const jsonString = '{"url":"https://hcti.io/v1/image/cbf786ed-0569-43e6-89a6-de32c11fbffa"}';
+  //   const obj = JSON.parse(await res.text());
+
+  //   const tempObj = {
+  //     key: 'Preview', value: obj.url
+  //   };
+
+  //   console.log(tempObj);
+
+  //   inputs.lines[0].attributes.push(tempObj);
+
+
+
+  //   // if (res.ok) {
+  //   //   console.log("Fetch request successful!");
+  //   // }
+
+  //   // const data = await res.json();
+
+  //   // // const prunedData = data.map((record) => {
+  //   // //   console.log(data);
+  //   // //   return record;
+  //   // //   // return {
+  //   // //   //   id: record.id,
+  //   // //   //   title: record.title,
+  //   // //   //   formattedBody: escapeHtml(record.content),
+  //   // //   // };
+  //   // // });
+  //   // console.log(data);
+  // }
+
 
   let status = 200;
   let result;
@@ -64,6 +127,7 @@ export async function action({ request, context }) {
   }
 
   const { cart: cartResult, errors } = result;
+
   return json(
     {
       cart: cartResult,
@@ -93,4 +157,12 @@ export default function CartRoute() {
       </div>
     </Container>
   );
+}
+
+function isPatchBuilder(action, inputs) {
+  if (action == "LinesAdd") {
+    if (inputs.lines[0].attributes?.length > 0) {
+      return true;
+    }
+  }
 }

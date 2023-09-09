@@ -122,7 +122,7 @@ export async function loader({ params, request, context }) {
 export default function Collection() {
   const { collection, collections, appliedFilters } = useLoaderData();
 
-  console.log(collection);
+ // console.log(collection);
   const policies = [
     { name: 'Text & Patch Size', icon: GlobeAmericasIcon, description: 'Customize text and size of patch' },
     { name: 'Font & Background Colors', icon: CurrencyDollarIcon, description: "Customize the font and background color" },
@@ -175,6 +175,9 @@ export default function Collection() {
                   collection={collection}
                   url={`/collections/${collection.handle}`}
                   data-test="product-grid"
+                  previousLink={PreviousLink}
+                  nextLink={NextLink}
+                  isLoading={isLoading}
                 />
               </>
             )}

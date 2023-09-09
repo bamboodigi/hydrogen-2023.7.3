@@ -2,6 +2,7 @@ import { useRef, Suspense, useEffect } from 'react';
 import { Disclosure, Listbox } from '@headlessui/react';
 import { defer, redirect } from '@shopify/remix-oxygen';
 import { useLoaderData, Await, } from '@remix-run/react';
+
 import {
   AnalyticsPageType,
   Money,
@@ -53,6 +54,7 @@ export const headers = routeHeaders;
 const configProduct = config.webpage.product;
 
 const stars_enabled = configProduct.stars;
+
 
 export async function loader({ params, request, context }) {
   const { productHandle } = params;
@@ -142,13 +144,31 @@ export async function loader({ params, request, context }) {
   });
 }
 
+// This function redirects the user to the first variant of a product
 function redirectToFirstVariant({ product, request }) {
+  // Get the search parameters from the request URL
   const searchParams = new URLSearchParams(new URL(request.url).search);
+
+  // Get the first variant of the product
   const firstVariant = product.variants.nodes[0];
+
+  // Set the selected options of the first variant as search parameters
   for (const option of firstVariant.selectedOptions) {
     searchParams.set(option.name, option.value);
   }
 
+  // Log the search parameters to the console
+  // console.log(searchParams.toString());
+  // console.log(product.variants);
+  // console.log(request);
+
+  // Redirect the user to the first variant of the product
+
+  // console.log(product.variants.nodes.length);
+
+  // if(product.variants.nodes.length > 1) {
+  //   throw redirect(`/products/${product.handle}?${searchParams.toString()}`, 302);
+  // }
   throw redirect(`/products/${product.handle}?${searchParams.toString()}`, 302);
 }
 
