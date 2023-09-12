@@ -1,7 +1,7 @@
 import { useRef, Suspense, useEffect } from 'react';
 import { Disclosure, Listbox } from '@headlessui/react';
 import { defer, redirect } from '@shopify/remix-oxygen';
-import { useLoaderData, Await, } from '@remix-run/react';
+import { useLoaderData, Await, useParams} from '@remix-run/react';
 
 import {
   AnalyticsPageType,
@@ -58,7 +58,7 @@ const stars_enabled = configProduct.stars;
 
 export async function loader({ params, request, context }) {
   const { productHandle } = params;
-  
+  const searchParams = new URL(request.url).searchParams;
   invariant(productHandle, 'Missing productHandle param, check route filename');
 
   const selectedOptions = getSelectedProductOptions(request);
@@ -105,7 +105,10 @@ export async function loader({ params, request, context }) {
     throw new Response('product', { status: 404 });
   }
 
+  console.log(product);
+  console.log(product.variantBySelectedOptions)
   if (!product.selectedVariant) {
+    console.log('redirect');
     return redirectToFirstVariant({ product, request });
   }
 
@@ -148,6 +151,8 @@ export async function loader({ params, request, context }) {
 function redirectToFirstVariant({ product, request }) {
   // Get the search parameters from the request URL
   const searchParams = new URLSearchParams(new URL(request.url).search);
+  console.log('searchParms: 1st');
+  console.log(searchParams);
 
   // Get the first variant of the product
   const firstVariant = product.variants.nodes[0];
@@ -156,6 +161,9 @@ function redirectToFirstVariant({ product, request }) {
   for (const option of firstVariant.selectedOptions) {
     searchParams.set(option.name, option.value);
   }
+
+  console.log('searchParms: 2nd after set(name and value)');
+  console.log(searchParams.toString());
 
   // Log the search parameters to the console
   // console.log(searchParams.toString());
@@ -169,7 +177,7 @@ function redirectToFirstVariant({ product, request }) {
   // if(product.variants.nodes.length > 1) {
   //   throw redirect(`/products/${product.handle}?${searchParams.toString()}`, 302);
   // }
-  throw redirect(`/products/${product.handle}?${searchParams.toString()}`, 302);
+  throw redirect(`/products/${product.handle}?${searchParams.toString()}`, 302 );
 }
 
 function classNames(...classes) {
