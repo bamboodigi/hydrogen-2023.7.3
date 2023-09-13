@@ -19,6 +19,7 @@ const bgColors = builderData.colors.bgColors;
 const fontColors = builderData.colors.fontColors;
 const imgs = builderData.imgs;
 const symbols = imgs.symbols;
+const markTypeOptions = builderData.markType.types;
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -89,6 +90,7 @@ export function PatchBuilder({ product, config, ...props }) {
 
 
 function initFormData(product) {
+  // console.log(product);
   const patchType = builderData.type[getBuilderTitle(product).toLowerCase()];
 
   const params = useParams();
@@ -120,6 +122,7 @@ function initFormData(product) {
     bgColorImg: bgColors[18].img,
     markType: '',
     flagEnabled: false,
+    flagType : '',
     img: data[5].values[0]["hivis-flags"][0].name,
     imgSrc: data[5].values[0]["hivis-flags"][0].img,
     flagReversed: false,
@@ -161,7 +164,7 @@ function initFormData(product) {
     }
   }
 
-  console.log(params);
+  //  console.log(params);
 
   return formData || {};
 }
@@ -236,7 +239,7 @@ function getBuilderTitle(product) {
     case 'ranger-tabs':
       result = 'ranger tabs';
       break;
-    case 'laser-cut-flag':
+    case 'flag-patch':
       result = 'flag';
       break;
     default:
@@ -731,7 +734,7 @@ function Visualizer({ formData, className, ...props }) {
   useEffect(() => {
     const handleScroll = () => {
       setScrollPosition(window.scrollY);
-    };
+    }
 
     window.addEventListener('scroll', handleScroll);
     return () => {
@@ -749,7 +752,7 @@ function Visualizer({ formData, className, ...props }) {
       )}>
         {/* ${scrollPosition >= 100 ? ' w-100 fixed z-50' : ' transition relative'
         } */}
-        <div id="patch" className="flex items-center justify-center transform lg:scale-150" style={style}>
+        {/* <div id="patch" className="flex items-center justify-center transform lg:scale-150" style={style}>
 
           {formData.type.toLowerCase().includes("id panel") && formData.size == '6” x 2”' ? (
             <div className="w-full h-full flex">
@@ -879,7 +882,7 @@ function Visualizer({ formData, className, ...props }) {
                 ></div>
               </div>
             </div>
-          ) : formData.type.toLowerCase() == ("laser cut flag") ? (
+          ) : formData.type.toLowerCase() == ("flag") ? (
             <div ref={containerRef} className="h-full w-full p-2 overflow-x-hidden flex items-center justify-center">
               <div id="flag" className="flex-1 w-full" style={flagStyle}></div>
             </div>
@@ -923,7 +926,7 @@ function Visualizer({ formData, className, ...props }) {
               <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.length > 0 ? formData.text : formData.textPlaceholder}</p>
             </div>
           )}
-        </div>
+        </div> */}
       </div>
     </div >
   );
@@ -939,6 +942,8 @@ function Form({ formData, setFormData, data, config, product }) {
     { name: 'Flag', href: '#', status: 'upcoming', step: 4 },
     { name: 'Almost There', href: '#', status: 'upcoming', step: 5 },
   ];
+
+  console.log(formData);
 
   switch (formData.type.toLowerCase()) {
     case 'name tape':
@@ -976,6 +981,8 @@ function Form({ formData, setFormData, data, config, product }) {
     obj: tempSteps[0]
   };
 
+  console.log(tempStepObj);
+
   //console.log(tempSteps);
 
 
@@ -1009,6 +1016,12 @@ function Form({ formData, setFormData, data, config, product }) {
         textLines: obj.sizes[0].lines, textMaxLength: obj.sizes[0].maxLength, textPlaceholder: obj.sizes[0].placeholder
       });
     }
+  };
+
+  const handleFlagTypeChange = (event) => {
+    // Find the selected type from data array
+    console.log(event);
+    setFormData({ ...formData, flagType: event.target.value});
   };
 
   // Define a function to handle the change of the text input field
@@ -1212,7 +1225,7 @@ function Form({ formData, setFormData, data, config, product }) {
     }
   };
 
-  //console.log(stepForm)
+  console.log(stepForm)
 
   return (
     <>
@@ -1499,8 +1512,31 @@ function Form({ formData, setFormData, data, config, product }) {
                         value={formData.img}
                         img={formData.imgSrc}
                         onChange={handleImgChange}
-                        options={imgs["hi-vis"]}
+                        options={imgs["lazer-cut"]["3x2"]}
                       />
+                    </>
+                  ) : input.id.toLowerCase() == "flagtype" ? (
+                    <>
+                      <div className="col-span-6">
+                        <label htmlFor="type" className="block text-sm xl:text-lg font-medium">
+                          Flag Type or Custom Upload
+                        </label>
+                        <select
+                          id="type"
+                          name={formData.flagType}
+                          value={formData.flagType}
+                          onChange={handleFlagTypeChange}
+                          className="bg-transparent mt-1 block w-full rounded-md border border-contrast py-3 xl:py-4 xl:px-5 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 xl:text-lg"
+                        >
+                          <option value="">Select a type</option>
+                          {markTypeOptions.map((val, index) => {
+                            const key = index.toString();
+                            return (
+                              <option key={key} value={val}>{val}</option>
+                            );
+                          })}
+                        </select>
+                      </div>
                     </>
                   ) : input.id.toLowerCase() == "flagenabled" ? (
                     <>
@@ -1654,7 +1690,7 @@ function BuilderATC({ formData, className, config, currentStep, steps }) {
   }
   function getAttributes() {
     const arr = [];
-    console.log(formData);
+    // console.log(formData);
     arr.push(
       { key: "Size", value: formData.size },
       { key: "Price", value: formData.price + "" },

@@ -105,10 +105,10 @@ export async function loader({ params, request, context }) {
     throw new Response('product', { status: 404 });
   }
 
-  console.log(product);
-  console.log(product.variantBySelectedOptions)
+  // console.log(product);
+  // console.log(product.variantBySelectedOptions)
   if (!product.selectedVariant) {
-    console.log('redirect');
+    // console.log('redirect');
     return redirectToFirstVariant({ product, request });
   }
 
@@ -151,8 +151,8 @@ export async function loader({ params, request, context }) {
 function redirectToFirstVariant({ product, request }) {
   // Get the search parameters from the request URL
   const searchParams = new URLSearchParams(new URL(request.url).search);
-  console.log('searchParms: 1st');
-  console.log(searchParams);
+  // console.log('searchParms: 1st');
+  // console.log(searchParams);
 
   // Get the first variant of the product
   const firstVariant = product.variants.nodes[0];
@@ -162,8 +162,8 @@ function redirectToFirstVariant({ product, request }) {
     searchParams.set(option.name, option.value);
   }
 
-  console.log('searchParms: 2nd after set(name and value)');
-  console.log(searchParams.toString());
+  // console.log('searchParms: 2nd after set(name and value)');
+  // console.log(searchParams.toString());
 
   // Log the search parameters to the console
   // console.log(searchParams.toString());

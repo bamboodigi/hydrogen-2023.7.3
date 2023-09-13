@@ -383,7 +383,7 @@ const builderData = {
             name: "Flag",
             input: [
               {
-                flag: 'flagType',
+                id: 'flagType',
                 label: 'Flag Type',
                 type: 'select',
                 placeholder: 'Lazer Cut Flag',
@@ -1453,6 +1453,13 @@ const builderData = {
       }
     }
   },
+  markType: {
+    types: [
+      "Lazer Cut",
+      "HiVis",
+      "Upload"
+    ]
+  }
 };
 
 
@@ -1603,5 +1610,5 @@ function initLazerCutFlags() {
   return lazerObj;
 }
 
-// console.log(builderData);
+console.log(builderData.imgs["lazer-cut"]);
 export default builderData;
