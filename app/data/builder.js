@@ -1593,6 +1593,11 @@ function initLazerCutFlags() {
   let lazerObj = {};
   sizes.forEach(size => {
     let key = size.replace(/ /g, "");
+    let iconKey = key;
+    console.log(iconKey);
+    iconKey = iconKey === '3x2' ? 'mini-id' : iconKey;
+    // iconKey = iconKey === '3.5x2' ? '6x3' : iconKey;
+
     const formattedArray = imageList.map(image => {
       const name = image.replace(".png", "");
       const titleCaseName = name.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
@@ -1601,7 +1606,7 @@ function initLazerCutFlags() {
         name: formattedName,
         img: `${folder}${key}${name}.png${end}`,
         glow: `${folder}${key}${name}-glow-border.png${end}`,
-        icon: `${folder}${key}${name}-icon.png${end}`
+        icon: `${folder}${iconKey}${name}-icon.png${end}`
       };
     });
     lazerObj[key] = formattedArray;
