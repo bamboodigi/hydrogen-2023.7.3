@@ -69,6 +69,10 @@ export function PatchBuilder({ product, config, ...props }) {
                   <>
                     Cats Eye
                   </>
+                ) : formData.type.toLowerCase().includes("light sabers") ? (
+                  <>
+                    Light Saber
+                  </>
                 ) : (
                   <>
                     {formData.type}
@@ -79,6 +83,14 @@ export function PatchBuilder({ product, config, ...props }) {
               {isFlag(formData.type) && (
                 <span className="text-xl mt-2 uppercase block">with {formData.markType}</span>
               )
+              }
+
+              {
+                formData.type.toLowerCase().includes("light sabers") && (
+                  <>
+                    <span className="text-xl mt-2 uppercase block">{formData.saberType}</span>
+                  </>
+                )
               }
             </Heading>
           </div>
@@ -146,7 +158,7 @@ function initFormData(product) {
     bladeImg: saberOptions[0].blade,
   };
 
-  if(formData.type.toLowerCase().includes("light sabers")) {
+  if (formData.type.toLowerCase().includes("light sabers")) {
     formData.bgColor = bgColors[0].name;
     formData.bgColorImg = bgColors[0].img;
   }
@@ -351,7 +363,6 @@ function initVisualizerStyle(formData) {
       WebkitMaskSize: 'contain',
       WebkitMaskRepeat: 'no-repeat',
       WebkitMaskPosition: 'center',
-      width: '73%',
       height: '100%',
     }
   };
@@ -384,6 +395,7 @@ function initVisualizerStyle(formData) {
       obj.flag.transform = 'scale(1.5)';
       break;
     case 'light sabers':
+      obj.patch.height = '58px';
       switch (formData.saberType.toLowerCase()) {
         case 'darth vader':
           // obj.hilt.backgroundImage = 'url("' + formData.hiltColor + '")';
@@ -627,11 +639,11 @@ function Visualizer({ formData, className, ...props }) {
 
     img.onload = () => {
       if (formData.type.toLowerCase().includes("light sabers")) {
-        if(mask == "saber") {
+        if (mask == "saber") {
           let newWidth = '';
           let newMarginLeft = '';
           let newColor = '';
-          switch(formData.saberType.toLowerCase()) {
+          switch (formData.saberType.toLowerCase()) {
             case 'darth vader':
               newWidth = src.includes("hilt") ? '27%' : src.includes("blade") ? '73%' : '';
               newColor = src.includes("hilt") ? fontColors[7].img : src.includes("blade") ? fontColors[11].img : '';
@@ -665,19 +677,19 @@ function Visualizer({ formData, className, ...props }) {
             WebkitMaskImage: `url("${src}")`,
             maskImage: `url("${src}")`,
           }));
-          if(newWidth.length > 0) {
+          if (newWidth.length > 0) {
             setState(prevStyle => ({
               ...prevStyle,
               width: newWidth
             }));
           }
-          if(newMarginLeft.length > 0) {
+          if (newMarginLeft.length > 0) {
             setState(prevStyle => ({
               ...prevStyle,
               marginLeft: newMarginLeft
             }));
           }
-          if(newColor.length > 0) {
+          if (newColor.length > 0) {
             setState(prevStyle => ({
               ...prevStyle,
               backgroundImage: `url("${newColor}")`
@@ -685,7 +697,7 @@ function Visualizer({ formData, className, ...props }) {
           }
           console.log(src);
 
-        }  
+        }
         else {
           console.log("bing");
           console.log("")
@@ -728,7 +740,7 @@ function Visualizer({ formData, className, ...props }) {
     }
   };
 
-    // Custom hook to update the font style when the text color image changes
+  // Custom hook to update the font style when the text color image changes
   useEffect(() => {
     console.log(formData.hiltImg);
     console.log(formData.bladeImg);
@@ -762,18 +774,18 @@ function Visualizer({ formData, className, ...props }) {
 
   }, [formData.textColorImg]);
 
-    // Custom hook to update the font style when the text color image changes
-    useEffect(() => {
-      imageLoader(formData.hiltColorImg, setHiltStyle);
-    }, [formData.hiltColorImg]);
+  // Custom hook to update the font style when the text color image changes
+  useEffect(() => {
+    imageLoader(formData.hiltColorImg, setHiltStyle);
+  }, [formData.hiltColorImg]);
 
 
-    // Custom hook to update the font style when the text color image changes
-    useEffect(() => {
-      imageLoader(formData.bladeColorImg, setBladeStyle);
-    }, [formData.bladeColorImg]);
+  // Custom hook to update the font style when the text color image changes
+  useEffect(() => {
+    imageLoader(formData.bladeColorImg, setBladeStyle);
+  }, [formData.bladeColorImg]);
 
-      // Custom hook to update the font style when the text color image changes
+  // Custom hook to update the font style when the text color image changes
   useEffect(() => {
     if (formData.type.toLowerCase().includes("medical patch")) {
       imageLoader(formData.textColorImg, setFlagStyle);
@@ -931,7 +943,10 @@ function Visualizer({ formData, className, ...props }) {
       )}>
         {/* ${scrollPosition >= 100 ? ' w-100 fixed z-50' : ' transition relative'
         } */}
-        <div id="patch" className="flex items-center justify-center transform lg:scale-150" style={style}>
+        <div id="patch" className={classNames(
+          formData.type.toLowerCase().includes("light sabers") ? "justify-center" : "justify-center",
+          "flex items-center transform lg:scale-150"
+        )} style={style}>
 
           {formData.type.toLowerCase().includes("id panel") && formData.size == '6” x 2”' ? (
             <div className="w-full h-full flex">
@@ -1074,9 +1089,9 @@ function Visualizer({ formData, className, ...props }) {
               <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.length > 0 ? formData.text : formData.textPlaceholder}</p>
             </div>
           ) : formData.type.toLowerCase().includes("light saber") ? (
-            <div ref={containerRef} className="h-full w-full text-center overflow-x-hidden flex items-center justify-center">
-              <div id="hilt" className="" style={{ ...hiltStyle }}></div>
-              <div id="blade" className="" style={{ ...bladeStyle }}></div>
+            <div ref={containerRef} className="h-full w-full text-center overflow-x-hidden flex items-center justify-start">
+              <div id="hilt" className="w-0 transition-background duration-[.75s]" style={{ ...hiltStyle }}></div>
+              <div id="blade" className="w-0 transition-width transition-background duration-[.75s]" style={{ ...bladeStyle }}></div>
             </div>
           ) : formData.type.toLowerCase().includes("custom printed") ? (
             <div ref={containerRef} className="h-full text-center overflow-x-hidden flex items-center justify-center">
@@ -1211,7 +1226,8 @@ function Form({ formData, setFormData, data, config, product }) {
     console.log(event.target.value);
     let newHiltColor = '';
     let newBladeColor = '';
-    switch(formData.saberType.toLowerCase()) {
+    console.log(formData.saberType.toLowerCase());
+    switch (obj.name.toLowerCase()) {
       case 'darth vader':
         newHiltColor = fontColors[7];
         newBladeColor = fontColors[11];
@@ -1232,7 +1248,12 @@ function Form({ formData, setFormData, data, config, product }) {
         newHiltColor = fontColors[7];
         newBladeColor = fontColors[11];
         break;
+      default:
+        break;
     }
+
+    console.log(newBladeColor);
+    console.log(fontColors[11]);
     setFormData({ ...formData, saberType: event.target.value, hiltImg: obj.hilt, bladeImg: obj.blade, hiltColor: newHiltColor.name, hiltColorImg: newHiltColor.img, bladeColor: newBladeColor.name, bladeColorImg: newBladeColor.img });
   };
   // Define a function to handle the change of the font text color dropdown menu

@@ -487,11 +487,6 @@ const builderData = {
             status: 'upcoming',
             input: [
               {
-                flag: 'bladeType',
-                label: 'Blade Type',
-                type: 'select',
-              },
-              {
                 id: 'leadTime',
                 label: 'I Agree to the Lead Time',
                 type: 'checkmark',
