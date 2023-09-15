@@ -450,23 +450,35 @@ const builderData = {
             name: "Hilt, Saber, and Background Colors",
             status: 'current',
             input: [
-              // {
-              //   id: 'hiltColor',
-              //   label: 'Hilt Color',
-              //   type: 'advancedSelect',
-              //   placeholder: 'Flat Spice Brown',
-              // },
-              // {
-              //   id: 'bladeColor',
-              //   label: 'Blade Color',
-              //   type: 'advancedSelect',
-              //   placeholder: 'Flat Spice Brown',
-              // },
+              {
+                id: 'saberType',
+                label: 'LightSaber Type',
+                type: 'select',
+                placeholder: '//',
+              },
               {
                 id: 'backgroundColor',
                 label: 'Background Color',
                 type: 'advancedSelect',
                 placeholder: 'Multicam Alpine',
+              },
+            ],
+          },
+          {
+            name: "Almost There",
+            status: 'upcoming',
+            input: [
+              {
+                id: 'hiltColor',
+                label: 'Hilt Color',
+                type: 'advancedSelect',
+                placeholder: 'Flat Spice Brown',
+              },
+              {
+                id: 'bladeColor',
+                label: 'Blade Color',
+                type: 'advancedSelect',
+                placeholder: 'Flat Spice Brown',
               },
             ],
           },
@@ -1459,6 +1471,35 @@ const builderData = {
       "HiVis",
       "Upload"
     ]
+  },
+  lightSabers: {
+    types: [
+      {
+        name: "Darth Vader",
+        hilt: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-darth-vader-hilt.png",
+        blade: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-darth-vader-blade.png",
+      },
+      {
+        name: "Luke Skywalker",
+        hilt: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-luke-skywalker-hilt.png",
+        blade: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-luke-skywalker-blade.png",
+      },
+      {
+        name: "Mace Windu",
+        hilt: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-mace-windu-hilt.png",
+        blade: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-mace-windu-blade.png",
+      },
+      {
+        name: "Obi Wan Kenobi",
+        hilt: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-obi-wan-kenobi-hilt.png",
+        blade: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-obi-wan-kenobi-blade.png",
+      },
+      {
+        name: "Count Dooku",
+        hilt: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-count-dooku-hilt.png",
+        blade: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-count-dooku-blade.png",
+      },
+    ]
   }
 };
 
@@ -1615,5 +1656,5 @@ function initLazerCutFlags() {
   return lazerObj;
 }
 
-console.log(builderData.imgs["lazer-cut"]);
+//console.log(builderData.imgs["lazer-cut"]);
 export default builderData;

@@ -20,6 +20,8 @@ const fontColors = builderData.colors.fontColors;
 const imgs = builderData.imgs;
 const symbols = imgs.symbols;
 const markTypeOptions = builderData.markType.types;
+const saberOptions = builderData.lightSabers.types;
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -27,6 +29,7 @@ function classNames(...classes) {
 
 // Patch Builder Component. This is the component that will show a tailored patch unique to the user's selections.
 export function PatchBuilder({ product, config, ...props }) {
+
 
   // Destructure variables from useLoaderData and useFetcher hooks
   const { shop } = useLoaderData();
@@ -122,7 +125,7 @@ function initFormData(product) {
     bgColorImg: bgColors[18].img,
     markType: '',
     flagEnabled: false,
-    flagType : '',
+    flagType: '',
     img: data[5].values[0]["hivis-flags"][0].name,
     imgSrc: data[5].values[0]["hivis-flags"][0].img,
     flagReversed: false,
@@ -134,7 +137,19 @@ function initFormData(product) {
     reflectiveGlowFontColor: false,
     typeData: patchType.config.sizes || [],
     price: parseInt(product.variants.nodes[0].price.amount),
+    saberType: saberOptions[0].name,
+    hiltColor: fontColors[7].name,
+    hiltColorImg: fontColors[7].img,
+    hiltImg: saberOptions[0].hilt,
+    bladeColor: fontColors[11].name,
+    bladeColorImg: fontColors[11].img,
+    bladeImg: saberOptions[0].blade,
   };
+
+  if(formData.type.toLowerCase().includes("light sabers")) {
+    formData.bgColor = bgColors[0].name;
+    formData.bgColorImg = bgColors[0].img;
+  }
 
   if (formData.type.toLowerCase().includes("medical patch")) {
     if (formData.size == '1” x 1”') {
@@ -259,6 +274,8 @@ function initVisualizerStyle(formData) {
 
   const bgColorImg = 'url("' + formData.bgColorImg + '")';
   const textColorImg = 'url("' + formData.textColorImg + '")';
+  const hiltImg = 'url("' + formData.hiltColorImg + '")';
+  const bladeImg = 'url("' + formData.bladeColorImg + '")';
   const flagImg = 'url("' + formData.imgSrc + '")';
 
   var obj = {
@@ -307,7 +324,38 @@ function initVisualizerStyle(formData) {
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     },
+    hilt: {
+      backgroundImage: hiltImg,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      maskImage: 'url("' + formData.hiltImg + '")',
+      maskSize: 'contain',
+      maskRepeat: 'no-repeat',
+      maskPosition: 'center',
+      WebkitMaskImage: 'url("' + formData.hiltImg + '")',
+      WebkitMaskSize: 'contain',
+      WebkitMaskRepeat: 'no-repeat',
+      WebkitMaskPosition: 'center',
+      width: '27%',
+      height: '100%',
+    },
+    blade: {
+      backgroundImage: bladeImg,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      maskImage: 'url("' + formData.bladeImg + '")',
+      maskSize: 'contain',
+      maskRepeat: 'no-repeat',
+      maskPosition: 'center',
+      WebkitMaskImage: 'url("' + formData.bladeImg + '")',
+      WebkitMaskSize: 'contain',
+      WebkitMaskRepeat: 'no-repeat',
+      WebkitMaskPosition: 'center',
+      width: '73%',
+      height: '100%',
+    }
   };
+
 
   switch (formData.type.toLowerCase()) {
     case 'id panel':
@@ -335,9 +383,31 @@ function initVisualizerStyle(formData) {
       obj.patch.WebkitMaskImage = 'none';
       obj.flag.transform = 'scale(1.5)';
       break;
+    case 'light sabers':
+      switch (formData.saberType.toLowerCase()) {
+        case 'darth vader':
+          // obj.hilt.backgroundImage = 'url("' + formData.hiltColor + '")';
+          // obj.blade.backgroundImage = 'url("' + formData.bladeColor + '")';
+          break;
+        case 'luke skywalker':
+          // obj.hilt.backgroundImage = 'url("' + formData.hiltColor + '")';
+          // obj.blade.backgroundImage = 'url("' + formData.bladeColor + '")';
+          break;
+        case 'obi wan kenobi':
+          // obj.hilt.backgroundImage = 'url("' + formData.hiltColor + '")';
+          // obj.blade.backgroundImage = 'url("' + formData.bladeColor + '")';
+          break;
+        case 'mace windu':
+          // obj.hilt.backgroundImage = 'url("' + formData.hiltColor + '")';
+          // obj.blade.backgroundImage = 'url("' + formData.bladeColor + '")';
+          break;
+        case 'count dooku':
+          // obj.hilt.backgroundImage = 'url("' + formData.hiltColor + '")';
+          // obj.blade.backgroundImage = 'url("' + formData.bladeColor + '")';
+          break;
+      }
   }
 
-  //console.log(obj.flag)
 
   return obj;
 }
@@ -529,7 +599,7 @@ function updateAdditionalFontSize(containerSecondaryRef, setFontSecondaryStyle, 
 // Patch Visualizer element that shows a tailored patch
 function Visualizer({ formData, className, ...props }) {
 
-  const { canvas, patch, font, font2, flag } = initVisualizerStyle(formData);
+  const { canvas, patch, font, font2, flag, hilt, blade } = initVisualizerStyle(formData);
 
   // Create a ref to access the container element
   const containerRef = useRef(null);
@@ -540,14 +610,91 @@ function Visualizer({ formData, className, ...props }) {
   const [fontStyle, setFontStyle] = useState(font);
   const [fontSecondaryStyle, setFontSecondaryStyle] = useState(font2);
   const [flagStyle, setFlagStyle] = useState(flag);
+  const [hiltStyle, setHiltStyle] = useState(hilt);
+  const [bladeStyle, setBladeStyle] = useState(blade);
 
+  console.log(flag);
+  console.log(hilt);
+  console.log(blade);
+
+  console.log(flagStyle);
+  console.log(bladeStyle);
+  console.log(hiltStyle)
 
   // A function to load an image and update the state with its URL
   const imageLoader = (src, setState, mask) => {
     const img = new Image();
 
     img.onload = () => {
-      if (formData.type.toLowerCase().includes("medical patch")) {
+      if (formData.type.toLowerCase().includes("light sabers")) {
+        if(mask == "saber") {
+          let newWidth = '';
+          let newMarginLeft = '';
+          let newColor = '';
+          switch(formData.saberType.toLowerCase()) {
+            case 'darth vader':
+              newWidth = src.includes("hilt") ? '27%' : src.includes("blade") ? '73%' : '';
+              newColor = src.includes("hilt") ? fontColors[7].img : src.includes("blade") ? fontColors[11].img : '';
+              break;
+            case 'luke skywalker':
+              newWidth = src.includes("hilt") ? '27%' : src.includes("blade") ? '71%' : '';
+              newColor = src.includes("hilt") ? fontColors[7].img : src.includes("blade") ? fontColors[13].img : '';
+              newMarginLeft = src.includes("blade") ? '1%' : '';
+              break;
+            case 'obi wan kenobi':
+              newWidth = src.includes("hilt") ? '27%' : src.includes("blade") ? '71%' : '';
+              newMarginLeft = src.includes("blade") ? '1%' : '';
+              newColor = src.includes("hilt") ? fontColors[7].img : src.includes("blade") ? fontColors[13].img : '';
+              break;
+            case 'mace windu':
+              newWidth = src.includes("hilt") ? '27%' : src.includes("blade") ? '71%' : '';
+              newMarginLeft = src.includes("blade") ? '1%' : '';
+              newColor = src.includes("hilt") ? fontColors[7].img : src.includes("blade") ? fontColors[15].img : '';
+              break;
+            case 'count dooku':
+              newWidth = src.includes("hilt") ? '33%' : src.includes("blade") ? '65%' : '';
+              newMarginLeft = src.includes("blade") ? '-1%' : '';
+              newColor = src.includes("hilt") ? fontColors[7].img : src.includes("blade") ? fontColors[11].img : '';
+              break;
+          }
+          console.log("bing")
+          console.log(mask);
+          console.log(setState);
+          setState(prevStyle => ({
+            ...prevStyle,
+            WebkitMaskImage: `url("${src}")`,
+            maskImage: `url("${src}")`,
+          }));
+          if(newWidth.length > 0) {
+            setState(prevStyle => ({
+              ...prevStyle,
+              width: newWidth
+            }));
+          }
+          if(newMarginLeft.length > 0) {
+            setState(prevStyle => ({
+              ...prevStyle,
+              marginLeft: newMarginLeft
+            }));
+          }
+          if(newColor.length > 0) {
+            setState(prevStyle => ({
+              ...prevStyle,
+              backgroundImage: `url("${newColor}")`
+            }));
+          }
+          console.log(src);
+
+        }  
+        else {
+          console.log("bing");
+          console.log("")
+          setState(prevStyle => ({
+            ...prevStyle,
+            backgroundImage: `url("${src}")`
+          }));
+        }
+      } else if (formData.type.toLowerCase().includes("medical patch")) {
         if (mask) {
           setState(prevStyle => ({
             ...prevStyle,
@@ -581,6 +728,16 @@ function Visualizer({ formData, className, ...props }) {
     }
   };
 
+    // Custom hook to update the font style when the text color image changes
+  useEffect(() => {
+    console.log(formData.hiltImg);
+    console.log(formData.bladeImg);
+    imageLoader(formData.hiltImg, setHiltStyle, "saber");
+    imageLoader(formData.bladeImg, setBladeStyle, "saber");
+    // setHiltStyle(prevStyle => ({ ...prevStyle, maskImage: `url("${formData.hiltImg}")`, WebkitMaskImage: `url("${formData.hiltImg}")` }));
+    // setBladeStyle(prevStyle => ({ ...prevStyle, maskImage: `url("${formData.bladeImg}")`, WebkitMaskImage: `url("${formData.bladeImg}")` }));
+  }, [formData.saberType]);
+
   // // Custom hook to update the flag style when the flag image changes
   useEffect(() => {
     if (formData.type.toLowerCase().includes("medical patch")) {
@@ -596,6 +753,27 @@ function Visualizer({ formData, className, ...props }) {
   }, [formData.bgColorImg]);
 
   // Custom hook to update the font style when the text color image changes
+  useEffect(() => {
+    if (formData.type.toLowerCase().includes("medical patch")) {
+      imageLoader(formData.textColorImg, setFlagStyle);
+    }
+    imageLoader(formData.textColorImg, setFontStyle);
+    imageLoader(formData.textColorImg, setFontSecondaryStyle);
+
+  }, [formData.textColorImg]);
+
+    // Custom hook to update the font style when the text color image changes
+    useEffect(() => {
+      imageLoader(formData.hiltColorImg, setHiltStyle);
+    }, [formData.hiltColorImg]);
+
+
+    // Custom hook to update the font style when the text color image changes
+    useEffect(() => {
+      imageLoader(formData.bladeColorImg, setBladeStyle);
+    }, [formData.bladeColorImg]);
+
+      // Custom hook to update the font style when the text color image changes
   useEffect(() => {
     if (formData.type.toLowerCase().includes("medical patch")) {
       imageLoader(formData.textColorImg, setFlagStyle);
@@ -653,6 +831,7 @@ function Visualizer({ formData, className, ...props }) {
   let count = 0;
   useEffect(() => {
     // console.log(!containerRef.current);
+    if (formData.type.toLowerCase().includes("light sabers")) return;
     if (!containerRef.current) return;
     // Define a function to adjust the font size
     const adjustFontSize = () => {
@@ -752,7 +931,7 @@ function Visualizer({ formData, className, ...props }) {
       )}>
         {/* ${scrollPosition >= 100 ? ' w-100 fixed z-50' : ' transition relative'
         } */}
-        {/* <div id="patch" className="flex items-center justify-center transform lg:scale-150" style={style}>
+        <div id="patch" className="flex items-center justify-center transform lg:scale-150" style={style}>
 
           {formData.type.toLowerCase().includes("id panel") && formData.size == '6” x 2”' ? (
             <div className="w-full h-full flex">
@@ -895,8 +1074,9 @@ function Visualizer({ formData, className, ...props }) {
               <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.length > 0 ? formData.text : formData.textPlaceholder}</p>
             </div>
           ) : formData.type.toLowerCase().includes("light saber") ? (
-            <div ref={containerRef} className="h-full text-center overflow-x-hidden flex items-center justify-center">
-              <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.length > 0 ? formData.text : formData.textPlaceholder}</p>
+            <div ref={containerRef} className="h-full w-full text-center overflow-x-hidden flex items-center justify-center">
+              <div id="hilt" className="" style={{ ...hiltStyle }}></div>
+              <div id="blade" className="" style={{ ...bladeStyle }}></div>
             </div>
           ) : formData.type.toLowerCase().includes("custom printed") ? (
             <div ref={containerRef} className="h-full text-center overflow-x-hidden flex items-center justify-center">
@@ -926,7 +1106,7 @@ function Visualizer({ formData, className, ...props }) {
               <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.length > 0 ? formData.text : formData.textPlaceholder}</p>
             </div>
           )}
-        </div> */}
+        </div>
       </div>
     </div >
   );
@@ -1021,7 +1201,79 @@ function Form({ formData, setFormData, data, config, product }) {
   const handleFlagTypeChange = (event) => {
     // Find the selected type from data array
     console.log(event);
-    setFormData({ ...formData, flagType: event.target.value});
+    setFormData({ ...formData, flagType: event.target.value });
+  };
+
+  const handleSaberTypeChange = (event) => {
+    // Find the selected type from data array
+    const obj = saberOptions.find(value => value.name === event.target.value);
+    console.log(obj);
+    console.log(event.target.value);
+    let newHiltColor = '';
+    let newBladeColor = '';
+    switch(formData.saberType.toLowerCase()) {
+      case 'darth vader':
+        newHiltColor = fontColors[7];
+        newBladeColor = fontColors[11];
+        break;
+      case 'luke skywalker':
+        newHiltColor = fontColors[7];
+        newBladeColor = fontColors[13];
+        break;
+      case 'obi wan kenobi':
+        newHiltColor = fontColors[7];
+        newBladeColor = fontColors[13];
+        break;
+      case 'mace windu':
+        newHiltColor = fontColors[7];
+        newBladeColor = fontColors[15];
+        break;
+      case 'count dooku':
+        newHiltColor = fontColors[7];
+        newBladeColor = fontColors[11];
+        break;
+    }
+    setFormData({ ...formData, saberType: event.target.value, hiltImg: obj.hilt, bladeImg: obj.blade, hiltColor: newHiltColor.name, hiltColorImg: newHiltColor.img, bladeColor: newBladeColor.name, bladeColorImg: newBladeColor.img });
+  };
+  // Define a function to handle the change of the font text color dropdown menu
+  const handleHiltColorChange = (event) => {
+    // Find the selected font text color from data array
+    const obj = fontColors.find(value => value.name === event.name);
+    var isProIR = false;
+    var isReflectiveGlow = false;
+
+    if (event.name.includes("Pro IR")) {
+      isProIR = true;
+    }
+    if (event.name.includes("Reflective + Glow")) {
+      isReflectiveGlow = true;
+    }
+
+
+    console.log(isProIR);
+    // Set the form data with the selected font text color and its image
+    setFormData({ ...formData, hiltColorImg: obj.img, proIRFontColor: isProIR, reflectiveGlowFontColor: isReflectiveGlow });
+  };
+
+  // Define a function to handle the change of the font text color dropdown menu
+  const handleBladeColorChange = (event) => {
+    // Find the selected font text color from data array
+    const obj = fontColors.find(value => value.name === event.name);
+    var isProIR = false;
+    var isReflectiveGlow = false;
+
+    console.log(obj);
+
+    if (event.name.includes("Pro IR")) {
+      isProIR = true;
+    }
+    if (event.name.includes("Reflective + Glow")) {
+      isReflectiveGlow = true;
+    }
+
+    console.log(isProIR);
+    // Set the form data with the selected font text color and its image
+    setFormData({ ...formData, bladeColor: obj.name, bladeColorImg: obj.img, proIRFontColor: isProIR, reflectiveGlowFontColor: isReflectiveGlow });
   };
 
   // Define a function to handle the change of the text input field
@@ -1537,6 +1789,53 @@ function Form({ formData, setFormData, data, config, product }) {
                           })}
                         </select>
                       </div>
+                    </>
+                  ) : input.id.toLowerCase() == "sabertype" ? (
+                    <>
+                      <div className="col-span-6">
+                        <label htmlFor="type" className="block text-sm xl:text-lg font-medium">
+                          Choose Your Saber
+                        </label>
+                        <select
+                          id="type"
+                          name={formData.saberType}
+                          value={formData.saberType}
+                          onChange={handleSaberTypeChange}
+                          className="bg-transparent mt-1 block w-full rounded-md border border-contrast py-3 xl:py-4 xl:px-5 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 xl:text-lg"
+                        >
+                          <option value="">Select a type</option>
+                          {saberOptions.map((val, index) => {
+                            const key = index.toString();
+                            return (
+                              <option key={key} value={val.name}>{val.name}</option>
+                            );
+                          })}
+                        </select>
+                      </div>
+                    </>
+                  ) : input.id.toLowerCase() == "hiltcolor" ? (
+                    <>
+                      <AdvancedSelect
+                        id="hiltColor"
+                        title="Hilt Color"
+                        name="hiltColor"
+                        value={formData.hiltColor}
+                        img={formData.hiltColorImg}
+                        onChange={handleHiltColorChange}
+                        options={fontColors}
+                      />
+                    </>
+                  ) : input.id.toLowerCase() == "bladecolor" ? (
+                    <>
+                      <AdvancedSelect
+                        id="bladeColor"
+                        title="Blade Color"
+                        name="bladeColor"
+                        value={formData.bladeColor}
+                        img={formData.bladeColorImg}
+                        onChange={handleBladeColorChange}
+                        options={fontColors}
+                      />
                     </>
                   ) : input.id.toLowerCase() == "flagenabled" ? (
                     <>
