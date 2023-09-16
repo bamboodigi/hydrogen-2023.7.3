@@ -389,15 +389,9 @@ const builderData = {
                 placeholder: 'Lazer Cut Flag',
               },
               {
-                id: 'flag',
-                label: 'Flag',
-                type: 'advancedSelect',
-                placeholder: 'USA',
-              },
-              {
-                id: 'flagReverse',
-                label: 'Do you want to reverse the flag?',
-                type: 'checkmark',
+                id: 'size',
+                label: 'Size',
+                type: 'select',
                 placeholder: '',
               },
             ],
@@ -407,10 +401,22 @@ const builderData = {
             status: 'upcoming',
             input: [
               {
+                id: 'flag',
+                label: 'Flag',
+                type: 'advancedSelect',
+                placeholder: 'USA',
+              },
+              {
                 id: 'backgroundColor',
                 label: 'Background Color',
                 type: 'advancedSelect',
                 placeholder: 'Multicam Alpine',
+              },
+              {
+                id: 'flagReverse',
+                label: 'Do you want to reverse the flag?',
+                type: 'checkmark',
+                placeholder: '',
               },
             ],
           },
@@ -1462,8 +1468,8 @@ const builderData = {
   },
   markType: {
     types: [
-      "Lazer Cut",
-      "HiVis",
+      "Lazer Cut Flag",
+      "HiVis Flag",
       "Upload"
     ]
   },

@@ -30,7 +30,6 @@ function classNames(...classes) {
 // Patch Builder Component. This is the component that will show a tailored patch unique to the user's selections.
 export function PatchBuilder({ product, config, ...props }) {
 
-
   // Destructure variables from useLoaderData and useFetcher hooks
   const { shop } = useLoaderData();
 
@@ -73,6 +72,12 @@ export function PatchBuilder({ product, config, ...props }) {
                   <>
                     Light Saber
                   </>
+                ) : formData.type.toLowerCase().includes("flag") ? (
+                  <>
+                  <span class="block mt-2">
+                    {formData.flagType}
+                    </span>
+                  </>
                 ) : (
                   <>
                     {formData.type}
@@ -81,7 +86,7 @@ export function PatchBuilder({ product, config, ...props }) {
               }
 
               {isFlag(formData.type) && (
-                <span className="text-xl mt-2 uppercase block">with {formData.markType}</span>
+                <span className="text-xl mt-2 uppercase block">with {formData.Type}</span>
               )
               }
 
@@ -137,7 +142,7 @@ function initFormData(product) {
     bgColorImg: bgColors[18].img,
     markType: '',
     flagEnabled: false,
-    flagType: '',
+    flagType: 'Lazer Cut Flag',
     img: data[5].values[0]["hivis-flags"][0].name,
     imgSrc: data[5].values[0]["hivis-flags"][0].img,
     flagReversed: false,
@@ -180,14 +185,19 @@ function initFormData(product) {
   }
 
   if (isFlag(formData.type)) {
+    console.log(formData.type.toLowerCase())
     switch (formData.type.toLowerCase()) {
       case 'id panel':
-        formData.markType = 'Lazer Cut Flag';
+        formData.flagType = 'Lazer Cut Flag';
       case 'name tape':
-        formData.markType = 'HiVis Flag';
+        formData.flagType = 'HiVis Flag';
+      case 'flag':
+        formData.flagType = 'Lazer Cut Flag';
+        console.log(formData.flagType);
       case 'default':
-        formData.markType = 'HiVis Flag';
-        formData.price += 4;
+      // console.log("test");
+      // formData.flagType = 'HiVis Flag';
+      // formData.price += 4;
     }
   }
 
@@ -205,7 +215,7 @@ function isGlowBorder(type, size, sizeEnabled) {
 
 function isFlag(type, flagEnabled) {
   // determine if type == id panel, lazer cut flag, jacket panel, division jacket panel
-  if (type.toLowerCase().includes("id panel") || type.toLowerCase().includes("flag")
+  if (type.toLowerCase().includes("id panel") 
     || type.toLowerCase().includes("jacket panel") || type.toLowerCase().includes("division jacket panel")
   ) {
     flagEnabled = true;
@@ -418,6 +428,11 @@ function initVisualizerStyle(formData) {
           // obj.blade.backgroundImage = 'url("' + formData.bladeColor + '")';
           break;
       }
+      break;
+    case 'flag':
+      obj.patch.padding = '0';
+      obj.patch.background = 'none';
+      break;
   }
 
 
@@ -844,6 +859,8 @@ function Visualizer({ formData, className, ...props }) {
   useEffect(() => {
     // console.log(!containerRef.current);
     if (formData.type.toLowerCase().includes("light sabers")) return;
+    console.log(formData.type.toLowerCase().includes("flag"));
+    if (formData.type.toLowerCase().includes("flag")) return;
     if (!containerRef.current) return;
     // Define a function to adjust the font size
     const adjustFontSize = () => {
@@ -944,7 +961,7 @@ function Visualizer({ formData, className, ...props }) {
         {/* ${scrollPosition >= 100 ? ' w-100 fixed z-50' : ' transition relative'
         } */}
         <div id="patch" className={classNames(
-          formData.type.toLowerCase().includes("light sabers") ? "justify-center" : "justify-center",
+          formData.type.toLowerCase().includes("flag") ? "justify-center" : "justify-center",
           "flex items-center transform lg:scale-150"
         )} style={style}>
 
@@ -1077,8 +1094,8 @@ function Visualizer({ formData, className, ...props }) {
               </div>
             </div>
           ) : formData.type.toLowerCase() == ("flag") ? (
-            <div ref={containerRef} className="h-full w-full p-2 overflow-x-hidden flex items-center justify-center">
-              <div id="flag" className="flex-1 w-full" style={flagStyle}></div>
+            <div ref={containerRef} className="h-full w-full overflow-x-hidden flex items-center justify-center">
+              <div id="flag" className="flex-1 h-full w-full" style={flagStyle}></div>
             </div>
           ) : formData.type.toLowerCase().includes("call sign") ? (
             <div ref={containerRef} className="h-full text-center overflow-x-hidden flex items-center justify-center">
