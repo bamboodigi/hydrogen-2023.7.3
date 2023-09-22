@@ -1809,7 +1809,7 @@ function Form({ formData, setFormData, data, config, product }) {
                     <>
                       <div className="col-span-6">
                         <label htmlFor="type" className="block text-sm xl:text-lg font-medium">
-                          Flag Type or Custom Upload
+                          Flag Type
                         </label>
                         <select
                           id="type"

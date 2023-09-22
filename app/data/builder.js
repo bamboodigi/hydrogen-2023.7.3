@@ -1469,8 +1469,7 @@ const builderData = {
   markType: {
     types: [
       "Lazer Cut Flag",
-      "HiVis Flag",
-      "Upload"
+      "HiVis Flag"
     ]
   },
   lightSabers: {
