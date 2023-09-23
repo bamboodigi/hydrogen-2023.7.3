@@ -74,7 +74,7 @@ export function PatchBuilder({ product, config, ...props }) {
                   </>
                 ) : formData.type.toLowerCase().includes("flag") ? (
                   <>
-                  <span class="block mt-2">
+                  <span className="block mt-2">
                     {formData.flagType}
                     </span>
                   </>
@@ -163,6 +163,10 @@ function initFormData(product) {
     bladeImg: saberOptions[0].blade,
   };
 
+  if(formData.type.toLowerCase().includes("flag")) {
+   // formData.imgSrc = "";
+  }
+
   if (formData.type.toLowerCase().includes("light sabers")) {
     formData.bgColor = bgColors[0].name;
     formData.bgColorImg = bgColors[0].img;
@@ -193,7 +197,6 @@ function initFormData(product) {
         formData.flagType = 'HiVis Flag';
       case 'flag':
         formData.flagType = 'Lazer Cut Flag';
-        console.log(formData.flagType);
       case 'default':
       // console.log("test");
       // formData.flagType = 'HiVis Flag';
