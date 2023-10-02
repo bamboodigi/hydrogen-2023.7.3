@@ -379,8 +379,7 @@ function initVisualizerStyle(formData) {
         WebkitTextFillColor: 'transparent',
         fontFamily: 'WMIStencil-Black',
         backgroundClip: 'text',
-        textAlign: 'center',
-        lineHeight: '38px',
+        lineHeight: '34px',
         fontSize: '32px',
       },
     },
@@ -442,6 +441,7 @@ function initVisualizerStyle(formData) {
       obj.text.secondary.lineHeight = '30.8475px';
       obj.text.secondary.fontSize = '36.6316px';
       obj.text.secondary.width = 'auto';
+      obj.text.secondary.textAlign = 'center';
       break;
     case 'name tape':
       obj.text.primary.fontSize = '48.6397px';
@@ -452,6 +452,7 @@ function initVisualizerStyle(formData) {
       obj.patch.maskImage = 'none';
       obj.patch.WebkitMaskImage = 'none';
       obj.text.secondary.width = 'auto';
+      obj.text.secondary.textAlign = 'center';
       break;
     case 'light sabers':
       obj.patch.height = '58px';
@@ -460,8 +461,11 @@ function initVisualizerStyle(formData) {
       obj.patch.padding = '0';
       obj.patch.background = 'none';
       obj.text.secondary.width = 'auto';
+      obj.text.secondary.textAlign = 'center';
       break;
     case 'jacket panel':
+      obj.text.secondary.fontSize = '34px';
+      obj.patch.borderRadius = '.5rem'
       break;
   }
 
@@ -1141,16 +1145,19 @@ function Visualizer({ formData, className, ...props }) {
               <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
             </div>
           ) : formData.type.toLowerCase() == "jacket panel" ? (
-            <div ref={containerRef} className="h-full w-full text-center overflow-x-hidden flex flex-col items-center justify-center">
-              <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
-              <div className="flex flex-wrap">
-                <p id="text2" className="w-1/2" style={{ ...fontSecondaryStyle }}>{formData.text.secondary.text.length > 0 ? formData.text.secondary.text : formData.text.secondary.placeholder}</p>
-                <p id="text3" className=" w-1/2" style={{ ...fontSecondaryStyle }}>{formData.text.third.text.length > 0 ? formData.text.third.text : formData.text.third.placeholder}</p>
-                <p id="text4" className="w-1/2" style={{ ...fontSecondaryStyle }}>{formData.text.fourth.text.length > 0 ? formData.text.fourth.text : formData.text.fourth.placeholder}</p>
-                <p id="text5" className="w-1/2" style={{ ...fontSecondaryStyle }}>{formData.text.fifth.text.length > 0 ? formData.text.fifth.text : formData.text.fifth.placeholder}</p>
-                <p id="text6" className="w-1/2" style={{ ...fontSecondaryStyle }}>{formData.text.sixth.text.length > 0 ? formData.text.sixth.text : formData.text.sixth.placeholder}</p>
-                <p id="text7" className="w-1/2" style={{ ...fontSecondaryStyle }}>{formData.text.seventh.text.length > 0 ? formData.text.seventh.text : formData.text.seventh.placeholder}</p>
+            <div ref={containerRef} className="h-full w-full overflow-x-hidden flex flex-col items-center justify-between">
+              <div className="mt-2">
+                <p id="main-text" className="text-center" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
+                <div className="flex flex-wrap">
+                  <p id="text2" className="w-1/2 mb-3" style={{ ...fontSecondaryStyle }}>{formData.text.secondary.text.length > 0 ? formData.text.secondary.text : formData.text.secondary.placeholder}</p>
+                  <p id="text3" className="w-1/2 mb-3 text-right" style={{ ...fontSecondaryStyle }}>{formData.text.third.text.length > 0 ? formData.text.third.text : formData.text.third.placeholder}</p>
+                  <p id="text4" className="w-1/2 mb-3" style={{ ...fontSecondaryStyle }}>{formData.text.fourth.text.length > 0 ? formData.text.fourth.text : formData.text.fourth.placeholder}</p>
+                  <p id="text5" className="w-1/2 mb-3 text-right" style={{ ...fontSecondaryStyle }}>{formData.text.fifth.text.length > 0 ? formData.text.fifth.text : formData.text.fifth.placeholder}</p>
+                  <p id="text6" className="w-1/2" style={{ ...fontSecondaryStyle }}>{formData.text.sixth.text.length > 0 ? formData.text.sixth.text : formData.text.sixth.placeholder}</p>
+                  <p id="text7" className="w-1/2 text-right" style={{ ...fontSecondaryStyle }}>{formData.text.seventh.text.length > 0 ? formData.text.seventh.text : formData.text.seventh.placeholder}</p>
+                </div>
               </div>
+              <div id="flag" className="w-full rounded-lg" style={flagStyle}></div>
             </div>
           ) : formData.type.toLowerCase() == ("division jacket panel") ? (
             <div ref={containerRef} className="h-full text-center overflow-x-hidden flex items-center justify-center">
@@ -1354,7 +1361,7 @@ function Form({ formData, setFormData, data, config, product }) {
   const handleText5Change = (event) => {
     setFormData({ ...formData, text: { ...formData.text, fifth: { ...formData.text.fifth, text: event.target.value } } });
   }
-  
+
   const handleText6Change = (event) => {
     setFormData({ ...formData, text: { ...formData.text, sixth: { ...formData.text.sixth, text: event.target.value } } });
   }
@@ -1791,7 +1798,7 @@ function Form({ formData, setFormData, data, config, product }) {
                     <>
                       <div className="flex justify-between">
                         <label htmlFor="text" className="block text-sm xl:text-lg font-medium">
-                          Text
+                          {input.label}
                         </label>
                         <label htmlFor="text" className="block text-sm xl:text-lg font-medium text-right">
                           {formData.text.secondary.text === 'Text' ? formData.text.secondary.maxLength + " " : formData.text.secondary.maxLength - formData.text.secondary.text.replace(/\n/g, '').length + " "}
@@ -1816,7 +1823,7 @@ function Form({ formData, setFormData, data, config, product }) {
                     <>
                       <div className="flex justify-between">
                         <label htmlFor="text" className="block text-sm xl:text-lg font-medium">
-                          Text
+                          {input.label}
                         </label>
                         <label htmlFor="text" className="block text-sm xl:text-lg font-medium text-right">
                           {formData.text.third.text === 'Text' ? formData.text.third.maxLength + " " : formData.text.third.maxLength - formData.text.third.text.replace(/\n/g, '').length + " "}
@@ -1841,7 +1848,7 @@ function Form({ formData, setFormData, data, config, product }) {
                     <>
                       <div className="flex justify-between">
                         <label htmlFor="text" className="block text-sm xl:text-lg font-medium">
-                          Text
+                          {input.label}
                         </label>
                         <label htmlFor="text" className="block text-sm xl:text-lg font-medium text-right">
                           {formData.text.fourth.text === 'Text' ? formData.text.fourth.maxLength + " " : formData.text.fourth.maxLength - formData.text.fourth.text.replace(/\n/g, '').length + " "}
@@ -1866,7 +1873,7 @@ function Form({ formData, setFormData, data, config, product }) {
                     <>
                       <div className="flex justify-between">
                         <label htmlFor="text" className="block text-sm xl:text-lg font-medium">
-                          Text
+                          {input.label}
                         </label>
                         <label htmlFor="text" className="block text-sm xl:text-lg font-medium text-right">
                           {formData.text.fifth.text === 'Text' ? formData.text.fifth.maxLength + " " : formData.text.fifth.maxLength - formData.text.fifth.text.replace(/\n/g, '').length + " "}
@@ -1891,7 +1898,7 @@ function Form({ formData, setFormData, data, config, product }) {
                     <>
                       <div className="flex justify-between">
                         <label htmlFor="text" className="block text-sm xl:text-lg font-medium">
-                          Text
+                          {input.label}
                         </label>
                         <label htmlFor="text" className="block text-sm xl:text-lg font-medium text-right">
                           {formData.text.sixth.text === 'Text' ? formData.text.sixth.maxLength + " " : formData.text.sixth.maxLength - formData.text.sixth.text.replace(/\n/g, '').length + " "}
@@ -1916,7 +1923,7 @@ function Form({ formData, setFormData, data, config, product }) {
                     <>
                       <div className="flex justify-between">
                         <label htmlFor="text" className="block text-sm xl:text-lg font-medium">
-                          Text
+                          {input.label}
                         </label>
                         <label htmlFor="text" className="block text-sm xl:text-lg font-medium text-right">
                           {formData.text.seventh.text === 'Text' ? formData.text.seventh.maxLength + " " : formData.text.seventh.maxLength - formData.text.seventh.text.replace(/\n/g, '').length + " "}

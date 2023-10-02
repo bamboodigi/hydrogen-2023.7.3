@@ -589,13 +589,13 @@ const builderData = {
             input: [
               {
                 id: 'text2',
-                label: 'Text',
+                label: 'Text 2',
                 type: 'input',
                 placeholder: 'Name',
               },
               {
                 id: 'text3',
-                label: 'Text',
+                label: 'Text 3',
                 type: 'input',
                 placeholder: 'Name',
               },
@@ -606,13 +606,13 @@ const builderData = {
             input: [
               {
                 id: 'text4',
-                label: 'Text',
+                label: 'Text 4',
                 type: 'input',
                 placeholder: 'Name',
               },
               {
                 id: 'text5',
-                label: 'Text',
+                label: 'Text 5',
                 type: 'input',
                 placeholder: 'Name',
               },
@@ -623,13 +623,13 @@ const builderData = {
             input: [
               {
                 id: 'text6',
-                label: 'Text',
+                label: 'Text 6',
                 type: 'input',
                 placeholder: 'Name',
               },
               {
                 id: 'text7',
-                label: 'Text',
+                label: 'Text 7',
                 type: 'input',
                 placeholder: 'Name',
               },
