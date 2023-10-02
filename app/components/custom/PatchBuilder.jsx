@@ -10,11 +10,11 @@ import { AnalyticsPageType, Money, ShopPayButton } from '@shopify/hydrogen';
 
 // Import data from the '~/data/visualizer.js' file
 import data from '~/data/visualizer.js';
-import newData from '~/data/newVisualizer.js';
-import sizeOptions from '~/data/size-options.js';
-
 import builderData from '~/data/builder.js';
 
+import initFormDataTest from '~/helpers/initFormData.js';
+
+const sizeOptions = builderData.sizeOptions;
 const bgColors = builderData.colors.bgColors;
 const fontColors = builderData.colors.fontColors;
 const imgs = builderData.imgs;
@@ -29,16 +29,16 @@ function classNames(...classes) {
 
 // Patch Builder Component. This is the component that will show a tailored patch unique to the user's selections.
 export function PatchBuilder({ product, config, ...props }) {
-
   // Destructure variables from useLoaderData and useFetcher hooks
   const { shop } = useLoaderData();
 
   const { shippingPolicy, refundPolicy } = shop;
   // const fetch = useFetcher();
 
+  // console.log(imgs);
+
   // Set initial state with useState hook
   const [formData, setFormData] = useState(initFormData(product));
-
   // Define a variable that sets a prestyle object with a width property
   var prestyle = {
     width: '300px'
@@ -57,16 +57,20 @@ export function PatchBuilder({ product, config, ...props }) {
           <div className="grid gap-2">
             <Heading as="h1" className="text-3xl leading-[2rem] pr-5 sm:pr-0 whitespace-normal">
               <span className="mr-2">
-                {formData.size}
+                {formData.size.current}
               </span>
-              {isMini(formData.type, formData.size) && (
+              {isMini(formData.type, formData.size.current) && (
                 <span className="">Mini </span>
               )
               }
               {
-                formData.type.toLowerCase().includes("medical patch") && formData.size == '1” x 1”' ? (
+                formData.type.toLowerCase().includes("medical patch") && formData.size.current == '1” x 1”' ? (
                   <>
                     Cats Eye
+                  </>
+                ) : formData.type.toLowerCase().includes("medical patch") && formData.size.current == '3.5” x 2”' ? (
+                  <>
+                    Medical ID Panel
                   </>
                 ) : formData.type.toLowerCase().includes("light sabers") ? (
                   <>
@@ -74,9 +78,14 @@ export function PatchBuilder({ product, config, ...props }) {
                   </>
                 ) : formData.type.toLowerCase().includes("flag") ? (
                   <>
-                  <span className="block mt-2">
-                    {formData.flagType}
+                    <span className="block mt-2">
+                      {formData.img.type}
                     </span>
+                  </>
+                ) : formData.type.toLowerCase().includes("jacket panel") ? (
+                  <>
+                    <br></br>
+                    Custom Jacket Panel
                   </>
                 ) : (
                   <>
@@ -93,7 +102,7 @@ export function PatchBuilder({ product, config, ...props }) {
               {
                 formData.type.toLowerCase().includes("light sabers") && (
                   <>
-                    <span className="text-xl mt-2 uppercase block">{formData.saberType}</span>
+                    <span className="text-xl mt-2 uppercase block">{formData.lightsaber.saberType}</span>
                   </>
                 )
               }
@@ -110,102 +119,131 @@ export function PatchBuilder({ product, config, ...props }) {
 
 
 function initFormData(product) {
-  // console.log(product);
+  //console.log(product);
   const patchType = builderData.type[getBuilderTitle(product).toLowerCase()];
 
-  const params = useParams();
-  // console.log(patchType);
-  ///////////////////////////////////////////////////////////////////////////////////////////////
-  //  FORMDATA OBJ = TEXT, TEXTMAXLENGTH, TEXTLINES, TEXTPLACEHOLDER, TEXTADDITIONAL, TYPE,
-  //  TYPEDATA, SIZE, TEXTCOLOR, TEXTCOLORIMG, BGCOLOR, BGCOLORIMG, FLAG, FLAGIMG, FLAGVARIANT, 
-  //  FLAGVARIANTIMG, COMMENTS, CANDIDATES
-  ///////////////////////////////////////////////////////////////////////////////////////////////
   let formData = {
-    // input fields
-    text: '',
-    textMaxLength: patchType.config.sizes[0].maxLength || '',
-    textLines: patchType.config.sizes[0].lines || '',
-    textPlaceholder: patchType.config.sizes[0].placeholder || '',
-    textAdditional: '',
-    textAdditionalMaxLength: patchType.config.sizes[0].maxLength2 || '',
-    textAdditionalLines: patchType.config.sizes[0].lines2 || '',
-    textAdditionalPlaceholder: patchType.config.sizes[0].placeholder2 || '',
     type: patchType.name || '',
-    // size list per variant
-    // size: '3.5” x 2”',
-    size: patchType.config.sizes[0].size || '',
-    // font text color name and image
-    textColor: fontColors[8].name,
-    textColorImg: fontColors[8].img,
-    // background color name and image
-    bgColor: bgColors[18].name,
-    bgColorImg: bgColors[18].img,
-    markType: '',
-    flagEnabled: false,
-    flagType: 'Lazer Cut Flag',
-    img: data[5].values[0]["hivis-flags"][0].name,
-    imgSrc: data[5].values[0]["hivis-flags"][0].img,
-    flagReversed: false,
-    flagVariant: "",
-    flagVariantImg: "",
-    agreement: false,
-    glowBorder: false,
-    proIRFontColor: false,
-    reflectiveGlowFontColor: false,
-    typeData: patchType.config.sizes || [],
-    price: parseInt(product.variants.nodes[0].price.amount),
-    saberType: saberOptions[0].name,
-    hiltColor: fontColors[7].name,
-    hiltColorImg: fontColors[7].img,
-    hiltImg: saberOptions[0].hilt,
-    bladeColor: fontColors[11].name,
-    bladeColorImg: fontColors[11].img,
-    bladeImg: saberOptions[0].blade,
+    formValidation: {
+      agreement: false,
+    },
+    price: {
+      amount: parseInt(product.variants.nodes[0].price.amount),
+      total: parseInt(product.variants.nodes[0].price.amount),
+    },
+    upsells: {
+      glowBorder: false,
+      proIRFontColor: false,
+      reflectiveGlowFontColor: false,
+    },
+    size: {
+      current: patchType.config.sizes[0].size || '',
+      list: patchType.config.sizes || [],
+    },
+    bgColor: {
+      name: bgColors[18].name,
+      img: bgColors[18].img,
+    },
+    text: {
+      primary: {
+        text: '',
+        maxLength: patchType.config.sizes[0].maxLength || '',
+        lines: patchType.config.sizes[0].lines || '',
+        placeholder: patchType.config.sizes[0].placeholder || '',
+      },
+      secondary: {
+        text: '',
+        maxLength: patchType.config.sizes[0].maxLength2 || '',
+        lines: patchType.config.sizes[0].lines2 || '',
+        placeholder: patchType.config.sizes[0].placeholder2 || '',
+      },
+      color: {
+        name: fontColors[8].name,
+        img: fontColors[8].img,
+      },
+    },
+    lightsaber: {
+      saberType: saberOptions[0].name,
+      hilt: {
+        name: fontColors[7].name,
+        color: fontColors[7].img,
+        img: saberOptions[0].hilt,
+      },
+      blade: {
+        name: fontColors[11].name,
+        color: fontColors[11].img,
+        img: saberOptions[0].blade,
+      },
+    },
+    img: {
+      markType: 'Flag',
+      enabled: false,
+      name: imgs["hi-vis"][0].name,
+      img: imgs["hi-vis"][0].img,
+      color: {
+        name: fontColors[8].name,
+        img: fontColors[8].img,
+      },
+      type: 'Lazer Cut Flag',
+      reversed: false,
+      variant: {
+        name: '',
+        img: '',
+      },
+    }
   };
 
-  if(formData.type.toLowerCase().includes("flag")) {
-   // formData.imgSrc = "";
+  switch (formData.type.toLowerCase()) {
+    case 'id panel':
+      formData.img.type = 'Lazer Cut Flag';
+      break;
+    case 'name tape':
+      formData.img.type = 'HiVis Flag';
+      break;
+    case 'flag':
+      formData.img.type = 'Lazer Cut Flag';
+      break;
+    case 'light sabers':
+      formData.bgColor.name = bgColors[0].name;
+      formData.bgColor.img = bgColors[0].img;
+      break;
+    case 'medical patch':
+      if (formData.size.current == '1” x 1”') {
+        console.log('hi')
+        formData.img.markType = 'Symbol';
+        formData.img.name = symbols['medical patch']['1 x 1'][0].name;
+        formData.img.img = symbols['medical patch']['1 x 1'][0].img;
+        formData.img.icon = symbols['medical patch']['1 x 1'][0].icon;
+        formData.img.glow = symbols['medical patch']['1 x 1'][0].glow;
+      } else {
+        formData.img.markType = 'Symbol';
+        formData.img.name = symbols['medical patch']['2 x 2'][0].name;
+        formData.img.img = symbols['medical patch']['2 x 2'][0].img;
+        formData.img.icon = symbols['medical patch']['2 x 2'][0].icon;
+        formData.img.glow = symbols['medical patch']['2 x 2'][0].glow;
+      }
+      break;
+    case 'jacket panel':
+      let tempObj = {
+        text: '',
+        placeholder: 'Text',
+        maxLength: 6,
+        lines: 1,
+      };
+      formData.text.secondary = tempObj;
+      formData.text.third = tempObj;
+      formData.text.fourth = tempObj;
+      formData.text.fifth = tempObj;
+      formData.text.sixth = tempObj;
+      formData.text.seventh = tempObj;
+
+      break;
+    case 'default':
+      formData.img.type = 'HiVis Flag';
+      formData.price.total += 4;
+      break;
   }
-
-  if (formData.type.toLowerCase().includes("light sabers")) {
-    formData.bgColor = bgColors[0].name;
-    formData.bgColorImg = bgColors[0].img;
-  }
-
-  if (formData.type.toLowerCase().includes("medical patch")) {
-    if (formData.size == '1” x 1”') {
-      formData.markType = 'Symbol';
-      formData.img = symbols['medical patch']['1 x 1'][0].name;
-      formData.imgSrc = symbols['medical patch']['1 x 1'][0].img;
-      formData.imgIcon = symbols['medical patch']['1 x 1'][0].icon;
-      formData.imgGlow = symbols['medical patch']['1 x 1'][0].glow;
-    } else {
-      formData.markType = 'Symbol';
-      formData.img = symbols['medical patch']['2 x 2'][0].name;
-      formData.imgSrc = symbols['medical patch']['2 x 2'][0].img;
-      formData.imgIcon = symbols['medical patch']['2 x 2'][0].icon;
-      formData.imgGlow = symbols['medical patch']['2 x 2'][0].glow;
-    }
-  }
-
-  if (isFlag(formData.type)) {
-    console.log(formData.type.toLowerCase())
-    switch (formData.type.toLowerCase()) {
-      case 'id panel':
-        formData.flagType = 'Lazer Cut Flag';
-      case 'name tape':
-        formData.flagType = 'HiVis Flag';
-      case 'flag':
-        formData.flagType = 'Lazer Cut Flag';
-      case 'default':
-      // console.log("test");
-      // formData.flagType = 'HiVis Flag';
-      // formData.price += 4;
-    }
-  }
-
-  //  console.log(params);
-
+  // console.log(formData);
   return formData || {};
 }
 
@@ -218,8 +256,8 @@ function isGlowBorder(type, size, sizeEnabled) {
 
 function isFlag(type, flagEnabled) {
   // determine if type == id panel, lazer cut flag, jacket panel, division jacket panel
-  if (type.toLowerCase().includes("id panel") 
-    || type.toLowerCase().includes("jacket panel") || type.toLowerCase().includes("division jacket panel")
+  if (type.toLowerCase().includes("id panel")
+    // || type.toLowerCase().includes("jacket panel") || type.toLowerCase().includes("division jacket panel")
   ) {
     flagEnabled = true;
   }
@@ -296,19 +334,21 @@ function getBuilderTitle(product) {
 
 
 function initVisualizerStyle(formData) {
+  const bgColor = 'url("' + formData.bgColor.img + '")';
+  const textColor = 'url("' + formData.text.color.img + '")';
+  const hiltColor = 'url("' + formData.lightsaber.hilt.color + '")';
+  const bladeColor = 'url("' + formData.lightsaber.blade.color + '")';
+  const symbolColor = 'url("' + formData.img.color.color + '")';
+  const img = formData.type.toLowerCase() === "medical patch" ? 'url("' + formData.img.symbol + '")' : 'url("' + formData.img.img + '")';
+  const hiltImg = 'url("' + formData.lightsaber.hilt.img + '")';
+  const bladeImg = 'url("' + formData.lightsaber.blade.img + '")';
 
-  const bgColorImg = 'url("' + formData.bgColorImg + '")';
-  const textColorImg = 'url("' + formData.textColorImg + '")';
-  const hiltImg = 'url("' + formData.hiltColorImg + '")';
-  const bladeImg = 'url("' + formData.bladeColorImg + '")';
-  const flagImg = 'url("' + formData.imgSrc + '")';
-
-  var obj = {
+  let obj = {
     canvas: {
       height: '230px'
     },
     patch: {
-      backgroundImage: bgColorImg,
+      backgroundImage: bgColor,
       width: '290px',
       height: 'calc(290px/3)',
       textTransform: 'uppercase',
@@ -319,122 +359,109 @@ function initVisualizerStyle(formData) {
       OTransition: 'background-image 0.3s ease-in-out, height 0.2s ease-in-out, width 0.4s ease-in-out !important',
       transition: 'background-image 0.3s ease-in-out, height 0.2s ease-in-out, width 0.4s ease-in-out !important',
     },
-    font: {
-      backgroundImage: textColorImg,
-      WebkitBackgroundClip: 'text',
-      WebkitTextFillColor: 'transparent',
-      fontFamily: 'WMIStencil-Black',
-      backgroundClip: 'text',
-      width: 'auto',
-      whiteSpace: 'nowrap',
-      textAlign: 'center',
-      lineHeight: '96.66px',
-      fontSize: '96.66px',
-      marginTop: '8.3333px'
+    text: {
+      primary: {
+        backgroundImage: textColor,
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        fontFamily: 'WMIStencil-Black',
+        backgroundClip: 'text',
+        width: 'auto',
+        whiteSpace: 'nowrap',
+        textAlign: 'center',
+        lineHeight: '96.66px',
+        fontSize: '96.66px',
+        marginTop: '8.3333px'
+      },
+      secondary: {
+        backgroundImage: textColor,
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        fontFamily: 'WMIStencil-Black',
+        backgroundClip: 'text',
+        textAlign: 'center',
+        lineHeight: '38px',
+        fontSize: '32px',
+      },
     },
-    font2: {
-      backgroundImage: textColorImg,
-      WebkitBackgroundClip: 'text',
-      WebkitTextFillColor: 'transparent',
-      fontFamily: 'WMIStencil-Black',
-      backgroundClip: 'text',
-      width: 'auto',
-      textAlign: 'center',
-      lineHeight: '38px',
-      fontSize: '32px',
+    img: {
+      flag: {
+        backgroundImage: img,
+        aspectRatio: '2/1',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      },
+      symbol: {
+        backgroundImage: symbolColor,
+        maskImage: img,
+        maskSize: 'cover',
+        WebkitMaskImage: img,
+        WebkitMaskSize: 'cover',
+        transform: 'scale(1.5)',
+      },
     },
-    flag: {
-      backgroundImage: flagImg,
-      aspectRatio: '2/1',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-    },
-    hilt: {
-      backgroundImage: hiltImg,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      maskImage: 'url("' + formData.hiltImg + '")',
-      maskSize: 'contain',
-      maskRepeat: 'no-repeat',
-      maskPosition: 'center',
-      WebkitMaskImage: 'url("' + formData.hiltImg + '")',
-      WebkitMaskSize: 'contain',
-      WebkitMaskRepeat: 'no-repeat',
-      WebkitMaskPosition: 'center',
-      width: '27%',
-      height: '100%',
-    },
-    blade: {
-      backgroundImage: bladeImg,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      maskImage: 'url("' + formData.bladeImg + '")',
-      maskSize: 'contain',
-      maskRepeat: 'no-repeat',
-      maskPosition: 'center',
-      WebkitMaskImage: 'url("' + formData.bladeImg + '")',
-      WebkitMaskSize: 'contain',
-      WebkitMaskRepeat: 'no-repeat',
-      WebkitMaskPosition: 'center',
-      height: '100%',
+    lightsaber: {
+      hilt: {
+        backgroundImage: hiltColor,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        maskImage: hiltImg,
+        maskSize: 'contain',
+        maskRepeat: 'no-repeat',
+        maskPosition: 'center',
+        WebkitMaskImage: hiltImg,
+        WebkitMaskSize: 'contain',
+        WebkitMaskRepeat: 'no-repeat',
+        WebkitMaskPosition: 'center',
+        width: '27%',
+        height: '100%',
+      },
+      blade: {
+        backgroundImage: bladeColor,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        maskImage: bladeImg,
+        maskSize: 'contain',
+        maskRepeat: 'no-repeat',
+        maskPosition: 'center',
+        WebkitMaskImage: bladeImg,
+        WebkitMaskSize: 'contain',
+        WebkitMaskRepeat: 'no-repeat',
+        WebkitMaskPosition: 'center',
+        height: '100%',
+      }
     }
   };
-
 
   switch (formData.type.toLowerCase()) {
     case 'id panel':
       obj.patch.height = 'calc(290px*3)/2)';
-      obj.font.fontSize = '96px';
-      obj.font.lineHeight = '96px';
-      obj.font.marginTop = 'calc(96px/9)';
-      // obj.font2.marginTop = '8px';
-      // obj.font2.marginLeft = '6px';
-      obj.font2.lineHeight = '30.8475px';
-      obj.font2.fontSize = '36.6316px';
+      obj.text.primary.fontSize = '96px';
+      obj.text.primary.lineHeight = '96px';
+      obj.text.primary.marginTop = 'calc(96px/9)';
+      obj.text.secondary.lineHeight = '30.8475px';
+      obj.text.secondary.fontSize = '36.6316px';
+      obj.text.secondary.width = 'auto';
       break;
     case 'name tape':
-      obj.font.fontSize = '48.6397px';
-      obj.font.lineHeight = '48.6397px';
-      obj.font.marginTop = '6.07996px';
+      obj.text.primary.fontSize = '48.6397px';
+      obj.text.primary.lineHeight = '48.6397px';
+      obj.text.primary.marginTop = '6.07996px';
       break;
     case 'medical patch':
-      obj.flag.backgroundImage = textColorImg;
-      obj.flag.WebkitMaskImage = flagImg;
-      obj.flag.maskImage = flagImg;
-      obj.flag.maskSize = 'cover';
-      obj.flag.WebkitMaskSize = 'cover';
       obj.patch.maskImage = 'none';
       obj.patch.WebkitMaskImage = 'none';
-      obj.flag.transform = 'scale(1.5)';
+      obj.text.secondary.width = 'auto';
       break;
     case 'light sabers':
       obj.patch.height = '58px';
-      switch (formData.saberType.toLowerCase()) {
-        case 'darth vader':
-          // obj.hilt.backgroundImage = 'url("' + formData.hiltColor + '")';
-          // obj.blade.backgroundImage = 'url("' + formData.bladeColor + '")';
-          break;
-        case 'luke skywalker':
-          // obj.hilt.backgroundImage = 'url("' + formData.hiltColor + '")';
-          // obj.blade.backgroundImage = 'url("' + formData.bladeColor + '")';
-          break;
-        case 'obi wan kenobi':
-          // obj.hilt.backgroundImage = 'url("' + formData.hiltColor + '")';
-          // obj.blade.backgroundImage = 'url("' + formData.bladeColor + '")';
-          break;
-        case 'mace windu':
-          // obj.hilt.backgroundImage = 'url("' + formData.hiltColor + '")';
-          // obj.blade.backgroundImage = 'url("' + formData.bladeColor + '")';
-          break;
-        case 'count dooku':
-          // obj.hilt.backgroundImage = 'url("' + formData.hiltColor + '")';
-          // obj.blade.backgroundImage = 'url("' + formData.bladeColor + '")';
-          break;
-      }
       break;
     case 'flag':
       obj.patch.padding = '0';
       obj.patch.background = 'none';
+      obj.text.secondary.width = 'auto';
+      break;
+    case 'jacket panel':
       break;
   }
 
@@ -442,19 +469,19 @@ function initVisualizerStyle(formData) {
   return obj;
 }
 
+
 function updateFontSize(containerRef, setFontStyle, formData) {
 
 
-  const textLines = formData.textLines;
+  const textLines = formData.text.primary.lines;
   // console.log(textLines)
-  // console.log(formData.textLines)
+  // console.log(formData.text.primary.lines)
   // console.log(formData.type.toLowerCase())
-  // console.log(formData.size == '6” x 2”')
-  const currentLines = formData.text.split("\n").length;
-  // console.log(formData.text.split("\n").length)
+  // console.log(formData.size.current == '6” x 2”')
+  const currentLines = formData.text.primary.text.split("\n").length;
   //  console.log(formData.type.toLowerCase().includes("name tape") && formData.type.toLowerCase().includes("flag"))
-  // console log that formData.type.toLowercase() contains id panel and formData.size == '6” x 2”' is true
-  // console.log(formData.type.toLowerCase().includes('id panel') && formData.size == '6” x 2”')
+  // console log that formData.type.toLowercase() contains id panel and formData.size.current == '6” x 2”' is true
+  // console.log(formData.type.toLowerCase().includes('id panel') && formData.size.current == '6” x 2”')
   const container = containerRef.current;
 
   const textElement = container.querySelector('#main-text');
@@ -499,8 +526,8 @@ function updateFontSize(containerRef, setFontStyle, formData) {
 
   switch (formData.type.toLowerCase()) {
     case 'id panel':
-      if (formData.text.length == 0) {
-        switch (formData.size) {
+      if (formData.text.primary.text.length == 0) {
+        switch (formData.size.current) {
           case '3” x 2”':
             newFontSize = 97.0787;
             break;
@@ -523,7 +550,7 @@ function updateFontSize(containerRef, setFontStyle, formData) {
       }
       break;
     case 'medical patch':
-      if (formData.text.length == 0) {
+      if (formData.text.primary.text.length == 0) {
         newFontSize = 47.1714;
       }
       break;
@@ -591,8 +618,8 @@ function updateAdditionalFontSize(containerSecondaryRef, setFontSecondaryStyle, 
 
   switch (formData.type.toLowerCase()) {
     case 'id panel':
-      if (formData.textAdditional.length == 0) {
-        switch (formData.size) {
+      if (formData.text.secondary.text.length == 0) {
+        switch (formData.size.current) {
           case '3” x 2”':
             newFontSize = 37;
             break;
@@ -629,27 +656,20 @@ function updateAdditionalFontSize(containerSecondaryRef, setFontSecondaryStyle, 
 // Patch Visualizer element that shows a tailored patch
 function Visualizer({ formData, className, ...props }) {
 
-  const { canvas, patch, font, font2, flag, hilt, blade } = initVisualizerStyle(formData);
-
+  const { canvas, patch, text, img, lightsaber } = initVisualizerStyle(formData);
   // Create a ref to access the container element
+
+  console.log(lightsaber);
   const containerRef = useRef(null);
   const containerSecondaryRef = useRef(null);
 
   const [canvasStyle, setCanvasStyle] = useState(canvas);
   const [style, setStyle] = useState(patch);
-  const [fontStyle, setFontStyle] = useState(font);
-  const [fontSecondaryStyle, setFontSecondaryStyle] = useState(font2);
-  const [flagStyle, setFlagStyle] = useState(flag);
-  const [hiltStyle, setHiltStyle] = useState(hilt);
-  const [bladeStyle, setBladeStyle] = useState(blade);
+  const [fontStyle, setFontStyle] = useState(text.primary);
+  const [fontSecondaryStyle, setFontSecondaryStyle] = useState(text.secondary);
+  const [flagStyle, setFlagStyle] = useState(formData.type.toLowerCase() === "medical patch" ? img.symbol : img.flag); const [hiltStyle, setHiltStyle] = useState(lightsaber.hilt);
+  const [bladeStyle, setBladeStyle] = useState(lightsaber.blade);
 
-  console.log(flag);
-  console.log(hilt);
-  console.log(blade);
-
-  console.log(flagStyle);
-  console.log(bladeStyle);
-  console.log(hiltStyle)
 
   // A function to load an image and update the state with its URL
   const imageLoader = (src, setState, mask) => {
@@ -661,7 +681,7 @@ function Visualizer({ formData, className, ...props }) {
           let newWidth = '';
           let newMarginLeft = '';
           let newColor = '';
-          switch (formData.saberType.toLowerCase()) {
+          switch (formData.lightsaber.saberType.toLowerCase()) {
             case 'darth vader':
               newWidth = src.includes("hilt") ? '27%' : src.includes("blade") ? '73%' : '';
               newColor = src.includes("hilt") ? fontColors[7].img : src.includes("blade") ? fontColors[11].img : '';
@@ -687,9 +707,6 @@ function Visualizer({ formData, className, ...props }) {
               newColor = src.includes("hilt") ? fontColors[7].img : src.includes("blade") ? fontColors[11].img : '';
               break;
           }
-          console.log("bing")
-          console.log(mask);
-          console.log(setState);
           setState(prevStyle => ({
             ...prevStyle,
             WebkitMaskImage: `url("${src}")`,
@@ -713,12 +730,8 @@ function Visualizer({ formData, className, ...props }) {
               backgroundImage: `url("${newColor}")`
             }));
           }
-          console.log(src);
-
         }
         else {
-          console.log("bing");
-          console.log("")
           setState(prevStyle => ({
             ...prevStyle,
             backgroundImage: `url("${src}")`
@@ -729,7 +742,7 @@ function Visualizer({ formData, className, ...props }) {
           setState(prevStyle => ({
             ...prevStyle,
             backgroundImage: `url("${src}")`,
-            WebkitMaskImage: `url("${formData.imgSrc}")`,
+            WebkitMaskImage: `url("${formData.img.img}")`,
             maskImage: `url("${mask}")`,
             maskSize: `cover`,
             WebkitSize: 'cover',
@@ -760,65 +773,63 @@ function Visualizer({ formData, className, ...props }) {
 
   // Custom hook to update the font style when the text color image changes
   useEffect(() => {
-    console.log(formData.hiltImg);
-    console.log(formData.bladeImg);
-    imageLoader(formData.hiltImg, setHiltStyle, "saber");
-    imageLoader(formData.bladeImg, setBladeStyle, "saber");
+    imageLoader(formData.lightsaber.hilt.img, setHiltStyle, "saber");
+    imageLoader(formData.lightsaber.blade.img, setBladeStyle, "saber");
     // setHiltStyle(prevStyle => ({ ...prevStyle, maskImage: `url("${formData.hiltImg}")`, WebkitMaskImage: `url("${formData.hiltImg}")` }));
     // setBladeStyle(prevStyle => ({ ...prevStyle, maskImage: `url("${formData.bladeImg}")`, WebkitMaskImage: `url("${formData.bladeImg}")` }));
-  }, [formData.saberType]);
+  }, [formData.lightsaber.saberType]);
 
   // // Custom hook to update the flag style when the flag image changes
   useEffect(() => {
     if (formData.type.toLowerCase().includes("medical patch")) {
-      imageLoader(formData.textColorImg, setFlagStyle, formData.imgSrc);
+      imageLoader(formData.text.color.img, setFlagStyle, formData.img.img);
     } else {
-      imageLoader(formData.imgSrc, setFlagStyle);
+      imageLoader(formData.img.img, setFlagStyle);
     }
-  }, [formData.imgSrc]);
+  }, [formData.img.img]);
 
   // Custom hook to update the background color image style when the background color image changes
   useEffect(() => {
-    imageLoader(formData.bgColorImg, setStyle);
-  }, [formData.bgColorImg]);
+    imageLoader(formData.bgColor.img, setStyle);
+  }, [formData.bgColor.img]);
 
   // Custom hook to update the font style when the text color image changes
   useEffect(() => {
     if (formData.type.toLowerCase().includes("medical patch")) {
-      imageLoader(formData.textColorImg, setFlagStyle);
+      imageLoader(formData.text.color.img, setFlagStyle);
     }
-    imageLoader(formData.textColorImg, setFontStyle);
-    imageLoader(formData.textColorImg, setFontSecondaryStyle);
+    imageLoader(formData.text.color.img, setFontStyle);
+    imageLoader(formData.text.color.img, setFontSecondaryStyle);
 
-  }, [formData.textColorImg]);
-
-  // Custom hook to update the font style when the text color image changes
-  useEffect(() => {
-    imageLoader(formData.hiltColorImg, setHiltStyle);
-  }, [formData.hiltColorImg]);
-
+  }, [formData.text.color.img]);
 
   // Custom hook to update the font style when the text color image changes
   useEffect(() => {
-    imageLoader(formData.bladeColorImg, setBladeStyle);
-  }, [formData.bladeColorImg]);
+    imageLoader(formData.lightsaber.hilt.img, setHiltStyle);
+  }, [formData.lightsaber.hilt.img]);
+
+
+  // Custom hook to update the font style when the text color image changes
+  useEffect(() => {
+    imageLoader(formData.lightsaber.blade.img, setBladeStyle);
+  }, [formData.lightsaber.blade.img]);
 
   // Custom hook to update the font style when the text color image changes
   useEffect(() => {
     if (formData.type.toLowerCase().includes("medical patch")) {
-      imageLoader(formData.textColorImg, setFlagStyle);
+      imageLoader(formData.text.color.img, setFlagStyle);
     }
-    imageLoader(formData.textColorImg, setFontStyle);
-    imageLoader(formData.textColorImg, setFontSecondaryStyle);
+    imageLoader(formData.text.color.img, setFontStyle);
+    imageLoader(formData.text.color.img, setFontSecondaryStyle);
 
-  }, [formData.textColorImg]);
+  }, [formData.text.color.img]);
 
   // Custom hook to update the size style when the size changes
   useEffect(() => {
     // An array of objects that represent the different size options
     const values = sizeOptions;
 
-    const value = values.find(item => item.name === formData.size);
+    const value = values.find(item => item.name === formData.size.current);
 
     if (value) {
       if (value.ratio === "1:1") {
@@ -830,7 +841,7 @@ function Visualizer({ formData, className, ...props }) {
         setStyle(prevStyle => ({ ...prevStyle, width: '290px', height: `${290 * height / width}px` }));
       }
     }
-  }, [formData.size]);
+  }, [formData.size.current]);
 
   // Custom hook to update the canvas style when the size changes
   useEffect(() => {
@@ -841,7 +852,7 @@ function Visualizer({ formData, className, ...props }) {
 
     // Check if the current size requires a larger canvas
     for (let i = 0; i < arr.length; i++) {
-      if (arr[i].name === formData.size) {
+      if (arr[i].name === formData.size.current) {
         setCanvasStyle(prevStyle => ({ ...prevStyle, height: '400px' }));
         countSize = false;
         break;
@@ -852,7 +863,20 @@ function Visualizer({ formData, className, ...props }) {
     if (countSize) {
       setCanvasStyle(prevStyle => ({ ...prevStyle, height: '230px' }));
     }
-  }, [formData.size]);
+    if (formData.type.toLowerCase().includes("medical patch")) {
+      setCanvasStyle(prevStyle => ({ ...prevStyle, height: '230px' }));
+      switch (formData.size.current) {
+        case '1” x 1”':
+          break;
+        case '2” x 2”':
+          break;
+        case '3.5” x 2”':
+          setFlagStyle(prevStyle => ({ ...prevStyle, transform: `scale(1)` }));
+          console.log("hi");
+          break;
+      }
+    }
+  }, [formData.size.current]);
 
   //Use the useEffect hook to manage side effects
   // This useEffect hook adjusts the font size of the text inside a container element
@@ -862,7 +886,6 @@ function Visualizer({ formData, className, ...props }) {
   useEffect(() => {
     // console.log(!containerRef.current);
     if (formData.type.toLowerCase().includes("light sabers")) return;
-    console.log(formData.type.toLowerCase().includes("flag"));
     if (formData.type.toLowerCase().includes("flag")) return;
     if (!containerRef.current) return;
     // Define a function to adjust the font size
@@ -890,7 +913,7 @@ function Visualizer({ formData, className, ...props }) {
       window.removeEventListener('resize', adjustFontSize());
       observer.disconnect();
     };
-  }, [formData.text, formData.size]);
+  }, [formData.text.primary.text, formData.size.current]);
 
   const count2 = 0;
   //Use the useEffect hook to manage side effects
@@ -918,26 +941,26 @@ function Visualizer({ formData, className, ...props }) {
       window.removeEventListener('resize', adjustFontSize());
       observer.disconnect();
     };
-  }, [formData.textAdditional, formData.size]);
+  }, [formData.text.secondary.text, formData.size.current]);
 
 
   useEffect(() => {
     if (formData.type.toLowerCase() !== 'medical patch') {
-      if (formData.flagReversed) {
-        setFlagStyle(prevStyle => ({ ...prevStyle, transform: `scaleX(-1.5)` }));
+      if (formData.img.reversed) {
+        setFlagStyle(prevStyle => ({ ...prevStyle, transform: `scaleX(-1)` }));
       } else {
         setFlagStyle(prevStyle => ({ ...prevStyle, transform: `scaleX(1)` }));
       }
     }
-  }, [formData.flagReversed]);
+  }, [formData.img.reversed]);
 
   useEffect(() => {
-    if (formData.glowBorder) {
+    if (formData.upsells.glowBorder) {
       setStyle(prevStyle => ({ ...prevStyle, WebkitTextStroke: `2px white`, textStroke: `2px white` }));
     } else {
       setStyle(prevStyle => ({ ...prevStyle, WebkitTextStroke: `initial`, textStroke: `initial` }));
     }
-  }, [formData.glowBorder]);
+  }, [formData.upsells.glowBorder]);
 
 
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -968,60 +991,60 @@ function Visualizer({ formData, className, ...props }) {
           "flex items-center transform lg:scale-150"
         )} style={style}>
 
-          {formData.type.toLowerCase().includes("id panel") && formData.size == '6” x 2”' ? (
+          {formData.type.toLowerCase().includes("id panel") && formData.size.current == '6” x 2”' ? (
             <div className="w-full h-full flex">
               <div className="w-1/2 flex items-center px-2">
                 <div id="flag" className="w-full" style={flagStyle}></div>
               </div>
               <div className="flex flex-col w-1/2 gap-2" style={{}}>
                 <div ref={containerRef} className=" h-3/5 text-center overflow-x-hidden flex items-center justify-center">
-                  <p id="main-text" className="pt-2.5 inline-block" style={{ ...fontStyle }}>{formData.text.length > 0 ? formData.text : formData.textPlaceholder}</p>
+                  <p id="main-text" className="pt-2.5 inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
                 </div>
                 <div ref={containerSecondaryRef} className="h-2/5 text-center overflow-x-hidden flex items-end justify-center">
                   <p id="secondary-text" className="inline-block h-full whitespace-nowrap" style={{ ...fontSecondaryStyle }}>
-                    {formData.textAdditional.length > 0 ? formData.textAdditional : 'APOS  NKDA'}
+                    {formData.text.secondary.text.length > 0 ? formData.text.secondary.text : 'APOS  NKDA'}
                   </p>
                 </div>
               </div>
             </div>
           ) : formData.type.toLowerCase().includes("id panel") ? (
             <div className={classNames(
-              formData.size === '3.5” x 2”' ? "gap-2" :
-                formData.size === '4” x 2”' ? "gap-2" : "",
+              formData.size.current === '3.5” x 2”' ? "gap-2" :
+                formData.size.current === '4” x 2”' ? "gap-2" : "",
               "flex flex-col w-full h-full"
             )}>
               <div ref={containerRef} className="h-1/2 justify-center overflow-y-hidden flex items-center">
-                <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.length > 0 ? formData.text : formData.textPlaceholder}</p>
+                <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
               </div>
               <div className={classNames(
-                formData.size === '3.5” x 2”' ? "px-1" : "",
+                formData.size.current === '3.5” x 2”' ? "px-1" : "",
                 "flex h-1/2 items-center"
               )}>
                 <div id="flag"
                   className={classNames(
-                    formData.size === '3” x 2”' ? "min-w-3/5" : "min-w-1/2",
+                    formData.size.current === '3” x 2”' ? "min-w-3/5" : "min-w-1/2",
                     "flex-1 max-h-full max-w-full h-auto"
                   )}
                   style={flagStyle}></div>
                 <div ref={containerSecondaryRef} className={classNames(
-                  formData.size === '3” x 2”' ? "w-2/5" :
-                    formData.size === '3.5” x 2”' ? "w-1/2" : "w-1/2",
+                  formData.size.current === '3” x 2”' ? "w-2/5" :
+                    formData.size.current === '3.5” x 2”' ? "w-1/2" : "w-1/2",
                   "flex items-center justify-center h-full"
                 )}>
                   <p id="secondary-text" className={classNames(
-                    formData.size === '6” x 3”' ? "pt-3" :
-                      formData.size === '4” x 2”' ? "pt-3" :
-                        formData.size === '3.5” x 2”' ? "pt-2" : "pt-2 pl-2",
+                    formData.size.current === '6” x 3”' ? "pt-3" :
+                      formData.size.current === '4” x 2”' ? "pt-3" :
+                        formData.size.current === '3.5” x 2”' ? "pt-2" : "pt-2 pl-2",
                     ""
                   )}
                     style={{ ...fontSecondaryStyle }}>
-                    {formData.textAdditional.length > 0 ? formData.textAdditional.split('\n').map((line, index) => (
+                    {formData.text.secondary.text.length > 0 ? formData.text.secondary.text.split('\n').map((line, index) => (
                       <React.Fragment key={index}>
                         {index > 0 && <br />}
                         {line}
                       </React.Fragment>
                     )) :
-                      formData.textAdditionalPlaceholder.split('\n').map((line, index) => (
+                      formData.text.secondary.placeholder.split('\n').map((line, index) => (
                         <React.Fragment key={index}>
                           {index > 0 && <br />}
                           {line}
@@ -1032,51 +1055,51 @@ function Visualizer({ formData, className, ...props }) {
                 </div>
               </div>
             </div>
-          ) : formData.type.toLowerCase().includes("name tape") && formData.flagEnabled ? (
+          ) : formData.type.toLowerCase().includes("name tape") && formData.img.enabled ? (
             <div className="flex w-full h-full gap-2">
               <div className="flex flex-0  w-1/3 items-center" style={{}}>
                 <div id="flag" className="mr-1 flex-1 max-h-full max-w-full w-auto h-auto" style={flagStyle}></div>
               </div>
               <div ref={containerRef} className="flex flex-1 w-2/3 justify-center overflow-y-hidden items-center">
-                <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.length > 0 ? formData.text : formData.textPlaceholder}</p>
+                <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
               </div>
             </div>
           ) : formData.type.toLowerCase().includes("name tape") ? (
             <div ref={containerRef} className="h-full w-full text-center overflow-x-hidden overflow-y-hidden flex items-center justify-center">
-              <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.length > 0 ? formData.text.split('\n').map((line, index) => (
+              <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text.split('\n').map((line, index) => (
                 <React.Fragment key={index}>
                   {index > 0 && <br />}
                   {line}
                 </React.Fragment>
               )) :
-                formData.textPlaceholder.split('\n').map((line, index) => (
+                formData.text.primary.placeholder.split('\n').map((line, index) => (
                   <React.Fragment key={index}>
                     {index > 0 && <br />}
-                    {line}
+                    {line}x
                   </React.Fragment>
                 ))}</p>
             </div>
-          ) : formData.type.toLowerCase().includes("medical patch") && formData.size == '3.5” x 2”' ? (
+          ) : formData.type.toLowerCase().includes("medical patch") && formData.size.current == '3.5” x 2”' ? (
             <div className="flex w-full h-full gap-2">
-              <div className="flex flex-0  w-1/2 items-center" style={{}}>
+              <div className="flex flex-0  w-[45%] items-center" style={{}}>
                 <div id="icon" className="h-full w-full" style={flagStyle}>
                   <div id="glow"
                     className={classNames(
-                      formData.glowBorder ? "block" : "hidden",
+                      formData.upsells.glowBorder ? "block" : "hidden",
                       "h-full w-full"
                     )}
-                    style={{ backgroundImage: `url("${formData.imgGlow}")`, backgroundSize: 'cover', position: 'absolute' }}
+                    style={{ backgroundImage: `url("${formData.img.glow}")`, backgroundSize: 'cover', position: 'absolute' }}
                   ></div>
                 </div>
               </div>
-              <div ref={containerRef} className="flex flex-1 w-1/2 justify-center overflow-y-hidden items-center">
-                <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.length > 0 ? formData.text.split('\n').map((line, index) => (
+              <div ref={containerRef} className="flex flex-1 w-[55%] justify-center overflow-y-hidden items-center">
+                <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text.split('\n').map((line, index) => (
                   <React.Fragment key={index}>
                     {index > 0 && <br />}
                     {line}
                   </React.Fragment>
                 )) :
-                  formData.textPlaceholder.split('\n').map((line, index) => (
+                  formData.text.primary.placeholder.split('\n').map((line, index) => (
                     <React.Fragment key={index}>
                       {index > 0 && <br />}
                       {line}
@@ -1089,10 +1112,10 @@ function Visualizer({ formData, className, ...props }) {
               <div id="icon" className="h-4/5 w-4/5" style={flagStyle}>
                 <div id="glow"
                   className={classNames(
-                    formData.glowBorder ? "block" : "hidden",
+                    formData.upsells.glowBorder ? "block" : "hidden",
                     "h-full w-full"
                   )}
-                  style={{ backgroundImage: `url("${formData.imgGlow}")`, backgroundSize: 'cover', position: 'absolute' }}
+                  style={{ backgroundImage: `url("${formData.img.glow}")`, backgroundSize: 'cover', position: 'absolute' }}
                 ></div>
               </div>
             </div>
@@ -1102,11 +1125,11 @@ function Visualizer({ formData, className, ...props }) {
             </div>
           ) : formData.type.toLowerCase().includes("call sign") ? (
             <div ref={containerRef} className="h-full text-center overflow-x-hidden flex items-center justify-center">
-              <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.length > 0 ? formData.text : formData.textPlaceholder}</p>
+              <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
             </div>
           ) : formData.type.toLowerCase().includes("quote") ? (
             <div ref={containerRef} className="h-full text-center overflow-x-hidden flex items-center justify-center">
-              <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.length > 0 ? formData.text : formData.textPlaceholder}</p>
+              <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
             </div>
           ) : formData.type.toLowerCase().includes("light saber") ? (
             <div ref={containerRef} className="h-full w-full text-center overflow-x-hidden flex items-center justify-start">
@@ -1115,30 +1138,31 @@ function Visualizer({ formData, className, ...props }) {
             </div>
           ) : formData.type.toLowerCase().includes("custom printed") ? (
             <div ref={containerRef} className="h-full text-center overflow-x-hidden flex items-center justify-center">
-              <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.length > 0 ? formData.text : formData.textPlaceholder}</p>
+              <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
             </div>
           ) : formData.type.toLowerCase() == "jacket panel" ? (
             <div ref={containerRef} className="h-full w-full text-center overflow-x-hidden flex flex-col items-center justify-center">
-              <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.length > 0 ? formData.text : formData.textPlaceholder}</p>
-              <div className="flex">
-                <p id="text2" className="inline-block flex-0 w-1/2" style={{ ...fontSecondaryStyle }}>{formData.text.length > 0 ? formData.text : formData.textPlaceholder}</p>
-                <p id="text3" className="inline-block flex-0 w-1/2" style={{ ...fontSecondaryStyle }}>{formData.text.length > 0 ? formData.text : formData.textPlaceholder}</p>
-                <p id="text4" className="inline-block flex-0 w-1/2" style={{ ...fontSecondaryStyle }}>{formData.text.length > 0 ? formData.text : formData.textPlaceholder}</p>
-                <p id="text5" className="inline-block flex-0 w-1/2" style={{ ...fontSecondaryStyle }}>{formData.text.length > 0 ? formData.text : formData.textPlaceholder}</p>
-                <p id="text6" className="inline-block flex-0 w-1/2" style={{ ...fontSecondaryStyle }}>{formData.text.length > 0 ? formData.text : formData.textPlaceholder}</p>
+              <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
+              <div className="flex flex-wrap">
+                <p id="text2" className="w-1/2" style={{ ...fontSecondaryStyle }}>{formData.text.secondary.text.length > 0 ? formData.text.secondary.text : formData.text.secondary.placeholder}</p>
+                <p id="text3" className=" w-1/2" style={{ ...fontSecondaryStyle }}>{formData.text.third.text.length > 0 ? formData.text.third.text : formData.text.third.placeholder}</p>
+                <p id="text4" className="w-1/2" style={{ ...fontSecondaryStyle }}>{formData.text.fourth.text.length > 0 ? formData.text.fourth.text : formData.text.fourth.placeholder}</p>
+                <p id="text5" className="w-1/2" style={{ ...fontSecondaryStyle }}>{formData.text.fifth.text.length > 0 ? formData.text.fifth.text : formData.text.fifth.placeholder}</p>
+                <p id="text6" className="w-1/2" style={{ ...fontSecondaryStyle }}>{formData.text.sixth.text.length > 0 ? formData.text.sixth.text : formData.text.sixth.placeholder}</p>
+                <p id="text7" className="w-1/2" style={{ ...fontSecondaryStyle }}>{formData.text.seventh.text.length > 0 ? formData.text.seventh.text : formData.text.seventh.placeholder}</p>
               </div>
             </div>
           ) : formData.type.toLowerCase() == ("division jacket panel") ? (
             <div ref={containerRef} className="h-full text-center overflow-x-hidden flex items-center justify-center">
-              <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.length > 0 ? formData.text : formData.textPlaceholder}</p>
+              <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
             </div>
           ) : formData.type.toLowerCase().includes("ranger tabs") ? (
             <div ref={containerRef} className="h-full text-center overflow-x-hidden flex items-center justify-center">
-              <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.length > 0 ? formData.text : formData.textPlaceholder}</p>
+              <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
             </div>
           ) : (
             <div ref={containerRef} className="h-full text-center overflow-x-hidden flex items-center justify-center">
-              <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.length > 0 ? formData.text : formData.textPlaceholder}</p>
+              <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
             </div>
           )}
         </div>
@@ -1158,7 +1182,7 @@ function Form({ formData, setFormData, data, config, product }) {
     { name: 'Almost There', href: '#', status: 'upcoming', step: 5 },
   ];
 
-  console.log(formData);
+  // console.log(formData);
 
   switch (formData.type.toLowerCase()) {
     case 'name tape':
@@ -1196,9 +1220,9 @@ function Form({ formData, setFormData, data, config, product }) {
     obj: tempSteps[0]
   };
 
-  console.log(tempStepObj);
+  // console.log(tempStepObj);
 
-  //console.log(tempSteps);
+
 
 
   const [steps, setSteps] = useState(tempSteps);
@@ -1213,40 +1237,38 @@ function Form({ formData, setFormData, data, config, product }) {
   //  HANDLE EVENTS = TYPE, TEXT, TEXT ADDITIONAL, SIZE, TEXT COLOR, BG COLOR, FLAG, MORE TO ADD
   ///////////////////////////////////////////////////////////////////////////////////////////////
   // Define a function to handle the change of the type of customized patches
-  const handleTypeChange = (event) => {
-    // Find the selected type from data array
-    const obj = data[3].values.find(value => value.name === event.target.value);
-    // Check if the selected type contains the string "hivis"
-    if (obj.name.toLowerCase().includes('hivis')) {
-      // If it does, set the form data with the selected type, its sizes, and the first hivis flag
-      setFormData({
-        ...formData, type: event.target.value, typeData: obj.sizes, size: obj.sizes[0].size,
-        img: data[5].values[0]["hivis-flags"][0].name, imgSrc: data[5].values[0]["hivis-flags"][0].img,
-        textLines: obj.sizes[0].lines, textMaxLength: obj.sizes[0].maxLength, textPlaceholder: obj.sizes[0].placeholder
-      });
-    } else {
-      // If it doesn't, set the form data with the selected type and its sizes
-      setFormData({
-        ...formData, type: event.target.value, typeData: obj.sizes, size: obj.sizes[0].size,
-        textLines: obj.sizes[0].lines, textMaxLength: obj.sizes[0].maxLength, textPlaceholder: obj.sizes[0].placeholder
-      });
-    }
-  };
+  // const handleTypeChange = (event) => {
+
+  //   // Find the selected type from data array
+  //   const obj = data[3].values.find(value => value.name === event.target.value);
+  //   // Check if the selected type contains the string "hivis"
+  //   if (obj.name.toLowerCase().includes('hivis')) {
+  //     // If it does, set the form data with the selected type, its sizes, and the first hivis flag
+  //     setFormData({
+  //       ...formData, type: event.target.value, typeData: obj.sizes, size: obj.sizes[0].size,
+  //       img: data[5].values[0]["hivis-flags"][0].name, imgSrc: data[5].values[0]["hivis-flags"][0].img,
+  //       textLines: obj.sizes[0].lines, textMaxLength: obj.sizes[0].maxLength, textPlaceholder: obj.sizes[0].placeholder
+  //     });
+  //   } else {
+  //     // If it doesn't, set the form data with the selected type and its sizes
+  //     setFormData({
+  //       ...formData, type: event.target.value, typeData: obj.sizes, size: obj.sizes[0].size,
+  //       textLines: obj.sizes[0].lines, textMaxLength: obj.sizes[0].maxLength, textPlaceholder: obj.sizes[0].placeholder
+  //     });
+  //   }
+  // };
 
   const handleFlagTypeChange = (event) => {
     // Find the selected type from data array
-    console.log(event);
-    setFormData({ ...formData, flagType: event.target.value });
+    setFormData({ ...formData, img: { ...formData.img, type: event.target.value } });
   };
 
   const handleSaberTypeChange = (event) => {
     // Find the selected type from data array
     const obj = saberOptions.find(value => value.name === event.target.value);
-    console.log(obj);
-    console.log(event.target.value);
     let newHiltColor = '';
     let newBladeColor = '';
-    console.log(formData.saberType.toLowerCase());
+    // console.log(formData.lightsaber.saberType.toLowerCase());
     switch (obj.name.toLowerCase()) {
       case 'darth vader':
         newHiltColor = fontColors[7];
@@ -1272,14 +1294,12 @@ function Form({ formData, setFormData, data, config, product }) {
         break;
     }
 
-    console.log(newBladeColor);
-    console.log(fontColors[11]);
-    setFormData({ ...formData, saberType: event.target.value, hiltImg: obj.hilt, bladeImg: obj.blade, hiltColor: newHiltColor.name, hiltColorImg: newHiltColor.img, bladeColor: newBladeColor.name, bladeColorImg: newBladeColor.img });
+    setFormData({ ...formData, lightsaber: { ...formData.lightsaber, saberType: event.target.value, hilt: { ...formData.lightsaber.hilt, name: newHiltColor.name, color: newHiltColor.img, img: obj.hilt }, blade: { ...formData.lightsaber.blade, name: newBladeColor.name, color: newBladeColor.img, img: obj.blade } } });
   };
   // Define a function to handle the change of the font text color dropdown menu
   const handleHiltColorChange = (event) => {
     // Find the selected font text color from data array
-    const obj = fontColors.find(value => value.name === event.name);
+    const obj = fontColors.find(value => vxalue.name === event.name);
     var isProIR = false;
     var isReflectiveGlow = false;
 
@@ -1290,10 +1310,10 @@ function Form({ formData, setFormData, data, config, product }) {
       isReflectiveGlow = true;
     }
 
-
-    console.log(isProIR);
     // Set the form data with the selected font text color and its image
-    setFormData({ ...formData, hiltColorImg: obj.img, proIRFontColor: isProIR, reflectiveGlowFontColor: isReflectiveGlow });
+    //setFormData({ ...formData, hiltColorImg: obj.img, proIRFontColor: isProIR, reflectiveGlowFontColor: isReflectiveGlow });
+    setFormData({ ...formData, lightsaber: { ...formData.lightsaber, hilt: { ...formData.lightsaber.hilt, name: obj.name, color: obj.img } }, upsells: { ...formData.upsells, proIRFontColor: isProIR, reflectiveGlowFontColor: isReflectiveGlow } });
+
   };
 
   // Define a function to handle the change of the font text color dropdown menu
@@ -1303,7 +1323,6 @@ function Form({ formData, setFormData, data, config, product }) {
     var isProIR = false;
     var isReflectiveGlow = false;
 
-    console.log(obj);
 
     if (event.name.includes("Pro IR")) {
       isProIR = true;
@@ -1312,21 +1331,44 @@ function Form({ formData, setFormData, data, config, product }) {
       isReflectiveGlow = true;
     }
 
-    console.log(isProIR);
     // Set the form data with the selected font text color and its image
-    setFormData({ ...formData, bladeColor: obj.name, bladeColorImg: obj.img, proIRFontColor: isProIR, reflectiveGlowFontColor: isReflectiveGlow });
+    // setFormData({ ...formData, bladeColor: obj.name, bladeColorImg: obj.img, proIRFontColor: isProIR, reflectiveGlowFontColor: isReflectiveGlow });
+    setFormData({ ...formData, lightsaber: { ...formData.lightsaber, blade: { ...formData.lightsaber.blade, name: obj.name, color: obj.img } }, upsells: { ...formData.upsells, proIRFontColor: isProIR, reflectiveGlowFontColor: isReflectiveGlow } });
+
   };
 
   // Define a function to handle the change of the text input field
   const handleTextChange = (event) => {
-    setFormData({ ...formData, text: event.target.value });
+    //  setFormData({ ...formData, text: event.target.value });
+    setFormData({ ...formData, text: { ...formData.text, primary: { ...formData.text.primary, text: event.target.value } } });
   };
+
+  const handleText3Change = (event) => {
+    setFormData({ ...formData, text: { ...formData.text, third: { ...formData.text.third, text: event.target.value } } });
+  };
+
+  const handleText4Change = (event) => {
+    setFormData({ ...formData, text: { ...formData.text, fourth: { ...formData.text.fourth, text: event.target.value } } });
+  };
+
+  const handleText5Change = (event) => {
+    setFormData({ ...formData, text: { ...formData.text, fifth: { ...formData.text.fifth, text: event.target.value } } });
+  }
+  
+  const handleText6Change = (event) => {
+    setFormData({ ...formData, text: { ...formData.text, sixth: { ...formData.text.sixth, text: event.target.value } } });
+  }
+
+  const handleText7Change = (event) => {
+    setFormData({ ...formData, text: { ...formData.text, seventh: { ...formData.text.seventh, text: event.target.value } } });
+  }
 
   const maxRows = 2;
   const [rows, setRows] = useState(maxRows);
   // Define a function to handle the change of the additional text input field
   const handleTextAdditionalChange = (event) => {
-    setFormData({ ...formData, textAdditional: event.target.value });
+    // setFormData({ ...formData, textAdditional: event.target.value });
+    setFormData({ ...formData, text: { ...formData.text, secondary: { ...formData.text.secondary, text: event.target.value } } });
   };
 
   // Define a function to handle the change of the size dropdown menu
@@ -1335,30 +1377,117 @@ function Form({ formData, setFormData, data, config, product }) {
     const objSizes = obj.sizes.find(value => value.size === event.target.value);
     if (formData.type.toLowerCase() == "medical patch") {
       if (event.target.value == '1” x 1”') {
+        // setFormData({
+        //   ...formData,
+        //   img: symbols['medical patch']["1 x 1"][0].name,
+        //   imgSrc: symbols['medical patch']["1 x 1"][0].img,
+        //   imgGlow: symbols['medical patch']["1 x 1"][0].glow,
+        //   imgIcon: symbols['medical patch']["1 x 1"][0].icon,
+        //   size: event.target.value,
+        //   textLines: objSizes.lines, textMaxLength: objSizes.maxLength, textPlaceholder: objSizes.placeholder
+        // });
         setFormData({
           ...formData,
-          img: symbols['medical patch']["1 x 1"][0].name,
-          imgSrc: symbols['medical patch']["1 x 1"][0].img,
-          imgGlow: symbols['medical patch']["1 x 1"][0].glow,
-          imgIcon: symbols['medical patch']["1 x 1"][0].icon,
-          size: event.target.value,
-          textLines: objSizes.lines, textMaxLength: objSizes.maxLength, textPlaceholder: objSizes.placeholder
+          img: {
+            ...formData.img,
+            name: symbols['medical patch']["1 x 1"][0].name,
+            img: symbols['medical patch']["1 x 1"][0].img,
+            glow: symbols['medical patch']["1 x 1"][0].glow,
+            icon: symbols['medical patch']["1 x 1"][0].icon,
+          },
+          size: {
+            ...formData.size,
+            current: event.target.value
+          },
+          text: {
+            ...formData.text,
+            primary: {
+              ...formData.text.primary,
+              lines: objSizes.lines,
+              maxLength: objSizes.maxLength,
+              placeholder: objSizes.placeholder
+            }
+          },
+        });
+      } else if (event.target.value == '3.5” x 2”') {
+        // setFlagStyle(prevStyle => ({ ...prevStyle, transform: `scaleX(1.25)` }));
+        setFormData({
+          ...formData,
+          img: {
+            ...formData.img,
+            name: symbols['medical patch']["2 x 2"][0].name,
+            img: symbols['medical patch']["2 x 2"][0].img,
+            glow: symbols['medical patch']["2 x 2"][0].glow,
+            icon: symbols['medical patch']["2 x 2"][0].icon,
+          },
+          size: {
+            ...formData.size,
+            current: event.target.value
+          },
+          text: {
+            ...formData.text,
+            primary: {
+              ...formData.text.primary,
+              lines: objSizes.lines,
+              maxLength: objSizes.maxLength,
+              placeholder: objSizes.placeholder
+            }
+          },
         });
       } else {
+        // setFormData({
+        //   ...formData,
+        //   img: symbols['medical patch']["2 x 2"][0].name,
+        //   imgSrc: symbols['medical patch']["2 x 2"][0].img,
+        //   imgGlow: symbols['medical patch']["2 x 2"][0].glow,
+        //   imgIcon: symbols['medical patch']["2 x 2"][0].icon,
+        //   size: event.target.value,
+        //   textLines: objSizes.lines, textMaxLength: objSizes.maxLength, textPlaceholder: objSizes.placeholder
+        // });
         setFormData({
           ...formData,
-          img: symbols['medical patch']["2 x 2"][0].name,
-          imgSrc: symbols['medical patch']["2 x 2"][0].img,
-          imgGlow: symbols['medical patch']["2 x 2"][0].glow,
-          imgIcon: symbols['medical patch']["2 x 2"][0].icon,
-          size: event.target.value,
-          textLines: objSizes.lines, textMaxLength: objSizes.maxLength, textPlaceholder: objSizes.placeholder
+          img: {
+            ...formData.img,
+            name: symbols['medical patch']["2 x 2"][0].name,
+            img: symbols['medical patch']["2 x 2"][0].img,
+            glow: symbols['medical patch']["2 x 2"][0].glow,
+            icon: symbols['medical patch']["2 x 2"][0].icon,
+          },
+          size: {
+            ...formData.size,
+            current: event.target.value
+          },
+          text: {
+            ...formData.text,
+            primary: {
+              ...formData.text.primary,
+              lines: objSizes.lines,
+              maxLength: objSizes.maxLength,
+              placeholder: objSizes.placeholder
+            }
+          },
         });
       }
     } else {
+      // setFormData({
+      //   ...formData, size: event.target.value,
+      //   textLines: objSizes.lines, textMaxLength: objSizes.maxLength, textPlaceholder: objSizes.placeholder
+      // });
       setFormData({
-        ...formData, size: event.target.value,
-        textLines: objSizes.lines, textMaxLength: objSizes.maxLength, textPlaceholder: objSizes.placeholder
+        ...formData,
+        size: {
+          ...formData.size,
+          current: event.target.value
+        },
+        text: {
+          ...formData.text,
+          primary: {
+            ...formData.text.primary,
+            lines: objSizes.lines,
+            maxLength: objSizes.maxLength,
+            placeholder: objSizes.placeholder
+          }
+        },
       });
     }
   };
@@ -1377,10 +1506,10 @@ function Form({ formData, setFormData, data, config, product }) {
       isReflectiveGlow = true;
     }
 
-
-    console.log(isProIR);
     // Set the form data with the selected font text color and its image
-    setFormData({ ...formData, textColor: event.name, textColorImg: obj.img, proIRFontColor: isProIR, reflectiveGlowFontColor: isReflectiveGlow });
+    //setFormData({ ...formData, textColor: event.name, textColorImg: obj.img, proIRFontColor: isProIR, reflectiveGlowFontColor: isReflectiveGlow });
+    setFormData({ ...formData, text: { ...formData.text, color: { ...formData.text.color, name: event.name, img: obj.img } }, upsells: { ...formData.upsells, proIRFontColor: isProIR, reflectiveGlowFontColor: isReflectiveGlow } });
+
   };
 
   // Define a function to handle the change of the background color dropdown menu
@@ -1388,7 +1517,9 @@ function Form({ formData, setFormData, data, config, product }) {
     // Find the selected background color from data array
     const obj = bgColors.find(value => value.name === event.name);
     // Set the form data with the selected background color and its image
-    setFormData({ ...formData, bgColor: event.name, bgColorImg: obj.img });
+    // setFormData({ ...formData, bgColor: event.name, bgColorImg: obj.img });
+    setFormData({ ...formData, bgColor: { ...formData.bgColor, name: event.name, img: obj.img } });
+
   };
 
   // Define a function to handle the change of the hivis flag dropdown menu
@@ -1397,18 +1528,30 @@ function Form({ formData, setFormData, data, config, product }) {
     let obj = {};
     switch (formData.type.toLowerCase()) {
       case 'medical patch':
-        if (formData.size == '1” x 1”') {
+        if (formData.size.current == '1” x 1”') {
           obj = symbols["medical patch"]['1 x 1'].find(value => value.name === event.name);
         } else {
           obj = symbols["medical patch"]['2 x 2'].find(value => value.name === event.name);
         }
         // Set the form data with the selected hivis flag and its image
-        setFormData({ ...formData, img: event.name, imgSrc: obj.img, imgIcon: obj.icon, imgGlow: obj.glow });
+        // setFormData({ ...formData, img: event.name, imgSrc: obj.img, imgIcon: obj.icon, imgGlow: obj.glow });
+        setFormData({ ...formData, img: { ...formData.img, name: event.name, img: obj.img, icon: obj.icon, glow: obj.glow } });
+
         break;
       default:
+        console.log(event.name);
+        console.log(imgs["hi-vis"])
         obj = imgs["hi-vis"].find(value => value.name === event.name);
+        console.log(obj)
         // Set the form data with the selected hivis flag and its image
-        setFormData({ ...formData, img: event.name, imgSrc: obj.img });
+        // setFormData({ ...formData, img: event.name, imgSrc: obj.img });
+        setFormData({
+          ...formData, img: {
+            ...formData.img,
+            name: event.name,
+            img: obj.img
+          }
+        });
         break;
     }
   };
@@ -1416,21 +1559,43 @@ function Form({ formData, setFormData, data, config, product }) {
   // Define a function to handle the change of the comments checkbox
   const handleGlowBorderChange = (event) => {
     if (event.target.checked) {
-      setFormData({ ...formData, glowBorder: event.target.checked, price: formData.price + 10 });
+      // setFormData({ ...formData, glowBorder: event.target.checked, price: formData.price.total + 10 });
+      setFormData({
+        ...formData,
+        upsells: { ...formData.upsells, glowBorder: event.target.checked },
+        price: { ...formData.price, total: formData.price.total + 10 }
+      });
     } else {
-      setFormData({ ...formData, glowBorder: event.target.checked, price: formData.price - 10 });
+      //setFormData({ ...formData, glowBorder: event.target.checked, price: formData.price.total - 10 });
+      setFormData({
+        ...formData,
+        upsells: { ...formData.upsells, glowBorder: event.target.checked },
+        price: { ...formData.price, total: formData.price.total - 10 }
+      });
     }
   };
   // Define a function to handle the change of the comments checkbox
   const handleAgreementChange = (event) => {
-    setFormData({ ...formData, agreement: event.target.checked });
+    //  setFormData({ ...formData, agreement: event.target.checked });
+    setFormData({
+      ...formData,
+      formValidation: { ...formData.formValidation, agreement: event.target.checked }
+    });
   };
   const handleFlagReversedChange = (event) => {
-    setFormData({ ...formData, flagReversed: event.target.checked });
+    //   setFormData({ ...formData, flagReversed: event.target.checked });
+    setFormData({
+      ...formData,
+      img: { ...formData.img, reversed: event.target.checked }
+    });
   };
 
   const handleFlagEnabledChange = (event) => {
-    setFormData({ ...formData, flagEnabled: event.target.checked });
+    //  setFormData({ ...formData, flagEnabled: event.target.checked });
+    setFormData({
+      ...formData,
+      img: { ...formData.img, enabled: event.target.checked }
+    });
   };
 
   const handlePrevious = () => {
@@ -1447,7 +1612,7 @@ function Form({ formData, setFormData, data, config, product }) {
 
     switch (formData.type.toLowerCase()) {
       case 'name tape':
-        if ((formData.size == '4” x 1”' || formData.size == '5” x 1”')) {
+        if ((formData.size.current == '4” x 1”' || formData.size.current == '5” x 1”')) {
           const flagStep = {
             name: "Flag",
             status: 'upcoming',
@@ -1485,7 +1650,7 @@ function Form({ formData, setFormData, data, config, product }) {
         }
         break;
       case 'medical patch':
-        if (formData.size == '3.5” x 2”') {
+        if (formData.size.current == '3.5” x 2”') {
           const flagStep = {
             name: "Text",
             status: 'upcoming',
@@ -1503,9 +1668,9 @@ function Form({ formData, setFormData, data, config, product }) {
             steps.splice(1, 0, flagStep);
           }
         } else {
-          console.log(steps);
+          // console.log(steps);
           const textStepIndex = steps.findIndex(step => step.name === 'Text');
-          console.log(textStepIndex);
+          // console.log(textStepIndex);
 
           if (textStepIndex !== -1) {
             steps.splice(1, 1);
@@ -1518,7 +1683,7 @@ function Form({ formData, setFormData, data, config, product }) {
     }
   };
 
-  console.log(stepForm)
+  // console.log(stepForm)
 
   return (
     <>
@@ -1559,7 +1724,6 @@ function Form({ formData, setFormData, data, config, product }) {
           <div className="col-span-6 grid gap-4">
             {stepForm.steps[stepForm.currentStep - 1].input.map((input, i) => {
               const childKey = i.toString();
-              //       console.log("oops")
               return (
                 <div key={childKey}>
                   {input.id.toLowerCase() == "text" ? (
@@ -1569,35 +1733,38 @@ function Form({ formData, setFormData, data, config, product }) {
                           Text
                         </label>
                         <label htmlFor="text" className="block text-sm xl:text-lg font-medium text-right">
-                          {formData.text === 'Your Name' ? formData.textMaxLength + " " : formData.textMaxLength - formData.text.replace(/\n/g, '').length + " "}
+                          {formData.text.primary.text === 'Text' ? formData.text.primary.maxLength + " " : formData.text.primary.maxLength - formData.text.primary.text.replace(/\n/g, '').length + " "}
                           characters left
                         </label>
                       </div>
-                      {formData.textLines > 1 ? (
+                      {formData.text.primary.lines > 1 ? (
                         <>
                           <textarea
                             type="text"
                             id="text"
                             name="text"
-                            value={formData.text}
+                            value={formData.text.primary.text}
                             onChange={handleTextChange}
                             autoComplete="off"
-                            rows={formData.textLines}
+                            rows={formData.text.primary.lines}
                             style={{ resize: 'none' }}
                             className="mt-1 block w-full rounded-md border-contrast shadow-sm focus:border-indigo-500 focus:ring-indigo-500 xl:text-lg bg-transparent"
-                            placeholder={formData.textPlaceholder}
-                            maxLength={formData.textMaxLength + formData.textLines - 1}
+                            placeholder={formData.text.primary.placeholder}
+                            maxLength={formData.text.primary.maxLength + formData.text.primary.lines - 1}
                             onKeyDown={(e) => {
-                              const currentLines = formData.text.split("\n").length;
-                              const textLines = formData.textLines;
-                              const letterPerLine = formData.textMaxLength / formData.textLines;
-                              const currentLineLength = formData.text.split("\n").pop().length;
+                              const currentLines = formData.text.primary.text.split("\n").length;
+                              const textLines = formData.text.primary.lines;
+                              const letterPerLine = formData.text.primary.maxLength / formData.text.primary.lines;
+                              const currentLineLength = formData.text.primary.text.split("\n").pop().length;
                               if (currentLines >= textLines && e.key === 'Enter') {
                                 e.preventDefault();
                               } else if (currentLineLength >= letterPerLine && currentLines < textLines && e.key == 'Backspace') {
-                                setFormData({ ...formData, text: formData.text });
+                                // setFormData({ ...formData, text: formData.text.primary.text });
+                                setFormData({ ...formData, text: { ...formData.text, primary: { ...formData.text.primary, text: formData.text.primary.text } } });
                               } else if (currentLineLength >= letterPerLine && currentLines < textLines && e.key !== 'Enter') {
-                                setFormData({ ...formData, text: formData.text + '\n' });
+                                //    setFormData({ ...formData, text: formData.text.primary.text + '\n' });
+                                setFormData({ ...formData, text: { ...formData.text, primary: { ...formData.text.primary, text: formData.text.primary.text + '\n' } } });
+
                               }
                             }}
                           />
@@ -1605,33 +1772,182 @@ function Form({ formData, setFormData, data, config, product }) {
                       ) : (
                         <>
                           <input
-
                             onFocus={(e) => e.preventDefault()}
                             type="text"
                             id="text"
                             name="text"
-                            value={formData.text}
+                            value={formData.text.primary.text}
                             onChange={handleTextChange}
                             autoComplete="off"
                             className="mt-1 py-3 xl:py-4 block w-full rounded-md border-contrast shadow-sm focus:border-indigo-500 focus:ring-indigo-500 xl:text-lg bg-transparent"
-                            placeholder={formData.textPlaceholder}
-                            maxLength={formData.textMaxLength}
+                            placeholder={formData.text.primary.placeholder}
+                            maxLength={formData.text.primary.maxLength}
 
                           />
                         </>
                       )}
                     </>
+                  ) : input.id.toLowerCase() == "text2" ? (
+                    <>
+                      <div className="flex justify-between">
+                        <label htmlFor="text" className="block text-sm xl:text-lg font-medium">
+                          Text
+                        </label>
+                        <label htmlFor="text" className="block text-sm xl:text-lg font-medium text-right">
+                          {formData.text.secondary.text === 'Text' ? formData.text.secondary.maxLength + " " : formData.text.secondary.maxLength - formData.text.secondary.text.replace(/\n/g, '').length + " "}
+                          characters left
+                        </label>
+                      </div>
+                      <input
+                        onFocus={(e) => e.preventDefault()}
+                        type="text"
+                        id="text2"
+                        name="text"
+                        value={formData.text.secondary.text}
+                        onChange={handleTextAdditionalChange}
+                        autoComplete="off"
+                        className="mt-1 py-3 xl:py-4 block w-full rounded-md border-contrast shadow-sm focus:border-indigo-500 focus:ring-indigo-500 xl:text-lg bg-transparent"
+                        placeholder={formData.text.secondary.placeholder}
+                        maxLength={formData.text.secondary.maxLength}
+
+                      />
+                    </>
+                  ) : input.id.toLowerCase() == "text3" ? (
+                    <>
+                      <div className="flex justify-between">
+                        <label htmlFor="text" className="block text-sm xl:text-lg font-medium">
+                          Text
+                        </label>
+                        <label htmlFor="text" className="block text-sm xl:text-lg font-medium text-right">
+                          {formData.text.third.text === 'Text' ? formData.text.third.maxLength + " " : formData.text.third.maxLength - formData.text.third.text.replace(/\n/g, '').length + " "}
+                          characters left
+                        </label>
+                      </div>
+                      <input
+                        onFocus={(e) => e.preventDefault()}
+                        type="text"
+                        id="text3"
+                        name="text"
+                        value={formData.text.third.text}
+                        onChange={handleText3Change}
+                        autoComplete="off"
+                        className="mt-1 py-3 xl:py-4 block w-full rounded-md border-contrast shadow-sm focus:border-indigo-500 focus:ring-indigo-500 xl:text-lg bg-transparent"
+                        placeholder={formData.text.third.placeholder}
+                        maxLength={formData.text.third.maxLength}
+
+                      />
+                    </>
+                  ) : input.id.toLowerCase() == "text4" ? (
+                    <>
+                      <div className="flex justify-between">
+                        <label htmlFor="text" className="block text-sm xl:text-lg font-medium">
+                          Text
+                        </label>
+                        <label htmlFor="text" className="block text-sm xl:text-lg font-medium text-right">
+                          {formData.text.fourth.text === 'Text' ? formData.text.fourth.maxLength + " " : formData.text.fourth.maxLength - formData.text.fourth.text.replace(/\n/g, '').length + " "}
+                          characters left
+                        </label>
+                      </div>
+                      <input
+                        onFocus={(e) => e.preventDefault()}
+                        type="text"
+                        id="text4"
+                        name="text"
+                        value={formData.text.fourth.text}
+                        onChange={handleText4Change}
+                        autoComplete="off"
+                        className="mt-1 py-3 xl:py-4 block w-full rounded-md border-contrast shadow-sm focus:border-indigo-500 focus:ring-indigo-500 xl:text-lg bg-transparent"
+                        placeholder={formData.text.fourth.placeholder}
+                        maxLength={formData.text.fourth.maxLength}
+
+                      />
+                    </>
+                  ) : input.id.toLowerCase() == "text5" ? (
+                    <>
+                      <div className="flex justify-between">
+                        <label htmlFor="text" className="block text-sm xl:text-lg font-medium">
+                          Text
+                        </label>
+                        <label htmlFor="text" className="block text-sm xl:text-lg font-medium text-right">
+                          {formData.text.fifth.text === 'Text' ? formData.text.fifth.maxLength + " " : formData.text.fifth.maxLength - formData.text.fifth.text.replace(/\n/g, '').length + " "}
+                          characters left
+                        </label>
+                      </div>
+                      <input
+                        onFocus={(e) => e.preventDefault()}
+                        type="text"
+                        id="text5"
+                        name="text"
+                        value={formData.text.fifth.text}
+                        onChange={handleText5Change}
+                        autoComplete="off"
+                        className="mt-1 py-3 xl:py-4 block w-full rounded-md border-contrast shadow-sm focus:border-indigo-500 focus:ring-indigo-500 xl:text-lg bg-transparent"
+                        placeholder={formData.text.fifth.placeholder}
+                        maxLength={formData.text.fifth.maxLength}
+
+                      />
+                    </>
+                  ) : input.id.toLowerCase() == "text6" ? (
+                    <>
+                      <div className="flex justify-between">
+                        <label htmlFor="text" className="block text-sm xl:text-lg font-medium">
+                          Text
+                        </label>
+                        <label htmlFor="text" className="block text-sm xl:text-lg font-medium text-right">
+                          {formData.text.sixth.text === 'Text' ? formData.text.sixth.maxLength + " " : formData.text.sixth.maxLength - formData.text.sixth.text.replace(/\n/g, '').length + " "}
+                          characters left
+                        </label>
+                      </div>
+                      <input
+                        onFocus={(e) => e.preventDefault()}
+                        type="text"
+                        id="text6"
+                        name="text"
+                        value={formData.text.sixth.text}
+                        onChange={handleText6Change}
+                        autoComplete="off"
+                        className="mt-1 py-3 xl:py-4 block w-full rounded-md border-contrast shadow-sm focus:border-indigo-500 focus:ring-indigo-500 xl:text-lg bg-transparent"
+                        placeholder={formData.text.sixth.placeholder}
+                        maxLength={formData.text.sixth.maxLength}
+
+                      />
+                    </>
+                  ) : input.id.toLowerCase() == "text7" ? (
+                    <>
+                      <div className="flex justify-between">
+                        <label htmlFor="text" className="block text-sm xl:text-lg font-medium">
+                          Text
+                        </label>
+                        <label htmlFor="text" className="block text-sm xl:text-lg font-medium text-right">
+                          {formData.text.seventh.text === 'Text' ? formData.text.seventh.maxLength + " " : formData.text.seventh.maxLength - formData.text.seventh.text.replace(/\n/g, '').length + " "}
+                          characters left
+                        </label>
+                      </div>
+                      <input
+                        onFocus={(e) => e.preventDefault()}
+                        type="text"
+                        id="text7"
+                        name="text"
+                        value={formData.text.seventh.text}
+                        onChange={handleText7Change}
+                        autoComplete="off"
+                        className="mt-1 py-3 xl:py-4 block w-full rounded-md border-contrast shadow-sm focus:border-indigo-500 focus:ring-indigo-500 xl:text-lg bg-transparent"
+                        placeholder={formData.text.seventh.placeholder}
+                        maxLength={formData.text.seventh.maxLength}
+
+                      />
+                    </>
                   ) : input.id.toLowerCase() == "bloodtype" ? (
                     <>
 
-                      {formData.size == '6" x 2"' ? (
+                      {formData.size.current == '6" x 2"' ? (
                         <>
                           <div className="flex justify-between">
                             <label htmlFor="textAdditional" className="block text-sm xl:text-lg font-medium">
                               Blood Type & Allergies
                             </label>
                             <label htmlFor="textAdditional" className="block text-sm xl:text-lg font-medium text-right">
-                              {10 - formData.textAdditional.replace(/\n/g, '').length + " "}
+                              {10 - formData.text.secondary.text.replace(/\n/g, '').length + " "}
                               characters left
                             </label>
                           </div>
@@ -1640,7 +1956,7 @@ function Form({ formData, setFormData, data, config, product }) {
                             type="text"
                             id="textAdditional"
                             name="textAdditional"
-                            value={formData.textAdditional}
+                            value={formData.text.secondary.text}
                             onChange={handleTextAdditionalChange}
                             autoComplete="off"
                             className="mt-1 py-3 xl:py-4 block w-full rounded-md border-contrast shadow-sm focus:border-indigo-500 focus:ring-indigo-500 xl:text-lg bg-transparent"
@@ -1652,7 +1968,7 @@ function Form({ formData, setFormData, data, config, product }) {
                               Blood Type & Allergies
                             </label>
                             <label htmlFor="textAdditional" className="block text-sm xl:text-lg font-medium text-right">
-                              {formData.textAdditionalMaxLength - formData.textAdditional.replace(/\n/g, '').length + " "}
+                              {formData.text.secondary.maxLength - formData.text.secondary.text.replace(/\n/g, '').length + " "}
                               characters left
                             </label>
                           </div>
@@ -1660,27 +1976,30 @@ function Form({ formData, setFormData, data, config, product }) {
                             type="text"
                             id="textAdditional"
                             name="textAdditional"
-                            value={formData.textAdditional}
+                            value={formData.text.secondary.text}
                             onChange={handleTextAdditionalChange}
-                            maxLength={formData.textAdditionalMaxLength + formData.textAdditionalLines - 1}
+                            maxLength={formData.text.secondary.maxLength + formData.text.secondary.lines - 1}
                             onKeyDown={(e) => {
-                              const currentLines = formData.textAdditional.split("\n").length;
-                              const textLines = formData.textAdditionalLines;
-                              const letterPerLine = formData.textAdditionalMaxLength / formData.textAdditionalLines;
-                              const currentLineLength = formData.textAdditional.split("\n").pop().length;
+                              const currentLines = formData.text.secondary.text.split("\n").length;
+                              const textLines = formData.text.secondary.lines;
+                              const letterPerLine = formData.text.secondary.maxLength / formData.text.secondary.lines;
+                              const currentLineLength = formData.text.secondary.text.split("\n").pop().length;
                               if (currentLines >= textLines && e.key === 'Enter') {
                                 e.preventDefault();
                               } else if (currentLineLength >= letterPerLine && currentLines < textLines && e.key == 'Backspace') {
-                                setFormData({ ...formData, textAdditional: formData.textAdditional });
+                                //setFormData({ ...formData, textAdditional: formData.text.secondary.text });
+                                setFormData({ ...formData, text: { ...formData.text, secondary: { ...formData.text.secondary, text: formData.text.secondary.text } } });
+
                               } else if (currentLineLength >= letterPerLine && currentLines < textLines && e.key !== 'Enter') {
-                                setFormData({ ...formData, textAdditional: formData.textAdditional + '\n' });
+                                // setFormData({ ...formData, textAdditional: formData.text.secondary.text + '\n' });
+                                setFormData({ ...formData, text: { ...formData.text, secondary: { ...formData.text.secondary, text: formData.text.secondary.text + '\n' } } });
                               }
                             }}
                             autoComplete="off"
                             rows={rows}
                             style={{ resize: 'none' }}
                             className="mt-1 block w-full rounded-md border-contrast shadow-sm focus:border-indigo-500 focus:ring-indigo-500 xl:text-lg bg-transparent"
-                            placeholder={formData.textAdditionalPlaceholder}
+                            placeholder={formData.text.secondary.placeholder}
                           />
                         </>
                       ) : (
@@ -1690,7 +2009,7 @@ function Form({ formData, setFormData, data, config, product }) {
                               Blood Type & Allergies
                             </label>
                             <label htmlFor="textAdditional" className="block text-sm xl:text-lg font-medium text-right">
-                              {formData.textAdditionalMaxLength - formData.textAdditional.replace(/\n/g, '').length + " "}
+                              {formData.text.secondary.maxLength - formData.text.secondary.text.replace(/\n/g, '').length + " "}
                               characters left
                             </label>
                           </div>
@@ -1698,27 +2017,31 @@ function Form({ formData, setFormData, data, config, product }) {
                             type="text"
                             id="textAdditional"
                             name="textAdditional"
-                            value={formData.textAdditional}
+                            value={formData.text.secondary.text}
                             onChange={handleTextAdditionalChange}
-                            maxLength={formData.textAdditionalMaxLength + formData.textAdditionalLines - 1}
+                            maxLength={formData.text.secondary.maxLength + formData.text.secondary.lines - 1}
                             onKeyDown={(e) => {
-                              const currentLines = formData.textAdditional.split("\n").length;
-                              const textLines = formData.textAdditionalLines;
-                              const letterPerLine = formData.textAdditionalMaxLength / formData.textAdditionalLines;
-                              const currentLineLength = formData.textAdditional.split("\n").pop().length;
+                              const currentLines = formData.text.secondary.text.split("\n").length;
+                              const textLines = formData.text.secondary.lines;
+                              const letterPerLine = formData.text.secondary.maxLength / formData.text.secondary.lines;
+                              const currentLineLength = formData.text.secondary.text.split("\n").pop().length;
                               if (currentLines >= textLines && e.key === 'Enter') {
                                 e.preventDefault();
                               } else if (currentLineLength >= letterPerLine && currentLines < textLines && e.key == 'Backspace') {
-                                setFormData({ ...formData, textAdditional: formData.textAdditional });
+                                //setFormData({ ...formData, textAdditional: formData.text.secondary.text });
+                                setFormData({ ...formData, text: { ...formData.text, secondary: { ...formData.text.secondary, text: formData.text.secondary.text } } });
+
                               } else if (currentLineLength >= letterPerLine && currentLines < textLines && e.key !== 'Enter') {
-                                setFormData({ ...formData, textAdditional: formData.textAdditional + '\n' });
+                                // setFormData({ ...formData, textAdditional: formData.text.secondary.text + '\n' });
+                                setFormData({ ...formData, text: { ...formData.text, secondary: { ...formData.text.secondary, text: formData.text.secondary.text + '\n' } } });
                               }
+
                             }}
                             autoComplete="off"
                             rows={rows}
                             style={{ resize: 'none' }}
                             className="mt-1 block w-full rounded-md border-contrast shadow-sm focus:border-indigo-500 focus:ring-indigo-500 xl:text-lg bg-transparent"
-                            placeholder={formData.textAdditionalPlaceholder}
+                            placeholder={formData.text.secondary.placeholder}
                           />
                         </>
                       )}
@@ -1732,12 +2055,12 @@ function Form({ formData, setFormData, data, config, product }) {
 
                         id="size"
                         name="size"
-                        value={formData.size}
+                        value={formData.size.current}
                         onChange={handleSizeChange}
                         className="bg-transparent mt-1 block w-full rounded-md border border-contrast py-3 xl:py-4 xl:px-5 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 xl:text-lg"
                       >
                         <option value="">Select a size</option>
-                        {formData.typeData.map((val, index) => {
+                        {formData.size.list.map((val, index) => {
                           const key = index.toString();
                           return (
                             <option key={key} value={val.size}>{val.size}</option>
@@ -1751,8 +2074,8 @@ function Form({ formData, setFormData, data, config, product }) {
                         id="textColor"
                         title="Text Color"
                         name="textColor"
-                        value={formData.textColor}
-                        img={formData.textColorImg}
+                        value={formData.text.color.name}
+                        img={formData.text.color.img}
                         onChange={handleTextColorChange}
                         options={fontColors}
                       />
@@ -1763,22 +2086,22 @@ function Form({ formData, setFormData, data, config, product }) {
                         id="bgColor"
                         title="Background Color"
                         name="textColor"
-                        value={formData.bgColor}
-                        img={formData.bgColorImg}
+                        value={formData.bgColor.name}
+                        img={formData.bgColor.img}
                         onChange={handleBgColorChange}
                         options={bgColors}
                       />
 
                     </>
                   ) : input.id.toLowerCase() == "symbol" ? (
-                    formData.size == '1” x 1”' ? (
+                    formData.size.current == '1” x 1”' ? (
                       <>
                         <AdvancedSelect
                           // id="bgColor"
-                          title={formData.markType}
-                          name={formData.markType}
-                          value={formData.img}
-                          img={formData.imgIcon}
+                          title={formData.img.markType}
+                          name={formData.img.markType}
+                          value={formData.img.name}
+                          img={formData.img.icon}
                           onChange={handleImgChange}
                           options={symbols["medical patch"]["1 x 1"]}
                         />
@@ -1787,10 +2110,10 @@ function Form({ formData, setFormData, data, config, product }) {
                       <>
                         <AdvancedSelect
                           // id="bgColor"
-                          title={formData.markType}
-                          name={formData.markType}
-                          value={formData.img}
-                          img={formData.imgIcon}
+                          title={formData.img.markType}
+                          name={formData.img.markType}
+                          value={formData.img.name}
+                          img={formData.img.icon}
                           onChange={handleImgChange}
                           options={symbols["medical patch"]["2 x 2"]}
                         />
@@ -1800,10 +2123,10 @@ function Form({ formData, setFormData, data, config, product }) {
                     <>
                       <AdvancedSelect
                         // id="bgColor"
-                        title={formData.markType}
-                        name={formData.markType}
-                        value={formData.img}
-                        img={formData.imgSrc}
+                        title={formData.img.markType}
+                        name={formData.img.markType}
+                        value={formData.img.name}
+                        img={formData.img.img}
                         onChange={handleImgChange}
                         options={imgs["lazer-cut"]["3x2"]}
                       />
@@ -1816,8 +2139,8 @@ function Form({ formData, setFormData, data, config, product }) {
                         </label>
                         <select
                           id="type"
-                          name={formData.flagType}
-                          value={formData.flagType}
+                          name={formData.img.type}
+                          value={formData.img.type}
                           onChange={handleFlagTypeChange}
                           className="bg-transparent mt-1 block w-full rounded-md border border-contrast py-3 xl:py-4 xl:px-5 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 xl:text-lg"
                         >
@@ -1839,8 +2162,8 @@ function Form({ formData, setFormData, data, config, product }) {
                         </label>
                         <select
                           id="type"
-                          name={formData.saberType}
-                          value={formData.saberType}
+                          name={formData.lightsaber.saberType}
+                          value={formData.lightsaber.saberType}
                           onChange={handleSaberTypeChange}
                           className="bg-transparent mt-1 block w-full rounded-md border border-contrast py-3 xl:py-4 xl:px-5 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 xl:text-lg"
                         >
@@ -1860,8 +2183,8 @@ function Form({ formData, setFormData, data, config, product }) {
                         id="hiltColor"
                         title="Hilt Color"
                         name="hiltColor"
-                        value={formData.hiltColor}
-                        img={formData.hiltColorImg}
+                        value={formData.lightsaber.hilt.name}
+                        img={formData.lightsaber.hilt.img}
                         onChange={handleHiltColorChange}
                         options={fontColors}
                       />
@@ -1872,8 +2195,8 @@ function Form({ formData, setFormData, data, config, product }) {
                         id="bladeColor"
                         title="Blade Color"
                         name="bladeColor"
-                        value={formData.bladeColor}
-                        img={formData.bladeColorImg}
+                        value={formData.lightsaber.blade.name}
+                        img={formData.lightsaber.blade.img}
                         onChange={handleBladeColorChange}
                         options={fontColors}
                       />
@@ -1886,7 +2209,7 @@ function Form({ formData, setFormData, data, config, product }) {
                             id="flag-enabled"
                             name="flag-enabled"
                             type="checkbox"
-                            checked={formData.flagEnabled}
+                            checked={formData.img.enabled}
                             onChange={handleFlagEnabledChange}
                             className="bg-transparent h-4 w-4 rounded border-contrast text-indigo-600 focus:ring-indigo-500"
                           />
@@ -1906,7 +2229,7 @@ function Form({ formData, setFormData, data, config, product }) {
                             id="flag-reversed"
                             name="flag-reversed"
                             type="checkbox"
-                            checked={formData.flagReversed}
+                            checked={formData.img.reversed}
                             onChange={handleFlagReversedChange}
                             className="bg-transparent h-4 w-4 rounded border-contrast text-indigo-600 focus:ring-indigo-500"
                           />
@@ -1926,7 +2249,7 @@ function Form({ formData, setFormData, data, config, product }) {
                             id="glow-border"
                             name="glow-border"
                             type="checkbox"
-                            checked={formData.glowBorder}
+                            checked={formData.upsells.glowBorder}
                             onChange={handleGlowBorderChange}
                             className="bg-transparent h-4 w-4 rounded border-contrast text-indigo-600 focus:ring-indigo-500"
                           />
@@ -1946,7 +2269,7 @@ function Form({ formData, setFormData, data, config, product }) {
                             id="agreement"
                             name="agreement"
                             type="checkbox"
-                            checked={formData.agreement}
+                            checked={formData.formValidation.agreement}
                             onChange={handleAgreementChange}
                             className="bg-transparent h-4 w-4 rounded border-contrast text-indigo-600 focus:ring-indigo-500"
                           />
@@ -1999,27 +2322,27 @@ function BuilderATC({ formData, className, config, currentStep, steps }) {
         attributes: getAttributes(),
       }
     ];
-    if (formData.markType === "HiVis Flag") {
+    if (formData.img.markType === "HiVis Flag") {
 
       lines.push({
         merchandiseId: addOnVariantIDs["hi-vis"],
         quantity: 1,
       });
     }
-    if (formData.glowBorder) {
+    if (formData.upsells.glowBorder) {
 
       lines.push({
         merchandiseId: addOnVariantIDs["glow-border"],
         quantity: 1,
       });
     }
-    if (formData.textColor.includes("Pro IR")) {
+    if (formData.text.color.name.includes("Pro IR")) {
       lines.push({
         merchandiseId: addOnVariantIDs["pro-ir-font-color"],
         quantity: 1,
       });
     }
-    if (formData.textColor.includes("Reflective + Glow")) {
+    if (formData.text.color.name.includes("Reflective + Glow")) {
       lines.push({
         merchandiseId: addOnVariantIDs["reflective-glow-font-color"],
         quantity: 1,
@@ -2032,39 +2355,31 @@ function BuilderATC({ formData, className, config, currentStep, steps }) {
     const arr = [];
     // console.log(formData);
     arr.push(
-      { key: "Size", value: formData.size },
-      { key: "Price", value: formData.price + "" },
-      { key: "Flag", value: formData.img },
-      { key: "Mark Type", value: formData.markType || "n/a" },
-      { key: "Flag Reversed?", value: formData.flagReversed ? "Yes" : "No" },
-      { key: "Select Base Material", value: formData.textColor },
-      { key: "Main Text", value: formData.text || "Left Blank" },
-      { key: "Fabric Pattern", value: formData.bgColor },
-      { key: "Glow Border", value: formData.glowBorder ? "Yes" : "No" },
-      { key: "Blood Type and Allergies", value: formData.textadditional || "Left Blank" },
-      { key: "I agree to the Lead Time", value: formData.agreement ? "Yes" : "No" },
+      { key: "Size", value: formData.size.current },
+      { key: "Price", value: formData.price.total + "" },
+      { key: "Flag", value: formData.img.name },
+      { key: "Mark Type", value: formData.img.markType || "n/a" },
+      { key: "Flag Reversed?", value: formData.img.reversed ? "Yes" : "No" },
+      { key: "Select Base Material", value: formData.text.color.name },
+      { key: "Main Text", value: formData.text.primary.text || "Left Blank" },
+      { key: "Fabric Pattern", value: formData.bgColor.name },
+      { key: "Glow Border", value: formData.upsells.glowBorder ? "Yes" : "No" },
+      { key: "Blood Type and Allergies", value: formData.text.secondary.text || "Left Blank" },
+      { key: "I agree to the Lead Time", value: formData.formValidation.agreement ? "Yes" : "No" },
     );
 
 
     return arr;
   }
 
-  // attributes : [
-  // {key : "Flag", value : formData.flag },
-  // {key : "Select Base Material", value : formData.textColor },
-  // {key : "Main Text", value : formData.text },
-  // {key : "Fabric Pattern", value : formData.bgColor },
-  // {key : "Blood Type and Allergies", value : formData.textadditional },
-  // ],
-
 
   const priceObj = {
-    amount: formData.price + '.0',
+    amount: formData.price.total + '.0',
     currencyCode: selectedVariant?.price.currencyCode,
   };
 
   let disabled = true;
-  if (currentStep === steps.length && formData.agreement) {
+  if (currentStep === steps.length && formData.formValidation.agreement) {
     disabled = false;
   }
 

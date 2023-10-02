@@ -27,9 +27,9 @@ export async function loader({ request }: LoaderArgs) {
 
   const data = await res.json();
 
-  console.log(data);
+//  console.log(data);
   const prunedData = data.map((record) => {
-    console.log(data);
+  //  console.log(data);
     return record;
     // return {
     //   id: record.id,

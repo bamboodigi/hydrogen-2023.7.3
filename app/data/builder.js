@@ -556,11 +556,11 @@ const builderData = {
       name: "Jacket Panel",
       config: {
         "sizes": [
-          { size: '3.5” x 4”', maxLength: 13, lines: 1, placeholder: 'your name' },
-          { size: '4.6” x 6.2”', maxLength: 13, lines: 1, placeholder: 'your name' },
-          { size: '3.5” x 3.5”', maxLength: 13, lines: 1, placeholder: 'your name' },
-          { size: '3.6” x 5”', maxLength: 13, lines: 1, placeholder: 'your name' },
-          { size: '4” x 4.5”', maxLength: 13, lines: 1, placeholder: 'your name' }
+   //        { size: '3.5” x 4”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
+          { size: '4.6” x 6.2”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
+          // { size: '3.5” x 3.5”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
+          // { size: '3.6” x 5”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
+          // { size: '4” x 4.5”', maxLength: 13, lines: 1, placeholder: 'Your Name' }
         ]
       },
       form: {
@@ -577,21 +577,61 @@ const builderData = {
                 placeholder: 'Name',
               },
               {
-                id: 'bloodType',
-                label: 'Blood Type & Allergies',
-                type: 'textarea',
-                placeholder: 'APOS\nNKDA',
-              },
-            ],
-          },
-          {
-            name: "Patch Size",
-            input: [
-              {
                 id: 'size',
                 label: 'Size',
                 type: 'select',
                 placeholder: '3" x 2"',
+              },
+            ],
+          },
+          {
+            name: "Text",
+            input: [
+              {
+                id: 'text2',
+                label: 'Text',
+                type: 'input',
+                placeholder: 'Name',
+              },
+              {
+                id: 'text3',
+                label: 'Text',
+                type: 'input',
+                placeholder: 'Name',
+              },
+            ],
+          },
+          {
+            name: "Text",
+            input: [
+              {
+                id: 'text4',
+                label: 'Text',
+                type: 'input',
+                placeholder: 'Name',
+              },
+              {
+                id: 'text5',
+                label: 'Text',
+                type: 'input',
+                placeholder: 'Name',
+              },
+            ],
+          },
+          {
+            name: "Text",
+            input: [
+              {
+                id: 'text6',
+                label: 'Text',
+                type: 'input',
+                placeholder: 'Name',
+              },
+              {
+                id: 'text7',
+                label: 'Text',
+                type: 'input',
+                placeholder: 'Name',
               },
             ],
           },
@@ -1500,7 +1540,90 @@ const builderData = {
         blade: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-count-dooku-blade.png",
       },
     ]
-  }
+  },
+  sizeOptions: [
+    {
+      name: "1” x 1”", ratio: "1:1"
+    },
+    {
+      name: "3” x 1”", ratio: "3:1"
+    },
+    {
+      name: "4” x 1”", ratio: "4:1"
+    },
+    {
+      name: "5” x 1”", ratio: "5:1"
+    },
+    {
+      name: "2” x 2”", ratio: "1:1"
+    },
+    {
+      name: "3” x 2”", ratio: "3:2"
+    },
+    {
+      name: "3.5” x 2”", ratio: "7:4"
+    },
+    {
+      name: "4” x 2”", ratio: "2:1"
+    },
+    {
+      name: "6” x 2”", ratio: "3:1"
+    },
+    {
+      name: "5” x 3”", ratio: "5:3"
+    },
+    {
+      name: "6” x 3”", ratio: "2:1"
+    },
+    {
+      name: "8” x 2”", ratio: "4:1"
+    },
+    {
+      name: "10” x 2”", ratio: "5:1"
+    },
+    {
+      name: "8” x 3”", ratio: "8:3"
+    },
+    {
+      name: "9” x 3”", ratio: "3:1"
+    },
+    {
+      name: "8” x 4”", ratio: "2:1"
+    },
+    {
+      name: "11” x 3”", ratio: "11:3"
+    },
+    {
+      name: "12” x 4”", ratio: "3:1"
+    },
+    {
+      name: "3” x 1.5”", ratio: "2:1"
+    },
+    {
+      name: "4” x 1.5”", ratio: "8:3"
+    },
+    {
+      name: "5” x 1.5”", ratio: "10:3"
+    },
+    {
+      name: "3.5” x 4.25”", ratio: "7:8.5"
+    },
+    {
+      name: "3.5” x 4”", ratio: "7:8"
+    },
+    {
+      name: "4.6” x 6.2”", ratio: "23:31"
+    },
+    {
+      name: "3.5” x 3.5”", ratio: "1:1"
+    },
+    {
+      name: "3.6” x 5”", ratio: "18:25"
+    },
+    {
+      name: "4” x 4.5”", ratio: "8:9"
+    }
+  ]
 };
 
 
@@ -1635,7 +1758,7 @@ function initLazerCutFlags() {
   sizes.forEach(size => {
     let key = size.replace(/ /g, "");
     let iconKey = key;
-    console.log(iconKey);
+   // console.log(iconKey);
     iconKey = iconKey === '3x2' ? 'mini-id' : iconKey;
     // iconKey = iconKey === '3.5x2' ? '6x3' : iconKey;
 
@@ -1656,5 +1779,5 @@ function initLazerCutFlags() {
   return lazerObj;
 }
 
-console.log(builderData.imgs["lazer-cut"]);
+//console.log(builderData.imgs["lazer-cut"]);
 export default builderData;
