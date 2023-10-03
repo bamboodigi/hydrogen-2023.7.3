@@ -471,7 +471,7 @@ const builderData = {
             ],
           },
           {
-            name: "Almost There",
+            name: "Lightsaber Colors",
             status: 'upcoming',
             input: [
               {
@@ -506,8 +506,12 @@ const builderData = {
     "custom printed patch": {
       name: "Custom Printed Patch",
       config: {
-        "sizes": [
-          { size: '3.5” x 2”', maxLength: null, lines: null, placeholder: null },
+        sizes: [
+          { size: '3” x 2”', maxLength: null, lines: null, placeholder: null, hasFlag: true, sizeUpsell: 0, hiVis: 5 },
+          { size: '3.5” x 2”', maxLength: null, lines: null, placeholder: null, hasFlag: true, sizeUpsell: 1, thinLine: 4, hiVis: 5 },
+          { size: '5” x 3”', maxLength: null, lines: null, placeholder: null, hasFlag: true, sizeUpsell: 5, tRexArms: 6, hiVis: 5 },
+          { size: '6” x 2”', maxLength: null, lines: null, placeholder: null, hasFlag: true, sizeUpsell: 9, hiVis: 5 },
+          { size: '6” x 3”', maxLength: null, lines: null, placeholder: null, hasFlag: true, sizeUpsell: 13, hiVis: 5 }
         ],
       },
       form: {
@@ -518,12 +522,12 @@ const builderData = {
             name: "Material Type + Upload",
             status: 'upcoming',
             input: [
-              {
-                id: 'materialType',
-                label: 'Material Type',
-                type: 'select',
-                placeholder: 'Reflective',
-              },
+              // {
+              //   id: 'materialType',
+              //   label: 'Material Type',
+              //   type: 'select',
+              //   placeholder: 'Reflective',
+              // },
               {
                 id: 'upload',
                 label: 'Upload your image',
@@ -655,12 +659,12 @@ const builderData = {
           {
             name: "Flag",
             input: [
-              {
-                flag: 'flagType',
-                label: 'Flag Type',
-                type: 'select',
-                placeholder: 'Lazer Cut Flag',
-              },
+              // {
+              //   flag: 'flagType',
+              //   label: 'Flag Type',
+              //   type: 'select',
+              //   placeholder: 'Lazer Cut Flag',
+              // },
               {
                 id: 'flag',
                 label: 'Flag',
@@ -694,7 +698,99 @@ const builderData = {
           },
         ]
       },
-    }
+    },
+    "division jacket panel": {
+      name: "Division Jacket Panel",
+      config: {
+        "sizes": [
+   //        { size: '3.5” x 4”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
+          { size: '4.6” x 6.2”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
+          // { size: '3.5” x 3.5”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
+          // { size: '3.6” x 5”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
+          // { size: '4” x 4.5”', maxLength: 13, lines: 1, placeholder: 'Your Name' }
+        ]
+      },
+      form: {
+        intro: "Our Jacket Panels come in various sizes. Choose from different.",
+        btnText: "Get Started",
+        steps: [
+          {
+            name: "Text",
+            input: [
+              {
+                id: 'text',
+                label: 'Text',
+                type: 'input',
+                placeholder: 'Name',
+              },
+            ],
+          },
+          {
+            name: "Text",
+            input: [
+              {
+                id: 'text2',
+                label: 'Text 2',
+                type: 'input',
+                placeholder: 'Name',
+              },
+              {
+                id: 'text3',
+                label: 'Text 3',
+                type: 'input',
+                placeholder: 'Name',
+              },
+            ],
+          },
+          {
+            name: "Font & Background Colors",
+            input: [
+              {
+                id: 'textColor',
+                label: 'Text Color',
+                type: 'advancedSelect',
+                placeholder: 'Flat Spice Brown',
+              },
+              {
+                id: 'backgroundColor',
+                label: 'Background Color',
+                type: 'advancedSelect',
+                placeholder: 'Multicam Alpine',
+              },
+            ],
+          },
+          {
+            name: "Almost There",
+            status: 'upcoming',
+            input: [
+              {
+                id: 'ringColor',
+                label: 'Ring Color',
+                type: 'advancedSelect',
+                placeholder: 'Flat Spice Brown',
+              },
+            ],
+          },
+          {
+            name: "Almost There",
+            input: [
+              {
+                id: 'glowInTheDark',
+                label: 'Add a glow in the dark border? +$10 USD',
+                type: 'checkmark',
+                placeholder: '',
+              },
+              {
+                id: "leadTime",
+                label: 'I Agree to the Lead Time',
+                type: 'checkmark',
+                placeholder: '<strong>Lead Time:</strong>  - From your order, to design, production, QC, and shipping, takes roughly 10 business days. Don\'t worry, we\'ll keep you updated with what is going on the whole time. Check this box to confirm that you understand that your order will take roughly 10 business days to ship.',
+              },
+            ],
+          },
+        ]
+      },
+    },
   },
   colors: {
     bgColors: [

@@ -39,4 +39,5 @@ export {HeroTiles} from './custom/HeroTiles';
 export {Stats} from './custom/Stats';
 export {FeaturedReviews} from './custom/FeaturedReviews';
 export {CTASection} from './custom/CTASection';
+export {Upload} from './custom/Upload';
 export {trackViewedProduct, trackAddedToCart, trackLoggedInUsers} from './custom/Klaviyo';

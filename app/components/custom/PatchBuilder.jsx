@@ -2,11 +2,14 @@
 import { useState, useEffect, useRef } from 'react';
 import React from 'react';
 import { useLoaderData, useParams } from '@remix-run/react';
-import { ProductDetail, Steps, AddToCartButton, Text, Heading, AdvancedSelect } from '~/components';
+import {
+  ProductDetail,
+  Upload,
+  Steps, AddToCartButton, Text, Heading, AdvancedSelect
+} from '~/components';
 import { getExcerpt } from '~/lib/utils';
 
 import { AnalyticsPageType, Money, ShopPayButton } from '@shopify/hydrogen';
-
 
 // Import data from the '~/data/visualizer.js' file
 import data from '~/data/visualizer.js';
@@ -82,7 +85,7 @@ export function PatchBuilder({ product, config, ...props }) {
                       {formData.img.type}
                     </span>
                   </>
-                ) : formData.type.toLowerCase().includes("jacket panel") ? (
+                ) : formData.type.toLowerCase() == ("jacket panel") ? (
                   <>
                     <br></br>
                     Custom Jacket Panel
@@ -236,7 +239,22 @@ function initFormData(product) {
       formData.text.fifth = tempObj;
       formData.text.sixth = tempObj;
       formData.text.seventh = tempObj;
-
+      break;
+    case 'division jacket panel':
+      formData.text.primary.maxLength = 15;
+      formData.text.primary.placeholder = '1st Line';
+      formData.text.secondary = {
+        text: '',
+        placeholder: '2nd Line',
+        maxLength: 7,
+        lines: 1,
+      };
+      formData.text.third = {
+        text: '',
+        placeholder: '3rd Line',
+        maxLength: 7,
+        lines: 1,
+      };
       break;
     case 'default':
       formData.img.type = 'HiVis Flag';
@@ -324,6 +342,8 @@ function getBuilderTitle(product) {
       result = 'default';
       break;
   }
+
+  console.log(result);
   return capitalizeWords(result);
 
   function capitalizeWords(str) {
@@ -343,6 +363,11 @@ function initVisualizerStyle(formData) {
   const hiltImg = 'url("' + formData.lightsaber.hilt.img + '")';
   const bladeImg = 'url("' + formData.lightsaber.blade.img + '")';
 
+
+  // console.log(bladeColor);
+  // console.log(hiltColor);
+  // console.log(bladeImg);
+  // console.log(hiltImg);
   let obj = {
     canvas: {
       height: '230px'
@@ -467,6 +492,11 @@ function initVisualizerStyle(formData) {
       obj.text.secondary.fontSize = '34px';
       obj.patch.borderRadius = '.5rem'
       break;
+    case 'division jacket panel':
+      obj.text.secondary.fontSize = '27px';
+      obj.text.secondary.lineHeight = '29px';
+      obj.text.primary.fontSize = '52px';
+      obj.text.primary.lineHeight = '52px';
   }
 
 
@@ -523,7 +553,11 @@ function updateFontSize(containerRef, setFontStyle, formData) {
 
   let newFontSize = Math.min(newFontSizeWidth, newFontSizeHeight);
   // Limit the font size to a maximum value of 96px
-  const maxFontSize = containerHeight;
+  let maxFontSize = containerHeight;
+
+  // if(formData.type.toLowerCase() == 'division jacket panel'){
+  //   maxFontSize = 52;
+  // }
   if (newFontSize > maxFontSize) {
     newFontSize = maxFontSize;
   }
@@ -671,17 +705,18 @@ function Visualizer({ formData, className, ...props }) {
   const [style, setStyle] = useState(patch);
   const [fontStyle, setFontStyle] = useState(text.primary);
   const [fontSecondaryStyle, setFontSecondaryStyle] = useState(text.secondary);
-  const [flagStyle, setFlagStyle] = useState(formData.type.toLowerCase() === "medical patch" ? img.symbol : img.flag); const [hiltStyle, setHiltStyle] = useState(lightsaber.hilt);
+  const [flagStyle, setFlagStyle] = useState(formData.type.toLowerCase() === "medical patch" ? img.symbol : img.flag); 
+  const [hiltStyle, setHiltStyle] = useState(lightsaber.hilt);
   const [bladeStyle, setBladeStyle] = useState(lightsaber.blade);
 
 
   // A function to load an image and update the state with its URL
-  const imageLoader = (src, setState, mask) => {
+  const imageLoader = (src, setState, mask,) => {
     const img = new Image();
-
     img.onload = () => {
       if (formData.type.toLowerCase().includes("light sabers")) {
         if (mask == "saber") {
+          console.log("yes")
           let newWidth = '';
           let newMarginLeft = '';
           let newColor = '';
@@ -735,7 +770,14 @@ function Visualizer({ formData, className, ...props }) {
             }));
           }
         }
-        else {
+        if (mask == "saber color"){
+          setState(prevStyle => ({
+            ...prevStyle,
+            backgroundImage: `url("${src}")`,
+          }));
+        }
+        if(setState == setStyle) {
+          console.log(src);
           setState(prevStyle => ({
             ...prevStyle,
             backgroundImage: `url("${src}")`
@@ -777,6 +819,7 @@ function Visualizer({ formData, className, ...props }) {
 
   // Custom hook to update the font style when the text color image changes
   useEffect(() => {
+   // console.log(formData.lightsaber.blade.img);
     imageLoader(formData.lightsaber.hilt.img, setHiltStyle, "saber");
     imageLoader(formData.lightsaber.blade.img, setBladeStyle, "saber");
     // setHiltStyle(prevStyle => ({ ...prevStyle, maskImage: `url("${formData.hiltImg}")`, WebkitMaskImage: `url("${formData.hiltImg}")` }));
@@ -809,14 +852,14 @@ function Visualizer({ formData, className, ...props }) {
 
   // Custom hook to update the font style when the text color image changes
   useEffect(() => {
-    imageLoader(formData.lightsaber.hilt.img, setHiltStyle);
-  }, [formData.lightsaber.hilt.img]);
+    imageLoader(formData.lightsaber.hilt.color, setHiltStyle, "saber color");
+  }, [formData.lightsaber.hilt.color]);
 
 
   // Custom hook to update the font style when the text color image changes
   useEffect(() => {
-    imageLoader(formData.lightsaber.blade.img, setBladeStyle);
-  }, [formData.lightsaber.blade.img]);
+    imageLoader(formData.lightsaber.blade.color, setBladeStyle, "saber color");
+  }, [formData.lightsaber.blade.color]);
 
   // Custom hook to update the font style when the text color image changes
   useEffect(() => {
@@ -1079,7 +1122,7 @@ function Visualizer({ formData, className, ...props }) {
                 formData.text.primary.placeholder.split('\n').map((line, index) => (
                   <React.Fragment key={index}>
                     {index > 0 && <br />}
-                    {line}x
+                    {line}
                   </React.Fragment>
                 ))}</p>
             </div>
@@ -1140,10 +1183,11 @@ function Visualizer({ formData, className, ...props }) {
               <div id="hilt" className="w-0 transition-background duration-[.75s]" style={{ ...hiltStyle }}></div>
               <div id="blade" className="w-0 transition-width transition-background duration-[.75s]" style={{ ...bladeStyle }}></div>
             </div>
-          ) : formData.type.toLowerCase().includes("custom printed") ? (
-            <div ref={containerRef} className="h-full text-center overflow-x-hidden flex items-center justify-center">
-              <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
-            </div>
+          ) : formData.type.toLowerCase() == 'custom printed patch' ? (
+            <></>
+            // <div ref={containerRef} className="h-full w-full overflow-x-hidden flex items-center justify-center">
+            //   <div id="flag" className="flex-1 h-full w-full" style={flagStyle}></div>
+            // </div>
           ) : formData.type.toLowerCase() == "jacket panel" ? (
             <div ref={containerRef} className="h-full w-full overflow-x-hidden flex flex-col items-center justify-between">
               <div className="mt-2">
@@ -1157,11 +1201,18 @@ function Visualizer({ formData, className, ...props }) {
                   <p id="text7" className="w-1/2 text-right" style={{ ...fontSecondaryStyle }}>{formData.text.seventh.text.length > 0 ? formData.text.seventh.text : formData.text.seventh.placeholder}</p>
                 </div>
               </div>
-              <div id="flag" className="w-full rounded-lg" style={flagStyle}></div>
+              <div id="flag" className="w-full" style={flagStyle}></div>
             </div>
           ) : formData.type.toLowerCase() == ("division jacket panel") ? (
-            <div ref={containerRef} className="h-full text-center overflow-x-hidden flex items-center justify-center">
-              <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
+            <div className="h-full w-full overflow-x-hidden flex flex-col items-center justify-between">
+              <div ref={containerRef} className="w-full h-auto">
+                <p id="main-text" className="text-center" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
+                <div className="flex flex-wrap text-center">
+                  <p id="text2" className="w-1/2 mb-3" style={{ ...fontSecondaryStyle }}>{formData.text.secondary.text.length > 0 ? formData.text.secondary.text : formData.text.secondary.placeholder}</p>
+                  <p id="text3" className="w-1/2 mb-3" style={{ ...fontSecondaryStyle }}>{formData.text.third.text.length > 0 ? formData.text.third.text : formData.text.third.placeholder}</p>
+                </div>
+              </div>
+              <div id="flag" className="w-full" style={flagStyle}></div>
             </div>
           ) : formData.type.toLowerCase().includes("ranger tabs") ? (
             <div ref={containerRef} className="h-full text-center overflow-x-hidden flex items-center justify-center">
@@ -1208,7 +1259,7 @@ function Form({ formData, setFormData, data, config, product }) {
       tempSteps = builderData.type["light sabers"].form.steps;
       break;
     case 'custom printed patch':
-      tempSteps = builderData.type["custom printed"].form.steps;
+      tempSteps = builderData.type["custom printed patch"].form.steps;
       break;
     case 'jacket panel':
       tempSteps = builderData.type["jacket panel"].form.steps;
@@ -1306,7 +1357,7 @@ function Form({ formData, setFormData, data, config, product }) {
   // Define a function to handle the change of the font text color dropdown menu
   const handleHiltColorChange = (event) => {
     // Find the selected font text color from data array
-    const obj = fontColors.find(value => vxalue.name === event.name);
+    const obj = fontColors.find(value => value.name === event.name);
     var isProIR = false;
     var isReflectiveGlow = false;
 
@@ -1320,7 +1371,6 @@ function Form({ formData, setFormData, data, config, product }) {
     // Set the form data with the selected font text color and its image
     //setFormData({ ...formData, hiltColorImg: obj.img, proIRFontColor: isProIR, reflectiveGlowFontColor: isReflectiveGlow });
     setFormData({ ...formData, lightsaber: { ...formData.lightsaber, hilt: { ...formData.lightsaber.hilt, name: obj.name, color: obj.img } }, upsells: { ...formData.upsells, proIRFontColor: isProIR, reflectiveGlowFontColor: isReflectiveGlow } });
-
   };
 
   // Define a function to handle the change of the font text color dropdown menu
@@ -1562,6 +1612,18 @@ function Form({ formData, setFormData, data, config, product }) {
         break;
     }
   };
+
+  function handleFileInputChange(event) {
+    const file = event.target.files[0];
+    console.log(file);
+    setFormData({
+      ...formData, bgColor: {
+        ...formData.bgColor,
+        img: URL.createObjectURL(file)
+      }
+    });
+    // setFormData(prevStyle => ({ ...prevStyle, backgroundImage: `url("${URL.createObjectURL(file)}")` }));
+  }
 
   // Define a function to handle the change of the comments checkbox
   const handleGlowBorderChange = (event) => {
@@ -1944,6 +2006,10 @@ function Form({ formData, setFormData, data, config, product }) {
 
                       />
                     </>
+                  ) : input.id.toLowerCase() == "upload" ? (
+                    <>
+                      <Upload label="Upload" onChange={handleFileInputChange}/>
+                    </>
                   ) : input.id.toLowerCase() == "bloodtype" ? (
                     <>
 
@@ -2191,7 +2257,7 @@ function Form({ formData, setFormData, data, config, product }) {
                         title="Hilt Color"
                         name="hiltColor"
                         value={formData.lightsaber.hilt.name}
-                        img={formData.lightsaber.hilt.img}
+                        img={formData.lightsaber.hilt.color}
                         onChange={handleHiltColorChange}
                         options={fontColors}
                       />
@@ -2203,7 +2269,7 @@ function Form({ formData, setFormData, data, config, product }) {
                         title="Blade Color"
                         name="bladeColor"
                         value={formData.lightsaber.blade.name}
-                        img={formData.lightsaber.blade.img}
+                        img={formData.lightsaber.blade.color}
                         onChange={handleBladeColorChange}
                         options={fontColors}
                       />
