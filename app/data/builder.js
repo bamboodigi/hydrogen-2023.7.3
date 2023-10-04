@@ -443,6 +443,7 @@ const builderData = {
     },
     "light sabers": {
       name: "Light Sabers",
+      base: 20,
       config: {
         "sizes": [
           { size: '5” x 1”', maxLength: null, lines: null, placeholder: null },
@@ -505,6 +506,7 @@ const builderData = {
     },
     "custom printed patch": {
       name: "Custom Printed Patch",
+      basePrice: 14,
       config: {
         sizes: [
           { size: '3” x 2”', maxLength: null, lines: null, placeholder: null, hasFlag: true, sizeUpsell: 0, hiVis: 5 },
@@ -558,6 +560,7 @@ const builderData = {
     },
     "jacket panel": {
       name: "Jacket Panel",
+      base: 31,
       config: {
         "sizes": [
    //        { size: '3.5” x 4”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
@@ -701,6 +704,7 @@ const builderData = {
     },
     "division jacket panel": {
       name: "Division Jacket Panel",
+      base: 36,
       config: {
         "sizes": [
    //        { size: '3.5” x 4”', maxLength: 13, lines: 1, placeholder: 'Your Name' },

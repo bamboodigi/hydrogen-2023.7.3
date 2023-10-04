@@ -505,8 +505,6 @@ function initVisualizerStyle(formData) {
 
 
 function updateFontSize(containerRef, setFontStyle, formData) {
-
-
   const textLines = formData.text.primary.lines;
   // console.log(textLines)
   // console.log(formData.text.primary.lines)
@@ -587,6 +585,22 @@ function updateFontSize(containerRef, setFontStyle, formData) {
         }
       }
       break;
+      // @@ - This save spot is for setting starting font
+      case 'name tape':
+        if (formData.text.primary.text.length == 0) {
+          switch (formData.size.current) {
+            case '8” x 2”':
+              newFontSize = 28.3729;
+              break;
+            case '8” x 3”':
+              newFontSize = 43.6253;
+              break;
+            case '11” x 3”':
+              newFontSize = 30;
+              break;
+          }
+        }
+        break;
     case 'medical patch':
       if (formData.text.primary.text.length == 0) {
         newFontSize = 47.1714;
@@ -789,9 +803,11 @@ function Visualizer({ formData, className, ...props }) {
             ...prevStyle,
             backgroundImage: `url("${src}")`,
             WebkitMaskImage: `url("${formData.img.img}")`,
+            WebkitMaskPosition: 'center',
+            WebkitSize: 'cover',
             maskImage: `url("${mask}")`,
             maskSize: `cover`,
-            WebkitSize: 'cover',
+            maskPosition: 'center',
           }));
         } else {
           setState(prevStyle => ({
@@ -914,8 +930,10 @@ function Visualizer({ formData, className, ...props }) {
       setCanvasStyle(prevStyle => ({ ...prevStyle, height: '230px' }));
       switch (formData.size.current) {
         case '1” x 1”':
+          setFlagStyle(prevStyle => ({ ...prevStyle, transform: `scale(1.5)` }));
           break;
         case '2” x 2”':
+          setFlagStyle(prevStyle => ({ ...prevStyle, transform: `scale(1.5)` }));
           break;
         case '3.5” x 2”':
           setFlagStyle(prevStyle => ({ ...prevStyle, transform: `scale(1)` }));
@@ -1155,7 +1173,7 @@ function Visualizer({ formData, className, ...props }) {
               </div>
             </div>
           ) : formData.type.toLowerCase().includes("medical patch") ? (
-            <div className="h-full w-full text-center overflow-x-hidden flex items-center justify-center">
+            <div className="h-full w-full text-center overflow-x-hidden overflow-y-hidden flex items-center justify-center">
               <div id="icon" className="h-4/5 w-4/5" style={flagStyle}>
                 <div id="glow"
                   className={classNames(
@@ -1794,8 +1812,8 @@ function Form({ formData, setFormData, data, config, product }) {
             {stepForm.steps[stepForm.currentStep - 1].input.map((input, i) => {
               const childKey = i.toString();
               return (
-                <div key={childKey}>
-                  {input.id.toLowerCase() == "text" ? (
+                <>
+                  {   input.id.toLowerCase() == "text" ? (
                     <>
                       <div className="flex justify-between">
                         <label htmlFor="text" className="block text-sm xl:text-lg font-medium">
@@ -2274,6 +2292,18 @@ function Form({ formData, setFormData, data, config, product }) {
                         options={fontColors}
                       />
                     </>
+                  ) : input.id.toLowerCase() == "ringcolor" ? (
+                    <>
+                      <AdvancedSelect
+                        id="ringColor"
+                        title="Ring Color"
+                        name="ringColor"
+                        value={formData.symbol.name}
+                        img={formData.lightsaber.blade.color}
+                        onChange={handleBladeColorChange}
+                        options={fontColors}
+                      />
+                    </>
                   ) : input.id.toLowerCase() == "flagenabled" ? (
                     <>
                       <div className="flex items-start">
@@ -2287,7 +2317,7 @@ function Form({ formData, setFormData, data, config, product }) {
                             className="bg-transparent h-4 w-4 rounded border-contrast text-indigo-600 focus:ring-indigo-500"
                           />
                         </div>
-                        <div className="text-sm">
+                        <div className="text-sm leading-4">
                           <label htmlFor="agreeLeadTime" className="ml-3 font-medium">
                             Do you want to add a flag?
                           </label>
@@ -2307,7 +2337,7 @@ function Form({ formData, setFormData, data, config, product }) {
                             className="bg-transparent h-4 w-4 rounded border-contrast text-indigo-600 focus:ring-indigo-500"
                           />
                         </div>
-                        <div className="text-sm">
+                        <div className="text-sm leading-4">
                           <label htmlFor="agreeLeadTime" className="ml-3 font-medium">
                             Do you want to reverse the flag?
                           </label>
@@ -2327,7 +2357,7 @@ function Form({ formData, setFormData, data, config, product }) {
                             className="bg-transparent h-4 w-4 rounded border-contrast text-indigo-600 focus:ring-indigo-500"
                           />
                         </div>
-                        <div className="text-sm">
+                        <div className="text-sm leading-4">
                           <label htmlFor="agreeLeadTime" className="ml-3 font-medium">
                             Add a glow in the dark border? +$10 USD
                           </label>
@@ -2347,7 +2377,7 @@ function Form({ formData, setFormData, data, config, product }) {
                             className="bg-transparent h-4 w-4 rounded border-contrast text-indigo-600 focus:ring-indigo-500"
                           />
                         </div>
-                        <div className="text-sm">
+                        <div className="text-sm leading-4">
                           <label htmlFor="agreeLeadTime" className="ml-3 font-medium">
                             I Agree to the Lead Time
                           </label>
@@ -2359,7 +2389,7 @@ function Form({ formData, setFormData, data, config, product }) {
                     <>
                     </>
                   )}
-                </div>
+                </>
               );
             })}
           </div>
