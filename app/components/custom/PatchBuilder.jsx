@@ -1807,12 +1807,14 @@ function Form({ formData, setFormData, data, config, product }) {
             Step {stepForm.currentStep} / {stepForm.steps.length}
           </p>
         </div>
-        <div className="grid grid-cols-6 gap-6 min-h-[13rem] xl:min-h-[14rem]">
-          <div className="col-span-6 grid gap-4">
+        {/* <div className="grid grid-cols-6 gap-6 min-h-[13rem] xl:min-h-[14rem]">
+          <div className="col-span-6 grid gap-4"> */}
+        <div className="flex w-full min-h-[13rem] xl:min-h-[14rem]">
+          <div className="flex flex-col w-full space-y-8">
             {stepForm.steps[stepForm.currentStep - 1].input.map((input, i) => {
               const childKey = i.toString();
               return (
-                <>
+                <div key={childKey}>
                   {   input.id.toLowerCase() == "text" ? (
                     <>
                       <div className="flex justify-between">
@@ -2389,7 +2391,7 @@ function Form({ formData, setFormData, data, config, product }) {
                     <>
                     </>
                   )}
-                </>
+                </div>
               );
             })}
           </div>
