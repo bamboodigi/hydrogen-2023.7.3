@@ -250,7 +250,7 @@ function CartLineItem({ line }) {
             </div>
           </div>
           <div className="flex-grow flex-col space-y-2">
-            <div id="line-item__title" className="flex justify-between">
+            <div id="line-item__title" className="flex justify-between border-b-2 border-white">
               <Heading as="h3" size="copy">
                 {merchandise?.product?.handle ? (
                   <Link className="font-bold" to={`/products/${merchandise.product.handle}`} prefetch="intent">
