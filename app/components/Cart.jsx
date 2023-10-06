@@ -188,6 +188,10 @@ function CartLineItem({ line }) {
 
   const { id, quantity, merchandise, attributes } = line;
 
+  console.log(attributes.length);
+
+  const isCustomPatch = attributes.length > 7;
+  
   if (typeof quantity === 'undefined' || !merchandise?.product) return null;
 
 
@@ -198,7 +202,7 @@ function CartLineItem({ line }) {
   const proIRFontColor = fontColor?.value?.includes("Pro IR") || false;
   const reflectiveGlowFontColor = fontColor?.value?.includes("Reflective + Glow") || false;
   const length = parseInt(size?.value?.match(/\d+/g)[0]);
-  const isAddon = line.merchandise?.product.handle.includes("add-on");
+  let isAddon = line.merchandise?.product.handle.includes("add-on");
   const glowBorder = attributes.find((attribute) => attribute.key === 'Glow Border');
 
   var newTitle = '';
@@ -227,7 +231,7 @@ function CartLineItem({ line }) {
   // console.log(length);
   // console.log(markType?.value);
   // console.log(glowBorder?.value);
-
+  isAddon = false;
   return (
     <>
       {!isAddon ? (
@@ -249,79 +253,99 @@ function CartLineItem({ line }) {
               <ItemRemoveButton lineIds={[id]} />
             </div>
           </div>
-          <div className="flex-grow flex-col space-y-2">
-            <div id="line-item__title" className="flex justify-between border-b-2 border-white">
-              <Heading as="h3" size="copy">
-                {merchandise?.product?.handle ? (
-                  <Link className="font-bold" to={`/products/${merchandise.product.handle}`} prefetch="intent">
-                    {newTitle || merchandise?.product?.title}
-                  </Link>
-                ) : (
-                  <Text className="font-bold">{merchandise?.product?.title || ''}</Text>
-                )}
-              </Heading>
-              <span className="block font-bold text-copy whitespace-pre-wrap">
-                 {/* <CartLinePrice line={line} /> */}
-                <Money withoutTrailingZeros data={{ amount: price?.value + ".0", currencyCode: 'USD' }} />
-              </span>
-            </div>
-            {markType?.value.includes("HiVis") ? (
-              <>
-                <div className="flex justify-between">
-                  <Text className="font-semibold text-xs sm:text-copy">with HiVis Flag</Text>
-                  <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+$4</span>
-                </div>
-              </>
-            ) : markType?.value.includes("Lazer Cut") ? (
-              <>
-                <Text className="font-semibold text-xs sm:text-copy">with Lazer Cut Flag</Text>
-              </>
-            ) : (
-              <>
-              </>
-            )}
-            <div className="flex justify-between">
-              <Text className="font-semibold text-xs sm:text-copy">Base</Text>
-              <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">
-                <CartLinePrice line={line} />
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <Text className="font-semibold text-xs sm:text-copy">Size</Text>
-              <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+$0</span>
-            </div>
-            {proIRFontColor && (
-              <>
-                <div className="flex justify-between">
-                  <Text className="font-semibold text-xs sm:text-copy">Pro IR Font Color</Text>
-                  <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+$7</span>
-                </div>
-              </>
-            )}
-            {reflectiveGlowFontColor && (
-              <>
-                <div className="flex justify-between">
-                  <Text className="font-semibold text-xs sm:text-copy">Reflective / Glow Font Color</Text>
-                  <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+$7</span>
-                </div>
-              </>
-            )}
-            {glowBorder?.value === "Yes" && (
-              <>
-                <div className="flex justify-between">
-                  <Text className="font-semibold text-xs sm:text-copy">Glow Border</Text>
-                  <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+$10</span>
-                </div>
-              </>
-            )}
-            {/* <div className="grid pb-2">
+
+          {isCustomPatch ? (
+            <div className="flex-grow flex-col space-y-2">
+              <div id="line-item__title" className="flex justify-between border-b-2 border-white">
+                <Heading as="h3" size="copy">
+                  {merchandise?.product?.handle ? (
+                    <Link className="font-bold" to={`/products/${merchandise.product.handle}`} prefetch="intent">
+                      {newTitle || merchandise?.product?.title}
+                    </Link>
+                  ) : (
+                    <Text className="font-bold">{merchandise?.product?.title || ''}</Text>
+                  )}
+                </Heading>
+                <span className="block font-bold text-copy whitespace-pre-wrap">
+                  {/* <CartLinePrice line={line} /> */}
+                  <Money withoutTrailingZeros data={{ amount: price?.value + ".0", currencyCode: 'USD' }} />
+                </span>
+              </div>
+              {markType?.value.includes("HiVis") ? (
+                <>
+                  <div className="flex justify-between">
+                    <Text className="font-semibold text-xs sm:text-copy">with HiVis Flag</Text>
+                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+$4</span>
+                  </div>
+                </>
+              ) : markType?.value.includes("Lazer Cut") ? (
+                <>
+                  <Text className="font-semibold text-xs sm:text-copy">with Lazer Cut Flag</Text>
+                </>
+              ) : (
+                <>
+                </>
+              )}
+              <div className="flex justify-between">
+                <Text className="font-semibold text-xs sm:text-copy">Base</Text>
+                <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">
+                  <CartLinePrice line={line} />
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <Text className="font-semibold text-xs sm:text-copy">Size</Text>
+                <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+$0</span>
+              </div>
+              {proIRFontColor && (
+                <>
+                  <div className="flex justify-between">
+                    <Text className="font-semibold text-xs sm:text-copy">Pro IR Font Color</Text>
+                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+$7</span>
+                  </div>
+                </>
+              )}
+              {reflectiveGlowFontColor && (
+                <>
+                  <div className="flex justify-between">
+                    <Text className="font-semibold text-xs sm:text-copy">Reflective / Glow Font Color</Text>
+                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+$7</span>
+                  </div>
+                </>
+              )}
+              {glowBorder?.value === "Yes" && (
+                <>
+                  <div className="flex justify-between">
+                    <Text className="font-semibold text-xs sm:text-copy">Glow Border</Text>
+                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+$10</span>
+                  </div>
+                </>
+              )}
+              {/* <div className="grid pb-2">
                        {(merchandise?.selectedOptions || []).map((option) => (
                          <Text color="subtle" key={option.name}>
                            {option.name}: {option.value}
                          </Text>
                        ))}
                      </div> */}
-          </div>
+            </div>
+          ) : (
+            <div className="flex-grow flex-col space-y-2">
+              <div id="line-item__title" className="flex justify-between">
+                <Heading as="h3" size="copy">
+                  {merchandise?.product?.handle ? (
+                    <Link className="font-bold" to={`/products/${merchandise.product.handle}`} prefetch="intent">
+                      {newTitle || merchandise?.product?.title}
+                    </Link>
+                  ) : (
+                    <Text className="font-bold">{merchandise?.product?.title || ''}</Text>
+                  )}
+                </Heading>
+                <span className="block font-bold text-copy whitespace-pre-wrap">
+                  <CartLinePrice line={line} />
+                </span>
+              </div>
+            </div>
+          )}
         </li>
       ) : (
         <>
