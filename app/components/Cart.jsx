@@ -249,102 +249,78 @@ function CartLineItem({ line }) {
               <ItemRemoveButton lineIds={[id]} />
             </div>
           </div>
-          <div className="flex-grow grid gap-2">
-            <div className="flex justify-between flex-grow">
-              <div className="grid gap-2">
-                <Heading as="h3" size="copy">
-                  {merchandise?.product?.handle ? (
-                    <Link className="font-bold" to={`/products/${merchandise.product.handle}`} prefetch="intent">
-                      {newTitle || merchandise?.product?.title}
-                    </Link>
-                  ) : (
-                    <Text className="font-bold">{merchandise?.product?.title || ''}</Text>
-                  )}
-                </Heading>
-                {markType?.value.includes("HiVis") ? (
-                  <>
-                    <Text className="font-semibold text-xs sm:text-copy">with HiVis Flag</Text>
-                  </>
-                ) : markType?.value.includes("Lazer Cut") ? (
-                  <>
-                    <Text className="font-semibold text-xs sm:text-copy">with Lazer Cut Flag</Text>
-                  </>
+          <div className="flex-grow flex-col space-y-2">
+            <div id="line-item__title" className="flex justify-between">
+              <Heading as="h3" size="copy">
+                {merchandise?.product?.handle ? (
+                  <Link className="font-bold" to={`/products/${merchandise.product.handle}`} prefetch="intent">
+                    {newTitle || merchandise?.product?.title}
+                  </Link>
                 ) : (
-                  <>
-                  </>
+                  <Text className="font-bold">{merchandise?.product?.title || ''}</Text>
                 )}
-                {proIRFontColor && (
-                  <>
-                    <Text className="font-semibold text-xs sm:text-copy">Pro IR Font Color</Text>
-                  </>
-                )}
-                {reflectiveGlowFontColor && (
-                  <>
-                    <Text className="font-semibold text-xs sm:text-copy">Reflective / Glow Font Color</Text>
-                  </>
-                )}
-                {glowBorder?.value === "Yes" && (
-                  <>
-                    <Text className="font-semibold text-xs sm:text-copy">Glow Border</Text>
-                  </>
-                )}
-                {/* <div className="grid pb-2">
+              </Heading>
+              <span className="block font-bold text-copy whitespace-pre-wrap">
+                 {/* <CartLinePrice line={line} /> */}
+                <Money withoutTrailingZeros data={{ amount: price?.value + ".0", currencyCode: 'USD' }} />
+              </span>
+            </div>
+            {markType?.value.includes("HiVis") ? (
+              <>
+                <div className="flex justify-between">
+                  <Text className="font-semibold text-xs sm:text-copy">with HiVis Flag</Text>
+                  <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+$4</span>
+                </div>
+              </>
+            ) : markType?.value.includes("Lazer Cut") ? (
+              <>
+                <Text className="font-semibold text-xs sm:text-copy">with Lazer Cut Flag</Text>
+              </>
+            ) : (
+              <>
+              </>
+            )}
+            <div className="flex justify-between">
+              <Text className="font-semibold text-xs sm:text-copy">Base</Text>
+              <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">
+                <CartLinePrice line={line} />
+              </span>
+            </div>
+            <div className="flex justify-between">
+              <Text className="font-semibold text-xs sm:text-copy">Size</Text>
+              <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+$0</span>
+            </div>
+            {proIRFontColor && (
+              <>
+                <div className="flex justify-between">
+                  <Text className="font-semibold text-xs sm:text-copy">Pro IR Font Color</Text>
+                  <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+$7</span>
+                </div>
+              </>
+            )}
+            {reflectiveGlowFontColor && (
+              <>
+                <div className="flex justify-between">
+                  <Text className="font-semibold text-xs sm:text-copy">Reflective / Glow Font Color</Text>
+                  <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+$7</span>
+                </div>
+              </>
+            )}
+            {glowBorder?.value === "Yes" && (
+              <>
+                <div className="flex justify-between">
+                  <Text className="font-semibold text-xs sm:text-copy">Glow Border</Text>
+                  <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+$10</span>
+                </div>
+              </>
+            )}
+            {/* <div className="grid pb-2">
                        {(merchandise?.selectedOptions || []).map((option) => (
                          <Text color="subtle" key={option.name}>
                            {option.name}: {option.value}
                          </Text>
                        ))}
                      </div> */}
-
-                {/* <div className="flex items-center gap-2">
-                       <div className="flex justify-start text-copy">
-                         <CartLineQuantityAdjust line={line} />
-                       </div>
-                       <ItemRemoveButton lineIds={[id]} />
-                     </div> */}
-              </div>
-              <div className="text-right grid gap-2">
-                <span className="block font-bold text-copy whitespace-pre-wrap">
-                  <CartLinePrice line={line} />
-                </span>
-                {markType?.value.includes("HiVis") && (
-                  <>
-                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+$4</span>
-                  </>
-                )}
-                {proIRFontColor && (
-                  <>
-                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+$7</span>
-                  </>
-                )}
-                {reflectiveGlowFontColor && (
-                  <>
-                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+$7</span>
-                  </>
-                )}
-                {glowBorder?.value === "Yes" && (
-                  <>
-                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+$10</span>
-                  </>
-                )}
-              </div>
-            </div>
-            <div className="flex justify-between gap-4 mt-3">
-              <div className="flex justify-start text-copy">
-                <Heading
-                  as="h3"
-                  size="copy"
-                >
-                  <Text className="font-bold">Item Total:</Text>
-                </Heading>
-              </div>
-              <div className="text-right grid gap-2">
-                <span className="block font-bold text-copy whitespace-pre-wrap">
-                  <Money withoutTrailingZeros data={{ amount: price?.value + ".0", currencyCode: 'USD' }} />
-                </span>
-
-              </div>
-            </div>
           </div>
         </li>
       ) : (

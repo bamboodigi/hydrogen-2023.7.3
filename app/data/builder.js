@@ -1504,9 +1504,6 @@ const builderData = {
       }
     ],
     "lazer-cut": initLazerCutFlags(),
-    "badge": [
-
-    ],
     symbols: {
       "medical patch": {
         "1 x 1": [
