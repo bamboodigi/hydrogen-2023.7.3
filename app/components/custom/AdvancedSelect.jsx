@@ -26,6 +26,7 @@ export function AdvancedSelect({ title, value, img, onChange, options, ...props 
     const [query, setQuery] = useState('')
     // const [selectedOption, setSelectedOption] = useState(value)
 
+    console.log(options);
     function queryChange(event) {
         // console.log(event);
         setQuery(event.target.value);

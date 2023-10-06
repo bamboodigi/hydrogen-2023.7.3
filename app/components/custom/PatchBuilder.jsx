@@ -98,7 +98,7 @@ export function PatchBuilder({ product, config, ...props }) {
               }
 
               {isFlag(formData.type) && (
-                <span className="text-xl mt-2 uppercase block">with {formData.Type}</span>
+                <span className="text-xl mt-2 uppercase block">with {formData.img.type}</span>
               )
               }
 
@@ -343,7 +343,7 @@ function getBuilderTitle(product) {
       break;
   }
 
-  console.log(result);
+  // console.log(result);
   return capitalizeWords(result);
 
   function capitalizeWords(str) {
@@ -585,22 +585,22 @@ function updateFontSize(containerRef, setFontStyle, formData) {
         }
       }
       break;
-      // @@ - This save spot is for setting starting font
-      case 'name tape':
-        if (formData.text.primary.text.length == 0) {
-          switch (formData.size.current) {
-            case '8” x 2”':
-              newFontSize = 28.3729;
-              break;
-            case '8” x 3”':
-              newFontSize = 43.6253;
-              break;
-            case '11” x 3”':
-              newFontSize = 30;
-              break;
-          }
+    // @@ - This save spot is for setting starting font
+    case 'name tape':
+      if (formData.text.primary.text.length == 0) {
+        switch (formData.size.current) {
+          case '8” x 2”':
+            newFontSize = 28.3729;
+            break;
+          case '8” x 3”':
+            newFontSize = 43.6253;
+            break;
+          case '11” x 3”':
+            newFontSize = 30;
+            break;
         }
-        break;
+      }
+      break;
     case 'medical patch':
       if (formData.text.primary.text.length == 0) {
         newFontSize = 47.1714;
@@ -711,7 +711,7 @@ function Visualizer({ formData, className, ...props }) {
   const { canvas, patch, text, img, lightsaber } = initVisualizerStyle(formData);
   // Create a ref to access the container element
 
-  console.log(lightsaber);
+  //  console.log(lightsaber);
   const containerRef = useRef(null);
   const containerSecondaryRef = useRef(null);
 
@@ -719,7 +719,7 @@ function Visualizer({ formData, className, ...props }) {
   const [style, setStyle] = useState(patch);
   const [fontStyle, setFontStyle] = useState(text.primary);
   const [fontSecondaryStyle, setFontSecondaryStyle] = useState(text.secondary);
-  const [flagStyle, setFlagStyle] = useState(formData.type.toLowerCase() === "medical patch" ? img.symbol : img.flag); 
+  const [flagStyle, setFlagStyle] = useState(formData.type.toLowerCase() === "medical patch" ? img.symbol : img.flag);
   const [hiltStyle, setHiltStyle] = useState(lightsaber.hilt);
   const [bladeStyle, setBladeStyle] = useState(lightsaber.blade);
 
@@ -784,13 +784,13 @@ function Visualizer({ formData, className, ...props }) {
             }));
           }
         }
-        if (mask == "saber color"){
+        if (mask == "saber color") {
           setState(prevStyle => ({
             ...prevStyle,
             backgroundImage: `url("${src}")`,
           }));
         }
-        if(setState == setStyle) {
+        if (setState == setStyle) {
           console.log(src);
           setState(prevStyle => ({
             ...prevStyle,
@@ -835,7 +835,7 @@ function Visualizer({ formData, className, ...props }) {
 
   // Custom hook to update the font style when the text color image changes
   useEffect(() => {
-   // console.log(formData.lightsaber.blade.img);
+    // console.log(formData.lightsaber.blade.img);
     imageLoader(formData.lightsaber.hilt.img, setHiltStyle, "saber");
     imageLoader(formData.lightsaber.blade.img, setBladeStyle, "saber");
     // setHiltStyle(prevStyle => ({ ...prevStyle, maskImage: `url("${formData.hiltImg}")`, WebkitMaskImage: `url("${formData.hiltImg}")` }));
@@ -1258,6 +1258,10 @@ function Form({ formData, setFormData, data, config, product }) {
     { name: 'Almost There', href: '#', status: 'upcoming', step: 5 },
   ];
 
+    function convertSizeString(sizeString) {
+    return sizeString.split(" ").join("").split("”").join("");
+  }
+
   // console.log(formData);
 
   switch (formData.type.toLowerCase()) {
@@ -1616,7 +1620,17 @@ function Form({ formData, setFormData, data, config, product }) {
       default:
         console.log(event.name);
         console.log(imgs["hi-vis"])
-        obj = imgs["hi-vis"].find(value => value.name === event.name);
+        console.log(formData.img.type);
+        switch (formData.img.type.toLowerCase()) {
+          case 'lazer cut flag':
+            let size = convertSizeString(formData.size.current);
+            obj = imgs["lazer-cut"][size].find(value => value.name === event.name);   
+            console.log(obj);
+            break;
+          case 'hivis flag':
+            obj = imgs["hi-vis"].find(value => value.name === event.name);
+            break;
+        }
         console.log(obj)
         // Set the form data with the selected hivis flag and its image
         // setFormData({ ...formData, img: event.name, imgSrc: obj.img });
@@ -1630,6 +1644,8 @@ function Form({ formData, setFormData, data, config, product }) {
         break;
     }
   };
+
+
 
   function handleFileInputChange(event) {
     const file = event.target.files[0];
@@ -1774,7 +1790,7 @@ function Form({ formData, setFormData, data, config, product }) {
 
   return (
     <>
-      <div className="space-y-6">
+      <div className="space-y-4">
         {/* <Steps /> */}
         {/*      
           ///////////////////////////////////////
@@ -1809,13 +1825,13 @@ function Form({ formData, setFormData, data, config, product }) {
         </div>
         {/* <div className="grid grid-cols-6 gap-6 min-h-[13rem] xl:min-h-[14rem]">
           <div className="col-span-6 grid gap-4"> */}
-        <div className="flex w-full min-h-[13rem] xl:min-h-[14rem]">
-          <div className="flex flex-col w-full space-y-8">
+        <div className="flex w-full min-h-[15rem] xl:min-h-[16rem]">
+          <div className="flex flex-col w-full space-y-6">
             {stepForm.steps[stepForm.currentStep - 1].input.map((input, i) => {
               const childKey = i.toString();
               return (
                 <div key={childKey}>
-                  {   input.id.toLowerCase() == "text" ? (
+                  {input.id.toLowerCase() == "text" ? (
                     <>
                       <div className="flex justify-between">
                         <label htmlFor="text" className="block text-sm xl:text-lg font-medium">
@@ -2028,11 +2044,10 @@ function Form({ formData, setFormData, data, config, product }) {
                     </>
                   ) : input.id.toLowerCase() == "upload" ? (
                     <>
-                      <Upload label="Upload" onChange={handleFileInputChange}/>
+                      <Upload label="Upload" onChange={handleFileInputChange} />
                     </>
                   ) : input.id.toLowerCase() == "bloodtype" ? (
                     <>
-
                       {formData.size.current == '6" x 2"' ? (
                         <>
                           <div className="flex justify-between">
@@ -2214,22 +2229,36 @@ function Form({ formData, setFormData, data, config, product }) {
                     )
                   ) : input.id.toLowerCase() == "flag" ? (
                     <>
-                      <AdvancedSelect
+                    {
+                      formData.img.type.toLowerCase() == "lazer cut flag" ? (
+                        <AdvancedSelect
                         // id="bgColor"
                         title={formData.img.markType}
                         name={formData.img.markType}
                         value={formData.img.name}
                         img={formData.img.img}
                         onChange={handleImgChange}
-                        options={imgs["lazer-cut"]["3x2"]}
+                        options={imgs["lazer-cut"][convertSizeString(formData.size.current)]}
                       />
+                      ) : (
+                        <AdvancedSelect
+                        // id="bgColor"
+                        title={formData.img.markType}
+                        name={formData.img.markType}
+                        value={formData.img.name}
+                        img={formData.img.img}
+                        onChange={handleImgChange}
+                        options={imgs["hi-vis"]}
+                      />
+                      )
+                    }
                     </>
                   ) : input.id.toLowerCase() == "flagtype" ? (
                     <>
-                      <div className="col-span-6">
-                        <label htmlFor="type" className="block text-sm xl:text-lg font-medium">
-                          Flag Type
-                        </label>
+                      <label htmlFor="type" className="block text-sm xl:text-lg font-medium">
+                        Flag Type
+                      </label>
+                      <div className="relative mt-2">
                         <select
                           id="type"
                           name={formData.img.type}
