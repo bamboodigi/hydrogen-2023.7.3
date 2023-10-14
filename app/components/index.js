@@ -1,43 +1,48 @@
-export {Layout} from './Layout';
-export {Drawer, useDrawer} from './Drawer';
-export {Heading, Section, Text, PageHeader} from './Text';
-export {Input} from './Input';
-export {ProductGallery} from './ProductGallery';
-export {ProductCard} from './ProductCard';
-export {ProductSwimlane} from './ProductSwimlane';
-export {Skeleton} from './Skeleton';
-export {Button} from './Button';
-export {CountrySelector} from './CountrySelector';
-export {Cart} from './Cart';
-export {CartLoading} from './CartLoading';
-export {OrderCard} from './OrderCard';
-export {AccountDetails} from './AccountDetails';
-export {AccountAddressBook} from './AccountAddressBook';
-export {Modal} from './Modal';
-export {Link} from './Link';
-export {FeaturedCollections} from './FeaturedCollections';
-export {Hero} from './Hero';
-export {SortFilter} from './SortFilter';
-export {Grid} from './Grid';
-export {FeaturedProducts} from './FeaturedProducts';
-export {AddToCartButton} from './AddToCartButton';
+export { Layout } from './Layout';
+export { Drawer, useDrawer } from './Drawer';
+export { Heading, Section, Text, PageHeader } from './Text';
+export { Input } from './Input';
+export { ProductGallery } from './ProductGallery';
+export { ProductCard } from './ProductCard';
+export { ProductSwimlane } from './ProductSwimlane';
+export { Skeleton } from './Skeleton';
+export { Button } from './Button';
+export { CountrySelector } from './CountrySelector';
+export { Cart } from './Cart';
+export { CartLoading } from './CartLoading';
+export { OrderCard } from './OrderCard';
+export { AccountDetails } from './AccountDetails';
+export { AccountAddressBook } from './AccountAddressBook';
+export { Modal } from './Modal';
+export { Link } from './Link';
+export { FeaturedCollections } from './FeaturedCollections';
+export { Hero } from './Hero';
+export { SortFilter } from './SortFilter';
+export { Grid } from './Grid';
+export { FeaturedProducts } from './FeaturedProducts';
+export { AddToCartButton } from './AddToCartButton';
 export * from './Icon';
 
-export {Navigation} from './custom/Navigation';
-export {Footer} from './custom/Footer';
-export {Container} from './custom/Container';
-export {NewSortFilter} from './custom/NewSortFilter';
-export {ProductGrid} from './custom/ProductGrid';
-export {Toggle} from './custom/Toggle';
-export {PartialStarIcon} from './custom/PartialStarIcon';
-export {SearchGrid} from './custom/SearchGrid';
-export {AdvancedSelect} from './custom/AdvancedSelect';
-export {Steps} from './custom/Steps';
-export {PatchBuilder} from './custom/PatchBuilder';
-export {ProductDetail} from './custom/ProductDetail';
-export {HeroTiles} from './custom/HeroTiles';
-export {Stats} from './custom/Stats';
-export {FeaturedReviews} from './custom/FeaturedReviews';
-export {CTASection} from './custom/CTASection';
-export {Upload} from './custom/Upload';
-export {trackViewedProduct, trackAddedToCart, trackLoggedInUsers} from './custom/Klaviyo';
+// custom components sorted alphabetically
+export {
+    AdvancedSelect,
+    Container,
+    CTASection,
+    FeaturedReviews,
+    Footer,
+    HeroTiles,
+    Navigation,
+    NewSortFilter,
+    PartialStarIcon,
+    PatchBuilder,
+    ProductDetail,
+    ProductGrid,
+    SearchGrid,
+    Stats,
+    Steps,
+    Toggle,
+    trackAddedToCart,
+    trackLoggedInUsers,
+    trackViewedProduct,
+    Upload,
+  } from './custom';

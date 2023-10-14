@@ -5,6 +5,7 @@ let obj = {
   init: {
     // initalize the formData Object based on the product and chooses selected
     formData: function () {
+
     },
 
     // initialize the forms that collect data for the formData object.
@@ -13,18 +14,20 @@ let obj = {
     },
     // initalize the visualizer style to show custom product formed by the formData object.
     visualizer: function () {
+
     },
   },
-
+  // data object used for the patch builder
   data: {
     sizeOptions: builderData.sizeOptions,
     bgColors: builderData.colors.bgColors,
     fontColors: builderData.colors.fontColors,
     imgs: builderData.imgs,
-    symbols: imgs.symbols,
+    symbols: builderData.imgs.symbols,
     markTypeOptions: builderData.markType.types,
     saberOptions: builderData.lightSabers.types,
   },
+  //  
   helpers: {
     get: {
       builderTitle: function () {
@@ -45,7 +48,18 @@ let obj = {
       },
       additionalText: function () {
       },
-      patchBuilder: product.tags.includes("custom_patch")
+      patchBuilder: product.tags.includes("custom_patch"),
+      idPanel : ,
+      nameTape : ,
+      medicalPatch : ,
+      jacketPanel : ,
+      divisionJacketPanel : ,
+      flagPatch : ,
+      lightSaber : ,
+      customPatch : ,
+      lazerCutFlag : ,
+      hiVisFlag : ,
+      upload : ,
     },
   },
 };

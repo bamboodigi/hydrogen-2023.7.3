@@ -25,7 +25,7 @@ function classNames(...classes) {
 export function AdvancedSelect({ title, value, img, onChange, options, ...props }) {
     const [query, setQuery] = useState('')
     // const [selectedOption, setSelectedOption] = useState(value)
-
+console.log(img);
     console.log(options);
     function queryChange(event) {
         // console.log(event);
@@ -51,7 +51,7 @@ export function AdvancedSelect({ title, value, img, onChange, options, ...props 
     // console.log(title)
     // console.log(value)
     // console.log(onChange)
-    // console.log(options)
+    console.log(filteredOptions[0].icon)
 
     return (
         <Combobox as="div" value={value} onChange={onChange}>

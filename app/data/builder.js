@@ -1733,7 +1733,9 @@ function initLazerCutFlags() {
     "3.5 x 2",
     "5 x 3",
     "6 x 3",
-    "3.5 Hex"
+    "3.5 Hex",
+    "Mini-ID",
+    "Large-ID"
   ];    // If there's a common file extension, you can add it here
 
   const imageList = [
@@ -1853,7 +1855,7 @@ function initLazerCutFlags() {
 
   let lazerObj = {};
   sizes.forEach(size => {
-    let key = size.replace(/ /g, "");
+    let key = size.replace(/ /g, "").toLowerCase();
     let iconKey = key;
    // console.log(iconKey);
     iconKey = iconKey === '3x2' ? 'mini-id' : iconKey;

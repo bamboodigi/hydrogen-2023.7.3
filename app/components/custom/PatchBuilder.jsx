@@ -122,7 +122,6 @@ export function PatchBuilder({ product, config, ...props }) {
 
 
 function initFormData(product) {
-  //console.log(product);
   const patchType = builderData.type[getBuilderTitle(product).toLowerCase()];
 
   let formData = {
@@ -186,6 +185,12 @@ function initFormData(product) {
       color: {
         name: fontColors[8].name,
         img: fontColors[8].img,
+        mask: {
+          name: imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").name,
+          img: imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").img,
+          glow: imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").glow,
+          icon: imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").icon,
+        }
       },
       type: 'Lazer Cut Flag',
       reversed: false,
@@ -196,15 +201,21 @@ function initFormData(product) {
     }
   };
 
+  console.log(imgs["lazer-cut"]['3x2'].find(value => value.name == "USA"));
+
   switch (formData.type.toLowerCase()) {
     case 'id panel':
       formData.img.type = 'Lazer Cut Flag';
+      formData.img.color.mask.img = imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").img;
+      formData.img.color.mask.name = imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").name;
       break;
     case 'name tape':
       formData.img.type = 'HiVis Flag';
       break;
     case 'flag':
       formData.img.type = 'Lazer Cut Flag';
+      formData.img.color.mask.img = imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").img;
+      formData.img.color.mask.name = imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").name;
       break;
     case 'light sabers':
       formData.bgColor.name = bgColors[0].name;
@@ -217,7 +228,8 @@ function initFormData(product) {
         formData.img.name = symbols['medical patch']['1 x 1'][0].name;
         formData.img.img = symbols['medical patch']['1 x 1'][0].img;
         formData.img.icon = symbols['medical patch']['1 x 1'][0].icon;
-        formData.img.glow = symbols['medical patch']['1 x 1'][0].glow;
+        formData.img
+          .glow = symbols['medical patch']['1 x 1'][0].glow;
       } else {
         formData.img.markType = 'Symbol';
         formData.img.name = symbols['medical patch']['2 x 2'][0].name;
@@ -239,6 +251,9 @@ function initFormData(product) {
       formData.text.fifth = tempObj;
       formData.text.sixth = tempObj;
       formData.text.seventh = tempObj;
+      formData.img.type = 'Lazer Cut Flag';
+      formData.img.color.mask.img = imgs["lazer-cut"]['3x2'].find(value => value.name == "USA").img;
+      formData.img.color.mask.name = imgs["lazer-cut"]['3x2'].find(value => value.name == "USA").name;
       break;
     case 'division jacket panel':
       formData.text.primary.maxLength = 15;
@@ -360,10 +375,11 @@ function initVisualizerStyle(formData) {
   const bladeColor = 'url("' + formData.lightsaber.blade.color + '")';
   const symbolColor = 'url("' + formData.img.color.color + '")';
   const img = formData.type.toLowerCase() === "medical patch" ? 'url("' + formData.img.symbol + '")' : 'url("' + formData.img.img + '")';
+  const mask = 'url("' + formData.img.color.mask.img + '")';
   const hiltImg = 'url("' + formData.lightsaber.hilt.img + '")';
   const bladeImg = 'url("' + formData.lightsaber.blade.img + '")';
-
-
+  console.log(symbolColor);
+  console.log(mask);
   // console.log(bladeColor);
   // console.log(hiltColor);
   // console.log(bladeImg);
@@ -410,18 +426,29 @@ function initVisualizerStyle(formData) {
     },
     img: {
       flag: {
+        // backgroundImage: textColor,
+        // maskImage: img,
+        // maskSize: 'cover',
+        // WebkitMaskImage: img,
+        // WebkitMaskSize: 'cover',
+        // // aspectRatio: '2/1',
         backgroundImage: img,
-        aspectRatio: '2/1',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       },
+      mask: {
+        backgroundImage: textColor,
+        maskImage: mask,
+        maskSize: 'cover',
+        WebkitMaskImage: mask,
+        WebkitMaskSize: 'cover',
+      },
       symbol: {
         backgroundImage: symbolColor,
-        maskImage: img,
+        maskImage: mask,
         maskSize: 'cover',
-        WebkitMaskImage: img,
+        WebkitMaskImage: mask,
         WebkitMaskSize: 'cover',
-        transform: 'scale(1.5)',
       },
     },
     lightsaber: {
@@ -710,7 +737,7 @@ function Visualizer({ formData, className, ...props }) {
 
   const { canvas, patch, text, img, lightsaber } = initVisualizerStyle(formData);
   // Create a ref to access the container element
-
+  console.log(img.mask);
   //  console.log(lightsaber);
   const containerRef = useRef(null);
   const containerSecondaryRef = useRef(null);
@@ -722,54 +749,109 @@ function Visualizer({ formData, className, ...props }) {
   const [flagStyle, setFlagStyle] = useState(formData.type.toLowerCase() === "medical patch" ? img.symbol : img.flag);
   const [hiltStyle, setHiltStyle] = useState(lightsaber.hilt);
   const [bladeStyle, setBladeStyle] = useState(lightsaber.blade);
-
+  const [maskStyle, setMaskStyle] = useState(img.mask);
+  console.log(img.mask);
+  console.log(maskStyle);
 
   // A function to load an image and update the state with its URL
-  const imageLoader = (src, setState, mask,) => {
+  const imageLoader = (obj, setState) => {
+    //  console.log(obj);
+    // console.log(obj.type);
+    let mask = obj.mask ? obj.mask : null;
+    let bgImg = obj.src;
+    // console.log(mask)
+    //  console.log(obj.type.toLowerCase());
     const img = new Image();
-    img.onload = () => {
-      if (formData.type.toLowerCase().includes("light sabers")) {
-        if (mask == "saber") {
-          console.log("yes")
+    switch (obj.type.toLowerCase()) {
+      case "color":
+      case 'image':
+        console.log(bgImg);
+        img.src = bgImg;
+        img.onload = () => {
+          setState(prevStyle => ({
+            ...prevStyle,
+            backgroundImage: `url("${bgImg}")`,
+          }));
+        };
+        break;
+      case 'mask':
+        if (mask) {
+          img.src = mask;
+          console.log(mask);
+          setState(prevStyle => ({
+            ...prevStyle,
+            backgroundImage: `url("${bgImg}")`,
+            WebkitMaskImage: `url("${mask}")`,
+            WebkitMaskPosition: 'center',
+            WebkitSize: 'cover',
+            maskImage: `url("${mask}")`,
+            maskSize: `cover`,
+            maskPosition: 'center',
+          }));
+        }
+        break;
+      case 'light saber':
+        if (mask) {
           let newWidth = '';
           let newMarginLeft = '';
           let newColor = '';
+
+          if (setState == setBladeStyle) {
+            console.log("ooo");
+            setState(prevStyle => ({
+              ...prevStyle,
+              width: '0%'
+            }));
+          }
+
+
           switch (formData.lightsaber.saberType.toLowerCase()) {
             case 'darth vader':
-              newWidth = src.includes("hilt") ? '27%' : src.includes("blade") ? '73%' : '';
-              newColor = src.includes("hilt") ? fontColors[7].img : src.includes("blade") ? fontColors[11].img : '';
+              newWidth = mask.includes("hilt") ? '27%' : mask.includes("blade") ? '73%' : '';
+              newColor = mask.includes("hilt") ? fontColors[7].img : mask.includes("blade") ? fontColors[11].img : '';
               break;
             case 'luke skywalker':
-              newWidth = src.includes("hilt") ? '27%' : src.includes("blade") ? '71%' : '';
-              newColor = src.includes("hilt") ? fontColors[7].img : src.includes("blade") ? fontColors[13].img : '';
-              newMarginLeft = src.includes("blade") ? '1%' : '';
+              newWidth = mask.includes("hilt") ? '27%' : mask.includes("blade") ? '71%' : '';
+              newColor = mask.includes("hilt") ? fontColors[7].img : mask.includes("blade") ? fontColors[13].img : '';
+              newMarginLeft = mask.includes("blade") ? '1%' : '';
               break;
             case 'obi wan kenobi':
-              newWidth = src.includes("hilt") ? '27%' : src.includes("blade") ? '71%' : '';
-              newMarginLeft = src.includes("blade") ? '1%' : '';
-              newColor = src.includes("hilt") ? fontColors[7].img : src.includes("blade") ? fontColors[13].img : '';
+              newWidth = mask.includes("hilt") ? '27%' : mask.includes("blade") ? '71%' : '';
+              newMarginLeft = mask.includes("blade") ? '1%' : '';
+              newColor = mask.includes("hilt") ? fontColors[7].img : mask.includes("blade") ? fontColors[13].img : '';
               break;
             case 'mace windu':
-              newWidth = src.includes("hilt") ? '27%' : src.includes("blade") ? '71%' : '';
-              newMarginLeft = src.includes("blade") ? '1%' : '';
-              newColor = src.includes("hilt") ? fontColors[7].img : src.includes("blade") ? fontColors[15].img : '';
+              newWidth = mask.includes("hilt") ? '27%' : mask.includes("blade") ? '71%' : '';
+              newMarginLeft = mask.includes("blade") ? '1%' : '';
+              newColor = mask.includes("hilt") ? fontColors[7].img : mask.includes("blade") ? fontColors[15].img : '';
               break;
             case 'count dooku':
-              newWidth = src.includes("hilt") ? '33%' : src.includes("blade") ? '65%' : '';
-              newMarginLeft = src.includes("blade") ? '-1%' : '';
-              newColor = src.includes("hilt") ? fontColors[7].img : src.includes("blade") ? fontColors[11].img : '';
+              newWidth = mask.includes("hilt") ? '33%' : mask.includes("blade") ? '65%' : '';
+              newMarginLeft = mask.includes("blade") ? '-1%' : '';
+              newColor = mask.includes("hilt") ? fontColors[7].img : mask.includes("blade") ? fontColors[11].img : '';
               break;
           }
+          img.src = mask;
+          console.log(mask);
           setState(prevStyle => ({
             ...prevStyle,
-            WebkitMaskImage: `url("${src}")`,
-            maskImage: `url("${src}")`,
+            backgroundImage: `url("${bgImg}")`,
+            WebkitMaskImage: `url("${mask}")`,
+            WebkitMaskPosition: 'center',
+            WebkitSize: 'cover',
+            maskImage: `url("${mask}")`,
+            maskSize: `cover`,
+            maskPosition: 'center',
           }));
+          
           if (newWidth.length > 0) {
+            setTimeout(() => {
+
             setState(prevStyle => ({
               ...prevStyle,
               width: newWidth
             }));
+          }, 1000);
           }
           if (newMarginLeft.length > 0) {
             setState(prevStyle => ({
@@ -784,108 +866,135 @@ function Visualizer({ formData, className, ...props }) {
             }));
           }
         }
-        if (mask == "saber color") {
-          setState(prevStyle => ({
-            ...prevStyle,
-            backgroundImage: `url("${src}")`,
-          }));
-        }
-        if (setState == setStyle) {
-          console.log(src);
-          setState(prevStyle => ({
-            ...prevStyle,
-            backgroundImage: `url("${src}")`
-          }));
-        }
-      } else if (formData.type.toLowerCase().includes("medical patch")) {
-        if (mask) {
-          setState(prevStyle => ({
-            ...prevStyle,
-            backgroundImage: `url("${src}")`,
-            WebkitMaskImage: `url("${formData.img.img}")`,
-            WebkitMaskPosition: 'center',
-            WebkitSize: 'cover',
-            maskImage: `url("${mask}")`,
-            maskSize: `cover`,
-            maskPosition: 'center',
-          }));
-        } else {
-          setState(prevStyle => ({
-            ...prevStyle,
-            backgroundImage: `url("${src}")`
-          }));
-        }
-      } else {
-        setState(prevStyle => ({
-          ...prevStyle,
-          backgroundImage: `url("${src}")`
-        }));
-      }
-    };
-    if (formData.type.toLowerCase().includes("medical patch")) {
-      if (mask) {
-        img.src = mask;
-      } else {
-        img.src = src;
-      }
-    } else {
-      img.src = src;
+        break;
+
     }
   };
 
-  // Custom hook to update the font style when the text color image changes
-  useEffect(() => {
-    // console.log(formData.lightsaber.blade.img);
-    imageLoader(formData.lightsaber.hilt.img, setHiltStyle, "saber");
-    imageLoader(formData.lightsaber.blade.img, setBladeStyle, "saber");
-    // setHiltStyle(prevStyle => ({ ...prevStyle, maskImage: `url("${formData.hiltImg}")`, WebkitMaskImage: `url("${formData.hiltImg}")` }));
-    // setBladeStyle(prevStyle => ({ ...prevStyle, maskImage: `url("${formData.bladeImg}")`, WebkitMaskImage: `url("${formData.bladeImg}")` }));
-  }, [formData.lightsaber.saberType]);
 
-  // // Custom hook to update the flag style when the flag image changes
+
+  // // // Custom hook to update the flag style when the flag image changes
   useEffect(() => {
-    if (formData.type.toLowerCase().includes("medical patch")) {
-      imageLoader(formData.text.color.img, setFlagStyle, formData.img.img);
+    let obj = {
+    };
+    if (
+      formData.img.markType.toLowerCase() === "symbol" ||
+      formData.img.type.toLowerCase() === "lazer cut flag"
+    ) {
+      obj.type = 'mask';
+      obj.src = formData.text.color.img;
+      obj.mask = formData.img.color.mask.img;
+      imageLoader(obj, setMaskStyle)
     } else {
-      imageLoader(formData.img.img, setFlagStyle);
+      obj.type = 'image'
+      obj.src = formData.img.img;
+      imageLoader(obj, setFlagStyle)
     }
   }, [formData.img.img]);
 
+  useEffect(() => {
+    let obj = {
+    };
+    obj.type = 'mask';
+    obj.src = formData.text.color.img;
+    obj.mask = formData.img.color.mask.img;
+    imageLoader(obj, setMaskStyle)
+
+  }, [formData.img.color.mask.img]);
+
   // Custom hook to update the background color image style when the background color image changes
   useEffect(() => {
-    imageLoader(formData.bgColor.img, setStyle);
+    const obj = {
+      type: 'color',
+      src: formData.bgColor.img,
+    };
+    imageLoader(obj, setStyle);
   }, [formData.bgColor.img]);
 
   // Custom hook to update the font style when the text color image changes
   useEffect(() => {
-    if (formData.type.toLowerCase().includes("medical patch")) {
-      imageLoader(formData.text.color.img, setFlagStyle);
+    const obj = {
+      type: 'color',
+      src: formData.text.color.img,
+    };
+    if (
+      formData.img.markType.toLowerCase() === "symbol" ||
+      formData.img.type.toLowerCase() === "lazer cut flag"
+    ) {
+      imageLoader(obj, setMaskStyle);
     }
-    imageLoader(formData.text.color.img, setFontStyle);
-    imageLoader(formData.text.color.img, setFontSecondaryStyle);
+
+    imageLoader(obj, setFontStyle);
+    imageLoader(obj, setFontSecondaryStyle);
 
   }, [formData.text.color.img]);
 
+  useEffect(() => {
+    let obj = {
+    };
+    console.log(formData.img.type)
+    console.log(formData.img.markType)
+    if (
+      formData.img.markType.toLowerCase() === "symbol" ||
+      formData.img.type.toLowerCase() === "lazer cut flag"
+    ) {
+      console.log(formData.img.type)
+      obj.type = 'mask';
+      obj.src = formData.text.color.img;
+      obj.mask = formData.img.color.mask.img;
+      imageLoader(obj, setMaskStyle)
+    } else {
+      console.log(formData.img.type)
+      obj.type = 'image'
+      obj.src = formData.img.img;
+      imageLoader(obj, setFlagStyle)
+    }
+    // console.log("yes")
+  }, [formData.img.type]);
+
+
+
   // Custom hook to update the font style when the text color image changes
   useEffect(() => {
-    imageLoader(formData.lightsaber.hilt.color, setHiltStyle, "saber color");
+
+    let objHilt = {
+    };
+    objHilt.type = 'light saber';
+    objHilt.src = formData.lightsaber.hilt.color;
+    objHilt.mask = formData.lightsaber.hilt.img;
+    imageLoader(objHilt, setHiltStyle)
+
+    let objBlade = {
+    };
+    objBlade.type = 'light saber';
+    objBlade.src = formData.lightsaber.blade.color;
+    objBlade.mask = formData.lightsaber.blade.img;
+    imageLoader(objBlade, setBladeStyle)
+
+  }, [formData.lightsaber.saberType]);
+  // Custom hook to update the font style when the text color image changes
+  useEffect(() => {
+    console.log(formData.lightsaber.hilt.color)
+    let objHilt = {
+    };
+    objHilt.type = 'mask';
+    objHilt.src = formData.lightsaber.hilt.color;
+    objHilt.mask = formData.lightsaber.hilt.img;
+    imageLoader(objHilt, setHiltStyle)
+
   }, [formData.lightsaber.hilt.color]);
 
-
   // Custom hook to update the font style when the text color image changes
   useEffect(() => {
-    imageLoader(formData.lightsaber.blade.color, setBladeStyle, "saber color");
+    let objBlade = {
+    };
+    objBlade.type = 'mask';
+    objBlade.src = formData.lightsaber.blade.color;
+    objBlade.mask = formData.lightsaber.blade.img;
+    imageLoader(objBlade, setBladeStyle)
   }, [formData.lightsaber.blade.color]);
 
-  // Custom hook to update the font style when the text color image changes
-  useEffect(() => {
-    if (formData.type.toLowerCase().includes("medical patch")) {
-      imageLoader(formData.text.color.img, setFlagStyle);
-    }
-    imageLoader(formData.text.color.img, setFontStyle);
-    imageLoader(formData.text.color.img, setFontSecondaryStyle);
 
-  }, [formData.text.color.img]);
 
   // Custom hook to update the size style when the size changes
   useEffect(() => {
@@ -940,6 +1049,15 @@ function Visualizer({ formData, className, ...props }) {
           console.log("hi");
           break;
       }
+    }
+
+    if (formData.img.type.toLowerCase() === "lazer cut flag") {
+      let obj = {
+      };
+      obj.type = 'mask';
+      obj.src = formData.text.color.img;
+      obj.mask = formData.img.color.mask.img;
+      imageLoader(obj, setMaskStyle)
     }
   }, [formData.size.current]);
 
@@ -1013,8 +1131,10 @@ function Visualizer({ formData, className, ...props }) {
     if (formData.type.toLowerCase() !== 'medical patch') {
       if (formData.img.reversed) {
         setFlagStyle(prevStyle => ({ ...prevStyle, transform: `scaleX(-1)` }));
+        setMaskStyle(prevStyle => ({ ...prevStyle, transform: `scaleX(-1)` }));
       } else {
         setFlagStyle(prevStyle => ({ ...prevStyle, transform: `scaleX(1)` }));
+        setMaskStyle(prevStyle => ({ ...prevStyle, transform: `scaleX(1)` }));
       }
     }
   }, [formData.img.reversed]);
@@ -1059,7 +1179,19 @@ function Visualizer({ formData, className, ...props }) {
           {formData.type.toLowerCase().includes("id panel") && formData.size.current == '6” x 2”' ? (
             <div className="w-full h-full flex">
               <div className="w-1/2 flex items-center px-2">
-                <div id="flag" className="w-full" style={flagStyle}></div>
+                {formData.img.type.toLowerCase() === "lazer cut flag" ? (
+                  <div id="mask" className="h-full w-full" style={maskStyle}>
+                    <div id="glow"
+                      className={classNames(
+                        formData.upsells.glowBorder ? "block" : "hidden",
+                        "h-full w-full"
+                      )}
+                      style={{ backgroundImage: `url("${formData.img.color.mask.glow}")`, backgroundSize: 'cover', position: 'absolute', backgroundPosition: 'center' }}
+                    ></div>
+                  </div>
+                ) : (
+                  <div id="flag" className="w-full" style={flagStyle}></div>
+                )}
               </div>
               <div className="flex flex-col w-1/2 gap-2" style={{}}>
                 <div ref={containerRef} className=" h-3/5 text-center overflow-x-hidden flex items-center justify-center">
@@ -1085,12 +1217,29 @@ function Visualizer({ formData, className, ...props }) {
                 formData.size.current === '3.5” x 2”' ? "px-1" : "",
                 "flex h-1/2 items-center"
               )}>
-                <div id="flag"
-                  className={classNames(
-                    formData.size.current === '3” x 2”' ? "min-w-3/5" : "min-w-1/2",
-                    "flex-1 max-h-full max-w-full h-auto"
-                  )}
-                  style={flagStyle}></div>
+                {formData.img.type.toLowerCase() === "lazer cut flag" ? (
+                  <div id="mask"
+                    className={classNames(
+                      formData.size.current === '3” x 2”' ? "min-w-3/5" : "min-w-1/2",
+                      "flex-1 max-h-full max-w-full h-full w-full"
+                    )}
+                    style={maskStyle}>
+                    <div id="glow"
+                      className={classNames(
+                        formData.upsells.glowBorder ? "block" : "hidden",
+                        "h-full w-full"
+                      )}
+                      style={{ backgroundImage: `url("${formData.img.color.mask.glow}")`, backgroundSize: 'cover', position: 'absolute', backgroundPosition: 'center' }}
+                    ></div>
+                  </div>
+                ) : (
+                  <div id="flag"
+                    className={classNames(
+                      formData.size.current === '3” x 2”' ? "min-w-3/5" : "min-w-1/2",
+                      "flex-1 max-h-full max-w-full h-full"
+                    )}
+                    style={flagStyle}></div>
+                )}
                 <div ref={containerSecondaryRef} className={classNames(
                   formData.size.current === '3” x 2”' ? "w-2/5" :
                     formData.size.current === '3.5” x 2”' ? "w-1/2" : "w-1/2",
@@ -1153,7 +1302,7 @@ function Visualizer({ formData, className, ...props }) {
                       formData.upsells.glowBorder ? "block" : "hidden",
                       "h-full w-full"
                     )}
-                    style={{ backgroundImage: `url("${formData.img.glow}")`, backgroundSize: 'cover', position: 'absolute' }}
+                    style={{ backgroundImage: `url("${formData.img.glow}")`, backgroundSize: 'cover', position: 'absolute', backgroundPosition: 'center' }}
                   ></div>
                 </div>
               </div>
@@ -1258,7 +1407,7 @@ function Form({ formData, setFormData, data, config, product }) {
     { name: 'Almost There', href: '#', status: 'upcoming', step: 5 },
   ];
 
-    function convertSizeString(sizeString) {
+  function convertSizeString(sizeString) {
     return sizeString.split(" ").join("").split("”").join("");
   }
 
@@ -1454,6 +1603,19 @@ function Form({ formData, setFormData, data, config, product }) {
   const handleSizeChange = (event) => {
     const obj = patchType.config;
     const objSizes = obj.sizes.find(value => value.size === event.target.value);
+    // Get the current size key from the event target value
+    const sizeKey = convertSizeString(event.target.value);
+
+    // Get the corresponding size object from the imgs['lazer-cut'] object
+    const sizeObject = imgs['lazer-cut'][sizeKey];
+
+    // Get the current mask name from the formData object
+    const maskName = formData.img.color.mask.name;
+
+    // Find the mask object in the size object with a name property equal to the current mask name
+    const maskObject = sizeObject && sizeObject.find(value => value.name === maskName);
+
+
     if (formData.type.toLowerCase() == "medical patch") {
       if (event.target.value == '1” x 1”') {
         // setFormData({
@@ -1548,6 +1710,7 @@ function Form({ formData, setFormData, data, config, product }) {
         });
       }
     } else {
+      console.log(formData.img.color.mask.icon)
       // setFormData({
       //   ...formData, size: event.target.value,
       //   textLines: objSizes.lines, textMaxLength: objSizes.maxLength, textPlaceholder: objSizes.placeholder
@@ -1565,6 +1728,18 @@ function Form({ formData, setFormData, data, config, product }) {
             lines: objSizes.lines,
             maxLength: objSizes.maxLength,
             placeholder: objSizes.placeholder
+          }
+        },
+        img: {
+          ...formData.img,
+          color: {
+            ...formData.img.color,
+            mask: {
+              name: maskObject?.name || maskName,
+              img: maskObject?.img || formData.img.color.mask.img,
+              glow: maskObject?.glow || formData.img.color.mask.glow,
+              icon: maskObject?.icon || formData.img.color.mask.icon,
+            }
           }
         },
       });
@@ -1605,6 +1780,19 @@ function Form({ formData, setFormData, data, config, product }) {
   const handleImgChange = (event) => {
     // Find the selected hivis flag from data array
     let obj = {};
+    obj = imgs["hi-vis"].find(value => value.name === event.name);
+    setFormData({
+      ...formData, img: {
+        ...formData.img,
+        name: event.name,
+        img: obj.img
+      }
+    });
+  };
+
+  const handleMaskChange = (event) => {
+    // Find the selected hivis flag from data array
+    let obj = {};
     switch (formData.type.toLowerCase()) {
       case 'medical patch':
         if (formData.size.current == '1” x 1”') {
@@ -1615,36 +1803,27 @@ function Form({ formData, setFormData, data, config, product }) {
         // Set the form data with the selected hivis flag and its image
         // setFormData({ ...formData, img: event.name, imgSrc: obj.img, imgIcon: obj.icon, imgGlow: obj.glow });
         setFormData({ ...formData, img: { ...formData.img, name: event.name, img: obj.img, icon: obj.icon, glow: obj.glow } });
-
         break;
       default:
-        console.log(event.name);
-        console.log(imgs["hi-vis"])
-        console.log(formData.img.type);
-        switch (formData.img.type.toLowerCase()) {
-          case 'lazer cut flag':
-            let size = convertSizeString(formData.size.current);
-            obj = imgs["lazer-cut"][size].find(value => value.name === event.name);   
-            console.log(obj);
-            break;
-          case 'hivis flag':
-            obj = imgs["hi-vis"].find(value => value.name === event.name);
-            break;
-        }
-        console.log(obj)
-        // Set the form data with the selected hivis flag and its image
-        // setFormData({ ...formData, img: event.name, imgSrc: obj.img });
+        let size = convertSizeString(formData.size.current);
+        obj = imgs["lazer-cut"][size].find(value => value.name === event.name);
+        console.log(obj);
         setFormData({
           ...formData, img: {
-            ...formData.img,
-            name: event.name,
-            img: obj.img
+            ...formData.img, color: {
+              ...formData.img.color, mask: {
+                name: event.name,
+                img: obj.img,
+                glow: obj.glow,
+                icon: obj.icon,
+              }
+            }
           }
         });
+        console.log(formData.img.color.mask);
         break;
     }
   };
-
 
 
   function handleFileInputChange(event) {
@@ -1786,7 +1965,7 @@ function Form({ formData, setFormData, data, config, product }) {
     }
   };
 
-  // console.log(stepForm)
+  console.log(formData.img.color.mask.icon);
 
   return (
     <>
@@ -2217,7 +2396,6 @@ function Form({ formData, setFormData, data, config, product }) {
                     ) : (
                       <>
                         <AdvancedSelect
-                          // id="bgColor"
                           title={formData.img.markType}
                           name={formData.img.markType}
                           value={formData.img.name}
@@ -2229,29 +2407,28 @@ function Form({ formData, setFormData, data, config, product }) {
                     )
                   ) : input.id.toLowerCase() == "flag" ? (
                     <>
-                    {
-                      formData.img.type.toLowerCase() == "lazer cut flag" ? (
-                        <AdvancedSelect
-                        // id="bgColor"
-                        title={formData.img.markType}
-                        name={formData.img.markType}
-                        value={formData.img.name}
-                        img={formData.img.img}
-                        onChange={handleImgChange}
-                        options={imgs["lazer-cut"][convertSizeString(formData.size.current)]}
-                      />
-                      ) : (
-                        <AdvancedSelect
-                        // id="bgColor"
-                        title={formData.img.markType}
-                        name={formData.img.markType}
-                        value={formData.img.name}
-                        img={formData.img.img}
-                        onChange={handleImgChange}
-                        options={imgs["hi-vis"]}
-                      />
-                      )
-                    }
+                      {
+                        formData.img.type.toLowerCase() == "lazer cut flag" ? (
+                          <AdvancedSelect
+                            title={formData.img.markType}
+                            name={formData.img.markType}
+                            value={formData.img.color.mask.name}
+                            img={formData.img.color.mask.icon}
+                            onChange={handleMaskChange}
+                            options={imgs["lazer-cut"][convertSizeString(formData.size.current)]}
+                          />
+                        ) : (
+                          <AdvancedSelect
+
+                            title={formData.img.markType}
+                            name={formData.img.markType}
+                            value={formData.img.name}
+                            img={formData.img.img}
+                            onChange={handleImgChange}
+                            options={imgs["hi-vis"]}
+                          />
+                        )
+                      }
                     </>
                   ) : input.id.toLowerCase() == "flagtype" ? (
                     <>
@@ -2431,7 +2608,7 @@ function Form({ formData, setFormData, data, config, product }) {
   );
 }
 
-function BuilderATC({ formData, className, config, currentStep, steps }) {
+function PatchATCButton({ formData, className, config, currentStep, steps }) {
   const { product, analytics, storeDomain } = useLoaderData();
   const productAnalytics = {
     ...analytics.products[0],
@@ -2607,7 +2784,7 @@ function FormButton({ formData, config, handlePrevious, handleNext, currentStep,
           currentStep === 1 ? "rounded-l-full border-2 w-[60%]" :
             currentStep === steps.length ? "rounded-r-full border-2 w-[70%]" : "",
           "transition bg-transparent border-t-2 border-b-2 border-contrast font-bold px-2")}>
-          <BuilderATC
+          <PatchATCButton
             formData={formData}
             config={config}
             currentStep={currentStep}
