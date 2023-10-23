@@ -462,7 +462,7 @@ export function Visualizer({ formData, className, ...props }) {
           "flex items-center transform lg:scale-150"
         )} style={style}>
 
-          {formData.type.toLowerCase().includes("id panel") ? (
+          { formData.type.toLowerCase().includes("id panel") ? (
             <IDPanel formData={formData} />
           ) : formData.type.toLowerCase().includes("name tape") ? (
             <NameTape formData={formData} />
