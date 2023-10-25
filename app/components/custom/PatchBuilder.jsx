@@ -201,7 +201,7 @@ function initFormData(product) {
     }
   };
 
-  console.log(imgs["lazer-cut"]['3x2'].find(value => value.name == "USA"));
+  // console.log(imgs["lazer-cut"]['3x2'].find(value => value.name == "USA"));
 
   switch (formData.type.toLowerCase()) {
     case 'id panel':
@@ -223,7 +223,7 @@ function initFormData(product) {
       break;
     case 'medical patch':
       if (formData.size.current == '1” x 1”') {
-        console.log('hi')
+        // console.log('hi')
         formData.img.markType = 'Symbol';
         formData.img.name = symbols['medical patch']['1 x 1'][0].name;
         formData.img.img = symbols['medical patch']['1 x 1'][0].img;
@@ -378,8 +378,8 @@ function initVisualizerStyle(formData) {
   const mask = 'url("' + formData.img.color.mask.img + '")';
   const hiltImg = 'url("' + formData.lightsaber.hilt.img + '")';
   const bladeImg = 'url("' + formData.lightsaber.blade.img + '")';
-  console.log(symbolColor);
-  console.log(mask);
+  // console.log(symbolColor);
+  // console.log(mask);
   // console.log(bladeColor);
   // console.log(hiltColor);
   // console.log(bladeImg);

@@ -3,10 +3,20 @@ import { useState } from 'react';
 import React from 'react';
 import {
   Upload,
-  AdvancedSelect
+  AdvancedSelect,
+  FormButton,
 } from '~/components';
 
 import builderData from '~/data/builder.js';
+
+
+const sizeOptions = builderData.sizeOptions;
+const bgColors = builderData.colors.bgColors;
+const fontColors = builderData.colors.fontColors;
+const imgs = builderData.imgs;
+const symbols = imgs.symbols;
+const markTypeOptions = builderData.markType.types;
+const saberOptions = builderData.lightSabers.types;
 
 
 // Form element to customize the patch
@@ -327,7 +337,7 @@ export function Form({ formData, setFormData, data, config, product }) {
           });
         }
       } else {
-        console.log(formData.img.color.mask.icon)
+       // console.log(formData.img.color.mask.icon)
         // setFormData({
         //   ...formData, size: event.target.value,
         //   textLines: objSizes.lines, textMaxLength: objSizes.maxLength, textPlaceholder: objSizes.placeholder
@@ -424,7 +434,7 @@ export function Form({ formData, setFormData, data, config, product }) {
         default:
           let size = convertSizeString(formData.size.current);
           obj = imgs["lazer-cut"][size].find(value => value.name === event.name);
-          console.log(obj);
+         //  console.log(obj);
           setFormData({
             ...formData, img: {
               ...formData.img, color: {
@@ -437,7 +447,7 @@ export function Form({ formData, setFormData, data, config, product }) {
               }
             }
           });
-          console.log(formData.img.color.mask);
+         // console.log(formData.img.color.mask);
           break;
       }
     };
@@ -445,7 +455,7 @@ export function Form({ formData, setFormData, data, config, product }) {
   
     function handleFileInputChange(event) {
       const file = event.target.files[0];
-      console.log(file);
+   //   console.log(file);
       setFormData({
         ...formData, bgColor: {
           ...formData.bgColor,
@@ -582,7 +592,7 @@ export function Form({ formData, setFormData, data, config, product }) {
       }
     };
   
-    console.log(formData.img.color.mask.icon);
+   // console.log(formData.img.color.mask.icon);
   
     return (
       <>
@@ -1224,3 +1234,56 @@ export function Form({ formData, setFormData, data, config, product }) {
       </>
     );
   }
+
+  // function that converts the custom product and choose the correct builder
+function getBuilderTitle(product) {
+  let result;
+  switch (product.handle) {
+    case 'medical-patch':
+      result = 'medical patch';
+      break;
+    case 'id-panel':
+      result = 'ID panel';
+      break;
+    case 'name-tape':
+      result = 'name tape';
+      break;
+    case 'call-sign':
+      result = 'call sign';
+      break;
+    case 'quote':
+      result = 'quote';
+      break;
+    case 'quotes':
+      result = 'light saber';
+      break;
+    case 'custom-printed-patch-1':
+      result = 'custom printed patch';
+      break;
+    case 'light-sabers':
+      result = 'light sabers'
+      break;
+    case 'jacket-panel':
+      result = 'jacket panel';
+      break;
+    case 'division-jacket-panel-1':
+      result = 'division jacket panel';
+      break;
+    case 'ranger-tabs':
+      result = 'ranger tabs';
+      break;
+    case 'flag-patch':
+      result = 'flag';
+      break;
+    default:
+      result = 'default';
+      break;
+  }
+
+  // console.log(result);
+  return capitalizeWords(result);
+
+  function capitalizeWords(str) {
+    return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  }
+}

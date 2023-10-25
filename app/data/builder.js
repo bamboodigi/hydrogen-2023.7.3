@@ -1878,5 +1878,5 @@ function initLazerCutFlags() {
   return lazerObj;
 }
 
-console.log(builderData.imgs["lazer-cut"]);
+// console.log(builderData.imgs["lazer-cut"]);
 export default builderData;

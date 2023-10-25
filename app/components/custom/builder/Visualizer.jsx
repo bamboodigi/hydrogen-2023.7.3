@@ -11,8 +11,18 @@ import {
   CustomPatch,
   JacketPanel,
   DivisionJacketPanel,
-} from './builder';
-import { NameTape } from './patches/NameTape';
+} from '~/components';
+
+import builderData from '~/data/builder.js';
+
+const sizeOptions = builderData.sizeOptions;
+const bgColors = builderData.colors.bgColors;
+const fontColors = builderData.colors.fontColors;
+const imgs = builderData.imgs;
+const symbols = imgs.symbols;
+const markTypeOptions = builderData.markType.types;
+const saberOptions = builderData.lightSabers.types;
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -23,7 +33,7 @@ export function Visualizer({ formData, className, ...props }) {
 
   const { canvas, patch, text, img, lightsaber } = initVisualizerStyle(formData);
   // Create a ref to access the container element
-  console.log(img.mask);
+  // console.log(img.mask);
   //  console.log(lightsaber);
   const containerRef = useRef(null);
   const containerSecondaryRef = useRef(null);
@@ -36,8 +46,8 @@ export function Visualizer({ formData, className, ...props }) {
   const [hiltStyle, setHiltStyle] = useState(lightsaber.hilt);
   const [bladeStyle, setBladeStyle] = useState(lightsaber.blade);
   const [maskStyle, setMaskStyle] = useState(img.mask);
-  console.log(img.mask);
-  console.log(maskStyle);
+  // console.log(img.mask);
+  // console.log(maskStyle);
 
   // A function to load an image and update the state with its URL
   const imageLoader = (obj, setState) => {
@@ -51,7 +61,7 @@ export function Visualizer({ formData, className, ...props }) {
     switch (obj.type.toLowerCase()) {
       case "color":
       case 'image':
-        console.log(bgImg);
+     //   console.log(bgImg);
         img.src = bgImg;
         img.onload = () => {
           setState(prevStyle => ({
@@ -63,7 +73,7 @@ export function Visualizer({ formData, className, ...props }) {
       case 'mask':
         if (mask) {
           img.src = mask;
-          console.log(mask);
+      //    console.log(mask);
           setState(prevStyle => ({
             ...prevStyle,
             backgroundImage: `url("${bgImg}")`,
@@ -83,7 +93,7 @@ export function Visualizer({ formData, className, ...props }) {
           let newColor = '';
 
           if (setState == setBladeStyle) {
-            console.log("ooo");
+           // console.log("ooo");
             setState(prevStyle => ({
               ...prevStyle,
               width: '0%'
@@ -118,7 +128,7 @@ export function Visualizer({ formData, className, ...props }) {
               break;
           }
           img.src = mask;
-          console.log(mask);
+       //   console.log(mask);
           setState(prevStyle => ({
             ...prevStyle,
             backgroundImage: `url("${bgImg}")`,
@@ -218,19 +228,19 @@ export function Visualizer({ formData, className, ...props }) {
   useEffect(() => {
     let obj = {
     };
-    console.log(formData.img.type)
-    console.log(formData.img.markType)
+   // console.log(formData.img.type)
+  //  console.log(formData.img.markType)
     if (
       formData.img.markType.toLowerCase() === "symbol" ||
       formData.img.type.toLowerCase() === "lazer cut flag"
     ) {
-      console.log(formData.img.type)
+    //  console.log(formData.img.type)
       obj.type = 'mask';
       obj.src = formData.text.color.img;
       obj.mask = formData.img.color.mask.img;
       imageLoader(obj, setMaskStyle)
     } else {
-      console.log(formData.img.type)
+    //  console.log(formData.img.type)
       obj.type = 'image'
       obj.src = formData.img.img;
       imageLoader(obj, setFlagStyle)
@@ -260,7 +270,7 @@ export function Visualizer({ formData, className, ...props }) {
   }, [formData.lightsaber.saberType]);
   // Custom hook to update the font style when the text color image changes
   useEffect(() => {
-    console.log(formData.lightsaber.hilt.color)
+    // console.log(formData.lightsaber.hilt.color)
     let objHilt = {
     };
     objHilt.type = 'mask';
@@ -332,7 +342,7 @@ export function Visualizer({ formData, className, ...props }) {
           break;
         case '3.5” x 2”':
           setFlagStyle(prevStyle => ({ ...prevStyle, transform: `scale(1)` }));
-          console.log("hi");
+      //    console.log("hi");
           break;
       }
     }
@@ -353,17 +363,16 @@ export function Visualizer({ formData, className, ...props }) {
   // match the font size.
   let count = 0;
   useEffect(() => {
-    // console.log(!containerRef.current);
     if (formData.type.toLowerCase().includes("light sabers")) return;
     if (formData.type.toLowerCase().includes("flag")) return;
     if (!containerRef.current) return;
+
     // Define a function to adjust the font size
     const adjustFontSize = () => {
       // If the containerRef is not set, return
       if (containerRef.current) {
         updateFontSize(containerRef, setFontStyle, formData);
       }
-
     };
 
     // Call adjustFontSize() immediately to set the font size on mount
@@ -448,7 +457,6 @@ export function Visualizer({ formData, className, ...props }) {
   }, []);
 
 
-  // format by option
   return (
     <div className="swimlane md:grid-flow-row hiddenScroll md:p-0 md:overflow-x-auto md:grid-cols-2 w-full justify-center lg:pr-16">
       <div id="visualizer" className={classNames(
@@ -456,20 +464,173 @@ export function Visualizer({ formData, className, ...props }) {
         "md:col-span-2 aspect-square snap-center flex items-center justify-center overflow-clip rounded-sm w-full max-h-1/2 p-6 py-4 sm:relative"
       )}>
         {/* ${scrollPosition >= 100 ? ' w-100 fixed z-50' : ' transition relative'
-          } */}
+        } */}
         <div id="patch" className={classNames(
           formData.type.toLowerCase().includes("flag") ? "justify-center" : "justify-center",
           "flex items-center transform lg:scale-150"
         )} style={style}>
 
-          { formData.type.toLowerCase().includes("id panel") ? (
-            <IDPanel formData={formData} />
+          {formData.type.toLowerCase().includes("id panel") && formData.size.current == '6” x 2”' ? (
+            <div className="w-full h-full flex">
+              <div className="w-1/2 flex items-center px-2">
+                {formData.img.type.toLowerCase() === "lazer cut flag" ? (
+                  <div id="mask" className="h-full w-full" style={maskStyle}>
+                    <div id="glow"
+                      className={classNames(
+                        formData.upsells.glowBorder ? "block" : "hidden",
+                        "h-full w-full"
+                      )}
+                      style={{ backgroundImage: `url("${formData.img.color.mask.glow}")`, backgroundSize: 'cover', position: 'absolute', backgroundPosition: 'center' }}
+                    ></div>
+                  </div>
+                ) : (
+                  <div id="flag" className="w-full" style={flagStyle}></div>
+                )}
+              </div>
+              <div className="flex flex-col w-1/2 gap-2" style={{}}>
+                <div ref={containerRef} className=" h-3/5 text-center overflow-x-hidden flex items-center justify-center">
+                  <p id="main-text" className="pt-2.5 inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
+                </div>
+                <div ref={containerSecondaryRef} className="h-2/5 text-center overflow-x-hidden flex items-end justify-center">
+                  <p id="secondary-text" className="inline-block h-full whitespace-nowrap" style={{ ...fontSecondaryStyle }}>
+                    {formData.text.secondary.text.length > 0 ? formData.text.secondary.text : 'APOS  NKDA'}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ) : formData.type.toLowerCase().includes("id panel") ? (
+            <div className={classNames(
+              formData.size.current === '3.5” x 2”' ? "gap-2" :
+                formData.size.current === '4” x 2”' ? "gap-2" : "",
+              "flex flex-col w-full h-full"
+            )}>
+              <div ref={containerRef} className="h-1/2 justify-center overflow-y-hidden flex items-center">
+                <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
+              </div>
+              <div className={classNames(
+                formData.size.current === '3.5” x 2”' ? "px-1" : "",
+                "flex h-1/2 items-center"
+              )}>
+                {formData.img.type.toLowerCase() === "lazer cut flag" ? (
+                  <div id="mask"
+                    className={classNames(
+                      formData.size.current === '3” x 2”' ? "min-w-3/5" : "min-w-1/2",
+                      "flex-1 max-h-full max-w-full h-full w-full"
+                    )}
+                    style={maskStyle}>
+                    <div id="glow"
+                      className={classNames(
+                        formData.upsells.glowBorder ? "block" : "hidden",
+                        "h-full w-full"
+                      )}
+                      style={{ backgroundImage: `url("${formData.img.color.mask.glow}")`, backgroundSize: 'cover', position: 'absolute', backgroundPosition: 'center' }}
+                    ></div>
+                  </div>
+                ) : (
+                  <div id="flag"
+                    className={classNames(
+                      formData.size.current === '3” x 2”' ? "min-w-3/5" : "min-w-1/2",
+                      "flex-1 max-h-full max-w-full h-full"
+                    )}
+                    style={flagStyle}></div>
+                )}
+                <div ref={containerSecondaryRef} className={classNames(
+                  formData.size.current === '3” x 2”' ? "w-2/5" :
+                    formData.size.current === '3.5” x 2”' ? "w-1/2" : "w-1/2",
+                  "flex items-center justify-center h-full"
+                )}>
+                  <p id="secondary-text" className={classNames(
+                    formData.size.current === '6” x 3”' ? "pt-3" :
+                      formData.size.current === '4” x 2”' ? "pt-3" :
+                        formData.size.current === '3.5” x 2”' ? "pt-2" : "pt-2 pl-2",
+                    ""
+                  )}
+                    style={{ ...fontSecondaryStyle }}>
+                    {formData.text.secondary.text.length > 0 ? formData.text.secondary.text.split('\n').map((line, index) => (
+                      <React.Fragment key={index}>
+                        {index > 0 && <br />}
+                        {line}
+                      </React.Fragment>
+                    )) :
+                      formData.text.secondary.placeholder.split('\n').map((line, index) => (
+                        <React.Fragment key={index}>
+                          {index > 0 && <br />}
+                          {line}
+                        </React.Fragment>
+                      ))
+                    }
+                  </p>
+                </div>
+              </div>
+            </div>
+          ) : formData.type.toLowerCase().includes("name tape") && formData.img.enabled ? (
+            <div className="flex w-full h-full gap-2">
+              <div className="flex flex-0  w-1/3 items-center" style={{}}>
+                <div id="flag" className="mr-1 flex-1 max-h-full max-w-full w-auto h-auto" style={flagStyle}></div>
+              </div>
+              <div ref={containerRef} className="flex flex-1 w-2/3 justify-center overflow-y-hidden items-center">
+                <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
+              </div>
+            </div>
           ) : formData.type.toLowerCase().includes("name tape") ? (
-            <NameTape formData={formData} />
+            <div ref={containerRef} className="h-full w-full text-center overflow-x-hidden overflow-y-hidden flex items-center justify-center">
+              <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text.split('\n').map((line, index) => (
+                <React.Fragment key={index}>
+                  {index > 0 && <br />}
+                  {line}
+                </React.Fragment>
+              )) :
+                formData.text.primary.placeholder.split('\n').map((line, index) => (
+                  <React.Fragment key={index}>
+                    {index > 0 && <br />}
+                    {line}
+                  </React.Fragment>
+                ))}</p>
+            </div>
+          ) : formData.type.toLowerCase().includes("medical patch") && formData.size.current == '3.5” x 2”' ? (
+            <div className="flex w-full h-full gap-2">
+              <div className="flex flex-0  w-[45%] items-center" style={{}}>
+                <div id="icon" className="h-full w-full" style={flagStyle}>
+                  <div id="glow"
+                    className={classNames(
+                      formData.upsells.glowBorder ? "block" : "hidden",
+                      "h-full w-full"
+                    )}
+                    style={{ backgroundImage: `url("${formData.img.glow}")`, backgroundSize: 'cover', position: 'absolute', backgroundPosition: 'center' }}
+                  ></div>
+                </div>
+              </div>
+              <div ref={containerRef} className="flex flex-1 w-[55%] justify-center overflow-y-hidden items-center">
+                <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text.split('\n').map((line, index) => (
+                  <React.Fragment key={index}>
+                    {index > 0 && <br />}
+                    {line}
+                  </React.Fragment>
+                )) :
+                  formData.text.primary.placeholder.split('\n').map((line, index) => (
+                    <React.Fragment key={index}>
+                      {index > 0 && <br />}
+                      {line}
+                    </React.Fragment>
+                  ))}</p>
+              </div>
+            </div>
           ) : formData.type.toLowerCase().includes("medical patch") ? (
-            <MedicalPatch formData={formData} />
+            <div className="h-full w-full text-center overflow-x-hidden overflow-y-hidden flex items-center justify-center">
+              <div id="icon" className="h-4/5 w-4/5" style={flagStyle}>
+                <div id="glow"
+                  className={classNames(
+                    formData.upsells.glowBorder ? "block" : "hidden",
+                    "h-full w-full"
+                  )}
+                  style={{ backgroundImage: `url("${formData.img.glow}")`, backgroundSize: 'cover', position: 'absolute' }}
+                ></div>
+              </div>
+            </div>
           ) : formData.type.toLowerCase() == ("flag") ? (
-            <Flag formData={formData} />
+            <div ref={containerRef} className="h-full w-full overflow-x-hidden flex items-center justify-center">
+              <div id="flag" className="flex-1 h-full w-full" style={flagStyle}></div>
+            </div>
           ) : formData.type.toLowerCase().includes("call sign") ? (
             <div ref={containerRef} className="h-full text-center overflow-x-hidden flex items-center justify-center">
               <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
@@ -479,13 +640,41 @@ export function Visualizer({ formData, className, ...props }) {
               <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
             </div>
           ) : formData.type.toLowerCase().includes("light saber") ? (
-            <LightSaber formData={formData} />
+            <div ref={containerRef} className="h-full w-full text-center overflow-x-hidden flex items-center justify-start">
+              <div id="hilt" className="w-0 transition-background duration-[.75s]" style={{ ...hiltStyle }}></div>
+              <div id="blade" className="w-0 transition-width transition-background duration-[.75s]" style={{ ...bladeStyle }}></div>
+            </div>
           ) : formData.type.toLowerCase() == 'custom printed patch' ? (
-            <CustomPatch formData={formData} />
+            <></>
+            // <div ref={containerRef} className="h-full w-full overflow-x-hidden flex items-center justify-center">
+            //   <div id="flag" className="flex-1 h-full w-full" style={flagStyle}></div>
+            // </div>
           ) : formData.type.toLowerCase() == "jacket panel" ? (
-            <JacketPanel formData={formData} />
+            <div ref={containerRef} className="h-full w-full overflow-x-hidden flex flex-col items-center justify-between">
+              <div className="mt-2">
+                <p id="main-text" className="text-center" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
+                <div className="flex flex-wrap">
+                  <p id="text2" className="w-1/2 mb-3" style={{ ...fontSecondaryStyle }}>{formData.text.secondary.text.length > 0 ? formData.text.secondary.text : formData.text.secondary.placeholder}</p>
+                  <p id="text3" className="w-1/2 mb-3 text-right" style={{ ...fontSecondaryStyle }}>{formData.text.third.text.length > 0 ? formData.text.third.text : formData.text.third.placeholder}</p>
+                  <p id="text4" className="w-1/2 mb-3" style={{ ...fontSecondaryStyle }}>{formData.text.fourth.text.length > 0 ? formData.text.fourth.text : formData.text.fourth.placeholder}</p>
+                  <p id="text5" className="w-1/2 mb-3 text-right" style={{ ...fontSecondaryStyle }}>{formData.text.fifth.text.length > 0 ? formData.text.fifth.text : formData.text.fifth.placeholder}</p>
+                  <p id="text6" className="w-1/2" style={{ ...fontSecondaryStyle }}>{formData.text.sixth.text.length > 0 ? formData.text.sixth.text : formData.text.sixth.placeholder}</p>
+                  <p id="text7" className="w-1/2 text-right" style={{ ...fontSecondaryStyle }}>{formData.text.seventh.text.length > 0 ? formData.text.seventh.text : formData.text.seventh.placeholder}</p>
+                </div>
+              </div>
+              <div id="flag" className="w-full" style={flagStyle}></div>
+            </div>
           ) : formData.type.toLowerCase() == ("division jacket panel") ? (
-            <DivisionJacketPanel formData={formData} />
+            <div className="h-full w-full overflow-x-hidden flex flex-col items-center justify-between">
+              <div ref={containerRef} className="w-full h-auto">
+                <p id="main-text" className="text-center" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
+                <div className="flex flex-wrap text-center">
+                  <p id="text2" className="w-1/2 mb-3" style={{ ...fontSecondaryStyle }}>{formData.text.secondary.text.length > 0 ? formData.text.secondary.text : formData.text.secondary.placeholder}</p>
+                  <p id="text3" className="w-1/2 mb-3" style={{ ...fontSecondaryStyle }}>{formData.text.third.text.length > 0 ? formData.text.third.text : formData.text.third.placeholder}</p>
+                </div>
+              </div>
+              <div id="flag" className="w-full" style={flagStyle}></div>
+            </div>
           ) : formData.type.toLowerCase().includes("ranger tabs") ? (
             <div ref={containerRef} className="h-full text-center overflow-x-hidden flex items-center justify-center">
               <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
@@ -499,4 +688,430 @@ export function Visualizer({ formData, className, ...props }) {
       </div>
     </div >
   );
+  // // format by option
+  // return (
+  //   <div className="swimlane md:grid-flow-row hiddenScroll md:p-0 md:overflow-x-auto md:grid-cols-2 w-full justify-center lg:pr-16">
+  //     <div id="visualizer" className={classNames(
+  //       className,
+  //       "md:col-span-2 aspect-square snap-center flex items-center justify-center overflow-clip rounded-sm w-full max-h-1/2 p-6 py-4 sm:relative"
+  //     )}>
+  //       {/* ${scrollPosition >= 100 ? ' w-100 fixed z-50' : ' transition relative'
+  //         } */}
+  //       <div id="patch" className={classNames(
+  //         formData.type.toLowerCase().includes("flag") ? "justify-center" : "justify-center",
+  //         "flex items-center transform lg:scale-150"
+  //       )} style={style}>
+
+  //         { formData.type.toLowerCase().includes("id panel") ? (
+  //           <IDPanel
+  //           formData={formData}
+  //           containerRef={containerRef}
+  //           secondaryContainerRef={secondaryContainerRef || null}
+  //           fontStyle={fontStyle}
+  //           secondaryFontStyle={secondaryFontStyle || null}
+  //           flagStyle={flagStyle}
+  //           maskStyle={maskStyle}
+  //         />
+  //         ) : formData.type.toLowerCase().includes("name tape") ? (
+  //           <NameTape formData={formData} />
+  //         ) : formData.type.toLowerCase().includes("medical patch") ? (
+  //           <MedicalPatch formData={formData} />
+  //         ) : formData.type.toLowerCase() == ("flag") ? (
+  //           <Flag formData={formData} />
+  //         ) : formData.type.toLowerCase().includes("call sign") ? (
+  //           <div ref={containerRef} className="h-full text-center overflow-x-hidden flex items-center justify-center">
+  //             <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
+  //           </div>
+  //         ) : formData.type.toLowerCase().includes("quote") ? (
+  //           <div ref={containerRef} className="h-full text-center overflow-x-hidden flex items-center justify-center">
+  //             <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
+  //           </div>
+  //         ) : formData.type.toLowerCase().includes("light saber") ? (
+  //           <LightSaber formData={formData} />
+  //         ) : formData.type.toLowerCase() == 'custom printed patch' ? (
+  //           <CustomPatch formData={formData} />
+  //         ) : formData.type.toLowerCase() == "jacket panel" ? (
+  //           <JacketPanel formData={formData} />
+  //         ) : formData.type.toLowerCase() == ("division jacket panel") ? (
+  //           <DivisionJacketPanel formData={formData} />
+  //         ) : formData.type.toLowerCase().includes("ranger tabs") ? (
+  //           <div ref={containerRef} className="h-full text-center overflow-x-hidden flex items-center justify-center">
+  //             <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
+  //           </div>
+  //         ) : (
+  //           <div ref={containerRef} className="h-full text-center overflow-x-hidden flex items-center justify-center">
+  //             <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
+  //           </div>
+  //         )}
+  //       </div>
+  //     </div>
+  //   </div >
+  // );
+}
+
+
+function initVisualizerStyle(formData) {
+  const bgColor = 'url("' + formData.bgColor.img + '")';
+  const textColor = 'url("' + formData.text.color.img + '")';
+  const hiltColor = 'url("' + formData.lightsaber.hilt.color + '")';
+  const bladeColor = 'url("' + formData.lightsaber.blade.color + '")';
+  const symbolColor = 'url("' + formData.img.color.color + '")';
+  const img = formData.type.toLowerCase() === "medical patch" ? 'url("' + formData.img.symbol + '")' : 'url("' + formData.img.img + '")';
+  const mask = 'url("' + formData.img.color.mask.img + '")';
+  const hiltImg = 'url("' + formData.lightsaber.hilt.img + '")';
+  const bladeImg = 'url("' + formData.lightsaber.blade.img + '")';
+//  console.log(symbolColor);
+ // console.log(mask);
+  // console.log(bladeColor);
+  // console.log(hiltColor);
+  // console.log(bladeImg);
+  // console.log(hiltImg);
+  let obj = {
+    canvas: {
+      height: '230px'
+    },
+    patch: {
+      backgroundImage: bgColor,
+      width: '290px',
+      height: 'calc(290px/3)',
+      textTransform: 'uppercase',
+      padding: '10px',
+      WebkitTransition: 'background-image 0.3s ease-in-out, height 0.2s ease-in-out, width 0.4s ease-in-out !important',
+      MozTransition: 'background-image 0.3s ease-in-out, height 0.2s ease-in-out, width 0.4s ease-in-out !important',
+      msTransition: 'background-image 0.3s ease-in-out, height 0.2s ease-in-out, width 0.4s ease-in-out !important',
+      OTransition: 'background-image 0.3s ease-in-out, height 0.2s ease-in-out, width 0.4s ease-in-out !important',
+      transition: 'background-image 0.3s ease-in-out, height 0.2s ease-in-out, width 0.4s ease-in-out !important',
+    },
+    text: {
+      primary: {
+        backgroundImage: textColor,
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        fontFamily: 'WMIStencil-Black',
+        backgroundClip: 'text',
+        width: 'auto',
+        whiteSpace: 'nowrap',
+        textAlign: 'center',
+        lineHeight: '96.66px',
+        fontSize: '96.66px',
+        marginTop: '8.3333px'
+      },
+      secondary: {
+        backgroundImage: textColor,
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        fontFamily: 'WMIStencil-Black',
+        backgroundClip: 'text',
+        lineHeight: '34px',
+        fontSize: '32px',
+      },
+    },
+    img: {
+      flag: {
+        // backgroundImage: textColor,
+        // maskImage: img,
+        // maskSize: 'cover',
+        // WebkitMaskImage: img,
+        // WebkitMaskSize: 'cover',
+        // // aspectRatio: '2/1',
+        backgroundImage: img,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      },
+      mask: {
+        backgroundImage: textColor,
+        maskImage: mask,
+        maskSize: 'cover',
+        WebkitMaskImage: mask,
+        WebkitMaskSize: 'cover',
+      },
+      symbol: {
+        backgroundImage: symbolColor,
+        maskImage: mask,
+        maskSize: 'cover',
+        WebkitMaskImage: mask,
+        WebkitMaskSize: 'cover',
+      },
+    },
+    lightsaber: {
+      hilt: {
+        backgroundImage: hiltColor,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        maskImage: hiltImg,
+        maskSize: 'contain',
+        maskRepeat: 'no-repeat',
+        maskPosition: 'center',
+        WebkitMaskImage: hiltImg,
+        WebkitMaskSize: 'contain',
+        WebkitMaskRepeat: 'no-repeat',
+        WebkitMaskPosition: 'center',
+        width: '27%',
+        height: '100%',
+      },
+      blade: {
+        backgroundImage: bladeColor,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        maskImage: bladeImg,
+        maskSize: 'contain',
+        maskRepeat: 'no-repeat',
+        maskPosition: 'center',
+        WebkitMaskImage: bladeImg,
+        WebkitMaskSize: 'contain',
+        WebkitMaskRepeat: 'no-repeat',
+        WebkitMaskPosition: 'center',
+        height: '100%',
+      }
+    }
+  };
+
+  switch (formData.type.toLowerCase()) {
+    case 'id panel':
+      obj.patch.height = 'calc(290px*3)/2)';
+      obj.text.primary.fontSize = '96px';
+      obj.text.primary.lineHeight = '96px';
+      obj.text.primary.marginTop = 'calc(96px/9)';
+      obj.text.secondary.lineHeight = '30.8475px';
+      obj.text.secondary.fontSize = '36.6316px';
+      obj.text.secondary.width = 'auto';
+      obj.text.secondary.textAlign = 'center';
+      break;
+    case 'name tape':
+      obj.text.primary.fontSize = '48.6397px';
+      obj.text.primary.lineHeight = '48.6397px';
+      obj.text.primary.marginTop = '6.07996px';
+      break;
+    case 'medical patch':
+      obj.patch.maskImage = 'none';
+      obj.patch.WebkitMaskImage = 'none';
+      obj.text.secondary.width = 'auto';
+      obj.text.secondary.textAlign = 'center';
+      break;
+    case 'light sabers':
+      obj.patch.height = '58px';
+      break;
+    case 'flag':
+      obj.patch.padding = '0';
+      obj.patch.background = 'none';
+      obj.text.secondary.width = 'auto';
+      obj.text.secondary.textAlign = 'center';
+      break;
+    case 'jacket panel':
+      obj.text.secondary.fontSize = '34px';
+      obj.patch.borderRadius = '.5rem'
+      break;
+    case 'division jacket panel':
+      obj.text.secondary.fontSize = '27px';
+      obj.text.secondary.lineHeight = '29px';
+      obj.text.primary.fontSize = '52px';
+      obj.text.primary.lineHeight = '52px';
+  }
+
+
+  return obj;
+}
+
+
+
+
+function updateFontSize(containerRef, setFontStyle, formData) {
+  const textLines = formData.text.primary.lines;
+  // console.log(textLines)
+  // console.log(formData.text.primary.lines)
+  // console.log(formData.type.toLowerCase())
+  // console.log(formData.size.current == '6” x 2”')
+  const currentLines = formData.text.primary.text.split("\n").length;
+  //  console.log(formData.type.toLowerCase().includes("name tape") && formData.type.toLowerCase().includes("flag"))
+  // console log that formData.type.toLowercase() contains id panel and formData.size.current == '6” x 2”' is true
+  // console.log(formData.type.toLowerCase().includes('id panel') && formData.size.current == '6” x 2”')
+  const container = containerRef.current;
+
+  const textElement = container.querySelector('#main-text');
+  // console.log(containerRef);
+  // console.log(textElement)
+  // // Get the container width and height, text width and height, and current font size
+  const containerWidth = container.offsetWidth;
+  const containerHeight = container.offsetHeight + 10;
+  let textWidth = textElement.offsetWidth;
+
+  // if(textWidth > containerWidth) {
+  //   textWidth = containerWidth;
+  // }
+  const textHeight = textElement.offsetHeight;
+  const currentFontSize = parseFloat(getComputedStyle(textElement).fontSize);
+
+  // console.log(textWidth);
+
+  // console.log(containerWidth)
+  // console.log(containerHeight)
+  // console.log(textWidth)
+  // console.log(textHeight)
+
+  // Calculate the new font size based on the container and text size
+  let newFontSizeWidth = (containerWidth / textWidth) * currentFontSize;
+  let newFontSizeHeight = (containerHeight / textHeight) * currentFontSize;
+
+  // console.log(currentFontSize)
+  // console.log(newFontSizeWidth)
+  // console.log(newFontSizeHeight)
+
+  if (containerHeight === textHeight) {
+    newFontSizeHeight = textHeight;
+  }
+
+  let newFontSize = Math.min(newFontSizeWidth, newFontSizeHeight);
+  // Limit the font size to a maximum value of 96px
+  let maxFontSize = containerHeight;
+
+  // if(formData.type.toLowerCase() == 'division jacket panel'){
+  //   maxFontSize = 52;
+  // }
+  if (newFontSize > maxFontSize) {
+    newFontSize = maxFontSize;
+  }
+
+  switch (formData.type.toLowerCase()) {
+    case 'id panel':
+      if (formData.text.primary.text.length == 0) {
+        switch (formData.size.current) {
+          case '3” x 2”':
+            newFontSize = 97.0787;
+            break;
+          case '3.5” x 2”':
+            newFontSize = 83;
+            break;
+          case '4” x 2”':
+            newFontSize = 73;
+            break;
+          case '5” x 3”':
+            newFontSize = 80;
+            break;
+          case '6” x 2”':
+            newFontSize = 48.5468;
+            break;
+          case '6” x 3”':
+            newFontSize = 48.556;
+            break;
+        }
+      }
+      break;
+    // @@ - This save spot is for setting starting font
+    case 'name tape':
+      if (formData.text.primary.text.length == 0) {
+        switch (formData.size.current) {
+          case '8” x 2”':
+            newFontSize = 28.3729;
+            break;
+          case '8” x 3”':
+            newFontSize = 43.6253;
+            break;
+          case '11” x 3”':
+            newFontSize = 30;
+            break;
+        }
+      }
+      break;
+    case 'medical patch':
+      if (formData.text.primary.text.length == 0) {
+        newFontSize = 47.1714;
+      }
+      break;
+  }
+
+
+  // Calculate the new margin top based on the font size
+  let marginTop = null;
+  if (textLines > 1) {
+    marginTop = (newFontSize) / 7;
+    let newLineHeight = newFontSize * .87;
+    setFontStyle(prevStyle => ({ ...prevStyle, fontSize: `${newFontSize}px`, lineHeight: `${newLineHeight}px`, marginTop: `${marginTop}px` }));
+
+  } else {
+    marginTop = (newFontSize) / 9;
+    setFontStyle(prevStyle => ({ ...prevStyle, fontSize: `${newFontSize}px`, lineHeight: `${newFontSize}px`, marginTop: `${marginTop}px` }));
+  }
+}
+
+function updateAdditionalFontSize(containerSecondaryRef, setFontSecondaryStyle, formData) {
+
+  // container
+  // textContainer
+  // how many lines
+  const container = containerSecondaryRef.current;
+  const textElement = container.querySelector('#secondary-text');
+  const textLines = 1;
+  // Get the container width and height, text width and height, and current font size
+  const containerWidth = container.offsetWidth;
+  const containerHeight = container.offsetHeight;
+  const textWidth = textElement.offsetWidth;
+  const textHeight = textElement.offsetHeight;
+  const currentFontSize = parseFloat(getComputedStyle(textElement).fontSize);
+
+
+  let newFontSizeWidth = ((containerWidth / textWidth) * currentFontSize);
+  let newFontSizeHeight = ((containerHeight / textHeight) * currentFontSize);
+
+  if (containerHeight === textHeight) {
+    newFontSizeHeight = textHeight;
+  }
+  // console.log(containerSecondaryRef);
+  // console.log(containerHeight);
+  // console.log(textHeight);
+  // console.log(containerHeight / textHeight);
+
+  // console.log(containerWidth);
+  // console.log(textWidth);
+  // console.log(containerWidth / textWidth);
+
+  // console.log(newFontSizeWidth);
+  // console.log(newFontSizeHeight);
+
+  let newFontSize = Math.min(newFontSizeWidth, newFontSizeHeight);
+  // Limit the font size to a maximum value of 96px
+  const maxFontSize = 37;
+  const minFontSize = 15;
+  if (newFontSize > maxFontSize) {
+    newFontSize = maxFontSize;
+  }
+
+  if (newFontSize < minFontSize) {
+    newFontSize = minFontSize;
+  }
+
+  switch (formData.type.toLowerCase()) {
+    case 'id panel':
+      if (formData.text.secondary.text.length == 0) {
+        switch (formData.size.current) {
+          case '3” x 2”':
+            newFontSize = 37;
+            break;
+          case '3.5” x 2”':
+            newFontSize = 37;
+            break;
+          case '4” x 2”':
+            newFontSize = 31.5;
+            break;
+          case '5” x 3”':
+            newFontSize = 32.8398;
+            break;
+          case '6” x 3”':
+            newFontSize = 31.5;
+            break;
+        }
+      }
+      break;
+  }
+
+  let newLineHeight = newFontSize * .8421;
+
+
+
+  // Set the font style using setFontStyle()
+  setFontSecondaryStyle(prevStyle => ({ ...prevStyle, fontSize: `${newFontSize}px`, lineHeight: `${newLineHeight}px` }));
+
+
+
+
+
 }

@@ -5,6 +5,8 @@ import {
   AddToCartButton, Text
 } from '~/components';
 
+import { Money } from '@shopify/hydrogen';
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }

@@ -4,6 +4,27 @@ import {
   Heading
 } from '~/components';
 
+function isMini(type, size, miniEnabled) {
+  const [lengthStr, heightStr] = size.split("x").map(str => str.trim());
+  const length = parseInt(lengthStr);
+  const height = parseInt(heightStr);
+  if (type.toLowerCase().includes("id panel") && length < 4) {
+    miniEnabled = true;
+  }
+  return miniEnabled || false;
+}
+
+function isFlag(type, flagEnabled) {
+  // determine if type == id panel, lazer cut flag, jacket panel, division jacket panel
+  if (type.toLowerCase().includes("id panel")
+    // || type.toLowerCase().includes("jacket panel") || type.toLowerCase().includes("division jacket panel")
+  ) {
+    flagEnabled = true;
+  }
+  return flagEnabled || false;
+}
+
+
 export function PatchHeading({ formData, methods}) {
     return (
       <>
