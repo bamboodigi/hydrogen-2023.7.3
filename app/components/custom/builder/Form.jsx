@@ -8,16 +8,17 @@ import {
 } from '~/components';
 
 import builderData from '~/data/builder.js';
+import builderObj from '~/data/builderObj.js';
 
-
-const sizeOptions = builderData.sizeOptions;
-const bgColors = builderData.colors.bgColors;
-const fontColors = builderData.colors.fontColors;
-const imgs = builderData.imgs;
-const symbols = imgs.symbols;
-const markTypeOptions = builderData.markType.types;
-const saberOptions = builderData.lightSabers.types;
-
+const { 
+  sizeOptions,
+  bgColors,
+  fontColors,
+  imgs,
+  symbols,
+  markTypeOptions,
+  saberOptions, 
+} = builderObj.data;
 
 // Form element to customize the patch
 export function Form({ formData, setFormData, data, config, product }) {

@@ -1,11 +1,11 @@
 import builderData from '~/data/builder.js';
 
-let obj = {
+const builderObj = {
   // initalize the starting state
   init: {
-    // initalize the formData Object based on the product and chooses selected
+  //   // initalize the formData Object based on the product and chooses selected
     formData: function (product) {
-      const patchType = builderData.type[getBuilderTitle(product).toLowerCase()];
+      const patchType = builderData.type[builderObj.helpers.get.builderTitle(product).toLowerCase()];
 
       let formData = {
         type: patchType.name || '',
@@ -26,8 +26,8 @@ let obj = {
           list: patchType.config.sizes || [],
         },
         bgColor: {
-          name: bgColors[18].name,
-          img: bgColors[18].img,
+          name: builderObj.data.bgColors[18].name,
+          img: builderObj.data.bgColors[18].img,
         },
         text: {
           primary: {
@@ -43,36 +43,36 @@ let obj = {
             placeholder: patchType.config.sizes[0].placeholder2 || '',
           },
           color: {
-            name: fontColors[8].name,
-            img: fontColors[8].img,
+            name: builderObj.data.fontColors[8].name,
+            img: builderObj.data.fontColors[8].img,
           },
         },
         lightsaber: {
-          saberType: saberOptions[0].name,
+          saberType: builderObj.data.saberOptions[0].name,
           hilt: {
-            name: fontColors[7].name,
-            color: fontColors[7].img,
-            img: saberOptions[0].hilt,
+            name: builderObj.data.fontColors[7].name,
+            color: builderObj.data.fontColors[7].img,
+            img: builderObj.data.saberOptions[0].hilt,
           },
           blade: {
-            name: fontColors[11].name,
-            color: fontColors[11].img,
-            img: saberOptions[0].blade,
+            name: builderObj.data.fontColors[11].name,
+            color: builderObj.data.fontColors[11].img,
+            img: builderObj.data.saberOptions[0].blade,
           },
         },
         img: {
           markType: 'Flag',
           enabled: false,
-          name: imgs["hi-vis"][0].name,
-          img: imgs["hi-vis"][0].img,
+          name: builderObj.data.imgs["hi-vis"][0].name,
+          img: builderObj.data.imgs["hi-vis"][0].img,
           color: {
-            name: fontColors[8].name,
-            img: fontColors[8].img,
+            name: builderObj.data.fontColors[8].name,
+            img: builderObj.data.fontColors[8].img,
             mask: {
-              name: imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").name,
-              img: imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").img,
-              glow: imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").glow,
-              icon: imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").icon,
+              name: builderObj.data.imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").name,
+              img: builderObj.data.imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").img,
+              glow: builderObj.data.imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").glow,
+              icon: builderObj.data.imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").icon,
             }
           },
           type: 'Lazer Cut Flag',
@@ -84,41 +84,38 @@ let obj = {
         }
       };
 
-      console.log(imgs["lazer-cut"]['3x2'].find(value => value.name == "USA"));
-
       switch (formData.type.toLowerCase()) {
         case 'id panel':
           formData.img.type = 'Lazer Cut Flag';
-          formData.img.color.mask.img = imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").img;
-          formData.img.color.mask.name = imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").name;
+          formData.img.color.mask.img = builderObj.data.imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").img;
+          formData.img.color.mask.name = builderObj.data.imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").name;
           break;
         case 'name tape':
           formData.img.type = 'HiVis Flag';
           break;
         case 'flag':
           formData.img.type = 'Lazer Cut Flag';
-          formData.img.color.mask.img = imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").img;
-          formData.img.color.mask.name = imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").name;
+          formData.img.color.mask.img = builderObj.data.imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").img;
+          formData.img.color.mask.name = builderObj.data.imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").name;
           break;
         case 'light sabers':
-          formData.bgColor.name = bgColors[0].name;
-          formData.bgColor.img = bgColors[0].img;
+          formData.bgColor.name = builderObj.data.bgColors[0].name;
+          formData.bgColor.img = builderObj.data.bgColors[0].img;
           break;
         case 'medical patch':
           if (formData.size.current == '1” x 1”') {
             console.log('hi')
             formData.img.markType = 'Symbol';
-            formData.img.name = symbols['medical patch']['1 x 1'][0].name;
-            formData.img.img = symbols['medical patch']['1 x 1'][0].img;
-            formData.img.icon = symbols['medical patch']['1 x 1'][0].icon;
-            formData.img
-              .glow = symbols['medical patch']['1 x 1'][0].glow;
+            formData.img.name = builderObj.data.symbols['medical patch']['1 x 1'][0].name;
+            formData.img.img = builderObj.data.symbols['medical patch']['1 x 1'][0].img;
+            formData.img.icon = builderObj.data.symbols['medical patch']['1 x 1'][0].icon;
+            formData.img.glow = builderObj.data.symbols['medical patch']['1 x 1'][0].glow;
           } else {
             formData.img.markType = 'Symbol';
-            formData.img.name = symbols['medical patch']['2 x 2'][0].name;
-            formData.img.img = symbols['medical patch']['2 x 2'][0].img;
-            formData.img.icon = symbols['medical patch']['2 x 2'][0].icon;
-            formData.img.glow = symbols['medical patch']['2 x 2'][0].glow;
+            formData.img.name = builderObj.data.symbols['medical patch']['2 x 2'][0].name;
+            formData.img.img = builderObj.data.symbols['medical patch']['2 x 2'][0].img;
+            formData.img.icon = builderObj.data.symbols['medical patch']['2 x 2'][0].icon;
+            formData.img.glow = builderObj.data.symbols['medical patch']['2 x 2'][0].glow;
           }
           break;
         case 'jacket panel':
@@ -135,8 +132,8 @@ let obj = {
           formData.text.sixth = tempObj;
           formData.text.seventh = tempObj;
           formData.img.type = 'Lazer Cut Flag';
-          formData.img.color.mask.img = imgs["lazer-cut"]['3x2'].find(value => value.name == "USA").img;
-          formData.img.color.mask.name = imgs["lazer-cut"]['3x2'].find(value => value.name == "USA").name;
+          formData.img.color.mask.img = builderObj.data.imgs["lazer-cut"]['3x2'].find(value => value.name == "USA").img;
+          formData.img.color.mask.name = builderObj.data.imgs["lazer-cut"]['3x2'].find(value => value.name == "USA").name;
           break;
         case 'division jacket panel':
           formData.text.primary.maxLength = 15;
@@ -163,11 +160,11 @@ let obj = {
       return formData || {};
     },
 
-    // initialize the forms that collect data for the formData object.
-    forms: function () {
+  //   // initialize the forms that collect data for the formData object.
+  //   forms: function () {
 
-    },
-    // initalize the visualizer style to show custom product formed by the formData object.
+  //   },
+  //   // initalize the visualizer style to show custom product formed by the formData object.
     visualizer: function (formData) {
       const bgColor = 'url("' + formData.bgColor.img + '")';
       const textColor = 'url("' + formData.text.color.img + '")';
@@ -178,12 +175,7 @@ let obj = {
       const mask = 'url("' + formData.img.color.mask.img + '")';
       const hiltImg = 'url("' + formData.lightsaber.hilt.img + '")';
       const bladeImg = 'url("' + formData.lightsaber.blade.img + '")';
-      console.log(symbolColor);
-      console.log(mask);
-      // console.log(bladeColor);
-      // console.log(hiltColor);
-      // console.log(bladeImg);
-      // console.log(hiltImg);
+
       let obj = {
         canvas: {
           height: '230px'
@@ -329,8 +321,8 @@ let obj = {
 
       return obj;
     },
-  },
-  // data object used for the patch builder
+   },
+  // // data object used for the patch builder
   data: {
     sizeOptions: builderData.sizeOptions,
     bgColors: builderData.colors.bgColors,
@@ -343,7 +335,7 @@ let obj = {
   //  
   helpers: {
     get: {
-      builderTitle: function (proudct) {
+      builderTitle: function (product) {
         let result;
         switch (product.handle) {
           case 'medical-patch':
@@ -622,23 +614,31 @@ let obj = {
         }
         return false;
       },
-      patchBuilder: product.tags.includes("custom_patch"),
-      patchType: {
-        idPanel: formData.type.toLowerCase().includes("id panel"),
-        nameTape: formData.type.toLowerCase().includes("name tape"),
-        medicalPatch: formData.type.toLowerCase().includes("medical patch"),
-        jacketPanel: formData.type.toLowerCase() == "jacket panel",
-        divisionJacketPanel: formData.type.toLowerCase() == ("division jacket panel"),
-        flagPatch: formData.type.toLowerCase() == ("flag"),
-        lightSaber: formData.type.toLowerCase().includes("light saber"),
-        customPatch: formData.type.toLowerCase() == 'custom printed patch',
-      },
-      flagType: {
-        lazerCutFlag: formData.img.type.toLowerCase() === "lazer cut flag",
-        hiVisFlag: formData.img.type.toLowerCase() === "hivis flag",
-        upload: formData.img.type.toLowerCase() === "upload",
-      },
+      // patchBuilder: product.tags.includes("custom_patch"),
+      // patchType: {
+      //   idPanel: formData.type.toLowerCase().includes("id panel"),
+      //   nameTape: formData.type.toLowerCase().includes("name tape"),
+      //   medicalPatch: formData.type.toLowerCase().includes("medical patch"),
+      //   jacketPanel: formData.type.toLowerCase() == "jacket panel",
+      //   divisionJacketPanel: formData.type.toLowerCase() == ("division jacket panel"),
+      //   flagPatch: formData.type.toLowerCase() == ("flag"),
+      //   lightSaber: formData.type.toLowerCase().includes("light saber"),
+      //   customPatch: formData.type.toLowerCase() == 'custom printed patch',
+      // },
+      // flagType: {
+      //   lazerCutFlag: formData.img.type.toLowerCase() === "lazer cut flag",
+      //   hiVisFlag: formData.img.type.toLowerCase() === "hivis flag",
+      //   upload: formData.img.type.toLowerCase() === "upload",
+      // },
 
     },
+    utility: {
+      classNames: function (...classes) {
+        return classes.filter(Boolean).join(' ')
+      }
+    }
   },
 };
+
+
+export default builderObj;
