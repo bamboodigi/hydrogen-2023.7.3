@@ -3,11 +3,10 @@ import {
 } from "~/components";
 
 
-export function FormButton({ formData, config, handlePrevious, handleNext, currentStep, steps }) {
+export function FormButton({ formData, config, handlePrevious, handleNext, currentStep, steps, methods, ...props }) {
 
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-  }
+  const classNames = methods.helpers.utility.classNames;
+
     return (
       <>
         <div className="col-span-6 flex w-full font-bold text-white text-copy">
@@ -31,6 +30,7 @@ export function FormButton({ formData, config, handlePrevious, handleNext, curre
               config={config}
               currentStep={currentStep}
               steps={steps}
+              methods={methods}
               className={classNames(
                 currentStep === 1 ? "" :
                   currentStep === steps.length ? "" : "",

@@ -7,12 +7,12 @@ import {
 
 import { Money } from '@shopify/hydrogen';
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
 
-export function PatchATCButton({ formData, className, config, currentStep, steps }) {
+export function PatchATCButton({ formData, className, config, currentStep, steps, methods, ...props }) {
     const { product, analytics, storeDomain } = useLoaderData();
+    
+    const classNames = methods.helpers.utility.classNames;
+    
     const productAnalytics = {
       ...analytics.products[0],
       quantity: 1,

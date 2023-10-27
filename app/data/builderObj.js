@@ -3,7 +3,7 @@ import builderData from '~/data/builder.js';
 const builderObj = {
   // initalize the starting state
   init: {
-  //   // initalize the formData Object based on the product and chooses selected
+    //   // initalize the formData Object based on the product and chooses selected
     formData: function (product) {
       const patchType = builderData.type[builderObj.helpers.get.builderTitle(product).toLowerCase()];
 
@@ -160,11 +160,11 @@ const builderObj = {
       return formData || {};
     },
 
-  //   // initialize the forms that collect data for the formData object.
-  //   forms: function () {
+    //   // initialize the forms that collect data for the formData object.
+    //   forms: function () {
 
-  //   },
-  //   // initalize the visualizer style to show custom product formed by the formData object.
+    //   },
+    //   // initalize the visualizer style to show custom product formed by the formData object.
     visualizer: function (formData) {
       const bgColor = 'url("' + formData.bgColor.img + '")';
       const textColor = 'url("' + formData.text.color.img + '")';
@@ -321,7 +321,7 @@ const builderObj = {
 
       return obj;
     },
-   },
+  },
   // // data object used for the patch builder
   data: {
     sizeOptions: builderData.sizeOptions,
@@ -385,6 +385,10 @@ const builderObj = {
         function capitalizeWords(str) {
           return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
         }
+      },
+      patchType: function (product) {
+        const patchType = builderData.type[builderObj.helpers.get.builderTitle(product).toLowerCase()];
+        return builderData.type[builderObj.helpers.get.builderTitle(product).toLowerCase()];
       }
     },
     update: {
@@ -614,7 +618,7 @@ const builderObj = {
         }
         return false;
       },
-      // patchBuilder: product.tags.includes("custom_patch"),
+      patchBuilder: () => product.tags.includes("custom_patch"),
       // patchType: {
       //   idPanel: formData.type.toLowerCase().includes("id panel"),
       //   nameTape: formData.type.toLowerCase().includes("name tape"),

@@ -14,21 +14,12 @@ import {
 
 // Import data from the '~/data/visualizer.js' file
 import data from '~/data/visualizer.js';
-
 import builderObj from '~/data/builderObj.js';
 
-const { 
-  bgColors,
-  fontColors,
-  imgs,
-  symbols,
-  saberOptions, 
-} = builderObj.data;
-
-const initFormData = builderObj.init.formData;
 
 // Patch Builder Component. This is the component that will show a tailored patch unique to the user's selections.
 export function PatchBuilder({ product, config, ...props }) {
+  const initFormData = builderObj.init.formData;
 
   // Destructure shop from useLoaderData and destructre shippingPolicy and refundPolicy from shop
   const { shop } = useLoaderData();
@@ -44,14 +35,14 @@ export function PatchBuilder({ product, config, ...props }) {
 
   return (
     <>
-      <Visualizer formData={formData} className="" />
+      <Visualizer formData={formData} methods={builderObj} className="" />
       <div className="sm:mt-auto sticky md:pr-4 xl:pr-16 md:-mb-nav md:top-nav md:-translate-y-nav md:pt-nav hiddenScroll md:overflow-y-scroll bg-white md:bg-transparent text-contrast border-2 border-t-2 border-l-2 border-r-2 border-black md:border-none rounded-t-2xl"
       >
         <section className="flex flex-col w-full max-w-[33rem] gap-6 p-7 lg:pb-0
             md:mx-auto md:px-0
             lg:">
-          <PatchHeading formData={formData} />
-          <Form formData={formData} setFormData={setFormData} data={data} config={config} product={product} />
+          <PatchHeading formData={formData} methods={builderObj} />
+          <Form formData={formData} setFormData={setFormData} data={data} config={config} product={product} methods={builderObj} />
           {/* <pre className="overflow-scroll" style={prestyle}>{JSON.stringify(formData, null, 2)}</pre> */}
           <ProductDetails shippingPolicy={shippingPolicy} refundPolicy={refundPolicy} />
         </section>

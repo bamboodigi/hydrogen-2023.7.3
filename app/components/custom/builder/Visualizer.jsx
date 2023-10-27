@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import React from 'react';
 
-import { 
+import {
   IDPanel,
   NameTape,
   MedicalPatch,
@@ -13,22 +13,20 @@ import {
   DivisionJacketPanel,
 } from '~/components';
 
-import builderObj from '~/data/builderObj.js';
-
-const { 
-  sizeOptions,
-  fontColors,
-} = builderObj.data;
-
-const initVisualizerStyle = builderObj.init.visualizer;
-const updateFontSize = builderObj.helpers.update.fontSize;
-const updateAdditionalFontSize = builderObj.helpers.update.fontSizeAdditional;
-
-const classNames = builderObj.helpers.utility.classNames;
-
-
 // Patch Visualizer element that shows a tailored patch
-export function Visualizer({ formData, className, ...props }) {
+export function Visualizer({ formData, className, methods, ...props }) {
+  
+  const {
+    sizeOptions,
+    fontColors,
+  } = methods.data;
+
+
+  const initVisualizerStyle = methods.init.visualizer;
+  const updateFontSize = methods.helpers.update.fontSize;
+  const updateAdditionalFontSize = methods.helpers.update.fontSizeAdditional;
+
+  const classNames = methods.helpers.utility.classNames;
 
   const { canvas, patch, text, img, lightsaber } = initVisualizerStyle(formData);
   // Create a ref to access the container element
@@ -60,7 +58,7 @@ export function Visualizer({ formData, className, ...props }) {
     switch (obj.type.toLowerCase()) {
       case "color":
       case 'image':
-     //   console.log(bgImg);
+        //   console.log(bgImg);
         img.src = bgImg;
         img.onload = () => {
           setState(prevStyle => ({
@@ -72,7 +70,7 @@ export function Visualizer({ formData, className, ...props }) {
       case 'mask':
         if (mask) {
           img.src = mask;
-      //    console.log(mask);
+          //    console.log(mask);
           setState(prevStyle => ({
             ...prevStyle,
             backgroundImage: `url("${bgImg}")`,
@@ -92,7 +90,7 @@ export function Visualizer({ formData, className, ...props }) {
           let newColor = '';
 
           if (setState == setBladeStyle) {
-           // console.log("ooo");
+            // console.log("ooo");
             setState(prevStyle => ({
               ...prevStyle,
               width: '0%'
@@ -127,7 +125,7 @@ export function Visualizer({ formData, className, ...props }) {
               break;
           }
           img.src = mask;
-       //   console.log(mask);
+          //   console.log(mask);
           setState(prevStyle => ({
             ...prevStyle,
             backgroundImage: `url("${bgImg}")`,
@@ -138,15 +136,15 @@ export function Visualizer({ formData, className, ...props }) {
             maskSize: `cover`,
             maskPosition: 'center',
           }));
-          
+
           if (newWidth.length > 0) {
             setTimeout(() => {
 
-            setState(prevStyle => ({
-              ...prevStyle,
-              width: newWidth
-            }));
-          }, 1000);
+              setState(prevStyle => ({
+                ...prevStyle,
+                width: newWidth
+              }));
+            }, 1000);
           }
           if (newMarginLeft.length > 0) {
             setState(prevStyle => ({
@@ -227,19 +225,19 @@ export function Visualizer({ formData, className, ...props }) {
   useEffect(() => {
     let obj = {
     };
-   // console.log(formData.img.type)
-  //  console.log(formData.img.markType)
+    // console.log(formData.img.type)
+    //  console.log(formData.img.markType)
     if (
       formData.img.markType.toLowerCase() === "symbol" ||
       formData.img.type.toLowerCase() === "lazer cut flag"
     ) {
-    //  console.log(formData.img.type)
+      //  console.log(formData.img.type)
       obj.type = 'mask';
       obj.src = formData.text.color.img;
       obj.mask = formData.img.color.mask.img;
       imageLoader(obj, setMaskStyle)
     } else {
-    //  console.log(formData.img.type)
+      //  console.log(formData.img.type)
       obj.type = 'image'
       obj.src = formData.img.img;
       imageLoader(obj, setFlagStyle)
@@ -341,7 +339,7 @@ export function Visualizer({ formData, className, ...props }) {
           break;
         case '3.5” x 2”':
           setFlagStyle(prevStyle => ({ ...prevStyle, transform: `scale(1)` }));
-      //    console.log("hi");
+          //    console.log("hi");
           break;
       }
     }

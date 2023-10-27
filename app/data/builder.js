@@ -563,7 +563,7 @@ const builderData = {
       base: 31,
       config: {
         "sizes": [
-   //        { size: '3.5” x 4”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
+          //        { size: '3.5” x 4”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
           { size: '4.6” x 6.2”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
           // { size: '3.5” x 3.5”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
           // { size: '3.6” x 5”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
@@ -707,7 +707,7 @@ const builderData = {
       base: 36,
       config: {
         "sizes": [
-   //        { size: '3.5” x 4”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
+          //        { size: '3.5” x 4”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
           { size: '4.6” x 6.2”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
           // { size: '3.5” x 3.5”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
           // { size: '3.6” x 5”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
@@ -1723,11 +1723,9 @@ const builderData = {
   ]
 };
 
-
-
 function initLazerCutFlags() {
   const folder = "https://cdn.shopify.com/s/files/1/2242/5805/files/";  // If you have a common folder path, you can add it here
-  const end = "?v=1678643370";
+  const end = "?v=1698434481j";
   const sizes = [
     "3 x 2",
     "3.5 x 2",
@@ -1743,11 +1741,11 @@ function initLazerCutFlags() {
     "-lc-alabama.png",
     "-lc-alaska.png",
     "-lc-antartica.png",
-    "-lc-aquila.png",
-    "-lc-argentina.png",
+    // "-lc-aquila.png",
+    // "-lc-argentina.png",
     "-lc-arizona.png",
     "-lc-arkansas.png",
-    "-lc-armenia.png",
+    //  "-lc-armenia.png",
     "-lc-australia.png",
     "-lc-austria.png",
     "-lc-belgium.png",
@@ -1755,10 +1753,10 @@ function initLazerCutFlags() {
     "-lc-british-columbia.png",
     "-lc-calico-jack.png",
     "-lc-california-republic.png",
-    "-lc-canada-philippines.png",
-    "-lc-canada-south-korea.png",
-    "-lc-canada-swiss.png",
-    "-lc-canada-uk.png",
+    //  "-lc-canada-philippines.png",
+    //  "-lc-canada-south-korea.png",
+    //   "-lc-canada-swiss.png",
+    //   "-lc-canada-uk.png",
     "-lc-canada.png",
     "-lc-chicago.png",
     "-lc-chile.png",
@@ -1770,21 +1768,24 @@ function initLazerCutFlags() {
     "-lc-cuba.png",
     "-lc-czech-republic.png",
     "-lc-denmark.png",
-    "-lc-egypt.png",
+    // "-lc-egypt.png",
+    "-lc-european-union.png",
     "-lc-finland.png",
     "-lc-florida.png",
     "-lc-france.png",
-    "-lc-gadsden.png",
+    //"-lc-gadsden.png",
     "-lc-galactic-empire.png",
     "-lc-galactic-republic.png",
-    "-lc-gaorgia-state.png",
+    //"-lc-gaorgia-state.png",
     "-lc-georgia-country.png",
     "-lc-germany.png",
     "-lc-greece.png",
+    "-lc-guernsey-channel-islands.png",
     "-lc-hawaii.png",
     "-lc-hong-kong.png",
     "-lc-hungary.png",
     "-lc-iceland.png",
+    "-lc-imperial-aquila.png",
     "-lc-imperial-japan.png",
     "-lc-indiana.png",
     "-lc-indianapolis.png",
@@ -1794,23 +1795,26 @@ function initLazerCutFlags() {
     "-lc-israel.png",
     "-lc-italy.png",
     "-lc-japan.png",
-    "-lc-jedi-order.png",
+    //"-lc-jedi-order.png",
     "-lc-jolly-roger.png",
     "-lc-jordan.png",
     "-lc-kurdistan.png",
-    "-lc-kyrgyzstan.png",
+    "-lc-kuwait.png",
+    //"-lc-kyrgyzstan.png",
     "-lc-latvia.png",
-    "-lc-macau.png",
-    "-lc-mandalorian.png",
+    "-lc-malaysia.png",
+   // "-lc-macau.png",
+   // "-lc-mandalorian.png",
     "-lc-maryland.png",
     "-lc-mexico.png",
     "-lc-mississippi.png",
+    "-lc-mythosaur.png",
     "-lc-navy-jack.png",
     "-lc-netherlands.png",
     "-lc-new-england.png",
     "-lc-new-mexico.png",
     "-lc-new-orleans.png",
-    "-lc-new-zeland.png",
+    "-lc-new-zealand.png",
     "-lc-north-carolina.png",
     "-lc-norway.png",
     "-lc-ohio.png",
@@ -1828,28 +1832,28 @@ function initLazerCutFlags() {
     "-lc-south-africa.png",
     "-lc-south-carolina.png",
     "-lc-south-korea.png",
-    "-lc-spain.png",
+    //"-lc-spain.png",
     "-lc-sweden.png",
     "-lc-switzerland.png",
     "-lc-taiwan.png",
     "-lc-tennessee.png",
     "-lc-texas.png",
     "-lc-thailand.png",
-    "-lc-tonga.png",
-    "-lc-trinidad-and-tobago.png",
+    //"-lc-tonga.png",
+    //"-lc-trinidad-and-tobago.png",
     "-lc-turkey.png",
-    "-lc-ukraine-standard.png",
+    "-lc-ukraine.png",
     "-lc-united-kingdom.png",
-    "-lc-usa-canada.png",
-    "-lc-usa-hong-kong.png",
-    "-lc-usa-new-zealand.png",
-    "-lc-usa-philippines.png",
-    "-lc-usa-south-korea.png",
-    "-lc-usa-uk-split.png",
+    // "-lc-usa-canada.png",
+    // "-lc-usa-hong-kong.png",
+    // "-lc-usa-new-zealand.png",
+    // "-lc-usa-philippines.png",
+    // "-lc-usa-south-korea.png",
+    // "-lc-usa-uk-split.png",
     "-lc-usa.png",
-    "-lc-usmc-ega.png",
+    //"-lc-usmc-ega.png",
     "-lc-utah.png",
-    "-lc-vader-wants-you.png",
+    //"-lc-vader-wants-you.png",
     "-lc-venezuela.png"
   ];
 
@@ -1857,7 +1861,7 @@ function initLazerCutFlags() {
   sizes.forEach(size => {
     let key = size.replace(/ /g, "").toLowerCase();
     let iconKey = key;
-   // console.log(iconKey);
+    // console.log(iconKey);
     iconKey = iconKey === '3x2' ? 'mini-id' : iconKey;
     // iconKey = iconKey === '3.5x2' ? '6x3' : iconKey;
 
@@ -1867,7 +1871,7 @@ function initLazerCutFlags() {
       const formattedName = titleCaseName.replace(" Lc ", "").replace("Uk", "UK").replace("Usa", "USA");
       return {
         name: formattedName,
-        img: `${folder}${key}${name}.png${end}`,
+        img: `${folder}${key}${name}-img.png${end}`,
         glow: `${folder}${key}${name}-glow-border.png${end}`,
         icon: `${folder}${iconKey}${name}-icon.png${end}`
       };
