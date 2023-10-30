@@ -83,9 +83,10 @@ const builderObj = {
           },
         }
       };
-
+      console.log(formData.type.toLowerCase());
       switch (formData.type.toLowerCase()) {
         case 'id panel':
+          console.log('id panel');
           formData.img.type = 'Lazer Cut Flag';
           formData.img.color.mask.img = builderObj.data.imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").img;
           formData.img.color.mask.name = builderObj.data.imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").name;
@@ -156,6 +157,7 @@ const builderObj = {
           formData.price.total += 4;
           break;
       }
+      console.log(formData);
       // console.log(formData);
       return formData || {};
     },
@@ -607,7 +609,16 @@ const builderObj = {
         const [lengthStr, heightStr] = size.split("x").map(str => str.trim());
         const length = parseInt(lengthStr);
         const height = parseInt(heightStr);
-        if (type.toLowerCase().includes("id panel") && length < 4) {
+        if (type.toLowerCase().includes("id panel") && length <= 4) {
+          miniEnabled = true;
+        }
+        return miniEnabled || false;
+      },
+      largeID: function (type, size, miniEnabled) {
+        const [lengthStr, heightStr] = size.split("x").map(str => str.trim());
+        const length = parseInt(lengthStr);
+        const height = parseInt(heightStr);
+        if (type.toLowerCase().includes("id panel") && length > 4) {
           miniEnabled = true;
         }
         return miniEnabled || false;
@@ -618,22 +629,22 @@ const builderObj = {
         }
         return false;
       },
-      patchBuilder: () => product.tags.includes("custom_patch"),
-      // patchType: {
-      //   idPanel: formData.type.toLowerCase().includes("id panel"),
-      //   nameTape: formData.type.toLowerCase().includes("name tape"),
-      //   medicalPatch: formData.type.toLowerCase().includes("medical patch"),
-      //   jacketPanel: formData.type.toLowerCase() == "jacket panel",
-      //   divisionJacketPanel: formData.type.toLowerCase() == ("division jacket panel"),
-      //   flagPatch: formData.type.toLowerCase() == ("flag"),
-      //   lightSaber: formData.type.toLowerCase().includes("light saber"),
-      //   customPatch: formData.type.toLowerCase() == 'custom printed patch',
-      // },
-      // flagType: {
-      //   lazerCutFlag: formData.img.type.toLowerCase() === "lazer cut flag",
-      //   hiVisFlag: formData.img.type.toLowerCase() === "hivis flag",
-      //   upload: formData.img.type.toLowerCase() === "upload",
-      // },
+      patchBuilder: (product) => product.tags.includes("custom_patch"),
+      patchType: {
+        idPanel: (formData) => formData.type.toLowerCase().includes("id panel"),
+        nameTape: (formData) => formData.type.toLowerCase().includes("name tape"),
+        medicalPatch: (formData) => formData.type.toLowerCase().includes("medical patch"),
+        jacketPanel: (formData) => formData.type.toLowerCase() == "jacket panel",
+        divisionJacketPanel: (formData) => formData.type.toLowerCase() == ("division jacket panel"),
+        flagPatch: (formData) => formData.type.toLowerCase() == ("flag"),
+        lightSaber: (formData) => formData.type.toLowerCase().includes("light saber"),
+        customPatch: (formData) => formData.type.toLowerCase() == 'custom printed patch',
+      },
+      flagType: {
+        lazerCutFlag: (formData) => formData.img.type.toLowerCase() === "lazer cut flag",
+        hiVisFlag: (formData) => formData.img.type.toLowerCase() === "hivis flag",
+        upload: (formData) => formData.img.type.toLowerCase() === "upload",
+      },
 
     },
     utility: {

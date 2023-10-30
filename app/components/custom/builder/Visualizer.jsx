@@ -29,6 +29,8 @@ export function Visualizer({ formData, className, methods, ...props }) {
   const classNames = methods.helpers.utility.classNames;
 
   const { canvas, patch, text, img, lightsaber } = initVisualizerStyle(formData);
+
+  console.log(img);
   // Create a ref to access the container element
   // console.log(img.mask);
   //  console.log(lightsaber);
@@ -343,13 +345,14 @@ export function Visualizer({ formData, className, methods, ...props }) {
           break;
       }
     }
-
+  
     if (formData.img.type.toLowerCase() === "lazer cut flag") {
       let obj = {
       };
       obj.type = 'mask';
       obj.src = formData.text.color.img;
       obj.mask = formData.img.color.mask.img;
+      console.log(obj);
       imageLoader(obj, setMaskStyle)
     }
   }, [formData.size.current]);

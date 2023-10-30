@@ -1737,26 +1737,27 @@ function initLazerCutFlags() {
   ];    // If there's a common file extension, you can add it here
 
   const imageList = [
-    "-lc-acadia.png",
+    "-lc-acadia.png",//
     "-lc-alabama.png",
     "-lc-alaska.png",
     "-lc-antartica.png",
-    // "-lc-aquila.png",
-    // "-lc-argentina.png",
+    // "-lc-aquila.png",//
+    // "-lc-argentina.png",//
     "-lc-arizona.png",
     "-lc-arkansas.png",
-    //  "-lc-armenia.png",
+    //  "-lc-armenia.png",//
     "-lc-australia.png",
     "-lc-austria.png",
     "-lc-belgium.png",
     "-lc-betsy-ross.png",
+    "-lc-black-beard.png",//
     "-lc-british-columbia.png",
     "-lc-calico-jack.png",
     "-lc-california-republic.png",
-    //  "-lc-canada-philippines.png",
-    //  "-lc-canada-south-korea.png",
-    //   "-lc-canada-swiss.png",
-    //   "-lc-canada-uk.png",
+    //  "-lc-canada-philippines.png",//
+    //  "-lc-canada-south-korea.png",//
+    //   "-lc-canada-swiss.png",//
+    //   "-lc-canada-uk.png",//
     "-lc-canada.png",
     "-lc-chicago.png",
     "-lc-chile.png",
@@ -1768,15 +1769,16 @@ function initLazerCutFlags() {
     "-lc-cuba.png",
     "-lc-czech-republic.png",
     "-lc-denmark.png",
-    // "-lc-egypt.png",
-    "-lc-european-union.png",
+    // "-lc-egypt.png", //
+    "-lc-european-union.png",//
     "-lc-finland.png",
     "-lc-florida.png",
     "-lc-france.png",
-    //"-lc-gadsden.png",
+   // "-lc-frogman.png",
+    //"-lc-gadsden.png", //
     "-lc-galactic-empire.png",
     "-lc-galactic-republic.png",
-    //"-lc-gaorgia-state.png",
+    //"-lc-georgia-state.png",//
     "-lc-georgia-country.png",
     "-lc-germany.png",
     "-lc-greece.png",
@@ -1786,11 +1788,11 @@ function initLazerCutFlags() {
     "-lc-hungary.png",
     "-lc-iceland.png",
     "-lc-imperial-aquila.png",
-    "-lc-imperial-japan.png",
+    "-lc-imperial-japan.png",//
     "-lc-indiana.png",
     "-lc-indianapolis.png",
     "-lc-indonesia.png",
-    "-lc-iraq.png",
+    "-lc-iraq.png",//
     "-lc-ireland.png",
     "-lc-israel.png",
     "-lc-italy.png",
@@ -1800,11 +1802,11 @@ function initLazerCutFlags() {
     "-lc-jordan.png",
     "-lc-kurdistan.png",
     "-lc-kuwait.png",
-    //"-lc-kyrgyzstan.png",
+    //"-lc-kyrgyzstan.png",//
     "-lc-latvia.png",
     "-lc-malaysia.png",
-   // "-lc-macau.png",
-   // "-lc-mandalorian.png",
+   // "-lc-macau.png",//
+   // "-lc-mandalorian.png",//
     "-lc-maryland.png",
     "-lc-mexico.png",
     "-lc-mississippi.png",
@@ -1832,7 +1834,7 @@ function initLazerCutFlags() {
     "-lc-south-africa.png",
     "-lc-south-carolina.png",
     "-lc-south-korea.png",
-    //"-lc-spain.png",
+    //"-lc-spain.png",//
     "-lc-sweden.png",
     "-lc-switzerland.png",
     "-lc-taiwan.png",
@@ -1841,19 +1843,20 @@ function initLazerCutFlags() {
     "-lc-thailand.png",
     //"-lc-tonga.png",
     //"-lc-trinidad-and-tobago.png",
-    "-lc-turkey.png",
+    "-lc-turkey.png",//
     "-lc-ukraine.png",
-    "-lc-united-kingdom.png",
-    // "-lc-usa-canada.png",
-    // "-lc-usa-hong-kong.png",
-    // "-lc-usa-new-zealand.png",
-    // "-lc-usa-philippines.png",
-    // "-lc-usa-south-korea.png",
-    // "-lc-usa-uk-split.png",
+    "-lc-united-kingdom.png",//
+    // "-lc-usa-canada.png",//
+    // "-lc-usa-hong-kong.png",//
+    // "-lc-usa-new-zealand.png",//
+    // "-lc-usa-philippines.png",//
+    // "-lc-usa-south-korea.png",//
+    // "-lc-usa-uk-split.png",//
     "-lc-usa.png",
-    //"-lc-usmc-ega.png",
+    //"-lc-usmc-ega.png",//
     "-lc-utah.png",
-    //"-lc-vader-wants-you.png",
+    "-lc-veitnam.png",
+    //"-lc-vader-wants-you.png",//
     "-lc-venezuela.png"
   ];
 

@@ -235,8 +235,19 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
     // Get the current size key from the event target value
     const sizeKey = convertSizeString(event.target.value);
 
+    let sizeObject = "";
+
+    if(methods.helpers.is.patchType.idPanel(formData)){
+      if(methods.helpers.is.mini(formData.type, formData.size.current)) {
+        sizeObject= imgs['lazer-cut']["mini-id"];
+      } else {
+        sizeObject= imgs['lazer-cut']["large-id"];
+      }
+    } else {
+      sizeObject= imgs['lazer-cut'][sizeKey];
+    }
+
     // Get the corresponding size object from the imgs['lazer-cut'] object
-    const sizeObject = imgs['lazer-cut'][sizeKey];
 
     // Get the current mask name from the formData object
     const maskName = formData.img.color.mask.name;
@@ -436,6 +447,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
       default:
         let size = "";
         if(formData.type.toLowerCase() == 'id panel'){
+          console.log("id panel");
           console.log(formData.size.current);
        //   size = convertSizeString(formData.size.current);
           switch(formData.size.current){
@@ -452,14 +464,15 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
               break;
           }
         } else {
+          console.log("else");
           size = convertSizeString(formData.size.current);
         }
 
         console.log(size);
-        console.log( imgs["lazer-cut"][size]);
-        console.log( imgs["lazer-cut"]);
+        // console.log( imgs["lazer-cut"][size]);
+        // console.log( imgs["lazer-cut"]);
         obj = imgs["lazer-cut"][size].find(value => value.name === event.name);
-        //  console.log(obj);
+         console.log(obj);
         setFormData({
           ...formData, img: {
             ...formData.img, color: {
@@ -616,8 +629,6 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
         break;
     }
   };
-
-  // console.log(formData.img.color.mask.icon);
 
   return (
     <>
@@ -1060,25 +1071,50 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
                   ) : input.id.toLowerCase() == "flag" ? (
                     <>
                       {
-                        formData.img.type.toLowerCase() == "lazer cut flag" ? (
-                          <AdvancedSelect
+                        methods.helpers.is.patchType.idPanel(formData) ? (
+                          methods.helpers.is.mini(formData.type, formData.size.current) ? (
+                            console.log("yes"),
+                            console.log(imgs["lazer-cut"]["large-id"]),
+                            <AdvancedSelect
                             title={formData.img.markType}
                             name={formData.img.markType}
                             value={formData.img.color.mask.name}
                             img={formData.img.color.mask.icon}
                             onChange={handleMaskChange}
-                            options={imgs["lazer-cut"][convertSizeString(formData.size.current)]}
+                            options={imgs["lazer-cut"]["mini-id"]}
                           />
-                        ) : (
-                          <AdvancedSelect
-
-                            title={formData.img.markType}
-                            name={formData.img.markType}
-                            value={formData.img.name}
-                            img={formData.img.img}
-                            onChange={handleImgChange}
-                            options={imgs["hi-vis"]}
-                          />
+                          ): (
+                            console.log("yes"),
+                            <AdvancedSelect
+                              title={formData.img.markType}
+                              name={formData.img.markType}
+                              value={formData.img.color.mask.name}
+                              img={formData.img.color.mask.icon}
+                              onChange={handleMaskChange}
+                              options={imgs["lazer-cut"]["large-id"]}
+                            />
+                          )
+                         ) : (
+                          methods.helpers.is.flagType.lazerCutFlag(formData) ? (
+                            <AdvancedSelect
+                              title={formData.img.markType}
+                              name={formData.img.markType}
+                              value={formData.img.color.mask.name}
+                              img={formData.img.color.mask.icon}
+                              onChange={handleMaskChange}
+                              options={imgs["lazer-cut"][convertSizeString(formData.size.current)]}
+                            />
+                          ) : (
+                            <AdvancedSelect
+  
+                              title={formData.img.markType}
+                              name={formData.img.markType}
+                              value={formData.img.name}
+                              img={formData.img.img}
+                              onChange={handleImgChange}
+                              options={imgs["hi-vis"]}
+                            />
+                          )
                         )
                       }
                     </>
