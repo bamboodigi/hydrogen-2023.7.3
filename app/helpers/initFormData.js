@@ -1,5 +1,5 @@
 export default function initFormDataTest(product, builderData, bgColors, fontColors, imgs, symbols, saberOptions) {
-  console.log(product);
+  // console.log(product);
   const patchType = builderData.type[getBuilderTitle(product).toLowerCase()];
   
   let formData = {

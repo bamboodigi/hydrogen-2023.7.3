@@ -30,7 +30,7 @@ export function PatchBuilder({ product, config, ...props }) {
 
   // Define a variable that sets a prestyle object with a width property
   var prestyle = {
-    width: '300px'
+    width: '100%'
   };
 
   return (
@@ -43,7 +43,7 @@ export function PatchBuilder({ product, config, ...props }) {
             lg:">
           <PatchHeading formData={formData} methods={builderObj} />
           <Form formData={formData} setFormData={setFormData} data={data} config={config} product={product} methods={builderObj} />
-          {/* <pre className="overflow-scroll" style={prestyle}>{JSON.stringify(formData, null, 2)}</pre> */}
+          <pre className="overflow-scroll" style={prestyle}>{JSON.stringify(formData, null, 2)}</pre>
           <ProductDetails shippingPolicy={shippingPolicy} refundPolicy={refundPolicy} />
         </section>
       </div>

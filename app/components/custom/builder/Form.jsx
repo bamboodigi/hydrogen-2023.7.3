@@ -31,14 +31,9 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
     { name: 'Almost There', href: '#', status: 'upcoming', step: 5 },
   ];
 
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-  }
+  const convertSizeString = methods.helpers.utility.convertSizeString;
 
-  function convertSizeString(sizeString) {
-    return sizeString.split(" ").join("").split("”").join("");
-  }
-
+  let upsells = {};
   // console.log(formData);
 
   switch (formData.type.toLowerCase()) {
@@ -230,31 +225,33 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
   // Define a function to handle the change of the size dropdown menu
   const handleSizeChange = (event) => {
     const obj = patchType.config;
-    console.log(obj);
     const objSizes = obj.sizes.find(value => value.size === event.target.value);
     // Get the current size key from the event target value
     const sizeKey = convertSizeString(event.target.value);
 
+    upsells = methods.helpers.get.upsells(product, event.target.value);
+
+    console.log(upsells);
     let sizeObject = "";
 
+
     if(methods.helpers.is.patchType.idPanel(formData)){
-      if(methods.helpers.is.mini(formData.type, formData.size.current)) {
-        sizeObject= imgs['lazer-cut']["mini-id"];
+      if(methods.helpers.is.mini(formData.type, event.target.value)) {
+        sizeObject = imgs['lazer-cut']["mini-id"];
       } else {
         sizeObject= imgs['lazer-cut']["large-id"];
       }
     } else {
-      sizeObject= imgs['lazer-cut'][sizeKey];
+      sizeObject = imgs['lazer-cut'][sizeKey];
     }
 
-    // Get the corresponding size object from the imgs['lazer-cut'] object
 
+
+    // Get the corresponding size object from the imgs['lazer-cut'] object
     // Get the current mask name from the formData object
     const maskName = formData.img.color.mask.name;
-
     // Find the mask object in the size object with a name property equal to the current mask name
-    const maskObject = sizeObject && sizeObject.find(value => value.name === maskName);
-
+    const maskObject = sizeObject.find(value => value.name === maskName);
 
     if (formData.type.toLowerCase() == "medical patch") {
       if (event.target.value == '1” x 1”') {
@@ -349,12 +346,8 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
           },
         });
       }
-    } else {
-      // console.log(formData.img.color.mask.icon)
-      // setFormData({
-      //   ...formData, size: event.target.value,
-      //   textLines: objSizes.lines, textMaxLength: objSizes.maxLength, textPlaceholder: objSizes.placeholder
-      // });
+    } 
+    else {
       setFormData({
         ...formData,
         size: {
@@ -365,9 +358,9 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
           ...formData.text,
           primary: {
             ...formData.text.primary,
-            lines: objSizes.lines,
-            maxLength: objSizes.maxLength,
-            placeholder: objSizes.placeholder
+            lines: objSizes.text.primary.lines,
+            maxLength: objSizes.text.primary.maxLength,
+            placeholder: objSizes.text.primary.placeholder
           }
         },
         img: {
@@ -556,8 +549,10 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
     if (stepForm.currentStep < stepForm.steps.length) {
       setStepForm({ ...stepForm, currentStep: stepForm.currentStep + 1, obj: stepForm.steps[stepForm.currentStep] });
     }
-
+// dynamically update steps
     switch (formData.type.toLowerCase()) {
+      case 'id panel':
+        break;
       case 'name tape':
         if ((formData.size.current == '4” x 1”' || formData.size.current == '5” x 1”')) {
           const flagStep = {

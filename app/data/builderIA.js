@@ -261,4 +261,4 @@ for (let key in type) {
 }
 
 
-console.log(type);
+// console.log(type);

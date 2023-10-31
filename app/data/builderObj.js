@@ -32,15 +32,15 @@ const builderObj = {
         text: {
           primary: {
             text: '',
-            maxLength: patchType.config.sizes[0].maxLength || '',
-            lines: patchType.config.sizes[0].lines || '',
-            placeholder: patchType.config.sizes[0].placeholder || '',
+            maxLength: patchType.config.sizes[0].text.primary.maxLength || '',
+            lines: patchType.config.sizes[0].text.primary.lines || '',
+            placeholder: patchType.config.sizes[0].text.primary.placeholder || '',
           },
           secondary: {
             text: '',
-            maxLength: patchType.config.sizes[0].maxLength2 || '',
-            lines: patchType.config.sizes[0].lines2 || '',
-            placeholder: patchType.config.sizes[0].placeholder2 || '',
+            maxLength: patchType.config.sizes[0].text.secondary.maxLength || '',
+            lines: patchType.config.sizes[0].text.secondary.lines || '',
+            placeholder: patchType.config.sizes[0].text.secondary.placeholder || '',
           },
           color: {
             name: builderObj.data.fontColors[8].name,
@@ -83,10 +83,10 @@ const builderObj = {
           },
         }
       };
-      console.log(formData.type.toLowerCase());
+     // console.log(formData.type.toLowerCase());
       switch (formData.type.toLowerCase()) {
         case 'id panel':
-          console.log('id panel');
+         // console.log('id panel');
           formData.img.type = 'Lazer Cut Flag';
           formData.img.color.mask.img = builderObj.data.imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").img;
           formData.img.color.mask.name = builderObj.data.imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").name;
@@ -105,7 +105,7 @@ const builderObj = {
           break;
         case 'medical patch':
           if (formData.size.current == '1” x 1”') {
-            console.log('hi')
+         //   console.log('hi')
             formData.img.markType = 'Symbol';
             formData.img.name = builderObj.data.symbols['medical patch']['1 x 1'][0].name;
             formData.img.img = builderObj.data.symbols['medical patch']['1 x 1'][0].img;
@@ -157,7 +157,7 @@ const builderObj = {
           formData.price.total += 4;
           break;
       }
-      console.log(formData);
+    //  console.log(formData);
       // console.log(formData);
       return formData || {};
     },
@@ -382,16 +382,23 @@ const builderObj = {
         }
 
         // console.log(result);
-        return capitalizeWords(result);
-
-        function capitalizeWords(str) {
-          return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-        }
+        return  builderObj.helpers.utility.capitalizeWords(result);
       },
       patchType: function (product) {
         const patchType = builderData.type[builderObj.helpers.get.builderTitle(product).toLowerCase()];
         return builderData.type[builderObj.helpers.get.builderTitle(product).toLowerCase()];
-      }
+      },
+      upsells: function (product, size) {
+        const patchType = this.patchType(product);
+        console.log(patchType);
+        const config = patchType.config;
+        console.log(config);
+
+        const sizeObj = config.sizes.find(value => value.size == size);
+
+         console.log(sizeObj);
+         return sizeObj?.upsells;
+      },
     },
     update: {
       fontSize: function (containerRef, setFontStyle, formData) {
@@ -588,6 +595,57 @@ const builderObj = {
         setFontSecondaryStyle(prevStyle => ({ ...prevStyle, fontSize: `${newFontSize}px`, lineHeight: `${newLineHeight}px` }));
 
       },
+      // totalPrice function calculates the total price of the product based on the form data
+      // It takes a formData object as an argument
+      totalPrice: function (formData) {
+        // Get the type of the product from the builderObj
+        const type = builderObj.helpers.get.builderTitle(product).toLowerCase();
+
+        // Create a priceObj object with the base price and upsell prices for the product
+        const priceObj = {
+          basePrice: builderData.type[type].basePrice || 0,
+          sizeObj: builderData.type[type].config.sizes.find(value => value.size == formData.size.current) || 0,
+          sizeUpsell: sizeObj?.sizeUpsell || 0,
+          glowInTheDarkUpsell: sizeObj?.glowInTheDark || 0,
+          hiVisUpsell: sizeObj?.hiVis || 0,
+          badgeUpsell: sizeObj?.badge || 0,
+          proIRFontColorUpsell: sizeObj?.proIRFontColor || 0,
+          reflectiveGlowFontColorUpsell: sizeObj?.reflectiveGlowFontColor || 0,
+          policeIDUpsell: sizeObj?.policeID || 0,
+        };
+
+        // Initialize the price variable with the base price
+        let price = formData.price.amount;
+        let upsells;
+        let size = formData.size.current;
+
+        // Add the size upsell to the price
+        price += sizeUpsell;
+
+        // Add the glow in the dark upsell to the price if selected
+        if (formData.upsells.glowBorder) {
+          price += priceObj.glowInTheDarkUpsell;
+        }
+
+        // Add the pro IR font color upsell to the price if selected
+        if (formData.upsells.proIRFontColor) {
+          price += 5;
+        }
+
+        // Add the badge or hi-vis upsell to the price if an image is enabled
+        if (formData.img.enabled) {
+          if (formData.img.type.toLowerCase() == 'lazer cut flag') {
+            // Do nothing
+          } else if (formData.img.type.toLowerCase() == 'hivis flag') {
+            price += priceObj.hiVisUpsell;
+          } else {
+            price += priceObj.badgeUpsell;
+          }
+
+          // Set the total price in the formData object
+          formData.price.total = price;
+        }
+      }
     },
     is: {
       glowBorder: function (type, size, sizeEnabled) {
@@ -609,10 +667,15 @@ const builderObj = {
         const [lengthStr, heightStr] = size.split("x").map(str => str.trim());
         const length = parseInt(lengthStr);
         const height = parseInt(heightStr);
+        let enabled = false;
+      //  console.log(length);
+     //   console.log(type);
         if (type.toLowerCase().includes("id panel") && length <= 4) {
-          miniEnabled = true;
+          enabled = true;
         }
-        return miniEnabled || false;
+
+       // console.log(enabled);
+        return enabled;
       },
       largeID: function (type, size, miniEnabled) {
         const [lengthStr, heightStr] = size.split("x").map(str => str.trim());
@@ -645,12 +708,30 @@ const builderObj = {
         hiVisFlag: (formData) => formData.img.type.toLowerCase() === "hivis flag",
         upload: (formData) => formData.img.type.toLowerCase() === "upload",
       },
+      upsells: {
+        glowBorder: function (type, size, sizeEnabled) {
+          const [lengthStr, heightStr] = size.split("x").map(str => str.trim());
+          const length = parseInt(lengthStr);
+          const height = parseInt(heightStr);
+
+          if (type.toLowerCase().includes("id panel") && length <= 4) {
+            sizeEnabled = false;
+          }
+          return sizeEnabled || true;
+        },
+      },
 
     },
     utility: {
       classNames: function (...classes) {
         return classes.filter(Boolean).join(' ')
-      }
+      },
+      convertSizeString: function (sizeString) {
+        return sizeString.split(" ").join("").split("”").join("");
+      },
+      capitalizeWords: function(str) {
+        return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+      },
     }
   },
 };

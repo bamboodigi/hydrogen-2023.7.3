@@ -4,109 +4,167 @@ const builderData = {
       name: "ID Panel",
       basePrice: 23,
       config: {
-        "sizes": [
+        sizes: [
           {
             size: '3” x 2”',
-            maxLength: 13,
-            lines: 1,
-            placeholder: 'Name',
-            maxLength2: 12,
-            lines2: 2,
-            placeholder2: 'APOS\nNKDA',
-            hasFlag: true,
-            sizeUpsell: 0,
-            glowInTheDark: 0,
-            hiVis: 3,
-            badge: 25,
+            text: {
+              primary: {
+                placeholder: 'Name',
+                maxLength: 13,
+                lines: 1,
+              },
+              secondary: {
+                placeholder: 'APOS\nNKDA',
+                maxLength: 12,
+                lines: 2,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 0,
+              glowInTheDark: 0,
+              hiVis: 3,
+              badge: 25,
+            }
           },
           {
             size: '3.5” x 2”',
-            maxLength: 13,
-            lines: 1,
-            placeholder: 'Name',
-            maxLength2: 12,
-            lines2: 2,
-            placeholder2: 'APOS\nNKDA',
-            hasFlag: true,
-            sizeUpsell: 1,
-            glowInTheDark: 0,
-            hiVis: 3,
-            badge: 25,
+            text: {
+              primary: {
+                placeholder: 'Name',
+                maxLength: 13,
+                lines: 1,
+              },
+              secondary: {
+                placeholder: 'APOS\nNKDA',
+                maxLength: 12,
+                lines: 2,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 1,
+              glowInTheDark: 0,
+              hiVis: 3,
+              badge: 25,
+            }
           },
           {
             size: '4” x 2”',
-            maxLength: 13,
-            lines: 1,
-            placeholder: 'Name',
-            maxLength2: 12,
-            lines2: 2,
-            placeholder2: 'APOS\nNKDA',
-            hasFlag: true,
-            sizeUpsell: 0,
-            glowInTheDark: 5,
+            text: {
+              primary: {
+                placeholder: 'Name',
+                maxLength: 13,
+                lines: 1,
+              },
+              secondary: {
+                placeholder: 'APOS\nNKDA',
+                maxLength: 12,
+                lines: 2,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 0,
+              glowInTheDark: 5,
+              hiVis: 0,
+              badge: 0,
+            }
           },
           {
             size: '5” x 3”',
-            maxLength: 13,
-            lines: 1,
-            placeholder: 'Name',
-            maxLength2: 12,
-            lines2: 2,
-            placeholder2: 'APOS\nNKDA',
-            hasFlag: true,
-            sizeUpsell: 8,
-            glowInTheDark: 10,
-            hiVis: 5,
-            badge: 25,
+            text: {
+              primary: {
+                placeholder: 'Name',
+                maxLength: 13,
+                lines: 1,
+              },
+              secondary: {
+                placeholder: 'APOS\nNKDA',
+                maxLength: 12,
+                lines: 2,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 8,
+              glowInTheDark: 10,
+              hiVis: 5,
+              badge: 25,
+            }
           },
           {
             size: '6” x 2”',
-            maxLength: 13,
-            lines: 1,
-            placeholder: 'Name',
-            maxLength2: 12,
-            lines2: 2,
-            placeholder2: 'APOS\nNKDA',
-            hasFlag: true,
-            sizeUpsell: 3,
-            hiVis: 5,
-            glowInTheDark: 10,
-            badge: 25,
+            text: {
+              primary: {
+                placeholder: 'Name',
+                maxLength: 13,
+                lines: 1,
+              },
+              secondary: {
+                placeholder: 'APOS\nNKDA',
+                maxLength: 12,
+                lines: 2,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 3,
+              glowInTheDark: 10,
+              hiVis: 5,
+              badge: 25,
+            }
           },
           {
             size: '6” x 3”',
-            maxLength: 13,
-            lines: 1,
-            placeholder: 'Your Name',
-            maxLength2: 12,
-            lines2: 2,
-            placeholder2: 'APOS\nNKDA',
-            hasFlag: true,
-            sizeUpsell: 8,
-            hiVis: 5,
-            glowInTheDark: 10,
-            badge: 25,
-            tRexArms: true,
-            policeID: 19,
+            text: {
+              primary: {
+                placeholder: 'Your Name',
+                maxLength: 13,
+                lines: 1,
+              },
+              secondary: {
+                placeholder: 'APOS\nNKDA',
+                maxLength: 12,
+                lines: 2,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 8,
+              glowInTheDark: 10,
+              hiVis: 5,
+              badge: 25,
+              tRexArms: true,
+              policeID: 19,
+            }
           }
         ],
         extra: [
           {
             name: "DeadBug DV2",
             size: '6” x 4”',
-            maxLength: 13,
-            lines: 1,
-            placeholder: 'Name',
-            maxLength2: 12,
-            lines2: 2,
-            placeholder2: 'APOS\nNKDA',
-            hasFlag: true,
-            sizeUpsell: 8,
-            hiVis: 5,
-            glowInTheDark: 10,
-            badge: 25,
-            tRexArms: true,
-            policeID: 19,
+            text: {
+              primary: {
+                placeholder: 'Name',
+                maxLength: 13,
+                lines: 1,
+              },
+              secondary: {
+                placeholder: 'APOS\nNKDA',
+                maxLength: 12,
+                lines: 2,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 8,
+              hiVis: 5,
+              glowInTheDark: 10,
+              badge: 25,
+              tRexArms: true,
+              policeID: 19,
+            }
           }
         ]
       },
@@ -207,23 +265,241 @@ const builderData = {
       basePrice: 13,
       config: {
         sizes: [
-          { size: '3” x 1”', maxLength: 9, lines: 1, placeholder: 'Your Name', hasFlag: false, sizeUpsell: 0, glowInTheDark: 5 },
-          { size: '4” x 1”', maxLength: 10, lines: 1, placeholder: 'Your Name', hasFlag: true, sizeUpsell: 1, glowInTheDark: 5 },
-          { size: '4” x 1.5”', maxLength: 10, lines: 1, placeholder: 'Your Name', hasFlag: false, sizeUpsell: 3, glowInTheDark: 5 },
-          { size: '5” x 1”', maxLength: 13, lines: 1, placeholder: 'Your Name', hasFlag: true, sizeUpsell: 2, glowInTheDark: 5, tacTecCarrier: 2, tacTecTrainer: 3, tRexArms: 0 },
-          { size: '5” x 1.5”', maxLength: 13, lines: 1, placeholder: 'Your Name', hasFlag: false, sizeUpsell: 4, glowInTheDark: 5 },
-          { size: '6” x 2”', maxLength: 10, lines: 1, placeholder: 'Your Name', hasFlag: false, sizeUpsell: 8, glowInTheDark: 10, policeBlueLine: 5, sheriffBlueLine: 5, },
-          { size: '8” x 2”', maxLength: 30, lines: 2, placeholder: 'Up to \n2 Lines', hasFlag: false, sizeUpsell: 9, glowInTheDark: 10, tRexArms: 4 },
-          { size: '8” x 3”', maxLength: 26, lines: 2, placeholder: 'Up to \n2 Lines', hasFlag: false, sizeUpsell: 14, glowInTheDark: 10 },
-          { size: '8” x 4”', maxLength: 39, lines: 3, placeholder: 'Up to \n3 \nLines', hasFlag: false, sizeUpsell: 24, glowInTheDark: 10 },
-          { size: '9” x 3”', maxLength: 26, lines: 2, placeholder: 'Up to 2\n Lines of Text', hasFlag: false, sizeUpsell: 15, glowInTheDark: 15 },
-          { size: '10” x 2”', maxLength: 13, lines: 1, placeholder: 'Your Name', hasFlag: false, sizeUpsell: 14, glowInTheDark: 10 },
-          { size: '11” x 3”', maxLength: 32, lines: 2, placeholder: 'Up to 2 \nLines of Text', hasFlag: false, sizeUpsell: 17, glowInTheDark: 15 },
-          { size: '12” x 4”', maxLength: 54, lines: 3, placeholder: 'Up to \n3 \nLines of Text', hasFlag: false, sizeUpsell: 41, glowInTheDark: 20 },
+          {
+            size: '3” x 1”',
+            text: {
+              primary: {
+                placeholder: 'Your Name',
+                maxLength: 9,
+                lines: 1,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 0,
+              glowInTheDark: 5,
+            }
+          },
+          {
+            size: '4” x 1”',
+            text: {
+              primary: {
+                placeholder: 'Your Name',
+                maxLength: 10,
+                lines: 1,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 1,
+              glowInTheDark: 5,
+            }
+          },
+          {
+            size: '4” x 1.5”',
+            text: {
+              primary: {
+                placeholder: 'Your Name',
+                maxLength: 10,
+                lines: 1,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 3,
+              glowInTheDark: 5,
+            }
+          },
+          {
+            size: '5” x 1”',
+            text: {
+              primary: {
+                placeholder: 'Your Name',
+                maxLength: 13,
+                lines: 1,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 2,
+              glowInTheDark: 5,
+              tacTecCarrier: 2,
+              tacTecTrainer: 3,
+              tRexArms: 0,
+            }
+          },
+          {
+            size: '5” x 1.5”',
+            text: {
+              primary: {
+                placeholder: 'Your Name',
+                maxLength: 13,
+                lines: 1,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 4,
+              glowInTheDark: 5,
+            }
+          },
+          {
+            size: '6” x 2”',
+            text: {
+              primary: {
+                placeholder: 'Your Name',
+                maxLength: 10,
+                lines: 1,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 8,
+              glowInTheDark: 10,
+              policeBlueLine: 5,
+              sheriffBlueLine: 5,
+            }
+          },
+          {
+            size: '8” x 2”',
+            text: {
+              primary: {
+                placeholder: 'Up to \n2 Lines',
+                maxLength: 30,
+                lines: 2,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 9,
+              glowInTheDark: 10,
+              tRexArms: 4,
+            }
+          },
+          {
+            size: '8” x 3”',
+            text: {
+              primary: {
+                placeholder: 'Up to \n2 Lines',
+                maxLength: 26,
+                lines: 2,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 14,
+              glowInTheDark: 10,
+            }
+          },
+          {
+            size: '8” x 4”',
+            text: {
+              primary: {
+                placeholder: 'Up to \n3 \nLines',
+                maxLength: 39,
+                lines: 3,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 24,
+              glowInTheDark: 10,
+            }
+          },
+          {
+            size: '9” x 3”',
+            text: {
+              primary: {
+                placeholder: 'Up to 2\n Lines of Text',
+                maxLength: 26,
+                lines: 2,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 15,
+              glowInTheDark: 15,
+            }
+          },
+          {
+            size: '10” x 2”',
+            text: {
+              primary: {
+                placeholder: 'Your Name',
+                maxLength: 13,
+                lines: 1,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 14,
+              glowInTheDark: 10,
+            }
+          },
+          {
+            size: '11” x 3”',
+            text: {
+              primary: {
+                placeholder: 'Up to 2 \nLines of Text',
+                maxLength: 32,
+                lines: 2,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 17,
+              glowInTheDark: 15,
+            }
+          },
+          {
+            size: '12” x 4”',
+            text: {
+              primary: {
+                placeholder: 'Up to \n3 \nLines of Text',
+                maxLength: 54,
+                lines: 3,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 41,
+              glowInTheDark: 20,
+            }
+          }
         ],
         extra: [
-          { size: '2.5” x 1”', maxLength: 7, lines: 1, placeholder: 'Your Nm', hasFlag: false, sizeUpsell: 1, glowInTheDark: 5, name: "Custom ID Tag" },
-          { size: '5” x 1”', maxLength: 4, lines: 1, placeholder: 'Dad', hasFlag: false, sizeUpsell: 9, glowInTheDark: 7, name: "* As Fuck Name Tape" },
+          {
+            size: '2.5” x 1”',
+            text: {
+              primary: {
+                placeholder: 'Your Nm',
+                maxLength: 7,
+                lines: 1,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 1,
+              glowInTheDark: 5,
+            },
+            name: "Custom ID Tag",
+          },
+          {
+            size: '5” x 1”',
+            text: {
+              primary: {
+                placeholder: 'Dad',
+                maxLength: 4,
+                lines: 1,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 9,
+              glowInTheDark: 7,
+            },
+            name: "* As Fuck Name Tape",
+          },
         ],
       },
       form: {
@@ -292,12 +568,61 @@ const builderData = {
       basePrice: 10,
       config: {
         sizes: [
-          { size: '1” x 1”', maxLength: null, lines: null, placeholder: null, hasFlag: true, sizeUpsell: 0 },
-          { size: '2” x 2”', maxLength: null, lines: null, placeholder: null, hasFlag: true, sizeUpsell: 3 },
-          { size: '3.5” x 2”', maxLength: 12, lines: 2, placeholder: 'APOS\nNKDA', hasFlag: true, sizeUpsell: 9 },
+          {
+            size: '1” x 1”',
+            text: {
+              primary: {
+                placeholder: null,
+                maxLength: null,
+                lines: null,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 0,
+            }
+          },
+          {
+            size: '2” x 2”',
+            text: {
+              primary: {
+                placeholder: null,
+                maxLength: null,
+                lines: null,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 3,
+            }
+          },
+          {
+            size: '3.5” x 2”',
+            text: {
+              primary: {
+                placeholder: 'APOS\nNKDA',
+                maxLength: 12,
+                lines: 2,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 9,
+            }
+          },
         ],
         extra: [
-          { name: "Hexagonal", size: '3.5” x 3.5”', maxLength: null, lines: null, placeholder: null, hasFlag: true, sizeUpsell: 9 },
+          {
+            name: "Hexagonal",
+            size: '3.5” x 3.5”',
+            maxLength: null,
+            lines: null,
+            placeholder: null,
+            flagEnabled: true,
+            upsells: {
+              size: 9,
+            },
+          },
         ]
       },
       form: {
@@ -365,15 +690,101 @@ const builderData = {
       basePrice: 15,
       config: {
         sizes: [
-          { size: '3” x 2”', maxLength: null, lines: null, placeholder: null, hasFlag: true, sizeUpsell: 0, hiVis: 5 },
-          { size: '3.5” x 2”', maxLength: null, lines: null, placeholder: null, hasFlag: true, sizeUpsell: 1, thinLine: 4, hiVis: 5 },
-          { size: '5” x 3”', maxLength: null, lines: null, placeholder: null, hasFlag: true, sizeUpsell: 5, tRexArms: 6, hiVis: 5 },
-          { size: '6” x 2”', maxLength: null, lines: null, placeholder: null, hasFlag: true, sizeUpsell: 9, hiVis: 5 },
-          { size: '6” x 3”', maxLength: null, lines: null, placeholder: null, hasFlag: true, sizeUpsell: 13, hiVis: 5 }
-        ],
+  {
+    size: '3” x 2”',
+    text: {
+      primary: {
+        placeholder: null,
+        maxLength: null,
+        lines: null,
+      }
+    },
+    flagEnabled: true,
+    upsells: {
+      size: 0,
+      hiVis: 5,
+    },
+  },
+  {
+    size: '3.5” x 2”',
+    text: {
+      primary: {
+        placeholder: null,
+        maxLength: null,
+        lines: null,
+      }
+    },
+    flagEnabled: true,
+    upsells: {
+      size: 1,
+      thinLine: 4,
+      hiVis: 5,
+    },
+  },
+  {
+    size: '5” x 3”',
+    text: {
+      primary: {
+        placeholder: null,
+        maxLength: null,
+        lines: null,
+      }
+    },
+    flagEnabled: true,
+    upsells: {
+      size: 5,
+      tRexArms: 6,
+      hiVis: 5,
+    },
+  },
+  {
+    size: '6” x 2”',
+    text: {
+      primary: {
+        placeholder: null,
+        maxLength: null,
+        lines: null,
+      }
+    },
+    flagEnabled: true,
+    upsells: {
+      size: 9,
+      hiVis: 5,
+    },
+  },
+  {
+    size: '6” x 3”',
+    text: {
+      primary: {
+        placeholder: null,
+        maxLength: null,
+        lines: null,
+      }
+    },
+    flagEnabled: true,
+    upsells: {
+      size: 13,
+      hiVis: 5,
+    },
+  },
+],
         extra: [
-          { name: "Hexagonal", size: '3.5” x 3.5”', maxLength: null, lines: null, placeholder: null, hasFlag: true, sizeUpsell: 3 },
-        ]
+  {
+    name: "Hexagonal",
+    size: '3.5” x 3.5”',
+    text: {
+      primary: {
+        placeholder: null,
+        maxLength: null,
+        lines: null,
+      }
+    },
+    flagEnabled: true,
+    upsells: {
+      size: 3,
+    },
+  },
+]
       },
       form: {
         intro: "Our Flag Patches come in Lazer Cut or Reflective Hi Vis.",
@@ -446,8 +857,13 @@ const builderData = {
       base: 20,
       config: {
         "sizes": [
-          { size: '5” x 1”', maxLength: null, lines: null, placeholder: null },
-        ],
+  {
+    size: '5” x 1”',
+    maxLength: null,
+    lines: null,
+    placeholder: null,
+  },
+],
       },
       form: {
         intro: "Our Flag Patches come in Lazer Cut or Reflective Hi Vis.",
@@ -509,12 +925,84 @@ const builderData = {
       basePrice: 14,
       config: {
         sizes: [
-          { size: '3” x 2”', maxLength: null, lines: null, placeholder: null, hasFlag: true, sizeUpsell: 0, hiVis: 5 },
-          { size: '3.5” x 2”', maxLength: null, lines: null, placeholder: null, hasFlag: true, sizeUpsell: 1, thinLine: 4, hiVis: 5 },
-          { size: '5” x 3”', maxLength: null, lines: null, placeholder: null, hasFlag: true, sizeUpsell: 5, tRexArms: 6, hiVis: 5 },
-          { size: '6” x 2”', maxLength: null, lines: null, placeholder: null, hasFlag: true, sizeUpsell: 9, hiVis: 5 },
-          { size: '6” x 3”', maxLength: null, lines: null, placeholder: null, hasFlag: true, sizeUpsell: 13, hiVis: 5 }
-        ],
+  {
+    size: '3” x 2”',
+    text: {
+      primary: {
+        placeholder: null,
+        maxLength: null,
+        lines: null,
+      }
+    },
+    flagEnabled: true,
+    upsells: {
+      size: 0,
+      hiVis: 5,
+    },
+  },
+  {
+    size: '3.5” x 2”',
+    text: {
+      primary: {
+        placeholder: null,
+        maxLength: null,
+        lines: null,
+      }
+    },
+    flagEnabled: true,
+    upsells: {
+      size: 1,
+      thinLine: 4,
+      hiVis: 5,
+    },
+  },
+  {
+    size: '5” x 3”',
+    text: {
+      primary: {
+        placeholder: null,
+        maxLength: null,
+        lines: null,
+      }
+    },
+    flagEnabled: true,
+    upsells: {
+      size: 5,
+      tRexArms: 6,
+      hiVis: 5,
+    },
+  },
+  {
+    size: '6” x 2”',
+    text: {
+      primary: {
+        placeholder: null,
+        maxLength: null,
+        lines: null,
+      }
+    },
+    flagEnabled: true,
+    upsells: {
+      size: 9,
+      hiVis: 5,
+    },
+  },
+  {
+    size: '6” x 3”',
+    text: {
+      primary: {
+        placeholder: null,
+        maxLength: null,
+        lines: null,
+      }
+    },
+    flagEnabled: true,
+    upsells: {
+      size: 13,
+      hiVis: 5,
+    },
+  },
+],
       },
       form: {
         intro: "Our Signature printed patches are constructed with durable, fade resistant ink in either a reflective, or non-reflective format on a honeycomb textured material. This low cost, no minimum budget material is great choice for designs too complex for conventional patch materials.",
@@ -563,12 +1051,37 @@ const builderData = {
       base: 31,
       config: {
         "sizes": [
-          //        { size: '3.5” x 4”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
-          { size: '4.6” x 6.2”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
-          // { size: '3.5” x 3.5”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
-          // { size: '3.6” x 5”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
-          // { size: '4” x 4.5”', maxLength: 13, lines: 1, placeholder: 'Your Name' }
-        ]
+  {
+    size: '3.5” x 4”',
+    maxLength: 13,
+    lines: 1,
+    placeholder: 'Your Name',
+  },
+  {
+    size: '4.6” x 6.2”',
+    maxLength: 13,
+    lines: 1,
+    placeholder: 'Your Name',
+  },
+  {
+    size: '3.5” x 3.5”',
+    maxLength: 13,
+    lines: 1,
+    placeholder: 'Your Name',
+  },
+  {
+    size: '3.6” x 5”',
+    maxLength: 13,
+    lines: 1,
+    placeholder: 'Your Name',
+  },
+  {
+    size: '4” x 4.5”',
+    maxLength: 13,
+    lines: 1,
+    placeholder: 'Your Name',
+  },
+]
       },
       form: {
         intro: "Our Jacket Panels come in various sizes. Choose from different.",
@@ -707,11 +1220,11 @@ const builderData = {
       base: 36,
       config: {
         "sizes": [
-          //        { size: '3.5” x 4”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
+                  { size: '3.5” x 4”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
           { size: '4.6” x 6.2”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
-          // { size: '3.5” x 3.5”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
-          // { size: '3.6” x 5”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
-          // { size: '4” x 4.5”', maxLength: 13, lines: 1, placeholder: 'Your Name' }
+           { size: '3.5” x 3.5”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
+           { size: '3.6” x 5”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
+           { size: '4” x 4.5”', maxLength: 13, lines: 1, placeholder: 'Your Name' }
         ]
       },
       form: {
@@ -1774,7 +2287,7 @@ function initLazerCutFlags() {
     "-lc-finland.png",
     "-lc-florida.png",
     "-lc-france.png",
-   // "-lc-frogman.png",
+    // "-lc-frogman.png",
     //"-lc-gadsden.png", //
     "-lc-galactic-empire.png",
     "-lc-galactic-republic.png",
@@ -1805,8 +2318,8 @@ function initLazerCutFlags() {
     //"-lc-kyrgyzstan.png",//
     "-lc-latvia.png",
     "-lc-malaysia.png",
-   // "-lc-macau.png",//
-   // "-lc-mandalorian.png",//
+    // "-lc-macau.png",//
+    // "-lc-mandalorian.png",//
     "-lc-maryland.png",
     "-lc-mexico.png",
     "-lc-mississippi.png",
