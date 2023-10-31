@@ -38,9 +38,9 @@ const builderObj = {
           },
           secondary: {
             text: '',
-            maxLength: patchType.config.sizes[0].text.secondary.maxLength || '',
-            lines: patchType.config.sizes[0].text.secondary.lines || '',
-            placeholder: patchType.config.sizes[0].text.secondary.placeholder || '',
+            maxLength: patchType.config.sizes[0].text.secondary?.maxLength || '',
+            lines: patchType.config.sizes[0].text.secondary?.lines || '',
+            placeholder: patchType.config.sizes[0].text.secondary?.placeholder || '',
           },
           color: {
             name: builderObj.data.fontColors[8].name,
@@ -645,14 +645,60 @@ const builderObj = {
           // Set the total price in the formData object
           formData.price.total = price;
         }
+      },
+      formElement: function (element, trigger, steps) {
+        // console.log(element);
+        // console.log(trigger);
+        // console.log(steps);
+        const foundElement = steps.some(step => {
+          return step.input.some(input => {
+            return input.id === element.id;
+          });
+        });
+
+        if(trigger) {
+          addElement(element);
+        } else {
+          removeElement(element);
+        }
+
+        function addElement(element) {
+          // check if element already exists, if not add element
+          if(foundElement){
+            console.log('element already exists');
+          } else {
+            if(element.id === 'glowInTheDark') {
+              console.log("ok");
+              let lastElement = steps[steps.length -1];
+              console.log(lastElement);
+              lastElement.input.unshift(element);
+              console.log(steps);
+            }
+          }
+        }
+
+        function removeElement(element) {
+          // check if element already exists, if so remove element
+          if(foundElement){
+            if(element.id === 'glowInTheDark') {
+              console.log("ok");
+              let lastElement = steps[steps.length -1];
+              console.log(lastElement);
+              lastElement.input.shift();
+              console.log(steps);
+            }
+          } else {
+          }
+        }
       }
     },
     is: {
       glowBorder: function (type, size, sizeEnabled) {
-        if (type.toLowerCase().includes("id panel") && size == "5” x 3”") {
-          sizeEnabled = true;
+        let enabled = false;
+        if (!this.mini(type,size)) {
+          enabled = true;
         }
-        return sizeEnabled || false;
+        return sizeEnabled || enabled;
       },
       flag: function (type, flagEnabled) {
         // determine if type == id panel, lazer cut flag, jacket panel, division jacket panel

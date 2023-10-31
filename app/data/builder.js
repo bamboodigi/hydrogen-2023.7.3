@@ -243,12 +243,12 @@ const builderData = {
           {
             name: "Almost There",
             input: [
-              {
-                id: 'glowInTheDark',
-                label: 'Add a glow in the dark border? +$10 USD',
-                type: 'checkmark',
-                placeholder: '',
-              },
+              // {
+              //   id: 'glowInTheDark',
+              //   label: 'Add a glow in the dark border? +$10 USD',
+              //   type: 'checkmark',
+              //   placeholder: '',
+              // },
               {
                 id: "leadTime",
                 label: 'I Agree to the Lead Time',

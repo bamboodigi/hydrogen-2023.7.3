@@ -85,6 +85,10 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
 
   const [stepForm, setStepForm] = useState(tempStepObj);
 
+  console.log(steps);
+  console.log(currentStepObj);
+  console.log(stepForm);
+
   ///////////////////////////////////////////////////////////////////////////////////////////////
   //  HANDLE EVENTS = TYPE, TEXT, TEXT ADDITIONAL, SIZE, TEXT COLOR, BG COLOR, FLAG, MORE TO ADD
   ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -225,34 +229,46 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
   // Define a function to handle the change of the size dropdown menu
   const handleSizeChange = (event) => {
     const obj = patchType.config;
+    console.log(obj.sizes);
     const objSizes = obj.sizes.find(value => value.size === event.target.value);
     // Get the current size key from the event target value
     const sizeKey = convertSizeString(event.target.value);
-
+    console.log(sizeKey);
     upsells = methods.helpers.get.upsells(product, event.target.value);
 
     console.log(upsells);
     let sizeObject = "";
 
+    // // check glowborder then update
+    // let formTempObj = {
+    //   id: 'glowInTheDark',
+    //   label: 'Add a glow in the dark border? +$10 USD',
+    //   type: 'checkmark',
+    //   placeholder: '',
+    // };
 
-    if(methods.helpers.is.patchType.idPanel(formData)){
-      if(methods.helpers.is.mini(formData.type, event.target.value)) {
+    // methods.helpers.update.formElement(formTempObj, methods.helpers.is.glowBorder(formData.type, event.target.value));
+
+    if (methods.helpers.is.patchType.idPanel(formData)) {
+      if (methods.helpers.is.mini(formData.type, event.target.value)) {
         sizeObject = imgs['lazer-cut']["mini-id"];
       } else {
-        sizeObject= imgs['lazer-cut']["large-id"];
+        sizeObject = imgs['lazer-cut']["large-id"];
       }
     } else {
       sizeObject = imgs['lazer-cut'][sizeKey];
     }
 
-
+    console.log(sizeObject);
 
     // Get the corresponding size object from the imgs['lazer-cut'] object
     // Get the current mask name from the formData object
     const maskName = formData.img.color.mask.name;
+    console.log(maskName);
     // Find the mask object in the size object with a name property equal to the current mask name
-    const maskObject = sizeObject.find(value => value.name === maskName);
-
+    const maskObject = sizeObject?.find(value => value.name === maskName) || {};
+    console.log(maskName);
+    console.log(maskObject);
     if (formData.type.toLowerCase() == "medical patch") {
       if (event.target.value == '1” x 1”') {
         // setFormData({
@@ -281,9 +297,9 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
             ...formData.text,
             primary: {
               ...formData.text.primary,
-              lines: objSizes.lines,
-              maxLength: objSizes.maxLength,
-              placeholder: objSizes.placeholder
+              lines: objSizes.text.primary.lines,
+              maxLength: objSizes.text.primary.maxLength,
+              placeholder: objSizes.text.primary.placeholder
             }
           },
         });
@@ -306,9 +322,9 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
             ...formData.text,
             primary: {
               ...formData.text.primary,
-              lines: objSizes.lines,
-              maxLength: objSizes.maxLength,
-              placeholder: objSizes.placeholder
+              lines: objSizes.text.primary.lines,
+              maxLength: objSizes.text.primary.maxLength,
+              placeholder: objSizes.text.primary.placeholder
             }
           },
         });
@@ -339,14 +355,14 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
             ...formData.text,
             primary: {
               ...formData.text.primary,
-              lines: objSizes.lines,
-              maxLength: objSizes.maxLength,
-              placeholder: objSizes.placeholder
+              lines: objSizes.text.primary.lines,
+              maxLength: objSizes.text.primary.maxLength,
+              placeholder: objSizes.text.primary.placeholder
             }
           },
         });
       }
-    } 
+    }
     else {
       setFormData({
         ...formData,
@@ -439,11 +455,11 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
         break;
       default:
         let size = "";
-        if(formData.type.toLowerCase() == 'id panel'){
+        if (formData.type.toLowerCase() == 'id panel') {
           console.log("id panel");
           console.log(formData.size.current);
-       //   size = convertSizeString(formData.size.current);
-          switch(formData.size.current){
+          //   size = convertSizeString(formData.size.current);
+          switch (formData.size.current) {
             case '3” x 2”':
               console.log("yes");
               size = "mini-id";
@@ -465,7 +481,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
         // console.log( imgs["lazer-cut"][size]);
         // console.log( imgs["lazer-cut"]);
         obj = imgs["lazer-cut"][size].find(value => value.name === event.name);
-         console.log(obj);
+        console.log(obj);
         setFormData({
           ...formData, img: {
             ...formData.img, color: {
@@ -549,9 +565,21 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
     if (stepForm.currentStep < stepForm.steps.length) {
       setStepForm({ ...stepForm, currentStep: stepForm.currentStep + 1, obj: stepForm.steps[stepForm.currentStep] });
     }
-// dynamically update steps
+    console.log(formData.type.toLowerCase());
+    // dynamically update steps
     switch (formData.type.toLowerCase()) {
       case 'id panel':
+        // check glowborder then update
+    //    console.log("yes");
+        let formTempObj = {
+          id: 'glowInTheDark',
+          label: 'Add a glow in the dark border? +$10 USD',
+          type: 'checkmark',
+          placeholder: '',
+        };
+
+        methods.helpers.update.formElement(formTempObj, methods.helpers.is.glowBorder(formData.type, formData.size.current), steps);
+
         break;
       case 'name tape':
         if ((formData.size.current == '4” x 1”' || formData.size.current == '5” x 1”')) {
@@ -1071,14 +1099,14 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
                             console.log("yes"),
                             console.log(imgs["lazer-cut"]["large-id"]),
                             <AdvancedSelect
-                            title={formData.img.markType}
-                            name={formData.img.markType}
-                            value={formData.img.color.mask.name}
-                            img={formData.img.color.mask.icon}
-                            onChange={handleMaskChange}
-                            options={imgs["lazer-cut"]["mini-id"]}
-                          />
-                          ): (
+                              title={formData.img.markType}
+                              name={formData.img.markType}
+                              value={formData.img.color.mask.name}
+                              img={formData.img.color.mask.icon}
+                              onChange={handleMaskChange}
+                              options={imgs["lazer-cut"]["mini-id"]}
+                            />
+                          ) : (
                             console.log("yes"),
                             <AdvancedSelect
                               title={formData.img.markType}
@@ -1089,7 +1117,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
                               options={imgs["lazer-cut"]["large-id"]}
                             />
                           )
-                         ) : (
+                        ) : (
                           methods.helpers.is.flagType.lazerCutFlag(formData) ? (
                             <AdvancedSelect
                               title={formData.img.markType}
@@ -1101,7 +1129,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
                             />
                           ) : (
                             <AdvancedSelect
-  
+
                               title={formData.img.markType}
                               name={formData.img.markType}
                               value={formData.img.name}
