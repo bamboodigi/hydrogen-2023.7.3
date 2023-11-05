@@ -30,6 +30,8 @@ export function Visualizer({ formData, className, methods, ...props }) {
 
   const { canvas, patch, text, img, lightsaber } = initVisualizerStyle(formData);
 
+  //console.log(img);
+
  // console.log(img);
   // Create a ref to access the container element
   // console.log(img.mask);
@@ -41,13 +43,13 @@ export function Visualizer({ formData, className, methods, ...props }) {
   const [style, setStyle] = useState(patch);
   const [fontStyle, setFontStyle] = useState(text.primary);
   const [fontSecondaryStyle, setFontSecondaryStyle] = useState(text.secondary);
-  const [flagStyle, setFlagStyle] = useState(formData.type.toLowerCase() === "medical patch" ? img.symbol : img.flag);
+  const [flagStyle, setFlagStyle] = useState(formData.type.toLowerCase() === "medical patch" ? img.mask : img.flag);
   const [hiltStyle, setHiltStyle] = useState(lightsaber.hilt);
   const [bladeStyle, setBladeStyle] = useState(lightsaber.blade);
   const [maskStyle, setMaskStyle] = useState(img.mask);
   // console.log(img.mask);
   // console.log(maskStyle);
-
+  //console.log(flagStyle);
   // A function to load an image and update the state with its URL
   const imageLoader = (obj, setState) => {
     //  console.log(obj);
@@ -57,6 +59,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
     // console.log(mask)
     //  console.log(obj.type.toLowerCase());
     const img = new Image();
+  //  console.log(obj.type.toLowerCase());
     switch (obj.type.toLowerCase()) {
       case "color":
       case 'image':
@@ -72,7 +75,8 @@ export function Visualizer({ formData, className, methods, ...props }) {
       case 'mask':
         if (mask) {
           img.src = mask;
-          //    console.log(mask);
+         //  console.log(mask);
+        //   console.log(setState);
           setState(prevStyle => ({
             ...prevStyle,
             backgroundImage: `url("${bgImg}")`,
@@ -179,12 +183,16 @@ export function Visualizer({ formData, className, methods, ...props }) {
       obj.type = 'mask';
       obj.src = formData.text.color.img;
       obj.mask = formData.img.color.mask.img;
+    //  console.log(obj);
       imageLoader(obj, setMaskStyle)
     } else {
+    //  console.log("ahh")
       obj.type = 'image'
       obj.src = formData.img.img;
       imageLoader(obj, setFlagStyle)
     }
+
+   // console.log(obj)
   }, [formData.img.img]);
 
   useEffect(() => {

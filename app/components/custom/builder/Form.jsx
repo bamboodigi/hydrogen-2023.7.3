@@ -21,6 +21,9 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
     saberOptions,
   } = methods.data;
 
+
+
+
   const patchType = methods.helpers.get.patchType(product);
 
   let tempSteps = [
@@ -85,9 +88,9 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
 
   const [stepForm, setStepForm] = useState(tempStepObj);
 
-  console.log(steps);
-  console.log(currentStepObj);
-  console.log(stepForm);
+  // console.log(steps);
+  // console.log(currentStepObj);
+  // console.log(stepForm);
 
   ///////////////////////////////////////////////////////////////////////////////////////////////
   //  HANDLE EVENTS = TYPE, TEXT, TEXT ADDITIONAL, SIZE, TEXT COLOR, BG COLOR, FLAG, MORE TO ADD
@@ -116,7 +119,14 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
 
   const handleFlagTypeChange = (event) => {
     // Find the selected type from data array
-    setFormData({ ...formData, img: { ...formData.img, type: event.target.value } });
+    // console.log(event.target);
+    //  console.log(event.target.value);
+    setFormData({
+      ...formData, img: {
+        ...formData.img,
+        type: event.target.value
+      }
+    });
   };
 
   const handleSaberTypeChange = (event) => {
@@ -229,14 +239,14 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
   // Define a function to handle the change of the size dropdown menu
   const handleSizeChange = (event) => {
     const obj = patchType.config;
-    console.log(obj.sizes);
+    //  console.log(obj.sizes);
     const objSizes = obj.sizes.find(value => value.size === event.target.value);
     // Get the current size key from the event target value
     const sizeKey = convertSizeString(event.target.value);
-    console.log(sizeKey);
+    //  console.log(sizeKey);
     upsells = methods.helpers.get.upsells(product, event.target.value);
 
-    console.log(upsells);
+    //  console.log(upsells);
     let sizeObject = "";
 
     // // check glowborder then update
@@ -259,16 +269,16 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
       sizeObject = imgs['lazer-cut'][sizeKey];
     }
 
-    console.log(sizeObject);
+    // console.log(sizeObject);
 
     // Get the corresponding size object from the imgs['lazer-cut'] object
     // Get the current mask name from the formData object
     const maskName = formData.img.color.mask.name;
-    console.log(maskName);
+    //  console.log(maskName);
     // Find the mask object in the size object with a name property equal to the current mask name
     const maskObject = sizeObject?.find(value => value.name === maskName) || {};
-    console.log(maskName);
-    console.log(maskObject);
+    //  console.log(maskName);
+    //  console.log(maskObject);
     if (formData.type.toLowerCase() == "medical patch") {
       if (event.target.value == '1” x 1”') {
         // setFormData({
@@ -429,14 +439,38 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
   const handleImgChange = (event) => {
     // Find the selected hivis flag from data array
     let obj = {};
+    //  console.log(event);
     obj = imgs["hi-vis"].find(value => value.name === event.name);
-    setFormData({
-      ...formData, img: {
-        ...formData.img,
-        name: event.name,
-        img: obj.img
-      }
-    });
+
+    switch (formData.img.markType.toLowerCase()) {
+      case 'flag':
+        setFormData({
+          ...formData, img: {
+            ...formData.img,
+            name: event.name,
+            img: obj.img
+          }
+        });
+        break;
+      case 'symbol':
+        //  console.log("ok");
+        setFormData({
+          ...formData, img: {
+            ...formData.img, name: event.name,
+            img: event.img,
+            color: {
+              ...formData.img.color, mask: {
+                name: event.name,
+                img: event.img,
+                icon: event.icon,
+                glow: event.glow
+              }
+            }
+          }
+        });
+        break;
+    }
+
   };
 
   const handleMaskChange = (event) => {
@@ -456,16 +490,16 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
       default:
         let size = "";
         if (formData.type.toLowerCase() == 'id panel') {
-          console.log("id panel");
-          console.log(formData.size.current);
+          //  console.log("id panel");
+          //  console.log(formData.size.current);
           //   size = convertSizeString(formData.size.current);
           switch (formData.size.current) {
             case '3” x 2”':
-              console.log("yes");
+              //    console.log("yes");
               size = "mini-id";
               break;
             case '3.5” x 2”':
-              console.log("yes");
+              //  console.log("yes");
               size = "mini-id";
               break;
             case 'default':
@@ -473,15 +507,15 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
               break;
           }
         } else {
-          console.log("else");
+          //  console.log("else");
           size = convertSizeString(formData.size.current);
         }
 
-        console.log(size);
+        // console.log(size);
         // console.log( imgs["lazer-cut"][size]);
         // console.log( imgs["lazer-cut"]);
         obj = imgs["lazer-cut"][size].find(value => value.name === event.name);
-        console.log(obj);
+        //  console.log(obj);
         setFormData({
           ...formData, img: {
             ...formData.img, color: {
@@ -565,12 +599,12 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
     if (stepForm.currentStep < stepForm.steps.length) {
       setStepForm({ ...stepForm, currentStep: stepForm.currentStep + 1, obj: stepForm.steps[stepForm.currentStep] });
     }
-    console.log(formData.type.toLowerCase());
+    // console.log(formData.type.toLowerCase());
     // dynamically update steps
     switch (formData.type.toLowerCase()) {
       case 'id panel':
         // check glowborder then update
-    //    console.log("yes");
+        //    console.log("yes");
         let formTempObj = {
           id: 'glowInTheDark',
           label: 'Add a glow in the dark border? +$10 USD',
@@ -1074,7 +1108,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
                           title={formData.img.markType}
                           name={formData.img.markType}
                           value={formData.img.name}
-                          img={formData.img.icon}
+                          img={formData.img.color.mask.icon}
                           onChange={handleImgChange}
                           options={symbols["medical patch"]["1 x 1"]}
                         />
@@ -1085,7 +1119,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
                           title={formData.img.markType}
                           name={formData.img.markType}
                           value={formData.img.name}
-                          img={formData.img.icon}
+                          img={formData.img.color.mask.icon}
                           onChange={handleImgChange}
                           options={symbols["medical patch"]["2 x 2"]}
                         />
@@ -1095,30 +1129,42 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
                     <>
                       {
                         methods.helpers.is.patchType.idPanel(formData) ? (
-                          methods.helpers.is.mini(formData.type, formData.size.current) ? (
-                            console.log("yes"),
-                            console.log(imgs["lazer-cut"]["large-id"]),
+                          methods.helpers.is.flagType.hiVisFlag(formData) ? (
                             <AdvancedSelect
                               title={formData.img.markType}
                               name={formData.img.markType}
-                              value={formData.img.color.mask.name}
-                              img={formData.img.color.mask.icon}
-                              onChange={handleMaskChange}
-                              options={imgs["lazer-cut"]["mini-id"]}
+                              value={formData.img.name}
+                              img={formData.img.img}
+                              onChange={handleImgChange}
+                              options={imgs["hi-vis"]}
                             />
                           ) : (
-                            console.log("yes"),
-                            <AdvancedSelect
-                              title={formData.img.markType}
-                              name={formData.img.markType}
-                              value={formData.img.color.mask.name}
-                              img={formData.img.color.mask.icon}
-                              onChange={handleMaskChange}
-                              options={imgs["lazer-cut"]["large-id"]}
-                            />
+                            methods.helpers.is.mini(formData.type, formData.size.current) ? (
+                              //    console.log("yes"),
+                              //   console.log(imgs["lazer-cut"]["large-id"]),
+                              <AdvancedSelect
+                                title={formData.img.markType}
+                                name={formData.img.markType}
+                                value={formData.img.color.mask.name}
+                                img={formData.img.color.mask.icon}
+                                onChange={handleMaskChange}
+                                options={imgs["lazer-cut"]["mini-id"]}
+                              />
+                            ) : (
+                              //        console.log("yes"),
+                              <AdvancedSelect
+                                title={formData.img.markType}
+                                name={formData.img.markType}
+                                value={formData.img.color.mask.name}
+                                img={formData.img.color.mask.icon}
+                                onChange={handleMaskChange}
+                                options={imgs["lazer-cut"]["large-id"]}
+                              />
+                            )
                           )
                         ) : (
                           methods.helpers.is.flagType.lazerCutFlag(formData) ? (
+                            //    console.log("ok"),
                             <AdvancedSelect
                               title={formData.img.markType}
                               name={formData.img.markType}
@@ -1129,7 +1175,6 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
                             />
                           ) : (
                             <AdvancedSelect
-
                               title={formData.img.markType}
                               name={formData.img.markType}
                               value={formData.img.name}

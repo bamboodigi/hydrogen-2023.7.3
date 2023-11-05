@@ -108,15 +108,17 @@ const builderObj = {
          //   console.log('hi')
             formData.img.markType = 'Symbol';
             formData.img.name = builderObj.data.symbols['medical patch']['1 x 1'][0].name;
-            formData.img.img = builderObj.data.symbols['medical patch']['1 x 1'][0].img;
-            formData.img.icon = builderObj.data.symbols['medical patch']['1 x 1'][0].icon;
-            formData.img.glow = builderObj.data.symbols['medical patch']['1 x 1'][0].glow;
+            formData.img.color.mask.name = builderObj.data.symbols['medical patch']['1 x 1'][0].name;
+            formData.img.color.mask.img = builderObj.data.symbols['medical patch']['1 x 1'][0].img;
+            formData.img.color.mask.icon = builderObj.data.symbols['medical patch']['1 x 1'][0].icon;
+            formData.img.color.mask.glow = builderObj.data.symbols['medical patch']['1 x 1'][0].glow;
           } else {
             formData.img.markType = 'Symbol';
-            formData.img.name = builderObj.data.symbols['medical patch']['2 x 2'][0].name;
-            formData.img.img = builderObj.data.symbols['medical patch']['2 x 2'][0].img;
-            formData.img.icon = builderObj.data.symbols['medical patch']['2 x 2'][0].icon;
-            formData.img.glow = builderObj.data.symbols['medical patch']['2 x 2'][0].glow;
+            formData.img.name = builderObj.data.symbols['medical patch']['1 x 1'][0].name;
+            formData.img.color.mask.name = builderObj.data.symbols['medical patch']['2 x 2'][0].name;
+            formData.img.color.mask.img = builderObj.data.symbols['medical patch']['2 x 2'][0].img;
+            formData.img.color.mask.icon = builderObj.data.symbols['medical patch']['2 x 2'][0].icon;
+            formData.img.color.mask.glow = builderObj.data.symbols['medical patch']['2 x 2'][0].glow;
           }
           break;
         case 'jacket panel':
