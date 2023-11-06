@@ -43,7 +43,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
   const [style, setStyle] = useState(patch);
   const [fontStyle, setFontStyle] = useState(text.primary);
   const [fontSecondaryStyle, setFontSecondaryStyle] = useState(text.secondary);
-  const [flagStyle, setFlagStyle] = useState(formData.type.toLowerCase() === "medical patch" ? img.mask : img.flag);
+  const [flagStyle, setFlagStyle] = useState(formData.type.toLowerCase() === "medical patch" ? img.mask : img.flag );
   const [hiltStyle, setHiltStyle] = useState(lightsaber.hilt);
   const [bladeStyle, setBladeStyle] = useState(lightsaber.blade);
   const [maskStyle, setMaskStyle] = useState(img.mask);
@@ -195,15 +195,15 @@ export function Visualizer({ formData, className, methods, ...props }) {
    // console.log(obj)
   }, [formData.img.img]);
 
-  useEffect(() => {
-    let obj = {
-    };
-    obj.type = 'mask';
-    obj.src = formData.text.color.img;
-    obj.mask = formData.img.color.mask.img;
-    imageLoader(obj, setMaskStyle)
+  // useEffect(() => {
+  //   let obj = {
+  //   };
+  //   obj.type = 'mask';
+  //   obj.src = formData.text.color.img;
+  //   obj.mask = formData.img.color.mask.img;
+  //   imageLoader(obj, setMaskStyle)
 
-  }, [formData.img.color.mask.img]);
+  // }, [formData.img.color.mask.img]);
 
   // Custom hook to update the background color image style when the background color image changes
   useEffect(() => {
@@ -360,7 +360,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
       obj.type = 'mask';
       obj.src = formData.text.color.img;
       obj.mask = formData.img.color.mask.img;
-    //  console.log(obj);
+   //   console.log(obj);
       imageLoader(obj, setMaskStyle)
     }
   }, [formData.size.current]);
@@ -597,7 +597,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
           ) : formData.type.toLowerCase().includes("medical patch") && formData.size.current == '3.5” x 2”' ? (
             <div className="flex w-full h-full gap-2">
               <div className="flex flex-0  w-[45%] items-center" style={{}}>
-                <div id="icon" className="h-full w-full" style={flagStyle}>
+                <div id="icon" className="h-full w-full" style={maskStyle}>
                   <div id="glow"
                     className={classNames(
                       formData.upsells.glowBorder ? "block" : "hidden",
@@ -624,7 +624,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
             </div>
           ) : formData.type.toLowerCase().includes("medical patch") ? (
             <div className="h-full w-full text-center overflow-x-hidden overflow-y-hidden flex items-center justify-center">
-              <div id="icon" className="h-4/5 w-4/5" style={flagStyle}>
+              <div id="icon" className="h-4/5 w-4/5" style={maskStyle}>
                 <div id="glow"
                   className={classNames(
                     formData.upsells.glowBorder ? "block" : "hidden",

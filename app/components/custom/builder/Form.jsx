@@ -293,11 +293,17 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
         setFormData({
           ...formData,
           img: {
-            ...formData.img,
+            ...formData.img, 
             name: symbols['medical patch']["1 x 1"][0].name,
             img: symbols['medical patch']["1 x 1"][0].img,
-            glow: symbols['medical patch']["1 x 1"][0].glow,
-            icon: symbols['medical patch']["1 x 1"][0].icon,
+            color : {
+              ...formData.img.color, mask: {
+                name: symbols['medical patch']["1 x 1"][0].name,
+                img: symbols['medical patch']["1 x 1"][0].img,
+                glow: symbols['medical patch']["1 x 1"][0].glow,
+                icon: symbols['medical patch']["1 x 1"][0].icon,
+              },
+            },
           },
           size: {
             ...formData.size,
@@ -351,11 +357,17 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
         setFormData({
           ...formData,
           img: {
-            ...formData.img,
+            ...formData.img, 
             name: symbols['medical patch']["2 x 2"][0].name,
             img: symbols['medical patch']["2 x 2"][0].img,
-            glow: symbols['medical patch']["2 x 2"][0].glow,
-            icon: symbols['medical patch']["2 x 2"][0].icon,
+            color : {
+              ...formData.img.color, mask: {
+                name: symbols['medical patch']["2 x 2"][0].name,
+                img: symbols['medical patch']["2 x 2"][0].img,
+                glow: symbols['medical patch']["2 x 2"][0].glow,
+                icon: symbols['medical patch']["2 x 2"][0].icon,
+              },
+            },
           },
           size: {
             ...formData.size,
@@ -453,7 +465,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
         });
         break;
       case 'symbol':
-        //  console.log("ok");
+         console.log("ok");
         setFormData({
           ...formData, img: {
             ...formData.img, name: event.name,

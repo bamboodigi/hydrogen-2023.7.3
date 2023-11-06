@@ -295,6 +295,7 @@ const builderObj = {
           obj.text.primary.fontSize = '48.6397px';
           obj.text.primary.lineHeight = '48.6397px';
           obj.text.primary.marginTop = '6.07996px';
+          obj.img.flag.aspectRatio = '2/1';
           break;
         case 'medical patch':
           obj.patch.maskImage = 'none';
