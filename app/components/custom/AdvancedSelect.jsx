@@ -1,17 +1,3 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
 import { useState } from 'react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { Combobox } from '@headlessui/react'
@@ -25,8 +11,13 @@ function classNames(...classes) {
 export function AdvancedSelect({ title, value, img, onChange, options, ...props }) {
     const [query, setQuery] = useState('')
     // const [selectedOption, setSelectedOption] = useState(value)
-// console.log(img);
-   //console.log(options);
+    // console.log(img);
+    console.log(title);
+    let isFlag = false;
+    if (title.toLowerCase() === 'flag') {
+        isFlag = true;
+    }
+    console.log(options);
     function queryChange(event) {
         // console.log(event);
         setQuery(event.target.value);
@@ -51,17 +42,19 @@ export function AdvancedSelect({ title, value, img, onChange, options, ...props 
     // console.log(title)
     // console.log(value)
     // console.log(onChange)
-   // console.log(filteredOptions[0].icon)
+    // console.log(filteredOptions[0].icon)
 
     return (
         <Combobox as="div" value={value} onChange={onChange}>
             <Combobox.Label className="block text-sm font-medium">{title}</Combobox.Label>
             <div className="relative mt-2">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2 xl:pl-3">
-                    <img src={img} alt="" className="border border-contrast h-6 w-6 xl:h-7 xl:w-7 flex-shrink-0 rounded-full" />
+                    <img src={img} alt="" className={classNames(isFlag ? 'w-10 xl:w-11 rounded-sm' : 'w-6 xl:w-7 rounded-full',
+                        "border border-contrast h-6 xl:h-7 flex-shrink-0")} />
                 </div>
                 <Combobox.Input
-                    className="bg-transparent pl-10 xl:pl-12 mt-1 block w-full rounded-md border border-contrast py-3 xl:py-4 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 xl:text-lg"
+                    className={classNames(isFlag ? 'pl-14 xl:pl-16' : 'pl-10 xl:pl-12',
+                        "bg-transparent mt-1 block w-full rounded-md border border-contrast py-3 xl:py-4 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 xl:text-lg")}
                     onChange={queryChange}
                     displayValue={handleValue}
                 />
@@ -77,7 +70,7 @@ export function AdvancedSelect({ title, value, img, onChange, options, ...props 
                                 value={option}
                                 className={({ active }) =>
                                     classNames(
-                                        'relative cursor-default select-none py-3 xl:py-4 pl-3 pr-9',
+                                        'relative cursor-default select-none py-3 xl:py-4 pl-2 pr-9',
                                         active ? 'bg-indigo-600' : 'text-gray-900'
                                     )
                                 }
@@ -87,10 +80,12 @@ export function AdvancedSelect({ title, value, img, onChange, options, ...props 
                                         <div className="flex items-center">
                                             {option.icon ? (
                                                 <>
-                                                    <img src={option.icon} alt="" className="border border-contrast h-6 w-6 flex-shrink-0 rounded-full" />
+                                                    <img src={option.icon} alt="" className={classNames(isFlag ? 'w-10 xl:w-11 rounded-sm' : 'w-6 xl:w-7 rounded-full',
+                                                        "border border-contrast h-6 xl:h-7 flex-shrink-0")} />
                                                 </>) : (
                                                 <>
-                                                    <img src={option.img} alt="" className="border border-contrast h-6 w-6 flex-shrink-0 rounded-full" />
+                                                    <img src={option.img} alt="" className={classNames(isFlag ? 'w-10 xl:w-11 rounded-sm' : 'w-6 xl:w-7 rounded-full',
+                                                        "border border-contrast h-6 xl:h-7 flex-shrink-0")} />
                                                 </>
                                             )}
                                             <span className={classNames('ml-3 truncate', selected && 'font-semibold')}>{option.name}</span>

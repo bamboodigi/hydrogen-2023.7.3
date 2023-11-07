@@ -690,101 +690,101 @@ const builderData = {
       basePrice: 15,
       config: {
         sizes: [
-  {
-    size: '3” x 2”',
-    text: {
-      primary: {
-        placeholder: null,
-        maxLength: null,
-        lines: null,
-      }
-    },
-    flagEnabled: true,
-    upsells: {
-      size: 0,
-      hiVis: 5,
-    },
-  },
-  {
-    size: '3.5” x 2”',
-    text: {
-      primary: {
-        placeholder: null,
-        maxLength: null,
-        lines: null,
-      }
-    },
-    flagEnabled: true,
-    upsells: {
-      size: 1,
-      thinLine: 4,
-      hiVis: 5,
-    },
-  },
-  {
-    size: '5” x 3”',
-    text: {
-      primary: {
-        placeholder: null,
-        maxLength: null,
-        lines: null,
-      }
-    },
-    flagEnabled: true,
-    upsells: {
-      size: 5,
-      tRexArms: 6,
-      hiVis: 5,
-    },
-  },
-  {
-    size: '6” x 2”',
-    text: {
-      primary: {
-        placeholder: null,
-        maxLength: null,
-        lines: null,
-      }
-    },
-    flagEnabled: true,
-    upsells: {
-      size: 9,
-      hiVis: 5,
-    },
-  },
-  {
-    size: '6” x 3”',
-    text: {
-      primary: {
-        placeholder: null,
-        maxLength: null,
-        lines: null,
-      }
-    },
-    flagEnabled: true,
-    upsells: {
-      size: 13,
-      hiVis: 5,
-    },
-  },
-],
+          // {
+          //   size: '3” x 2”',
+          //   text: {
+          //     primary: {
+          //       placeholder: null,
+          //       maxLength: null,
+          //       lines: null,
+          //     }
+          //   },
+          //   flagEnabled: true,
+          //   upsells: {
+          //     size: 0,
+          //     hiVis: 5,
+          //   },
+          // },
+          {
+            size: '3.5” x 2”',
+            text: {
+              primary: {
+                placeholder: null,
+                maxLength: null,
+                lines: null,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 1,
+              thinLine: 4,
+              hiVis: 5,
+            },
+          },
+          {
+            size: '5” x 3”',
+            text: {
+              primary: {
+                placeholder: null,
+                maxLength: null,
+                lines: null,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 5,
+              tRexArms: 6,
+              hiVis: 5,
+            },
+          },
+          {
+            size: '6” x 2”',
+            text: {
+              primary: {
+                placeholder: null,
+                maxLength: null,
+                lines: null,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 9,
+              hiVis: 5,
+            },
+          },
+          {
+            size: '6” x 3”',
+            text: {
+              primary: {
+                placeholder: null,
+                maxLength: null,
+                lines: null,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 13,
+              hiVis: 5,
+            },
+          },
+        ],
         extra: [
-  {
-    name: "Hexagonal",
-    size: '3.5” x 3.5”',
-    text: {
-      primary: {
-        placeholder: null,
-        maxLength: null,
-        lines: null,
-      }
-    },
-    flagEnabled: true,
-    upsells: {
-      size: 3,
-    },
-  },
-]
+          {
+            name: "Hexagonal",
+            size: '3.5” x 3.5”',
+            text: {
+              primary: {
+                placeholder: null,
+                maxLength: null,
+                lines: null,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 3,
+            },
+          },
+        ]
       },
       form: {
         intro: "Our Flag Patches come in Lazer Cut or Reflective Hi Vis.",
@@ -793,17 +793,23 @@ const builderData = {
           {
             name: "Flag",
             input: [
-              {
-                id: 'flagType',
-                label: 'Flag Type',
-                type: 'select',
-                placeholder: 'Lazer Cut Flag',
-              },
+              // {
+              //   id: 'flagType',
+              //   label: 'Flag Type',
+              //   type: 'select',
+              //   placeholder: 'Lazer Cut Flag',
+              // },
               {
                 id: 'size',
                 label: 'Size',
                 type: 'select',
                 placeholder: '',
+              },
+              {
+                id: 'flag',
+                label: 'Flag',
+                type: 'advancedSelect',
+                placeholder: 'USA',
               },
             ],
           },
@@ -812,10 +818,10 @@ const builderData = {
             status: 'upcoming',
             input: [
               {
-                id: 'flag',
-                label: 'Flag',
+                id: 'textColor',
+                label: 'Flag Color',
                 type: 'advancedSelect',
-                placeholder: 'USA',
+                placeholder: 'Flat Spice Brown',
               },
               {
                 id: 'backgroundColor',
@@ -857,13 +863,13 @@ const builderData = {
       base: 20,
       config: {
         "sizes": [
-  {
-    size: '5” x 1”',
-    maxLength: null,
-    lines: null,
-    placeholder: null,
-  },
-],
+          {
+            size: '5” x 1”',
+            maxLength: null,
+            lines: null,
+            placeholder: null,
+          },
+        ],
       },
       form: {
         intro: "Our Flag Patches come in Lazer Cut or Reflective Hi Vis.",
@@ -925,84 +931,84 @@ const builderData = {
       basePrice: 14,
       config: {
         sizes: [
-  {
-    size: '3” x 2”',
-    text: {
-      primary: {
-        placeholder: null,
-        maxLength: null,
-        lines: null,
-      }
-    },
-    flagEnabled: true,
-    upsells: {
-      size: 0,
-      hiVis: 5,
-    },
-  },
-  {
-    size: '3.5” x 2”',
-    text: {
-      primary: {
-        placeholder: null,
-        maxLength: null,
-        lines: null,
-      }
-    },
-    flagEnabled: true,
-    upsells: {
-      size: 1,
-      thinLine: 4,
-      hiVis: 5,
-    },
-  },
-  {
-    size: '5” x 3”',
-    text: {
-      primary: {
-        placeholder: null,
-        maxLength: null,
-        lines: null,
-      }
-    },
-    flagEnabled: true,
-    upsells: {
-      size: 5,
-      tRexArms: 6,
-      hiVis: 5,
-    },
-  },
-  {
-    size: '6” x 2”',
-    text: {
-      primary: {
-        placeholder: null,
-        maxLength: null,
-        lines: null,
-      }
-    },
-    flagEnabled: true,
-    upsells: {
-      size: 9,
-      hiVis: 5,
-    },
-  },
-  {
-    size: '6” x 3”',
-    text: {
-      primary: {
-        placeholder: null,
-        maxLength: null,
-        lines: null,
-      }
-    },
-    flagEnabled: true,
-    upsells: {
-      size: 13,
-      hiVis: 5,
-    },
-  },
-],
+          {
+            size: '3” x 2”',
+            text: {
+              primary: {
+                placeholder: null,
+                maxLength: null,
+                lines: null,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 0,
+              hiVis: 5,
+            },
+          },
+          {
+            size: '3.5” x 2”',
+            text: {
+              primary: {
+                placeholder: null,
+                maxLength: null,
+                lines: null,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 1,
+              thinLine: 4,
+              hiVis: 5,
+            },
+          },
+          {
+            size: '5” x 3”',
+            text: {
+              primary: {
+                placeholder: null,
+                maxLength: null,
+                lines: null,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 5,
+              tRexArms: 6,
+              hiVis: 5,
+            },
+          },
+          {
+            size: '6” x 2”',
+            text: {
+              primary: {
+                placeholder: null,
+                maxLength: null,
+                lines: null,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 9,
+              hiVis: 5,
+            },
+          },
+          {
+            size: '6” x 3”',
+            text: {
+              primary: {
+                placeholder: null,
+                maxLength: null,
+                lines: null,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 13,
+              hiVis: 5,
+            },
+          },
+        ],
       },
       form: {
         intro: "Our Signature printed patches are constructed with durable, fade resistant ink in either a reflective, or non-reflective format on a honeycomb textured material. This low cost, no minimum budget material is great choice for designs too complex for conventional patch materials.",
@@ -1051,37 +1057,237 @@ const builderData = {
       base: 31,
       config: {
         "sizes": [
-  {
-    size: '3.5” x 4”',
-    maxLength: 13,
-    lines: 1,
-    placeholder: 'Your Name',
-  },
-  {
-    size: '4.6” x 6.2”',
-    maxLength: 13,
-    lines: 1,
-    placeholder: 'Your Name',
-  },
-  {
-    size: '3.5” x 3.5”',
-    maxLength: 13,
-    lines: 1,
-    placeholder: 'Your Name',
-  },
-  {
-    size: '3.6” x 5”',
-    maxLength: 13,
-    lines: 1,
-    placeholder: 'Your Name',
-  },
-  {
-    size: '4” x 4.5”',
-    maxLength: 13,
-    lines: 1,
-    placeholder: 'Your Name',
-  },
-]
+          {
+            size: '3.5” x 4”',
+            text: {
+              primary: {
+                maxLength: 13,
+                lines: 1,
+                placeholder: 'L.T. Curtis',
+              },
+              secondary: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'RCSD',
+              },
+              third: {
+                text: '',
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'S1008',
+              },
+              fourth: {
+                text: '',
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'NKA',
+              },
+              fifth: {
+                text: '',
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'SPPROJ',
+              },
+              sixth: {
+                text: '',
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'BPOS',
+              },
+              seventh: {
+                text: '',
+                maxLength: 6,
+                lines: 1,
+                placeholder: '011173',
+              },
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 0,
+              hiVis: 5,
+            },
+          },
+          {
+            size: '3.5” x 3.5”',
+            text: {
+              primary: {
+                maxLength: 13,
+                lines: 1,
+                placeholder: 'L.T. Curtis',
+              },
+              secondary: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'RCSD',
+              },
+              third: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'S1008',
+              },
+              fourth: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'NKA',
+              },
+              fifth: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'SPPROJ',
+              },
+              sixth: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'BPOS',
+              },
+              seventh: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: '011173',
+              },
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 0,
+              hiVis: 5,
+            },
+          },
+          {
+            size: '4.6” x 6.2”',
+            text: {
+              primary: {
+                maxLength: 13,
+                lines: 1,
+                placeholder: 'L.T. Curtis',
+              },
+              secondary: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'RCSD',
+              },
+              third: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'S1008',
+              },
+              fourth: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'NKA',
+              },
+              fifth: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'SPPROJ',
+              },
+              sixth: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'BPOS',
+              },
+              seventh: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: '011173',
+              },
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 0,
+              hiVis: 5,
+            },
+          },
+          {
+            size: '3.6” x 5”',
+            text: {
+              primary: {
+                maxLength: 13,
+                lines: 1,
+                placeholder: 'L.T. Curtis',
+              },
+              secondary: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'RCSD',
+              },
+              third: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'S1008',
+              },
+              fourth: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'NKA',
+              },
+              fifth: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'SPPROJ',
+              },
+              sixth: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'BPOS',
+              },
+              seventh: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: '011173',
+              },
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 0,
+              hiVis: 5,
+            },
+          },
+          {
+            size: '4” x 4.5”',
+            text: {
+              primary: {
+                maxLength: 13,
+                lines: 1,
+                placeholder: 'L.T. Curtis',
+              },
+              secondary: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'RCSD',
+              },
+              third: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'S1008',
+              },
+              fourth: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'NKA',
+              },
+              fifth: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'SPPROJ',
+              },
+              sixth: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'BPOS',
+              },
+              seventh: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: '011173',
+              },
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 0,
+              hiVis: 5,
+            },
+          },
+        ]
       },
       form: {
         intro: "Our Jacket Panels come in various sizes. Choose from different.",
@@ -1220,11 +1426,11 @@ const builderData = {
       base: 36,
       config: {
         "sizes": [
-                  { size: '3.5” x 4”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
+          { size: '3.5” x 4”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
           { size: '4.6” x 6.2”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
-           { size: '3.5” x 3.5”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
-           { size: '3.6” x 5”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
-           { size: '4” x 4.5”', maxLength: 13, lines: 1, placeholder: 'Your Name' }
+          { size: '3.5” x 3.5”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
+          { size: '3.6” x 5”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
+          { size: '4” x 4.5”', maxLength: 13, lines: 1, placeholder: 'Your Name' }
         ]
       },
       form: {
@@ -2249,147 +2455,340 @@ function initLazerCutFlags() {
     "Large-ID"
   ];    // If there's a common file extension, you can add it here
 
-  const imageList = [
-    "-lc-acadia.png",//
-    "-lc-alabama.png",
-    "-lc-alaska.png",
-    "-lc-antartica.png",
-    // "-lc-aquila.png",//
-    // "-lc-argentina.png",//
-    "-lc-arizona.png",
-    "-lc-arkansas.png",
-    //  "-lc-armenia.png",//
-    "-lc-australia.png",
-    "-lc-austria.png",
-    "-lc-belgium.png",
-    "-lc-betsy-ross.png",
-    "-lc-black-beard.png",//
-    "-lc-british-columbia.png",
-    "-lc-calico-jack.png",
-    "-lc-california-republic.png",
-    //  "-lc-canada-philippines.png",//
-    //  "-lc-canada-south-korea.png",//
-    //   "-lc-canada-swiss.png",//
-    //   "-lc-canada-uk.png",//
-    "-lc-canada.png",
-    "-lc-chicago.png",
-    "-lc-chile.png",
-    "-lc-china.png",
-    "-lc-coast-guard.png",
-    "-lc-colorado.png",
-    "-lc-columbia.png",
-    "-lc-croatia.png",
-    "-lc-cuba.png",
-    "-lc-czech-republic.png",
-    "-lc-denmark.png",
-    // "-lc-egypt.png", //
-    "-lc-european-union.png",//
-    "-lc-finland.png",
-    "-lc-florida.png",
-    "-lc-france.png",
-    // "-lc-frogman.png",
-    //"-lc-gadsden.png", //
-    "-lc-galactic-empire.png",
-    "-lc-galactic-republic.png",
-    //"-lc-georgia-state.png",//
-    "-lc-georgia-country.png",
-    "-lc-germany.png",
-    "-lc-greece.png",
-    "-lc-guernsey-channel-islands.png",
-    "-lc-hawaii.png",
-    "-lc-hong-kong.png",
-    "-lc-hungary.png",
-    "-lc-iceland.png",
-    "-lc-imperial-aquila.png",
-    "-lc-imperial-japan.png",//
-    "-lc-indiana.png",
-    "-lc-indianapolis.png",
-    "-lc-indonesia.png",
-    "-lc-iraq.png",//
-    "-lc-ireland.png",
-    "-lc-israel.png",
-    "-lc-italy.png",
-    "-lc-japan.png",
-    //"-lc-jedi-order.png",
-    "-lc-jolly-roger.png",
-    "-lc-jordan.png",
-    "-lc-kurdistan.png",
-    "-lc-kuwait.png",
-    //"-lc-kyrgyzstan.png",//
-    "-lc-latvia.png",
-    "-lc-malaysia.png",
-    // "-lc-macau.png",//
-    // "-lc-mandalorian.png",//
-    "-lc-maryland.png",
-    "-lc-mexico.png",
-    "-lc-mississippi.png",
-    "-lc-mythosaur.png",
-    "-lc-navy-jack.png",
-    "-lc-netherlands.png",
-    "-lc-new-england.png",
-    "-lc-new-mexico.png",
-    "-lc-new-orleans.png",
-    "-lc-new-zealand.png",
-    "-lc-north-carolina.png",
-    "-lc-norway.png",
-    "-lc-ohio.png",
-    "-lc-pakistan.png",
-    "-lc-philippines.png",
-    "-lc-poland.png",
-    "-lc-portugal.png",
-    "-lc-puerto-rico.png",
-    "-lc-quebec.png",
-    "-lc-rebel-alliance.png",
-    "-lc-russia.png",
-    "-lc-scotland.png",
-    "-lc-signapore.png",
-    "-lc-sons-of-liberty.png",
-    "-lc-south-africa.png",
-    "-lc-south-carolina.png",
-    "-lc-south-korea.png",
-    //"-lc-spain.png",//
-    "-lc-sweden.png",
-    "-lc-switzerland.png",
-    "-lc-taiwan.png",
-    "-lc-tennessee.png",
-    "-lc-texas.png",
-    "-lc-thailand.png",
-    //"-lc-tonga.png",
-    //"-lc-trinidad-and-tobago.png",
-    "-lc-turkey.png",//
-    "-lc-ukraine.png",
-    "-lc-united-kingdom.png",//
-    // "-lc-usa-canada.png",//
-    // "-lc-usa-hong-kong.png",//
-    // "-lc-usa-new-zealand.png",//
-    // "-lc-usa-philippines.png",//
-    // "-lc-usa-south-korea.png",//
-    // "-lc-usa-uk-split.png",//
-    "-lc-usa.png",
-    //"-lc-usmc-ega.png",//
-    "-lc-utah.png",
-    "-lc-veitnam.png",
-    //"-lc-vader-wants-you.png",//
-    "-lc-venezuela.png"
-  ];
+
 
   let lazerObj = {};
   sizes.forEach(size => {
+    let imageList = [];
     let key = size.replace(/ /g, "").toLowerCase();
     let iconKey = key;
     // console.log(iconKey);
     iconKey = iconKey === '3x2' ? 'mini-id' : iconKey;
     // iconKey = iconKey === '3.5x2' ? '6x3' : iconKey;
-
+    console.log(iconKey)
+    switch (iconKey) {
+      case '3.5x2':
+        imageList = [
+          'acadia.png',
+          'alabama.png',
+          'alaska.png',
+          'antartica.png',
+          'argentina.png',
+          'armenia.png',
+          'australia.png',
+          'austria.png',
+          'belgium.png',
+          'betsy-ross.png',
+          'british-columbia.png',
+          'calico-jack.png',
+          'california-republic.png',
+          'canada.png',
+          'chicago.png',
+          'chile.png',
+          'china.png',
+          'christian-flag.png',
+          'coast-guard.png',
+          'colorado.png',
+          'columbia.png',
+          'croatia.png',
+          'cuba.png',
+          'czech-republic.png',
+          'denmark.png',
+          'egypt.png',
+          'european-union.png',
+          'finland.png',
+          'flordia.png',
+          'france.png',
+          'frogman.png',
+          'gadsden.png',
+          'galactic-empire.png',
+          'galactic-republic.png',
+          'georgia-country.png',
+          'georgia-state.png',
+          'germany.png',
+          'greece.png',
+          'guernsey-channel-islands.png',
+          'hawaii.png',
+          'hong-kong.png',
+          'hungary.png',
+          'iceland.png',
+          'imperial-aquila.png',
+          'imperial-japan.png',
+          'indiana.png',
+          'indianapolis.png',
+          'indonesia.png',
+          'iraq.png',
+          'ireland.png',
+          'israel.png',
+          'italy.png',
+          'japan.png',
+          'jedi-order.png',
+          'jolly-roger.png',
+          'jordan.png',
+          'kurdistan.png',
+          'kuwait.png',
+          'kyrgyzstan.png',
+          'laos.png',
+          'latvia.png',
+          'macau.png',
+          'malaysia.png',
+          'maryland.png',
+          'mexico.png',
+          'mississippi.png',
+          'mythosaur.png',
+          'navy-jack.png',
+          'netherlands.png',
+          'new-england.png',
+          'new-mexico.png',
+          'new-orleans.png',
+          'new-zeland.png',
+          'north-carolina.png',
+          'norway.png',
+          'ohio.png',
+          'pakistan.png',
+          'philippines.png',
+          'poland.png',
+          'portugal.png',
+          'puerto-rico.png',
+          'quebec.png',
+          'rebel-alliance.png',
+          'russia.png',
+          'scotland.png',
+          'singapore.png',
+          'sons-of-liberty.png',
+          'south-africa.png',
+          'south-carolina.png',
+          'south-korea.png',
+          'spain.png',
+          'sweden.png',
+          'switzerland.png',
+          'taiwan.png',
+          'tennessee.png',
+          'texas.png',
+          'thailand.png',
+          'tonga.png',
+          'trinidad-and-tobago.png',
+          'turkey.png',
+          'ukraine-standard.png',
+          'united-kingdom.png',
+          'usa.png',
+          'usmc-ega.png',
+          'utah.png',
+          'vader-wants-you.png',
+          'venezuela.png',
+          'vietnam.png'
+        ];
+      case 'mini-id':
+        imageList = [
+          "acadia.png",
+          "alabama.png",
+          "alaska.png",
+          "antartica.png",
+          "arizona.png",
+          "arkansas.png",
+          "australia.png",
+          "austria.png",
+          "belgium.png",
+          "betsy-ross.png",
+          "black-beard.png",
+          "british-columbia.png",
+          "calico-jack.png",
+          "california-republic.png",
+          "canada.png",
+          "chicago.png",
+          "chile.png",
+          "china.png",
+          "coast-guard.png",
+          "colorado.png",
+          "columbia.png",
+          "croatia.png",
+          "cuba.png",
+          "czech-republic.png",
+          "denmark.png",
+          "european-union.png",
+          "finland.png",
+          "florida.png",
+          "france.png",
+          "frogman.png",
+          "galactic-empire.png",
+          "galactic-republic.png",
+          "georgia-country.png",
+          "germany.png",
+          "greece.png",
+          "guernsey-channel-islands.png",
+          "hawaii.png",
+          "hong-kong.png",
+          "hungary.png",
+          "iceland.png",
+          "imperial-aquila.png",
+          "imperial-japan.png",
+          "indiana.png",
+          "indianapolis.png",
+          "indonesia.png",
+          "iraq.png",
+          "ireland.png",
+          "israel.png",
+          "italy.png",
+          "japan.png",
+          "jedi-order.png",
+          "jolly-roger.png",
+          "jordan.png",
+          "kurdistan.png",
+          "kuwait.png",
+          "latvia.png",
+          "malaysia.png",
+          "maryland.png",
+          "mexico.png",
+          "mississippi.png",
+          "mythosaur.png",
+          "navy-jack.png",
+          "netherlands.png",
+          "new-england.png",
+          "new-mexico.png",
+          "new-orleans.png",
+          "new-zealand.png",
+          "north-carolina.png",
+          "norway.png",
+          "ohio.png",
+          "pakistan.png",
+          "philippines.png",
+          "poland.png",
+          "portugal.png",
+          "puerto-rico.png",
+          "quebec.png",
+          "rebel-alliance.png",
+          "russia.png",
+          "scotland.png",
+          "signapore.png",
+          "sons-of-liberty.png",
+          "south-africa.png",
+          "south-carolina.png",
+          "south-korea.png",
+          "sweden.png",
+          "switzerland.png",
+          "taiwan.png",
+          "tennessee.png",
+          "texas.png",
+          "thailand.png",
+          "turkey.png",
+          "ukraine.png",
+          "united-kingdom.png",
+          "usa.png",
+          "utah.png",
+          "veitnam.png",
+          "venezuela.png"
+        ];
+        break;
+      case 'large-id':
+        imageList = [
+          "acadia.png",
+          "alabama.png",
+          "alaska.png",
+          "antartica.png",
+          "arizona.png",
+          "arkansas.png",
+          "australia.png",
+          "austria.png",
+          "belgium.png",
+          "betsy-ross.png",
+          "british-columbia.png",
+          "calico-jack.png",
+          "california-republic.png",
+          "canada.png",
+          "chicago.png",
+          "chile.png",
+          "china.png",
+          "coast-guard.png",
+          "colorado.png",
+          "columbia.png",
+          "croatia.png",
+          "cuba.png",
+          "czech-republic.png",
+          "denmark.png",
+          "european-union.png",
+          "finland.png",
+          "florida.png",
+          "france.png",
+          "frogman.png",
+          "galactic-empire.png",
+          "galactic-republic.png",
+          "georgia-country.png",
+          "germany.png",
+          "greece.png",
+          "guernsey-channel-islands.png",
+          "hawaii.png",
+          "hong-kong.png",
+          "hungary.png",
+          "iceland.png",
+          "imperial-aquila.png",
+          "indiana.png",
+          "indianapolis.png",
+          "indonesia.png",
+          "ireland.png",
+          "israel.png",
+          "italy.png",
+          "japan.png",
+          "jedi-order.png",
+          "jolly-roger.png",
+          "jordan.png",
+          "kurdistan.png",
+          "kuwait.png",
+          "latvia.png",
+          "malaysia.png",
+          "maryland.png",
+          "mexico.png",
+          "mississippi.png",
+          "mythosaur.png",
+          "navy-jack.png",
+          "netherlands.png",
+          "new-england.png",
+          "new-mexico.png",
+          "new-orleans.png",
+          "new-zealand.png",
+          "north-carolina.png",
+          "norway.png",
+          "ohio.png",
+          "pakistan.png",
+          "philippines.png",
+          "poland.png",
+          "portugal.png",
+          "puerto-rico.png",
+          "quebec.png",
+          "rebel-alliance.png",
+          "russia.png",
+          "scotland.png",
+          "signapore.png",
+          "sons-of-liberty.png",
+          "south-africa.png",
+          "south-carolina.png",
+          "south-korea.png",
+          "sweden.png",
+          "switzerland.png",
+          "taiwan.png",
+          "tennessee.png",
+          "texas.png",
+          "thailand.png",
+          "tonga.png",
+          "trinidad-and-tobago.png",
+          "turkey.png",
+          "ukraine.png",
+          "united-kingdom.png",
+          "usa.png",
+          "utah.png",
+          "veitnam.png",
+          "venezuela.png"
+        ];
+        break;
+    }
     const formattedArray = imageList.map(image => {
       const name = image.replace(".png", "");
       const titleCaseName = name.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
       const formattedName = titleCaseName.replace(" Lc ", "").replace("Uk", "UK").replace("Usa", "USA");
       return {
         name: formattedName,
-        img: `${folder}${key}${name}-img.png${end}`,
-        glow: `${folder}${key}${name}-glow-border.png${end}`,
-        icon: `${folder}${iconKey}${name}-icon.png${end}`
+        img: `${folder}${key}-lc-${name}-img.png${end}`,
+        glow: `${folder}${key}-lc-${name}-glow-border.png${end}`,
+        icon: `${folder}${name}-icon.png${end}`
       };
     });
     lazerObj[key] = formattedArray;
@@ -2398,5 +2797,130 @@ function initLazerCutFlags() {
   return lazerObj;
 }
 
-// console.log(builderData.imgs["lazer-cut"]);
+console.log(builderData.imgs["lazer-cut"]);
 export default builderData;
+
+
+// [
+//   "acadia.png",//
+//   "alabama.png",
+//   "alaska.png",
+//   "antartica.png",
+//   // "aquila.png",//
+//   // "argentina.png",//
+//   "arizona.png",
+//   "arkansas.png",
+//   //  "armenia.png",//
+//   "australia.png",
+//   "austria.png",
+//   "belgium.png",
+//   "betsy-ross.png",
+//   "black-beard.png",//
+//   "british-columbia.png",
+//   "calico-jack.png",
+//   "california-republic.png",
+//   //  "canada-philippines.png",//
+//   //  "canada-south-korea.png",//
+//   //   "canada-swiss.png",//
+//   //   "canada-uk.png",//
+//   "canada.png",
+//   "chicago.png",
+//   "chile.png",
+//   "china.png",
+//   "coast-guard.png",
+//   "colorado.png",
+//   "columbia.png",
+//   "croatia.png",
+//   "cuba.png",
+//   "czech-republic.png",
+//   "denmark.png",
+//   // "egypt.png", //
+//   "european-union.png",
+//   "finland.png",
+//   "florida.png",
+//   "france.png",
+//   // "frogman.png",
+//   //"gadsden.png", //
+//   "galactic-empire.png",
+//   "galactic-republic.png",
+//   //"georgia-state.png",//
+//   "georgia-country.png",
+//   "germany.png",
+//   "greece.png",
+//   "guernsey-channel-islands.png",
+//   "hawaii.png",
+//   "hong-kong.png",
+//   "hungary.png",
+//   "iceland.png",
+//   "imperial-aquila.png",
+//   "imperial-japan.png",//
+//   "indiana.png",
+//   "indianapolis.png",
+//   "indonesia.png",
+//   "iraq.png",//
+//   "ireland.png",
+//   "israel.png",
+//   "italy.png",
+//   "japan.png",
+//   //"jedi-order.png",
+//   "jolly-roger.png",
+//   "jordan.png",
+//   "kurdistan.png",
+//   "kuwait.png",
+//   //"kyrgyzstan.png",//
+//   "latvia.png",
+//   "malaysia.png",
+//   // "macau.png",//
+//   // "mandalorian.png",//
+//   "maryland.png",
+//   "mexico.png",
+//   "mississippi.png",
+//   "mythosaur.png",
+//   "navy-jack.png",
+//   "netherlands.png",
+//   "new-england.png",
+//   "new-mexico.png",
+//   "new-orleans.png",
+//   "new-zealand.png",
+//   "north-carolina.png",
+//   "norway.png",
+//   "ohio.png",
+//   "pakistan.png",
+//   "philippines.png",
+//   "poland.png",
+//   "portugal.png",
+//   "puerto-rico.png",
+//   "quebec.png",
+//   "rebel-alliance.png",
+//   "russia.png",
+//   "scotland.png",
+//   "signapore.png",
+//   "sons-of-liberty.png",
+//   "south-africa.png",
+//   "south-carolina.png",
+//   "south-korea.png",
+//   //"spain.png",//
+//   "sweden.png",
+//   "switzerland.png",
+//   "taiwan.png",
+//   "tennessee.png",
+//   "texas.png",
+//   "thailand.png",
+//   //"tonga.png",
+//   //"trinidad-and-tobago.png",
+//   "turkey.png",//
+//   "ukraine.png",
+//   "united-kingdom.png",//
+//   // "usa-canada.png",//
+//   // "usa-hong-kong.png",//
+//   // "usa-new-zealand.png",//
+//   // "usa-philippines.png",//
+//   // "usa-south-korea.png",//
+//   // "usa-uk-split.png",//
+//   "usa.png",
+//   //"usmc-ega.png",//
+//   "utah.png",
+//   "veitnam.png",
+//   //"vader-wants-you.png",//
+//   "venezuela.png"
+// ];

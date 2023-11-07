@@ -32,15 +32,15 @@ const builderObj = {
         text: {
           primary: {
             text: '',
-            maxLength: patchType.config.sizes[0].text.primary.maxLength || '',
-            lines: patchType.config.sizes[0].text.primary.lines || '',
-            placeholder: patchType.config.sizes[0].text.primary.placeholder || '',
+            maxLength: patchType.config.sizes[0].text?.primary.maxLength || '',
+            lines: patchType.config.sizes[0].text?.primary.lines || '',
+            placeholder: patchType.config.sizes[0].text?.primary.placeholder || '',
           },
           secondary: {
             text: '',
-            maxLength: patchType.config.sizes[0].text.secondary?.maxLength || '',
-            lines: patchType.config.sizes[0].text.secondary?.lines || '',
-            placeholder: patchType.config.sizes[0].text.secondary?.placeholder || '',
+            maxLength: patchType.config.sizes[0].text?.secondary?.maxLength || '',
+            lines: patchType.config.sizes[0].text?.secondary?.lines || '',
+            placeholder: patchType.config.sizes[0].text?.secondary?.placeholder || '',
           },
           color: {
             name: builderObj.data.fontColors[8].name,
@@ -83,10 +83,10 @@ const builderObj = {
           },
         }
       };
-     // console.log(formData.type.toLowerCase());
+      // console.log(formData.type.toLowerCase());
       switch (formData.type.toLowerCase()) {
         case 'id panel':
-         // console.log('id panel');
+          // console.log('id panel');
           formData.img.type = 'Lazer Cut Flag';
           formData.img.color.mask.img = builderObj.data.imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").img;
           formData.img.color.mask.name = builderObj.data.imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").name;
@@ -96,8 +96,10 @@ const builderObj = {
           break;
         case 'flag':
           formData.img.type = 'Lazer Cut Flag';
-          formData.img.color.mask.img = builderObj.data.imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").img;
-          formData.img.color.mask.name = builderObj.data.imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").name;
+          formData.img.color.mask.img = builderObj.data.imgs["lazer-cut"]['3.5x2'].find(value => value.name == "USA").img;
+          formData.img.color.mask.name = builderObj.data.imgs["lazer-cut"]['3.5x2'].find(value => value.name == "USA").name;
+          formData.img.color.mask.glow = builderObj.data.imgs["lazer-cut"]['3.5x2'].find(value => value.name == "USA").glow;
+          formData.img.color.mask.icon = builderObj.data.imgs["lazer-cut"]['3.5x2'].find(value => value.name == "USA").icon;
           break;
         case 'light sabers':
           formData.bgColor.name = builderObj.data.bgColors[0].name;
@@ -105,7 +107,7 @@ const builderObj = {
           break;
         case 'medical patch':
           if (formData.size.current == '1” x 1”') {
-         //   console.log('hi')
+            //   console.log('hi')
             formData.img.markType = 'Symbol';
             formData.img.name = builderObj.data.symbols['medical patch']['1 x 1'][0].name;
             formData.img.color.mask.name = builderObj.data.symbols['medical patch']['1 x 1'][0].name;
@@ -128,15 +130,17 @@ const builderObj = {
             maxLength: 6,
             lines: 1,
           };
-          formData.text.secondary = tempObj;
-          formData.text.third = tempObj;
-          formData.text.fourth = tempObj;
-          formData.text.fifth = tempObj;
-          formData.text.sixth = tempObj;
-          formData.text.seventh = tempObj;
+          //    formData.text.secondary = tempObj;
+          formData.text.third = patchType.config.sizes[0].text?.third || tempObj,
+            formData.text.fourth = patchType.config.sizes[0].text?.fourth || tempObj;
+          formData.text.fifth = patchType.config.sizes[0].text?.fifth || tempObj;
+          formData.text.sixth = patchType.config.sizes[0].text?.sixth || tempObj;
+          formData.text.seventh = patchType.config.sizes[0].text?.seventh || tempObj;
           formData.img.type = 'Lazer Cut Flag';
-          formData.img.color.mask.img = builderObj.data.imgs["lazer-cut"]['3x2'].find(value => value.name == "USA").img;
-          formData.img.color.mask.name = builderObj.data.imgs["lazer-cut"]['3x2'].find(value => value.name == "USA").name;
+          formData.img.color.mask.img = builderObj.data.imgs["lazer-cut"]['3.5x2'].find(value => value.name == "USA").img;
+          formData.img.color.mask.name = builderObj.data.imgs["lazer-cut"]['3.5x2'].find(value => value.name == "USA").name;
+          formData.img.color.mask.glow = builderObj.data.imgs["lazer-cut"]['3.5x2'].find(value => value.name == "USA").glow;
+          formData.img.color.mask.icon = builderObj.data.imgs["lazer-cut"]['3.5x2'].find(value => value.name == "USA").icon;
           break;
         case 'division jacket panel':
           formData.text.primary.maxLength = 15;
@@ -159,7 +163,7 @@ const builderObj = {
           formData.price.total += 4;
           break;
       }
-    //  console.log(formData);
+      console.log(formData);
       // console.log(formData);
       return formData || {};
     },
@@ -307,14 +311,16 @@ const builderObj = {
           obj.patch.height = '58px';
           break;
         case 'flag':
-          obj.patch.padding = '0';
-          obj.patch.background = 'none';
+          obj.patch.padding = '20px';
           obj.text.secondary.width = 'auto';
           obj.text.secondary.textAlign = 'center';
           break;
         case 'jacket panel':
+          obj.patch.padding = '12px';
           obj.text.secondary.fontSize = '34px';
-          obj.patch.borderRadius = '.5rem'
+          obj.patch.borderRadius = '.5rem';
+          obj.img.flag.aspectRatio = '2/1';
+          obj.img.mask.maxHeight = '136px';
           break;
         case 'division jacket panel':
           obj.text.secondary.fontSize = '27px';
@@ -385,7 +391,7 @@ const builderObj = {
         }
 
         // console.log(result);
-        return  builderObj.helpers.utility.capitalizeWords(result);
+        return builderObj.helpers.utility.capitalizeWords(result);
       },
       patchType: function (product) {
         const patchType = builderData.type[builderObj.helpers.get.builderTitle(product).toLowerCase()];
@@ -399,8 +405,8 @@ const builderObj = {
 
         const sizeObj = config.sizes.find(value => value.size == size);
 
-         console.log(sizeObj);
-         return sizeObj?.upsells;
+        console.log(sizeObj);
+        return sizeObj?.upsells;
       },
     },
     update: {
@@ -453,9 +459,9 @@ const builderObj = {
         // Limit the font size to a maximum value of 96px
         let maxFontSize = containerHeight;
 
-        // if(formData.type.toLowerCase() == 'division jacket panel'){
-        //   maxFontSize = 52;
-        // }
+        if (formData.type.toLowerCase() == 'jacket panel') {
+          maxFontSize = 45;
+        }
         if (newFontSize > maxFontSize) {
           newFontSize = maxFontSize;
         }
@@ -506,6 +512,11 @@ const builderObj = {
               newFontSize = 47.1714;
             }
             break;
+          case 'jacket panel':
+            // if (formData.text.primary.text.length == 0) {
+            //   newFontSize = 47.1714;
+            // }
+            break;
         }
 
 
@@ -513,12 +524,19 @@ const builderObj = {
         let marginTop = null;
         if (textLines > 1) {
           marginTop = (newFontSize) / 7;
+
           let newLineHeight = newFontSize * .87;
           setFontStyle(prevStyle => ({ ...prevStyle, fontSize: `${newFontSize}px`, lineHeight: `${newLineHeight}px`, marginTop: `${marginTop}px` }));
 
         } else {
-          marginTop = (newFontSize) / 9;
-          setFontStyle(prevStyle => ({ ...prevStyle, fontSize: `${newFontSize}px`, lineHeight: `${newFontSize}px`, marginTop: `${marginTop}px` }));
+          if (formData.type.toLowerCase() == 'jacket panel') {
+            marginTop = 0;
+            let newLineHeight = newFontSize * .87;
+            setFontStyle(prevStyle => ({ ...prevStyle, fontSize: `${newFontSize}px`, lineHeight: `${newLineHeight}px`, marginTop: `${marginTop}px` }));
+          } else {
+            marginTop = (newFontSize) / 9;
+            setFontStyle(prevStyle => ({ ...prevStyle, fontSize: `${newFontSize}px`, lineHeight: `${newFontSize}px`, marginTop: `${marginTop}px` }));
+          }
         }
       },
       fontSizeAdditional: function (containerSecondaryRef, setFontSecondaryStyle, formData) {
@@ -659,7 +677,7 @@ const builderObj = {
           });
         });
 
-        if(trigger) {
+        if (trigger) {
           addElement(element);
         } else {
           removeElement(element);
@@ -667,12 +685,12 @@ const builderObj = {
 
         function addElement(element) {
           // check if element already exists, if not add element
-          if(foundElement){
+          if (foundElement) {
             console.log('element already exists');
           } else {
-            if(element.id === 'glowInTheDark') {
+            if (element.id === 'glowInTheDark') {
               console.log("ok");
-              let lastElement = steps[steps.length -1];
+              let lastElement = steps[steps.length - 1];
               console.log(lastElement);
               lastElement.input.unshift(element);
               console.log(steps);
@@ -682,10 +700,10 @@ const builderObj = {
 
         function removeElement(element) {
           // check if element already exists, if so remove element
-          if(foundElement){
-            if(element.id === 'glowInTheDark') {
+          if (foundElement) {
+            if (element.id === 'glowInTheDark') {
               console.log("ok");
-              let lastElement = steps[steps.length -1];
+              let lastElement = steps[steps.length - 1];
               console.log(lastElement);
               lastElement.input.shift();
               console.log(steps);
@@ -698,7 +716,7 @@ const builderObj = {
     is: {
       glowBorder: function (type, size, sizeEnabled) {
         let enabled = false;
-        if (!this.mini(type,size)) {
+        if (!this.mini(type, size)) {
           enabled = true;
         }
         return sizeEnabled || enabled;
@@ -717,13 +735,13 @@ const builderObj = {
         const length = parseInt(lengthStr);
         const height = parseInt(heightStr);
         let enabled = false;
-      //  console.log(length);
-     //   console.log(type);
+        //  console.log(length);
+        //   console.log(type);
         if (type.toLowerCase().includes("id panel") && length <= 4) {
           enabled = true;
         }
 
-       // console.log(enabled);
+        // console.log(enabled);
         return enabled;
       },
       largeID: function (type, size, miniEnabled) {
@@ -778,7 +796,7 @@ const builderObj = {
       convertSizeString: function (sizeString) {
         return sizeString.split(" ").join("").split("”").join("");
       },
-      capitalizeWords: function(str) {
+      capitalizeWords: function (str) {
         return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
       },
     }

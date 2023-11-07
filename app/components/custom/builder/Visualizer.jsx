@@ -195,15 +195,15 @@ export function Visualizer({ formData, className, methods, ...props }) {
    // console.log(obj)
   }, [formData.img.img]);
 
-  // useEffect(() => {
-  //   let obj = {
-  //   };
-  //   obj.type = 'mask';
-  //   obj.src = formData.text.color.img;
-  //   obj.mask = formData.img.color.mask.img;
-  //   imageLoader(obj, setMaskStyle)
+  useEffect(() => {
+    let obj = {
+    };
+    obj.type = 'mask';
+    obj.src = formData.text.color.img;
+    obj.mask = formData.img.color.mask.img;
+    imageLoader(obj, setMaskStyle)
 
-  // }, [formData.img.color.mask.img]);
+  }, [formData.img.color.mask.img]);
 
   // Custom hook to update the background color image style when the background color image changes
   useEffect(() => {
@@ -636,7 +636,19 @@ export function Visualizer({ formData, className, methods, ...props }) {
             </div>
           ) : formData.type.toLowerCase() == ("flag") ? (
             <div ref={containerRef} className="h-full w-full overflow-x-hidden flex items-center justify-center">
-              <div id="flag" className="flex-1 h-full w-full" style={flagStyle}></div>
+              {formData.img.type.toLowerCase() === "lazer cut flag" ? (
+                  <div id="mask" className="h-full w-full" style={maskStyle}>
+                    <div id="glow"
+                      className={classNames(
+                        formData.upsells.glowBorder ? "block" : "hidden",
+                        "h-full w-full"
+                      )}
+                      style={{ backgroundImage: `url("${formData.img.color.mask.glow}")`, backgroundSize: 'cover', position: 'absolute', backgroundPosition: 'center' }}
+                    ></div>
+                  </div>
+                ) : (
+                  <div id="flag" className="w-full" style={flagStyle}></div>
+                )}
             </div>
           ) : formData.type.toLowerCase().includes("call sign") ? (
             <div ref={containerRef} className="h-full text-center overflow-x-hidden flex items-center justify-center">
@@ -661,15 +673,27 @@ export function Visualizer({ formData, className, methods, ...props }) {
               <div className="mt-2">
                 <p id="main-text" className="text-center" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
                 <div className="flex flex-wrap">
-                  <p id="text2" className="w-1/2 mb-3" style={{ ...fontSecondaryStyle }}>{formData.text.secondary.text.length > 0 ? formData.text.secondary.text : formData.text.secondary.placeholder}</p>
-                  <p id="text3" className="w-1/2 mb-3 text-right" style={{ ...fontSecondaryStyle }}>{formData.text.third.text.length > 0 ? formData.text.third.text : formData.text.third.placeholder}</p>
-                  <p id="text4" className="w-1/2 mb-3" style={{ ...fontSecondaryStyle }}>{formData.text.fourth.text.length > 0 ? formData.text.fourth.text : formData.text.fourth.placeholder}</p>
-                  <p id="text5" className="w-1/2 mb-3 text-right" style={{ ...fontSecondaryStyle }}>{formData.text.fifth.text.length > 0 ? formData.text.fifth.text : formData.text.fifth.placeholder}</p>
+                  <p id="text2" className="w-1/2 mb-1" style={{ ...fontSecondaryStyle }}>{formData.text.secondary.text.length > 0 ? formData.text.secondary.text : formData.text.secondary.placeholder}</p>
+                  <p id="text3" className="w-1/2 mb-1 text-right" style={{ ...fontSecondaryStyle }}>{formData.text.third.text.length > 0 ? formData.text.third.text : formData.text.third.placeholder}</p>
+                  <p id="text4" className="w-1/2 mb-1" style={{ ...fontSecondaryStyle }}>{formData.text.fourth.text.length > 0 ? formData.text.fourth.text : formData.text.fourth.placeholder}</p>
+                  <p id="text5" className="w-1/2 mb-1 text-right" style={{ ...fontSecondaryStyle }}>{formData.text.fifth.text.length > 0 ? formData.text.fifth.text : formData.text.fifth.placeholder}</p>
                   <p id="text6" className="w-1/2" style={{ ...fontSecondaryStyle }}>{formData.text.sixth.text.length > 0 ? formData.text.sixth.text : formData.text.sixth.placeholder}</p>
                   <p id="text7" className="w-1/2 text-right" style={{ ...fontSecondaryStyle }}>{formData.text.seventh.text.length > 0 ? formData.text.seventh.text : formData.text.seventh.placeholder}</p>
                 </div>
               </div>
-              <div id="flag" className="w-full" style={flagStyle}></div>
+              {formData.img.type.toLowerCase() === "lazer cut flag" ? (
+                  <div id="mask" className="h-full w-full" style={maskStyle}>
+                    <div id="glow"
+                      className={classNames(
+                        formData.upsells.glowBorder ? "block" : "hidden",
+                        "h-full w-full"
+                      )}
+                      style={{ backgroundImage: `url("${formData.img.color.mask.glow}")`, backgroundSize: 'cover', position: 'absolute', backgroundPosition: 'center' }}
+                    ></div>
+                  </div>
+                ) : (
+                  <div id="flag" className="w-full" style={flagStyle}></div>
+                )}
             </div>
           ) : formData.type.toLowerCase() == ("division jacket panel") ? (
             <div className="h-full w-full overflow-x-hidden flex flex-col items-center justify-between">

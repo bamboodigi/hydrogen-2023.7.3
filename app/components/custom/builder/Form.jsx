@@ -293,10 +293,10 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
         setFormData({
           ...formData,
           img: {
-            ...formData.img, 
+            ...formData.img,
             name: symbols['medical patch']["1 x 1"][0].name,
             img: symbols['medical patch']["1 x 1"][0].img,
-            color : {
+            color: {
               ...formData.img.color, mask: {
                 name: symbols['medical patch']["1 x 1"][0].name,
                 img: symbols['medical patch']["1 x 1"][0].img,
@@ -357,10 +357,10 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
         setFormData({
           ...formData,
           img: {
-            ...formData.img, 
+            ...formData.img,
             name: symbols['medical patch']["2 x 2"][0].name,
             img: symbols['medical patch']["2 x 2"][0].img,
-            color : {
+            color: {
               ...formData.img.color, mask: {
                 name: symbols['medical patch']["2 x 2"][0].name,
                 img: symbols['medical patch']["2 x 2"][0].img,
@@ -465,7 +465,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
         });
         break;
       case 'symbol':
-         console.log("ok");
+        console.log("ok");
         setFormData({
           ...formData, img: {
             ...formData.img, name: event.name,
@@ -498,6 +498,22 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
         // Set the form data with the selected hivis flag and its image
         // setFormData({ ...formData, img: event.name, imgSrc: obj.img, imgIcon: obj.icon, imgGlow: obj.glow });
         setFormData({ ...formData, img: { ...formData.img, name: event.name, img: obj.img, icon: obj.icon, glow: obj.glow } });
+        break;
+      case 'jacket panel':
+        obj = imgs["lazer-cut"]["3.5x2"].find(value => value.name === event.name);
+        //  console.log(obj);
+        setFormData({
+          ...formData, img: {
+            ...formData.img, color: {
+              ...formData.img.color, mask: {
+                name: event.name,
+                img: obj.img,
+                glow: obj.glow,
+                icon: obj.icon,
+              }
+            }
+          }
+        });
         break;
       default:
         let size = "";
@@ -1176,14 +1192,14 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
                           )
                         ) : (
                           methods.helpers.is.flagType.lazerCutFlag(formData) ? (
-                            //    console.log("ok"),
+                            console.log("ok"),
                             <AdvancedSelect
                               title={formData.img.markType}
                               name={formData.img.markType}
                               value={formData.img.color.mask.name}
                               img={formData.img.color.mask.icon}
                               onChange={handleMaskChange}
-                              options={imgs["lazer-cut"][convertSizeString(formData.size.current)]}
+                              options={imgs["lazer-cut"]["large-id"]}
                             />
                           ) : (
                             <AdvancedSelect
