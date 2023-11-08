@@ -1446,6 +1446,12 @@ const builderData = {
                 type: 'input',
                 placeholder: 'Name',
               },
+              {
+                id: 'textColor',
+                label: 'Text Color',
+                type: 'advancedSelect',
+                placeholder: 'Flat Spice Brown',
+              },
             ],
           },
           {
@@ -1469,8 +1475,8 @@ const builderData = {
             name: "Font & Background Colors",
             input: [
               {
-                id: 'textColor',
-                label: 'Text Color',
+                id: 'ringColor',
+                label: 'Ring Color',
                 type: 'advancedSelect',
                 placeholder: 'Flat Spice Brown',
               },
@@ -1479,18 +1485,6 @@ const builderData = {
                 label: 'Background Color',
                 type: 'advancedSelect',
                 placeholder: 'Multicam Alpine',
-              },
-            ],
-          },
-          {
-            name: "Almost There",
-            status: 'upcoming',
-            input: [
-              {
-                id: 'ringColor',
-                label: 'Ring Color',
-                type: 'advancedSelect',
-                placeholder: 'Flat Spice Brown',
               },
             ],
           },
@@ -2319,6 +2313,16 @@ const builderData = {
             icon: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2-o-neg-icon.png?v=1678643370",
           }
         ],
+      },
+      "division jacket panel" : {
+        bird :           {
+          name: "Bird",
+          img: "https://cdn.shopify.com/s/files/1/2242/5805/files/division-bird-img.png?v=1699398852",
+        },
+        ring :           {
+          name: "Ring",
+          img: "https://cdn.shopify.com/s/files/1/2242/5805/files/division-ring-img.png?v=1699398852",
+        },
       }
     }
   },
@@ -2465,7 +2469,6 @@ function initLazerCutFlags() {
     // console.log(iconKey);
     iconKey = iconKey === '3x2' ? 'mini-id' : iconKey;
     // iconKey = iconKey === '3.5x2' ? '6x3' : iconKey;
-    console.log(iconKey)
     switch (iconKey) {
       case '3.5x2':
         imageList = [

@@ -201,6 +201,27 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
     setFormData({ ...formData, lightsaber: { ...formData.lightsaber, blade: { ...formData.lightsaber.blade, name: obj.name, color: obj.img } }, upsells: { ...formData.upsells, proIRFontColor: isProIR, reflectiveGlowFontColor: isReflectiveGlow } });
 
   };
+  
+    // Define a function to handle the change of the font text color dropdown menu
+    const handleRingColorChange = (event) => {
+      // Find the selected font text color from data array
+      const obj = fontColors.find(value => value.name === event.name);
+      var isProIR = false;
+      var isReflectiveGlow = false;
+  
+      if (event.name.includes("Pro IR")) {
+        isProIR = true;
+      }
+      if (event.name.includes("Reflective + Glow")) {
+        isReflectiveGlow = true;
+      }
+  
+      // Set the form data with the selected font text color and its image
+      //setFormData({ ...formData, hiltColorImg: obj.img, proIRFontColor: isProIR, reflectiveGlowFontColor: isReflectiveGlow });
+      setFormData({ ...formData, img: { ...formData.img, division: { ...formData.img.division, ring: { ...formData.img.division.ring, color: { ...formData.img.division.ring.color,  name: obj.name, img: obj.img }} }}, upsells: { ...formData.upsells, proIRFontColor: isProIR, reflectiveGlowFontColor: isReflectiveGlow } });
+    };
+
+  
 
   // Define a function to handle the change of the text input field
   const handleTextChange = (event) => {
@@ -1260,6 +1281,20 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
                         </select>
                       </div>
                     </>
+                    
+                  ) : input.id.toLowerCase() == "ringcolor" ? (
+                    console.log(formData.img.division.ring.img),
+                    <>
+                      <AdvancedSelect
+                        id="ringColor"
+                        title="Ring Color"
+                        name="ringColor"
+                        value={formData.img.division.ring.color.name}
+                        img={formData.img.division.ring.color.img}
+                        onChange={handleRingColorChange}
+                        options={fontColors}
+                      />
+                    </>
                   ) : input.id.toLowerCase() == "hiltcolor" ? (
                     <>
                       <AdvancedSelect
@@ -1279,18 +1314,6 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
                         title="Blade Color"
                         name="bladeColor"
                         value={formData.lightsaber.blade.name}
-                        img={formData.lightsaber.blade.color}
-                        onChange={handleBladeColorChange}
-                        options={fontColors}
-                      />
-                    </>
-                  ) : input.id.toLowerCase() == "ringcolor" ? (
-                    <>
-                      <AdvancedSelect
-                        id="ringColor"
-                        title="Ring Color"
-                        name="ringColor"
-                        value={formData.symbol.name}
                         img={formData.lightsaber.blade.color}
                         onChange={handleBladeColorChange}
                         options={fontColors}

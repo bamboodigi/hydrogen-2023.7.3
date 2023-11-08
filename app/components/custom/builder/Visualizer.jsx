@@ -47,6 +47,8 @@ export function Visualizer({ formData, className, methods, ...props }) {
   const [hiltStyle, setHiltStyle] = useState(lightsaber.hilt);
   const [bladeStyle, setBladeStyle] = useState(lightsaber.blade);
   const [maskStyle, setMaskStyle] = useState(img.mask);
+  const [ringStyle, setRingStyle] = useState(img.division.ring);
+  const [birdStyle, setBirdStyle] = useState(img.division.bird);
   // console.log(img.mask);
   // console.log(maskStyle);
   //console.log(flagStyle);
@@ -194,6 +196,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
 
    // console.log(obj)
   }, [formData.img.img]);
+  
 
   useEffect(() => {
     let obj = {
@@ -227,6 +230,10 @@ export function Visualizer({ formData, className, methods, ...props }) {
       imageLoader(obj, setMaskStyle);
     }
 
+    if(formData.type.toLowerCase() === "division jacket panel"){
+      imageLoader(obj, setBirdStyle);
+    }
+
     imageLoader(obj, setFontStyle);
     imageLoader(obj, setFontSecondaryStyle);
 
@@ -255,6 +262,15 @@ export function Visualizer({ formData, className, methods, ...props }) {
     // console.log("yes")
   }, [formData.img.type]);
 
+
+    // Custom hook to update the background color image style when the background color image changes
+    useEffect(() => {
+      const obj = {
+        type: 'color',
+        src: formData.img.division.ring.color.img,
+      };
+      imageLoader(obj, setRingStyle);
+    }, [formData.img.division.ring.color.img]);
 
 
   // Custom hook to update the font style when the text color image changes
@@ -704,7 +720,10 @@ export function Visualizer({ formData, className, methods, ...props }) {
                   <p id="text3" className="w-1/2 mb-3" style={{ ...fontSecondaryStyle }}>{formData.text.third.text.length > 0 ? formData.text.third.text : formData.text.third.placeholder}</p>
                 </div>
               </div>
-              <div id="flag" className="w-full" style={flagStyle}></div>
+              <div id="division" className="h-full w-full flex justify-center">
+                <div id="bird" className="h-[75%] w-[75%]" style={birdStyle}></div>
+                <div id="ring"className="h-[61%] w-[69%] absolute z-100" style={ringStyle}></div>
+              </div>
             </div>
           ) : formData.type.toLowerCase().includes("ranger tabs") ? (
             <div ref={containerRef} className="h-full text-center overflow-x-hidden flex items-center justify-center">

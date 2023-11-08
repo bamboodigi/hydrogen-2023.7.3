@@ -75,6 +75,28 @@ const builderObj = {
               icon: builderObj.data.imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").icon,
             }
           },
+          division: {
+            bird: {
+              color: {
+                name: builderObj.data.fontColors[8].name,
+                img: builderObj.data.fontColors[8].img,
+              },
+              mask: {
+                name: builderObj.data.imgs.symbols['division jacket panel'].bird.name,
+                img: builderObj.data.imgs.symbols['division jacket panel'].bird.img,
+              }
+            },
+            ring: {
+              color: {
+                name: builderObj.data.fontColors[8].name,
+                img: builderObj.data.fontColors[8].img,
+              },
+              mask: {
+                name: builderObj.data.imgs.symbols['division jacket panel'].ring.name,
+                img: builderObj.data.imgs.symbols['division jacket panel'].ring.img,
+              },
+            },
+          },
           type: 'Lazer Cut Flag',
           reversed: false,
           variant: {
@@ -183,6 +205,12 @@ const builderObj = {
       const mask = 'url("' + formData.img.color.mask.img + '")';
       const hiltImg = 'url("' + formData.lightsaber.hilt.img + '")';
       const bladeImg = 'url("' + formData.lightsaber.blade.img + '")';
+      const ringImg = 'url("' + formData.img.division.ring.mask.img + '")';
+      const ringColor = 'url("' + formData.img.division.ring.color.img + '")';
+      const birdImg = 'url("' + formData.img.division.bird.mask.img + '")';
+      const birdColor = 'url("' + formData.img.division.bird.color.img + '")';
+
+
 
       let obj = {
         canvas: {
@@ -250,6 +278,22 @@ const builderObj = {
             WebkitMaskImage: mask,
             WebkitMaskSize: 'cover',
           },
+          division: {
+            bird: {
+              backgroundImage: textColor,
+              maskImage: birdImg,
+              maskSize: 'cover',
+              WebkitMaskImage: birdImg,
+              WebkitMaskSize: 'cover',
+            },
+            ring: {
+              backgroundImage: ringColor,
+              maskImage: ringImg,
+              maskSize: 'cover',
+              WebkitMaskImage: ringImg,
+              WebkitMaskSize: 'cover',
+            },
+          }
         },
         lightsaber: {
           hilt: {
@@ -339,6 +383,7 @@ const builderObj = {
     bgColors: builderData.colors.bgColors,
     fontColors: builderData.colors.fontColors,
     imgs: builderData.imgs,
+    division: builderData.division,
     symbols: builderData.imgs.symbols,
     markTypeOptions: builderData.markType.types,
     saberOptions: builderData.lightSabers.types,

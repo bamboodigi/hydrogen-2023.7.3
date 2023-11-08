@@ -12,12 +12,12 @@ export function AdvancedSelect({ title, value, img, onChange, options, ...props 
     const [query, setQuery] = useState('')
     // const [selectedOption, setSelectedOption] = useState(value)
     // console.log(img);
-    console.log(title);
+ //   console.log(title);
     let isFlag = false;
     if (title.toLowerCase() === 'flag') {
         isFlag = true;
     }
-    console.log(options);
+ //   console.log(options);
     function queryChange(event) {
         // console.log(event);
         setQuery(event.target.value);
