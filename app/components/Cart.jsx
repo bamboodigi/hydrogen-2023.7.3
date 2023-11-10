@@ -188,10 +188,10 @@ function CartLineItem({ line }) {
 
   const { id, quantity, merchandise, attributes } = line;
 
-  console.log(attributes.length);
+  // console.log(attributes.length);
 
   const isCustomPatch = attributes.length > 7;
-  
+
   if (typeof quantity === 'undefined' || !merchandise?.product) return null;
 
 
@@ -204,8 +204,26 @@ function CartLineItem({ line }) {
   const length = parseInt(size?.value?.match(/\d+/g)[0]);
   let isAddon = line.merchandise?.product.handle.includes("add-on");
   const glowBorder = attributes.find((attribute) => attribute.key === 'Glow Border');
-
+  const upsellPricing = attributes.find((attribute) => attribute.key === 'Pricing').value || '';
   var newTitle = '';
+
+  console.log(typeof upsellPricing);
+  let priceObj = {};
+  if (typeof upsellPricing === 'string' && upsellPricing.length > 0) {
+    priceObj = JSON.parse(upsellPricing);
+  }
+  console.log(priceObj);
+  // const myObj = JSON.parse(upsellPricing);
+  // console.log(myObj);
+  // let jsonObject;
+  // try {
+  //   jsonObject = JSON.parse(upsellPricing);
+  //   console.log('The JSON string is valid.');
+  // } catch (error) {
+  //   console.error('The JSON string is not valid:', error.message);
+  // }
+
+  // console.log(jsonObject);
 
   for (var i = 0; i < attributes.length; i++) {
     if (attributes[i].key === 'Size') {
@@ -223,7 +241,7 @@ function CartLineItem({ line }) {
 
   // console.log(line);
 
-  // console.log(line.attributes);
+  console.log(line.attributes);
 
   // console.log(size?.value);
   // console.log(price?.value);
@@ -294,13 +312,29 @@ function CartLineItem({ line }) {
               </div>
               <div className="flex justify-between">
                 <Text className="font-semibold text-xs sm:text-copy">Size</Text>
-                <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+$0</span>
+                <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+${priceObj.size ? priceObj.size : '0'}</span>
               </div>
-              {proIRFontColor && (
+              {priceObj.hiVis && (
+                <>
+                  <div className="flex justify-between">
+                    <Text className="font-semibold text-xs sm:text-copy">HiVis Flag</Text>
+                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+${priceObj.hiVis}</span>
+                  </div>
+                </>
+              )}
+              {priceObj.badge && (
+                <>
+                  <div className="flex justify-between">
+                    <Text className="font-semibold text-xs sm:text-copy">Upload</Text>
+                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+${priceObj.badge}</span>
+                  </div>
+                </>
+              )}
+              {/* {proIRFontColor && (
                 <>
                   <div className="flex justify-between">
                     <Text className="font-semibold text-xs sm:text-copy">Pro IR Font Color</Text>
-                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+$7</span>
+                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+${jsonObject.proIRFontColor ? jsonObject.proIRFontColor : '0'}</span>
                   </div>
                 </>
               )}
@@ -308,18 +342,18 @@ function CartLineItem({ line }) {
                 <>
                   <div className="flex justify-between">
                     <Text className="font-semibold text-xs sm:text-copy">Reflective / Glow Font Color</Text>
-                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+$7</span>
+                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+${jsonObject.reflectiveGlowFontColor ? jsonObject.reflectiveGlowFontColor : '0'}</span>
                   </div>
                 </>
-              )}
-              {glowBorder?.value === "Yes" && (
+              )} */}
+              {/* {glowBorder?.value === "Yes" && (
                 <>
                   <div className="flex justify-between">
                     <Text className="font-semibold text-xs sm:text-copy">Glow Border</Text>
-                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+$10</span>
+                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+${priceObj.glowBorder}</span>
                   </div>
                 </>
-              )}
+              )} */}
               {/* <div className="grid pb-2">
                        {(merchandise?.selectedOptions || []).map((option) => (
                          <Text color="subtle" key={option.name}>

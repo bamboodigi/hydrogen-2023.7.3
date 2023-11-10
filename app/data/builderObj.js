@@ -15,11 +15,21 @@ const builderObj = {
         price: {
           amount: parseInt(product.variants.nodes[0].price.amount),
           total: parseInt(product.variants.nodes[0].price.amount),
+          upsells : {
+            size: patchType.config.sizes[0].upsells.size || 0,
+            glowBorder: patchType.config.sizes[0].upsells.glowInTheDark || 0,
+            hiVis: patchType.config.sizes[0].upsells.hiVis || 0,
+            badge: patchType.config.sizes[0].upsells.badge || 0,
+            proIRFontColor: builderObj.helpers.get.fontUpsell(patchType.config.sizes[0].size) || 0,
+            reflectiveGlowFontColor: builderObj.helpers.get.fontUpsell(patchType.config.sizes[0].size) || 0,
+          }
         },
         upsells: {
           glowBorder: false,
           proIRFontColor: false,
           reflectiveGlowFontColor: false,
+          hiVis: false,
+          badge: false,
         },
         size: {
           current: patchType.config.sizes[0].size || '',
@@ -112,6 +122,7 @@ const builderObj = {
           formData.img.type = 'Lazer Cut Flag';
           formData.img.color.mask.img = builderObj.data.imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").img;
           formData.img.color.mask.name = builderObj.data.imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").name;
+          formData.img.enabled = true;
           break;
         case 'name tape':
           formData.img.type = 'HiVis Flag';
@@ -122,10 +133,12 @@ const builderObj = {
           formData.img.color.mask.name = builderObj.data.imgs["lazer-cut"]['3.5x2'].find(value => value.name == "USA").name;
           formData.img.color.mask.glow = builderObj.data.imgs["lazer-cut"]['3.5x2'].find(value => value.name == "USA").glow;
           formData.img.color.mask.icon = builderObj.data.imgs["lazer-cut"]['3.5x2'].find(value => value.name == "USA").icon;
+          formData.img.enabled = true;
           break;
         case 'light sabers':
           formData.bgColor.name = builderObj.data.bgColors[0].name;
           formData.bgColor.img = builderObj.data.bgColors[0].img;
+          formData.img.enabled = true;
           break;
         case 'medical patch':
           if (formData.size.current == '1” x 1”') {
@@ -144,6 +157,7 @@ const builderObj = {
             formData.img.color.mask.icon = builderObj.data.symbols['medical patch']['2 x 2'][0].icon;
             formData.img.color.mask.glow = builderObj.data.symbols['medical patch']['2 x 2'][0].glow;
           }
+          formData.img.enabled = true;
           break;
         case 'jacket panel':
           let tempObj = {
@@ -163,10 +177,12 @@ const builderObj = {
           formData.img.color.mask.name = builderObj.data.imgs["lazer-cut"]['3.5x2'].find(value => value.name == "USA").name;
           formData.img.color.mask.glow = builderObj.data.imgs["lazer-cut"]['3.5x2'].find(value => value.name == "USA").glow;
           formData.img.color.mask.icon = builderObj.data.imgs["lazer-cut"]['3.5x2'].find(value => value.name == "USA").icon;
+          formData.img.enabled = true;
           break;
         case 'division jacket panel':
           formData.text.primary.maxLength = 15;
           formData.text.primary.placeholder = '1st Line';
+          formData.img.enabled = true;
           formData.text.secondary = {
             text: '',
             placeholder: '2nd Line',
@@ -185,7 +201,7 @@ const builderObj = {
           formData.price.total += 4;
           break;
       }
-      console.log(formData);
+    //  console.log(formData);
       // console.log(formData);
       return formData || {};
     },
@@ -387,6 +403,7 @@ const builderObj = {
     symbols: builderData.imgs.symbols,
     markTypeOptions: builderData.markType.types,
     saberOptions: builderData.lightSabers.types,
+    type: builderData.type,
   },
   //  
   helpers: {
@@ -444,14 +461,31 @@ const builderObj = {
       },
       upsells: function (product, size) {
         const patchType = this.patchType(product);
-        console.log(patchType);
+  //      console.log(patchType);
         const config = patchType.config;
-        console.log(config);
+  //      console.log(config);
 
         const sizeObj = config.sizes.find(value => value.size == size);
 
-        console.log(sizeObj);
+   //     console.log(sizeObj);
         return sizeObj?.upsells;
+      },
+      fontUpsell : function (size) {
+        const [lengthStr, heightStr] = size.split("x").map(str => str.trim());
+        const length = parseInt(lengthStr);
+        const height = parseInt(heightStr);
+        let max = Math.max(length, height);
+        let result = 0;
+        if(max <= 5){
+          result = 7;
+        } else if(max > 5 && max <= 7){
+          result = 12;
+        } else if(max > 7 && max <= 9){
+          result = 17;
+        } else {
+          result = 25;
+        }
+        return result;
       },
     },
     update: {
@@ -663,54 +697,81 @@ const builderObj = {
       },
       // totalPrice function calculates the total price of the product based on the form data
       // It takes a formData object as an argument
-      totalPrice: function (formData) {
+      totalPrice: function (formData, setFormData) {
         // Get the type of the product from the builderObj
-        const type = builderObj.helpers.get.builderTitle(product).toLowerCase();
+
+        let data = formData.price;
+
+        const price = data.amount;
+        const upsells = data.upsells;
+        const statusObj = formData.upsells;
+        let upsellsObj = {};
+        let totalPrice = price;
+
+       
+        // console.log(upsells);
+        // console.log(statusObj);
+
+        if(upsells.size) {
+          totalPrice += upsells.size;
+          upsellsObj.size = upsells.size;
+        }
+        // go through each property in statusObj obj and if it is true add the same property name in upsells object
+        for (const [key, value] of Object.entries(statusObj)) {
+          if(value){
+            totalPrice += upsells[key];
+            upsellsObj[key] = upsells[key];
+          }
+          // console.log(totalPrice);
+
+        }
+        // console.log("price at end:" + totalPrice);
+        const myObjStr = JSON.stringify(upsellsObj);
+        console.log(myObjStr);
+        setFormData({ ...formData, price: { ...formData.price, total: totalPrice, upsellPricing: myObjStr } });
+
 
         // Create a priceObj object with the base price and upsell prices for the product
-        const priceObj = {
-          basePrice: builderData.type[type].basePrice || 0,
-          sizeObj: builderData.type[type].config.sizes.find(value => value.size == formData.size.current) || 0,
-          sizeUpsell: sizeObj?.sizeUpsell || 0,
-          glowInTheDarkUpsell: sizeObj?.glowInTheDark || 0,
-          hiVisUpsell: sizeObj?.hiVis || 0,
-          badgeUpsell: sizeObj?.badge || 0,
-          proIRFontColorUpsell: sizeObj?.proIRFontColor || 0,
-          reflectiveGlowFontColorUpsell: sizeObj?.reflectiveGlowFontColor || 0,
-          policeIDUpsell: sizeObj?.policeID || 0,
-        };
+        // const priceObj = {
+        //   basePrice: data.amount || 0,
+        //   sizeObj: builderData.type[type].config.sizes.find(value => value.size == formData.size.current) || 0,
+        //   sizeUpsell: sizeObj?.sizeUpsell || 0,
+        //   glowInTheDarkUpsell: sizeObj?.glowInTheDark || 0,
+        //   hiVisUpsell: sizeObj?.hiVis || 0,
+        //   badgeUpsell: sizeObj?.badge || 0,
+        //   proIRFontColorUpsell: sizeObj?.proIRFontColor || 0,
+        //   reflectiveGlowFontColorUpsell: sizeObj?.reflectiveGlowFontColor || 0,
+        //   policeIDUpsell: sizeObj?.policeID || 0,
+        // };
 
         // Initialize the price variable with the base price
-        let price = formData.price.amount;
-        let upsells;
-        let size = formData.size.current;
 
         // Add the size upsell to the price
-        price += sizeUpsell;
+        // price += sizeUpsell;
 
-        // Add the glow in the dark upsell to the price if selected
-        if (formData.upsells.glowBorder) {
-          price += priceObj.glowInTheDarkUpsell;
-        }
+        // // Add the glow in the dark upsell to the price if selected
+        // if (formData.upsells.glowBorder) {
+        //   price += priceObj.glowInTheDarkUpsell;
+        // }
 
-        // Add the pro IR font color upsell to the price if selected
-        if (formData.upsells.proIRFontColor) {
-          price += 5;
-        }
+        // // Add the pro IR font color upsell to the price if selected
+        // if (formData.upsells.proIRFontColor) {
+        //   price += 5;
+        // }
 
-        // Add the badge or hi-vis upsell to the price if an image is enabled
-        if (formData.img.enabled) {
-          if (formData.img.type.toLowerCase() == 'lazer cut flag') {
-            // Do nothing
-          } else if (formData.img.type.toLowerCase() == 'hivis flag') {
-            price += priceObj.hiVisUpsell;
-          } else {
-            price += priceObj.badgeUpsell;
-          }
+        // // Add the badge or hi-vis upsell to the price if an image is enabled
+        // if (formData.img.enabled) {
+        //   if (formData.img.type.toLowerCase() == 'lazer cut flag') {
+        //     // Do nothing
+        //   } else if (formData.img.type.toLowerCase() == 'hivis flag') {
+        //     price += priceObj.hiVisUpsell;
+        //   } else {
+        //     price += priceObj.badgeUpsell;
+        //   }
 
-          // Set the total price in the formData object
-          formData.price.total = price;
-        }
+        //   // Set the total price in the formData object
+        //   formData.price.total = price;
+        // }
       },
       formElement: function (element, trigger, steps) {
         // console.log(element);
@@ -731,14 +792,14 @@ const builderObj = {
         function addElement(element) {
           // check if element already exists, if not add element
           if (foundElement) {
-            console.log('element already exists');
+        //    console.log('element already exists');
           } else {
             if (element.id === 'glowInTheDark') {
-              console.log("ok");
+        //      console.log("ok");
               let lastElement = steps[steps.length - 1];
-              console.log(lastElement);
+         //     console.log(lastElement);
               lastElement.input.unshift(element);
-              console.log(steps);
+         //     console.log(steps);
             }
           }
         }
@@ -747,11 +808,11 @@ const builderObj = {
           // check if element already exists, if so remove element
           if (foundElement) {
             if (element.id === 'glowInTheDark') {
-              console.log("ok");
+           //   console.log("ok");
               let lastElement = steps[steps.length - 1];
-              console.log(lastElement);
+          //    console.log(lastElement);
               lastElement.input.shift();
-              console.log(steps);
+          //   console.log(steps);
             }
           } else {
           }
@@ -844,7 +905,7 @@ const builderObj = {
       capitalizeWords: function (str) {
         return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
       },
-    }
+    },
   },
 };
 

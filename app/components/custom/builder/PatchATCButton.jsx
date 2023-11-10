@@ -25,7 +25,6 @@ export function PatchATCButton({ formData, className, config, currentStep, steps
       "glow-border": "gid://shopify/ProductVariant/42668952420510",
       "reflective-glow-font-color": "gid://shopify/ProductVariant/42672795189406",
       "pro-ir-font-color": "gid://shopify/ProductVariant/42672794534046",
-      "name-tape--flag": "",
     };
   
     function getCart(formData) {
@@ -80,8 +79,8 @@ export function PatchATCButton({ formData, className, config, currentStep, steps
         { key: "Glow Border", value: formData.upsells.glowBorder ? "Yes" : "No" },
         { key: "Blood Type and Allergies", value: formData.text.secondary.text || "Left Blank" },
         { key: "I agree to the Lead Time", value: formData.formValidation.agreement ? "Yes" : "No" },
+        { key: "Pricing", value: formData.price.upsellPricing },
       );
-  
   
       return arr;
     }

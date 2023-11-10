@@ -293,6 +293,7 @@ const builderData = {
             upsells: {
               size: 1,
               glowInTheDark: 5,
+              hiVis: 4,
             }
           },
           {
@@ -323,6 +324,7 @@ const builderData = {
             upsells: {
               size: 2,
               glowInTheDark: 5,
+              hiVis: 4,
               tacTecCarrier: 2,
               tacTecTrainer: 3,
               tRexArms: 0,
@@ -1427,10 +1429,6 @@ const builderData = {
       config: {
         "sizes": [
           { size: '3.5” x 4”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
-          { size: '4.6” x 6.2”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
-          { size: '3.5” x 3.5”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
-          { size: '3.6” x 5”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
-          { size: '4” x 4.5”', maxLength: 13, lines: 1, placeholder: 'Your Name' }
         ]
       },
       form: {
@@ -1492,12 +1490,6 @@ const builderData = {
             name: "Almost There",
             input: [
               {
-                id: 'glowInTheDark',
-                label: 'Add a glow in the dark border? +$10 USD',
-                type: 'checkmark',
-                placeholder: '',
-              },
-              {
                 id: "leadTime",
                 label: 'I Agree to the Lead Time',
                 type: 'checkmark',
@@ -1517,7 +1509,7 @@ const builderData = {
       },
       {
         name: 'Coyote Brown',
-        img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/Coyote-7x7-V3.jpg?v=1678555924'
+        img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/coyote-brown.jpg?v=1678555191'
       },
       {
         name: 'Tan 499',
@@ -1624,8 +1616,8 @@ const builderData = {
     ],
     fontColors: [
       { name: 'Basic IR', img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/basic-ir.jpg?v=1692905056' },
-      { name: 'Pro IR - +$7 (USD)', img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/pro-ir.jpg?v=1692905056' },
-      { name: 'Reflective + Glow-in-the-Dark - +$7 (USD)', img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/reflective-glow-in-the-dark.jpg?v=1692905056' },
+      { name: 'Pro IR', img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/pro-ir.jpg?v=1692905056' },
+      { name: 'Reflective + Glow-in-the-Dark', img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/reflective-glow-in-the-dark.jpg?v=1692905056' },
       { name: 'Glow in the Dark', img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/glow-in-the-dark.jpg?v=1692905056' },
       { name: 'Flat Black', img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/flat-black.jpg?v=1692905056' },
       { name: 'Flat White', img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/flat-white.jpg?v=1692905056' },
@@ -2662,7 +2654,7 @@ function initLazerCutFlags() {
           "rebel-alliance.png",
           "russia.png",
           "scotland.png",
-          "signapore.png",
+          "singapore.png",
           "sons-of-liberty.png",
           "south-africa.png",
           "south-carolina.png",
@@ -2678,7 +2670,7 @@ function initLazerCutFlags() {
           "united-kingdom.png",
           "usa.png",
           "utah.png",
-          "veitnam.png",
+          "vietnam.png",
           "venezuela.png"
         ];
         break;
@@ -2760,7 +2752,7 @@ function initLazerCutFlags() {
           "rebel-alliance.png",
           "russia.png",
           "scotland.png",
-          "signapore.png",
+          "singapore.png",
           "sons-of-liberty.png",
           "south-africa.png",
           "south-carolina.png",
@@ -2778,7 +2770,7 @@ function initLazerCutFlags() {
           "united-kingdom.png",
           "usa.png",
           "utah.png",
-          "veitnam.png",
+          "vietnam.png",
           "venezuela.png"
         ];
         break;
@@ -2786,7 +2778,8 @@ function initLazerCutFlags() {
     const formattedArray = imageList.map(image => {
       const name = image.replace(".png", "");
       const titleCaseName = name.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
-      const formattedName = titleCaseName.replace(" Lc ", "").replace("Uk", "UK").replace("Usa", "USA");
+      const formattedName = titleCaseName.replace(" Lc ", "").replace("Usa", "USA");
+    //  const formattedName = titleCaseName.replace(" Lc ", "").replace("Uk", "UK").replace("Usa", "USA");
       return {
         name: formattedName,
         img: `${folder}${key}-lc-${name}-img.png${end}`,
@@ -2800,7 +2793,43 @@ function initLazerCutFlags() {
   return lazerObj;
 }
 
-console.log(builderData.imgs["lazer-cut"]);
+// const upsellSizesSet = new Set();
+// const upsellGlowSet = new Set();
+// const upsellHiVisSet = new Set();
+// const upsellBadgeSet = new Set();
+
+// for (const type in builderData.type) {
+//   const config = builderData.type[type].config;
+//   if (config && config.sizes) {
+//     for (const sizeObj of config.sizes) {
+//       if (sizeObj.upsells && sizeObj.upsells.size) {
+//         upsellSizesSet.add(sizeObj.upsells.size);
+//       }
+//       if (sizeObj.upsells && sizeObj.upsells.glowInTheDark) {
+//         upsellGlowSet.add(sizeObj.upsells.glowInTheDark);
+//       }
+//       if (sizeObj.upsells && sizeObj.upsells.hiVis) {
+//         upsellHiVisSet.add(sizeObj.upsells.hiVis);
+//       }
+//       if (sizeObj.upsells && sizeObj.upsells.badge) {
+//         upsellBadgeSet.add(sizeObj.upsells.badge);
+//       }
+//     }
+//   }
+// }
+
+// const upsellSizes = Array.from(upsellSizesSet).sort((a, b) => a - b);
+// const upsellGlow = Array.from(upsellGlowSet).sort((a, b) => a - b);
+// const upsellHiVis = Array.from(upsellHiVisSet).sort((a, b) => a - b);
+// const upsellBadge = Array.from(upsellBadgeSet).sort((a, b) => a - b);
+
+// console.log(upsellSizes);
+// console.log(upsellGlow);
+// console.log(upsellHiVis);
+// console.log(upsellBadge);
+
+
+// console.log(builderData.imgs["lazer-cut"]);
 export default builderData;
 
 
@@ -2897,7 +2926,7 @@ export default builderData;
 //   "rebel-alliance.png",
 //   "russia.png",
 //   "scotland.png",
-//   "signapore.png",
+//   "singapore.png",
 //   "sons-of-liberty.png",
 //   "south-africa.png",
 //   "south-carolina.png",
@@ -2923,7 +2952,7 @@ export default builderData;
 //   "usa.png",
 //   //"usmc-ega.png",//
 //   "utah.png",
-//   "veitnam.png",
+//   "vietnam.png",
 //   //"vader-wants-you.png",//
 //   "venezuela.png"
 // ];

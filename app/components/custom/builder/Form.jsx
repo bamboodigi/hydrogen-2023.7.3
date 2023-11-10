@@ -21,8 +21,18 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
     saberOptions,
   } = methods.data;
 
+  let newIRFontName = 'Pro IR - +$' + formData.price.upsells.proIRFontColor + '(USD)';
+  let newReflectiveGlowFontName = 'Reflective + Glow-in-the-Dark - +$' + formData.price.upsells.reflectiveGlowFontColor + '(USD)';
 
-
+  const newFontColors = fontColors.map((color) => {
+    if (color.name === 'Pro IR') {
+      return { ...color, name: newIRFontName };
+    }
+    if (color.name === 'Reflective + Glow-in-the-Dark') {
+      return { ...color, name: newReflectiveGlowFontName };
+    }
+    return color;
+  });
 
   const patchType = methods.helpers.get.patchType(product);
 
@@ -67,7 +77,6 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
     default:
       break;
   }
-
 
   let tempStepObj = {
     steps: tempSteps,
@@ -120,13 +129,22 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
   const handleFlagTypeChange = (event) => {
     // Find the selected type from data array
     // console.log(event.target);
-    //  console.log(event.target.value);
+    // console.log(event.target.value);
+    // console.log(methods.helpers.is.flagType.hiVisFlag(formData));
+
     setFormData({
-      ...formData, img: {
+      ...formData,
+      img: {
         ...formData.img,
-        type: event.target.value
+        type: event.target.value,
+      },
+      upsells: {
+        ...formData.upsells,
+        hiVis: () => event.target.value.toLowerCase() === "hivis flag",
+        badge: () => event.target.value.toLowerCase() === "upload",
       }
     });
+
   };
 
   const handleSaberTypeChange = (event) => {
@@ -201,27 +219,27 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
     setFormData({ ...formData, lightsaber: { ...formData.lightsaber, blade: { ...formData.lightsaber.blade, name: obj.name, color: obj.img } }, upsells: { ...formData.upsells, proIRFontColor: isProIR, reflectiveGlowFontColor: isReflectiveGlow } });
 
   };
-  
-    // Define a function to handle the change of the font text color dropdown menu
-    const handleRingColorChange = (event) => {
-      // Find the selected font text color from data array
-      const obj = fontColors.find(value => value.name === event.name);
-      var isProIR = false;
-      var isReflectiveGlow = false;
-  
-      if (event.name.includes("Pro IR")) {
-        isProIR = true;
-      }
-      if (event.name.includes("Reflective + Glow")) {
-        isReflectiveGlow = true;
-      }
-  
-      // Set the form data with the selected font text color and its image
-      //setFormData({ ...formData, hiltColorImg: obj.img, proIRFontColor: isProIR, reflectiveGlowFontColor: isReflectiveGlow });
-      setFormData({ ...formData, img: { ...formData.img, division: { ...formData.img.division, ring: { ...formData.img.division.ring, color: { ...formData.img.division.ring.color,  name: obj.name, img: obj.img }} }}, upsells: { ...formData.upsells, proIRFontColor: isProIR, reflectiveGlowFontColor: isReflectiveGlow } });
-    };
 
-  
+  // Define a function to handle the change of the font text color dropdown menu
+  const handleRingColorChange = (event) => {
+    // Find the selected font text color from data array
+    const obj = fontColors.find(value => value.name === event.name);
+    var isProIR = false;
+    var isReflectiveGlow = false;
+
+    if (event.name.includes("Pro IR")) {
+      isProIR = true;
+    }
+    if (event.name.includes("Reflective + Glow")) {
+      isReflectiveGlow = true;
+    }
+
+    // Set the form data with the selected font text color and its image
+    //setFormData({ ...formData, hiltColorImg: obj.img, proIRFontColor: isProIR, reflectiveGlowFontColor: isReflectiveGlow });
+    setFormData({ ...formData, img: { ...formData.img, division: { ...formData.img.division, ring: { ...formData.img.division.ring, color: { ...formData.img.division.ring.color, name: obj.name, img: obj.img } } } }, upsells: { ...formData.upsells, proIRFontColor: isProIR, reflectiveGlowFontColor: isReflectiveGlow } });
+  };
+
+
 
   // Define a function to handle the change of the text input field
   const handleTextChange = (event) => {
@@ -260,8 +278,11 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
   // Define a function to handle the change of the size dropdown menu
   const handleSizeChange = (event) => {
     const obj = patchType.config;
+
     //  console.log(obj.sizes);
     const objSizes = obj.sizes.find(value => value.size === event.target.value);
+
+    console.log(objSizes.upsells.size);
     // Get the current size key from the event target value
     const sizeKey = convertSizeString(event.target.value);
     //  console.log(sizeKey);
@@ -313,6 +334,16 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
         // });
         setFormData({
           ...formData,
+          price: {
+            ...formData.price,
+            upsells: {
+              ...formData.price.upsells,
+              size: objSizes.upsells.size,
+              glowBorder: objSizes.upsells.glowInTheDark || 0,
+              hiVis: objSizes.upsells.hiVis || 0,
+              badge: objSizes.upsells.badge || 0,
+            },
+          },
           img: {
             ...formData.img,
             name: symbols['medical patch']["1 x 1"][0].name,
@@ -344,6 +375,16 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
         // setFlagStyle(prevStyle => ({ ...prevStyle, transform: `scaleX(1.25)` }));
         setFormData({
           ...formData,
+          price: {
+            ...formData.price,
+            upsells: {
+              ...formData.price.upsells,
+              size: objSizes.upsells.size,
+              glowBorder: objSizes.upsells.glowInTheDark || 0,
+              hiVis: objSizes.upsells.hiVis || 0,
+              badge: objSizes.upsells.badge || 0,
+            },
+          },
           img: {
             ...formData.img,
             name: symbols['medical patch']["2 x 2"][0].name,
@@ -377,6 +418,16 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
         // });
         setFormData({
           ...formData,
+          price: {
+            ...formData.price,
+            upsells: {
+              ...formData.price.upsells,
+              size: objSizes.upsells.size,
+              glowBorder: objSizes.upsells.glowInTheDark || 0,
+              hiVis: objSizes.upsells.hiVis || 0,
+              badge: objSizes.upsells.badge || 0,
+            },
+          },
           img: {
             ...formData.img,
             name: symbols['medical patch']["2 x 2"][0].name,
@@ -409,6 +460,18 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
     else {
       setFormData({
         ...formData,
+        price: {
+          ...formData.price,
+          upsells: {
+            ...formData.price.upsells,
+            size: objSizes.upsells.size,
+            glowBorder: objSizes.upsells.glowInTheDark || 0,
+            hiVis: objSizes.upsells.hiVis || 0,
+            badge: objSizes.upsells.badge || 0,
+            proIRFontColor: methods.helpers.get.fontUpsell(event.target.value) || 0,
+            reflectiveGlowFontColor: methods.helpers.get.fontUpsell(event.target.value) || 0,
+          },
+        },
         size: {
           ...formData.size,
           current: event.target.value
@@ -441,9 +504,10 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
   // Define a function to handle the change of the font text color dropdown menu
   const handleTextColorChange = (event) => {
     // Find the selected font text color from data array
-    const obj = fontColors.find(value => value.name === event.name);
-    var isProIR = false;
-    var isReflectiveGlow = false;
+    // console.log(event);
+    const obj = fontColors.find(value => value.img === event.img);
+    let isProIR = false;
+    let isReflectiveGlow = false;
 
     if (event.name.includes("Pro IR")) {
       isProIR = true;
@@ -633,6 +697,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
     //  setFormData({ ...formData, flagEnabled: event.target.checked });
     setFormData({
       ...formData,
+      upsells: { ...formData.upsells, hiVis: event.target.checked },
       img: { ...formData.img, enabled: event.target.checked }
     });
   };
@@ -650,13 +715,19 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
     }
     // console.log(formData.type.toLowerCase());
     // dynamically update steps
+    let glowLabelStart = "Add a glow in the dark border? + $";
+    let glowLabelEnd = " USD";
+    let glowAmount = formData.price.upsells.glowBorder;
+
+    const glowLabel = glowLabelStart + glowAmount + glowLabelEnd;
+    console.log(glowAmount)
+    let formTempObj = {};
     switch (formData.type.toLowerCase()) {
       case 'id panel':
         // check glowborder then update
-        //    console.log("yes");
-        let formTempObj = {
+        formTempObj = {
           id: 'glowInTheDark',
-          label: 'Add a glow in the dark border? +$10 USD',
+          label: glowLabel,
           type: 'checkmark',
           placeholder: '',
         };
@@ -1133,7 +1204,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
                         value={formData.text.color.name}
                         img={formData.text.color.img}
                         onChange={handleTextColorChange}
-                        options={fontColors}
+                        options={newFontColors}
                       />
                     </>
                   ) : input.id.toLowerCase() == "backgroundcolor" ? (
@@ -1281,7 +1352,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
                         </select>
                       </div>
                     </>
-                    
+
                   ) : input.id.toLowerCase() == "ringcolor" ? (
                     console.log(formData.img.division.ring.img),
                     <>
@@ -1292,7 +1363,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
                         value={formData.img.division.ring.color.name}
                         img={formData.img.division.ring.color.img}
                         onChange={handleRingColorChange}
-                        options={fontColors}
+                        options={newFontColors}
                       />
                     </>
                   ) : input.id.toLowerCase() == "hiltcolor" ? (
@@ -1304,7 +1375,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
                         value={formData.lightsaber.hilt.name}
                         img={formData.lightsaber.hilt.color}
                         onChange={handleHiltColorChange}
-                        options={fontColors}
+                        options={newFontColors}
                       />
                     </>
                   ) : input.id.toLowerCase() == "bladecolor" ? (
@@ -1316,7 +1387,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
                         value={formData.lightsaber.blade.name}
                         img={formData.lightsaber.blade.color}
                         onChange={handleBladeColorChange}
-                        options={fontColors}
+                        options={newFontColors}
                       />
                     </>
                   ) : input.id.toLowerCase() == "flagenabled" ? (
@@ -1374,7 +1445,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
                         </div>
                         <div className="text-sm leading-4">
                           <label htmlFor="agreeLeadTime" className="ml-3 font-medium">
-                            Add a glow in the dark border? +$10 USD
+                            Add a glow in the dark border? +${formData.price.upsells.glowBorder} USD
                           </label>
                         </div>
                       </div>

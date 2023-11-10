@@ -2364,7 +2364,7 @@ function Form({ formData, setFormData, data, config, product }) {
                         value={formData.text.color.name}
                         img={formData.text.color.img}
                         onChange={handleTextColorChange}
-                        options={fontColors}
+                        options={newFontColors}
                       />
                     </>
                   ) : input.id.toLowerCase() == "backgroundcolor" ? (
@@ -2485,7 +2485,7 @@ function Form({ formData, setFormData, data, config, product }) {
                         value={formData.lightsaber.hilt.name}
                         img={formData.lightsaber.hilt.color}
                         onChange={handleHiltColorChange}
-                        options={fontColors}
+                        options={newFontColors}
                       />
                     </>
                   ) : input.id.toLowerCase() == "bladecolor" ? (
@@ -2497,7 +2497,7 @@ function Form({ formData, setFormData, data, config, product }) {
                         value={formData.lightsaber.blade.name}
                         img={formData.lightsaber.blade.color}
                         onChange={handleBladeColorChange}
-                        options={fontColors}
+                        options={newFontColors}
                       />
                     </>
                   ) : input.id.toLowerCase() == "ringcolor" ? (
@@ -2509,7 +2509,7 @@ function Form({ formData, setFormData, data, config, product }) {
                         value={formData.symbol.name}
                         img={formData.lightsaber.blade.color}
                         onChange={handleBladeColorChange}
-                        options={fontColors}
+                        options={newFontColors}
                       />
                     </>
                   ) : input.id.toLowerCase() == "flagenabled" ? (

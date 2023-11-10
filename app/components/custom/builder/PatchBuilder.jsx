@@ -1,5 +1,5 @@
 // Import React hooks and components
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import React from 'react';
 import { useLoaderData } from '@remix-run/react';
 
@@ -28,10 +28,15 @@ export function PatchBuilder({ product, config, ...props }) {
   // Set initial state of FormData with useState hook
   const [formData, setFormData] = useState(initFormData(product));
 
+  useEffect(() => {
+    builderObj.helpers.update.totalPrice(formData, setFormData);
+  }, [formData.img.enabled, formData.size.current, formData.formValidation.agreement, formData.upsells.glowBorder, formData.upsells.proIRFontColor, formData.upsells.reflectiveGlowFontColor, formData.upsells.hiVis, formData.upsells.badge]);
+
   // Define a variable that sets a prestyle object with a width property
   var prestyle = {
     width: '100%'
   };
+
 
   return (
     <>
