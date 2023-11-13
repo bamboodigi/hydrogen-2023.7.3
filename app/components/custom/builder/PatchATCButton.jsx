@@ -35,38 +35,38 @@ export function PatchATCButton({ formData, className, config, currentStep, steps
           attributes: getAttributes(),
         }
       ];
-      if (formData.img.markType === "HiVis Flag") {
+      // if (formData.img.markType === "HiVis Flag") {
   
-        lines.push({
-          merchandiseId: addOnVariantIDs["hi-vis"],
-          quantity: 1,
-        });
-      }
-      if (formData.upsells.glowBorder) {
+      //   lines.push({
+      //     merchandiseId: addOnVariantIDs["hi-vis"],
+      //     quantity: 1,
+      //   });
+      // }
+      // if (formData.upsells.glowBorder) {
   
-        lines.push({
-          merchandiseId: addOnVariantIDs["glow-border"],
-          quantity: 1,
-        });
-      }
-      if (formData.text.color.name.includes("Pro IR")) {
-        lines.push({
-          merchandiseId: addOnVariantIDs["pro-ir-font-color"],
-          quantity: 1,
-        });
-      }
-      if (formData.text.color.name.includes("Reflective + Glow")) {
-        lines.push({
-          merchandiseId: addOnVariantIDs["reflective-glow-font-color"],
-          quantity: 1,
-        });
-      }
+      //   lines.push({
+      //     merchandiseId: addOnVariantIDs["glow-border"],
+      //     quantity: 1,
+      //   });
+      // }
+      // if (formData.text.color.name.includes("Pro IR")) {
+      //   lines.push({
+      //     merchandiseId: addOnVariantIDs["pro-ir-font-color"],
+      //     quantity: 1,
+      //   });
+      // }
+      // if (formData.text.color.name.includes("Reflective + Glow")) {
+      //   lines.push({
+      //     merchandiseId: addOnVariantIDs["reflective-glow-font-color"],
+      //     quantity: 1,
+      //   });
+      // }
   
       return lines;
     }
     function getAttributes() {
       const arr = [];
-      // console.log(formData);
+    
       arr.push(
         { key: "Size", value: formData.size.current },
         { key: "Price", value: formData.price.total + "" },
@@ -79,7 +79,7 @@ export function PatchATCButton({ formData, className, config, currentStep, steps
         { key: "Glow Border", value: formData.upsells.glowBorder ? "Yes" : "No" },
         { key: "Blood Type and Allergies", value: formData.text.secondary.text || "Left Blank" },
         { key: "I agree to the Lead Time", value: formData.formValidation.agreement ? "Yes" : "No" },
-        { key: "Pricing", value: formData.price.upsellPricing },
+        { key: "Pricing", value: formData.price.upsellPricing || "" },
       );
   
       return arr;

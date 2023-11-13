@@ -204,7 +204,7 @@ function CartLineItem({ line }) {
   const length = parseInt(size?.value?.match(/\d+/g)[0]);
   let isAddon = line.merchandise?.product.handle.includes("add-on");
   const glowBorder = attributes.find((attribute) => attribute.key === 'Glow Border');
-  const upsellPricing = attributes.find((attribute) => attribute.key === 'Pricing').value || '';
+  const upsellPricing = attributes.find((attribute) => attribute.key === 'Pricing')?.value || '';
   var newTitle = '';
 
   console.log(typeof upsellPricing);
@@ -293,7 +293,7 @@ function CartLineItem({ line }) {
                 <>
                   <div className="flex justify-between">
                     <Text className="font-semibold text-xs sm:text-copy">with HiVis Flag</Text>
-                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+$4</span>
+                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ $4</span>
                   </div>
                 </>
               ) : markType?.value.includes("Lazer Cut") ? (
@@ -312,13 +312,13 @@ function CartLineItem({ line }) {
               </div>
               <div className="flex justify-between">
                 <Text className="font-semibold text-xs sm:text-copy">Size</Text>
-                <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+${priceObj.size ? priceObj.size : '0'}</span>
+                <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ ${priceObj.size ? priceObj.size : '0'}</span>
               </div>
               {priceObj.hiVis && (
                 <>
                   <div className="flex justify-between">
                     <Text className="font-semibold text-xs sm:text-copy">HiVis Flag</Text>
-                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+${priceObj.hiVis}</span>
+                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ ${priceObj.hiVis}</span>
                   </div>
                 </>
               )}
@@ -326,15 +326,15 @@ function CartLineItem({ line }) {
                 <>
                   <div className="flex justify-between">
                     <Text className="font-semibold text-xs sm:text-copy">Upload</Text>
-                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+${priceObj.badge}</span>
+                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ ${priceObj.badge}</span>
                   </div>
                 </>
               )}
-              {/* {proIRFontColor && (
+              {proIRFontColor && (
                 <>
                   <div className="flex justify-between">
                     <Text className="font-semibold text-xs sm:text-copy">Pro IR Font Color</Text>
-                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+${jsonObject.proIRFontColor ? jsonObject.proIRFontColor : '0'}</span>
+                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ ${priceObj.proIRFontColor }</span>
                   </div>
                 </>
               )}
@@ -342,18 +342,18 @@ function CartLineItem({ line }) {
                 <>
                   <div className="flex justify-between">
                     <Text className="font-semibold text-xs sm:text-copy">Reflective / Glow Font Color</Text>
-                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+${jsonObject.reflectiveGlowFontColor ? jsonObject.reflectiveGlowFontColor : '0'}</span>
+                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ ${priceObj.reflectiveGlowFontColor }</span>
                   </div>
                 </>
-              )} */}
-              {/* {glowBorder?.value === "Yes" && (
+              )}
+              {glowBorder?.value === "Yes" && (
                 <>
                   <div className="flex justify-between">
                     <Text className="font-semibold text-xs sm:text-copy">Glow Border</Text>
-                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+${priceObj.glowBorder}</span>
+                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ ${priceObj.glowBorder}</span>
                   </div>
                 </>
-              )} */}
+              )}
               {/* <div className="grid pb-2">
                        {(merchandise?.selectedOptions || []).map((option) => (
                          <Text color="subtle" key={option.name}>

@@ -127,6 +127,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
   // };
 
   const handleFlagTypeChange = (event) => {
+    console.log(event.target.value.toLowerCase());
     // Find the selected type from data array
     // console.log(event.target);
     // console.log(event.target.value);
@@ -140,8 +141,8 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
       },
       upsells: {
         ...formData.upsells,
-        hiVis: () => event.target.value.toLowerCase() === "hivis flag",
-        badge: () => event.target.value.toLowerCase() === "upload",
+        hiVis: event.target.value.toLowerCase() === "hivis flag",
+        badge: event.target.value.toLowerCase() === "upload",
       }
     });
 

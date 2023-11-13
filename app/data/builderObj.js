@@ -718,6 +718,7 @@ const builderObj = {
         }
         // go through each property in statusObj obj and if it is true add the same property name in upsells object
         for (const [key, value] of Object.entries(statusObj)) {
+
           if(value){
             totalPrice += upsells[key];
             upsellsObj[key] = upsells[key];
