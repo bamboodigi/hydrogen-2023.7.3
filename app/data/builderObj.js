@@ -9,13 +9,14 @@ const builderObj = {
 
       let formData = {
         type: patchType.name || '',
+        id : patchType.name.toLowerCase() || '',
         formValidation: {
           agreement: false,
         },
         price: {
           amount: parseInt(product.variants.nodes[0].price.amount),
           total: parseInt(product.variants.nodes[0].price.amount),
-          upsells : {
+          upsells: {
             size: patchType.config.sizes[0].upsells.size || 0,
             glowBorder: patchType.config.sizes[0].upsells.glowInTheDark || 0,
             hiVis: patchType.config.sizes[0].upsells.hiVis || 0,
@@ -201,7 +202,11 @@ const builderObj = {
           formData.price.total += 4;
           break;
       }
-    //  console.log(formData);
+
+      if(formData.price.upsells.size) {
+        
+      }
+      //  console.log(formData);
       // console.log(formData);
       return formData || {};
     },
@@ -461,31 +466,181 @@ const builderObj = {
       },
       upsells: function (product, size) {
         const patchType = this.patchType(product);
-  //      console.log(patchType);
+        //      console.log(patchType);
         const config = patchType.config;
-  //      console.log(config);
+        //      console.log(config);
 
         const sizeObj = config.sizes.find(value => value.size == size);
 
-   //     console.log(sizeObj);
+        //     console.log(sizeObj);
         return sizeObj?.upsells;
       },
-      fontUpsell : function (size) {
+      fontUpsell: function (size) {
         const [lengthStr, heightStr] = size.split("x").map(str => str.trim());
         const length = parseInt(lengthStr);
         const height = parseInt(heightStr);
         let max = Math.max(length, height);
         let result = 0;
-        if(max <= 5){
+        if (max <= 5) {
           result = 7;
-        } else if(max > 5 && max <= 7){
+        } else if (max > 5 && max <= 7) {
           result = 12;
-        } else if(max > 7 && max <= 9){
+        } else if (max > 7 && max <= 9) {
           result = 17;
         } else {
           result = 25;
         }
         return result;
+      },
+      addOnObj: function (product) {
+        return {
+          "glow-border": {
+            "name": "Add-on - Glow Border",
+            "variants": [
+              {
+                "id": "gid://shopify/ProductVariant/42893374390430",
+                "value": "5"
+              },
+              {
+                "id": "gid://shopify/ProductVariant/42908600729758",
+                "value": "10"
+              },
+              {
+                "id": "gid://shopify/ProductVariant/42893374554270",
+                "value": "15"
+              },
+              {
+                "id": "gid://shopify/ProductVariant/42908600762526",
+                "value": "20"
+              }
+            ]
+          },
+          "hivis-flag": {
+            "name": "Add-on - HiVis Flag",
+            "variants": [
+              {
+                "id": "gid://shopify/ProductVariant/42893372719262",
+                "value": "3"
+              },
+              {
+                "id": "gid://shopify/ProductVariant/42893372752030",
+                "value": "4"
+              },
+              {
+                "id": "gid://shopify/ProductVariant/42893372784798",
+                "value": "5"
+              }
+            ]
+          },
+          "pro-ir-font-color": {
+            "name": "Add-on - Pro IR Font Color",
+            "variants": [
+              {
+                "id": "gid://shopify/ProductVariant/42893371572382",
+                "value": "7"
+              },
+              {
+                "id": "gid://shopify/ProductVariant/42893371605150",
+                "value": "12"
+              },
+              {
+                "id": "gid://shopify/ProductVariant/42893371637918",
+                "value": "17"
+              },
+              {
+                "id": "gid://shopify/ProductVariant/42893371670686",
+                "value": "25"
+              }
+            ]
+          },
+          "reflective-glow-font-color": {
+            "name": "Add-on - Reflective & Glow Font Color",
+            "variants": [
+              {
+                "id": "gid://shopify/ProductVariant/42893372162206",
+                "value": "7"
+              },
+              {
+                "id": "gid://shopify/ProductVariant/42893372194974",
+                "value": "12"
+              },
+              {
+                "id": "gid://shopify/ProductVariant/42893372227742",
+                "value": "17"
+              },
+              {
+                "id": "gid://shopify/ProductVariant/42893372260510",
+                "value": "25"
+              }
+            ]
+          },
+          "badge": {
+            "name": "Add-on - Badge",
+            "variants": [
+              {
+                "id": "gid://shopify/ProductVariant/42893376127134",
+                "value": "25"
+              }
+            ]
+          },
+          "size": {
+            "name": "Add-on - Size",
+            "variants": [
+              {
+                "id": "gid://shopify/ProductVariant/42908592308382",
+                "value": "1"
+              },
+              {
+                "id": "gid://shopify/ProductVariant/42908592341150",
+                "value": "2"
+              },
+              {
+                "id": "gid://shopify/ProductVariant/42908592406686",
+                "value": "3"
+              },
+              {
+                "id": "gid://shopify/ProductVariant/42908592439454",
+                "value": "4"
+              },
+              {
+                "id": "gid://shopify/ProductVariant/42908592472222",
+                "value": "5"
+              },
+              {
+                "id": "gid://shopify/ProductVariant/42908592504990",
+                "value": "8"
+              },
+              {
+                "id": "gid://shopify/ProductVariant/42908592537758",
+                "value": "9"
+              },
+              {
+                "id": "gid://shopify/ProductVariant/42908592570526",
+                "value": "13"
+              },
+              {
+                "id": "gid://shopify/ProductVariant/42908592603294",
+                "value": "14"
+              },
+              {
+                "id": "gid://shopify/ProductVariant/42908592636062",
+                "value": "15"
+              },
+              {
+                "id": "gid://shopify/ProductVariant/42908592668830",
+                "value": "17"
+              },
+              {
+                "id": "gid://shopify/ProductVariant/42908592701598",
+                "value": "24"
+              },
+              {
+                "id": "gid://shopify/ProductVariant/42908592734366",
+                "value": "41"
+              }
+            ]
+          }
+        };
       },
     },
     update: {
@@ -699,27 +854,26 @@ const builderObj = {
       // It takes a formData object as an argument
       totalPrice: function (formData, setFormData) {
         // Get the type of the product from the builderObj
-
+        // calclate total price, price obj, and unique id
         let data = formData.price;
-
+        const id = formData.id;
+        let newID = formData.type.toLowerCase().replace(/\s+/g, "-");
         const price = data.amount;
         const upsells = data.upsells;
         const statusObj = formData.upsells;
         let upsellsObj = {};
         let totalPrice = price;
 
-       
-        // console.log(upsells);
-        // console.log(statusObj);
-
-        if(upsells.size) {
+        if (upsells.size) {
+          newID += '-size=' + upsells.size;
           totalPrice += upsells.size;
           upsellsObj.size = upsells.size;
         }
         // go through each property in statusObj obj and if it is true add the same property name in upsells object
         for (const [key, value] of Object.entries(statusObj)) {
 
-          if(value){
+          if (value) {
+            newID += '-' + key.toLowerCase() + '=' + upsells[key];
             totalPrice += upsells[key];
             upsellsObj[key] = upsells[key];
           }
@@ -728,51 +882,8 @@ const builderObj = {
         }
         // console.log("price at end:" + totalPrice);
         const myObjStr = JSON.stringify(upsellsObj);
-        console.log(myObjStr);
-        setFormData({ ...formData, price: { ...formData.price, total: totalPrice, upsellPricing: myObjStr } });
-
-
-        // Create a priceObj object with the base price and upsell prices for the product
-        // const priceObj = {
-        //   basePrice: data.amount || 0,
-        //   sizeObj: builderData.type[type].config.sizes.find(value => value.size == formData.size.current) || 0,
-        //   sizeUpsell: sizeObj?.sizeUpsell || 0,
-        //   glowInTheDarkUpsell: sizeObj?.glowInTheDark || 0,
-        //   hiVisUpsell: sizeObj?.hiVis || 0,
-        //   badgeUpsell: sizeObj?.badge || 0,
-        //   proIRFontColorUpsell: sizeObj?.proIRFontColor || 0,
-        //   reflectiveGlowFontColorUpsell: sizeObj?.reflectiveGlowFontColor || 0,
-        //   policeIDUpsell: sizeObj?.policeID || 0,
-        // };
-
-        // Initialize the price variable with the base price
-
-        // Add the size upsell to the price
-        // price += sizeUpsell;
-
-        // // Add the glow in the dark upsell to the price if selected
-        // if (formData.upsells.glowBorder) {
-        //   price += priceObj.glowInTheDarkUpsell;
-        // }
-
-        // // Add the pro IR font color upsell to the price if selected
-        // if (formData.upsells.proIRFontColor) {
-        //   price += 5;
-        // }
-
-        // // Add the badge or hi-vis upsell to the price if an image is enabled
-        // if (formData.img.enabled) {
-        //   if (formData.img.type.toLowerCase() == 'lazer cut flag') {
-        //     // Do nothing
-        //   } else if (formData.img.type.toLowerCase() == 'hivis flag') {
-        //     price += priceObj.hiVisUpsell;
-        //   } else {
-        //     price += priceObj.badgeUpsell;
-        //   }
-
-        //   // Set the total price in the formData object
-        //   formData.price.total = price;
-        // }
+        //  console.log(myObjStr);
+        setFormData({ ...formData, id: newID, price: { ...formData.price, total: totalPrice, upsellPricing: myObjStr } });
       },
       formElement: function (element, trigger, steps) {
         // console.log(element);
@@ -793,14 +904,14 @@ const builderObj = {
         function addElement(element) {
           // check if element already exists, if not add element
           if (foundElement) {
-        //    console.log('element already exists');
+            //    console.log('element already exists');
           } else {
             if (element.id === 'glowInTheDark') {
-        //      console.log("ok");
+              //      console.log("ok");
               let lastElement = steps[steps.length - 1];
-         //     console.log(lastElement);
+              //     console.log(lastElement);
               lastElement.input.unshift(element);
-         //     console.log(steps);
+              //     console.log(steps);
             }
           }
         }
@@ -809,16 +920,105 @@ const builderObj = {
           // check if element already exists, if so remove element
           if (foundElement) {
             if (element.id === 'glowInTheDark') {
-           //   console.log("ok");
+              //   console.log("ok");
               let lastElement = steps[steps.length - 1];
-          //    console.log(lastElement);
+              //    console.log(lastElement);
               lastElement.input.shift();
-          //   console.log(steps);
+              //   console.log(steps);
             }
           } else {
           }
         }
-      }
+      },
+      addOn: {
+        add: function (formData) {
+
+          // get data of upsell objects
+          const upsells = formData.price.upsells;
+          const statusObj = formData.upsells;
+          // arr to store addon project objects for
+          let addOnArr = [];
+
+
+
+
+          // console.log(upsells);
+          // console.log(statusObj);
+
+          if (upsells.size) {
+            let obj = {};
+            obj.merchandiseId = getAddOnGID(builderObj.helpers.get.addOnObj, 'size', upsells.size).id;
+            obj.quantity = 1;
+            obj.attributes = [
+              {
+                key: "productID",
+                value: formData.id,
+              }
+            ];
+            // push obj to addonarr
+            addOnArr.push(obj);
+          }
+          // go through each property in statusObj obj and if it is true add the same property name in upsells object
+          for (const [key, value] of Object.entries(statusObj)) {
+            console.log("key");
+            let type = "";
+            switch (key) {
+              case 'glowBorder':
+                type = 'glow-border';
+                break;
+              case 'hiVis':
+                type = 'hivis-flag';
+                break;
+              case 'proIRFontColor':
+                type = 'pro-ir-font-color';
+                break;
+              case 'reflectiveGlowFontColor':
+                type = 'reflective-glow-font-color';
+                break;
+              case 'badge':
+                type = 'badge';
+                break;
+            }
+            if (value) {
+              console.log(key);
+              console.log(upsells);
+              let obj = {};
+              obj.merchandiseId = getAddOnGID(builderObj.helpers.get.addOnObj, type, upsells[key]).id;
+              obj.quantity = 1;
+              obj.attributes = [
+                {
+                  key: "productID",
+                  value: formData.id,
+                }
+              ];
+              // push obj to addonarr
+              addOnArr.push(obj);
+            }
+          }
+
+          return addOnArr;
+
+          function getAddOnGID(addOnObj, handle, value) {
+            let addOn = addOnObj()[handle];
+
+            // console.log(addOnObj());
+            // console.log(addOn);
+            // console.log(handle);
+            // console.log(value);
+
+
+            if (!addOn) {
+              return null;
+            }
+
+            let variant = addOn.variants.find(v => parseInt(v.value) === value);
+
+            return variant || null;
+          }
+        },
+        remove: function (line_item) {
+        }
+      },
     },
     is: {
       glowBorder: function (type, size, sizeEnabled) {

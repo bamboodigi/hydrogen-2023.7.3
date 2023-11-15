@@ -65,10 +65,10 @@ const builderData = {
             },
             flagEnabled: true,
             upsells: {
-              size: 0,
+              size: 2,
               glowInTheDark: 5,
-              hiVis: 0,
-              badge: 0,
+              hiVis: 3,
+              badge: 25,
             }
           },
           {
@@ -582,6 +582,7 @@ const builderData = {
             flagEnabled: true,
             upsells: {
               size: 0,
+              glowInTheDark: 5,
             }
           },
           {
@@ -596,6 +597,7 @@ const builderData = {
             flagEnabled: true,
             upsells: {
               size: 3,
+              glowInTheDark: 5,
             }
           },
           {
@@ -610,6 +612,7 @@ const builderData = {
             flagEnabled: true,
             upsells: {
               size: 9,
+              glowInTheDark: 5,
             }
           },
         ],

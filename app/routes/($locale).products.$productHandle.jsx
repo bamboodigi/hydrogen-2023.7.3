@@ -34,7 +34,7 @@ import { StarIcon } from '@heroicons/react/20/solid'
 import { getExcerpt } from '~/lib/utils';
 import { seoPayload } from '~/lib/seo.server';
 import { CACHE_LONG, routeHeaders } from '~/data/cache';
-import { MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT } from '~/data/fragments';
+import { MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT, ADDON_CARD_FRAGMENT } from '~/data/fragments';
 
 import {
   JudgemeMedals,
@@ -72,14 +72,15 @@ export async function loader({ params, request, context }) {
     },
   });
 
-  const addon = await context.storefront.query(PRODUCT_QUERY, {
+
+  const addon = await context.storefront.query(ADDON_PRODUCTS_QUERY, {
     variables: {
-      handle: 'add-on-pro-ir-font-color',
-      selectedOptions,
       country: context.storefront.i18n.country,
       language: context.storefront.i18n.language,
     },
   });
+
+  console.log(addon);
 
   // console.log(addon.product);
   // console.log(addon.product.variants);
@@ -100,6 +101,7 @@ export async function loader({ params, request, context }) {
       language: context.storefront.i18n.language,
     },
   });
+
 
   if (!product?.id) {
     throw new Response('product', { status: 404 });
@@ -137,6 +139,7 @@ export async function loader({ params, request, context }) {
     shop,
     storeDomain: shop.primaryDomain.url,
     recommended,
+    addon,
     analytics: {
       pageType: AnalyticsPageType.product,
       resourceId: product.id,
@@ -191,10 +194,56 @@ const bgColor = "bg-[" + bgColors[0] + "]";
 
 
 export default function Product() {
-  const { product, shop, recommended, variants } = useLoaderData();
+  const { product, shop, recommended, variants, addon } = useLoaderData();
   const { media, title, vendor, descriptionHtml } = product;
   const { shippingPolicy, refundPolicy } = shop;
 
+//console.log(addon.products.nodes);
+
+  let addOnObj = {};
+
+addon.products.nodes.forEach(product => {
+ // console.log(product);
+  const handle = product.handle.replace(/^add-on-/, "");
+  const title = product.title.replace(/^Add On - /, "");
+  const id = product.id;
+  const variants = product.variants.nodes;
+
+  addOnObj[handle] = {};
+  addOnObj[handle].name = title;
+  addOnObj[handle].variants = [];
+
+  // console.log(handle);
+  // console.log(title);
+  // console.log(id);
+  // console.log(variants);
+
+  variants.forEach(variant => {
+    let variantObj = {};
+    const variantId = variant.id;
+    const value = variant.selectedOptions[0].value;
+    // console.log(id);
+    // console.log(value);
+    variantObj.id = variantId;
+    variantObj.value = value;
+
+    addOnObj[handle].variants.push(variantObj);
+  });
+
+  // if (!addOnObj[name]) {
+  //   addOnObj[name] = {
+  //     name: variant.product.title,
+  //     variants: []
+  //   };
+  // }
+
+  // addOnObj[name].variants.push({
+  //   id: id,
+  //   value: value
+  // });
+});
+
+console.log(addOnObj);
   useEffect(() => {
     trackViewedProduct(product);
   },[]);
@@ -672,6 +721,20 @@ const PRODUCT_QUERY = `#graphql
   ${PRODUCT_VARIANT_FRAGMENT}
 `;
 
+// @see: https://shopify.dev/api/storefront/2023-07/queries/products
+const ADDON_PRODUCTS_QUERY = `#graphql
+  ${ADDON_CARD_FRAGMENT}
+  query getProducts( $country: CountryCode, $language: LanguageCode)
+  @inContext(country: $country, language: $language) {
+    products(first: 8, query: "tag:add-on") {
+      nodes {
+        ...ProductCard
+      }
+    }
+  }
+`;
+
+
 const VARIANTS_QUERY = `#graphql
   query variants(
     $country: CountryCode
@@ -707,6 +770,7 @@ const RECOMMENDED_PRODUCTS_QUERY = `#graphql
   }
   ${PRODUCT_CARD_FRAGMENT}
 `;
+
 
 async function getRecommendedProducts(storefront, productId) {
   const products = await storefront.query(RECOMMENDED_PRODUCTS_QUERY, {

@@ -507,7 +507,9 @@ export function Visualizer({ formData, className, methods, ...props }) {
                     ></div>
                   </div>
                 ) : (
-                  <div id="flag" className="w-full" style={flagStyle}></div>
+                  <div id="flag"
+                  className="flex-1 max-h-full max-w-full h-full w-full"
+                  style={flagStyle}></div>
                 )}
               </div>
               <div className="flex flex-col w-1/2 gap-2" style={{}}>
