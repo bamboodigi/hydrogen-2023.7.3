@@ -9,7 +9,7 @@ const builderObj = {
 
       let formData = {
         type: patchType.name || '',
-        id : patchType.name.toLowerCase() || '',
+        id: patchType.name.toLowerCase() || '',
         formValidation: {
           agreement: false,
         },
@@ -203,8 +203,8 @@ const builderObj = {
           break;
       }
 
-      if(formData.price.upsells.size) {
-        
+      if (formData.price.upsells.size) {
+
       }
       //  console.log(formData);
       // console.log(formData);
@@ -939,9 +939,6 @@ const builderObj = {
           // arr to store addon project objects for
           let addOnArr = [];
 
-
-
-
           // console.log(upsells);
           // console.log(statusObj);
 
@@ -960,7 +957,7 @@ const builderObj = {
           }
           // go through each property in statusObj obj and if it is true add the same property name in upsells object
           for (const [key, value] of Object.entries(statusObj)) {
-            console.log("key");
+            //   console.log("key");
             let type = "";
             switch (key) {
               case 'glowBorder':
@@ -980,8 +977,8 @@ const builderObj = {
                 break;
             }
             if (value) {
-              console.log(key);
-              console.log(upsells);
+              //        console.log(key);
+              //       console.log(upsells);
               let obj = {};
               obj.merchandiseId = getAddOnGID(builderObj.helpers.get.addOnObj, type, upsells[key]).id;
               obj.quantity = 1;
@@ -1016,8 +1013,54 @@ const builderObj = {
             return variant || null;
           }
         },
-        remove: function (line_item) {
-        }
+        remove: function (line, cart) {
+          let arr = [];
+          const { id, attributes } = line;
+          const idTag = attributes.find((attribute) => attribute.key === 'ID')?.value || '';
+
+          arr.push(id);
+          cart.forEach((line) => {
+         //   console.log(line);
+            if (line.attributes.length == 1) {
+            //  console.log(line.attributes[0].value);
+              if (line.attributes[0].value == idTag) {
+              //  console.log(line);
+                arr.push(line.id);
+              }
+            }
+          });
+
+         console.log(arr);
+
+          return arr;
+        },
+        update: function (line, cart, quantity) {
+          console.log(line);
+          console.log(cart);
+          console.log(quantity);
+          let arr = [];
+          const { id, attributes } = line;
+          const idTag = attributes.find((attribute) => attribute.key === 'ID')?.value || '';
+
+          arr.push({ id: id, quantity: quantity, attributes: attributes });
+          cart.forEach((line) => {
+         //   console.log(line);
+            if (line.attributes.length == 1) {
+            //  console.log(line.attributes[0].value);
+              if (line.attributes[0].value == idTag) {
+              //  console.log(line);
+                arr.push({id: line.id, quantity: quantity, attributes:               {
+                  key: "productID",
+                  value: idTag,
+                }});
+              }
+            }
+          });
+
+         console.log(arr);
+
+          return arr;
+        },
       },
     },
     is: {

@@ -80,7 +80,7 @@ export async function loader({ params, request, context }) {
     },
   });
 
-  console.log(addon);
+//  console.log(addon);
 
   // console.log(addon.product);
   // console.log(addon.product.variants);
@@ -243,7 +243,7 @@ addon.products.nodes.forEach(product => {
   // });
 });
 
-console.log(addOnObj);
+//console.log(addOnObj);
   useEffect(() => {
     trackViewedProduct(product);
   },[]);

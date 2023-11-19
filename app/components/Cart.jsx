@@ -13,6 +13,8 @@ import {
 } from '~/components';
 import { getInputStyleClasses } from '~/lib/utils';
 
+import builderObj from '~/data/builderObj.js';
+
 export function Cart({ layout, onClose, cart }) {
   const linesCount = Boolean(cart?.lines?.edges?.length || 0);
 
@@ -133,7 +135,7 @@ function CartLines({ layout = 'drawer', lines: cartLines }) {
     >
       <ul className="grid gap-6 md:gap-10">
         {currentLines.map((line) => (
-          <CartLineItem key={line.id} line={line} />
+          <CartLineItem key={line.id} line={line} cartLines={currentLines} />
         ))}
       </ul>
     </section>
@@ -183,10 +185,11 @@ function CartSummary({ cost, layout, children = null }) {
   );
 }
 
-function CartLineItem({ line }) {
+function CartLineItem({ line, cartLines }) {
   if (!line?.id) return null;
 
   const { id, quantity, merchandise, attributes } = line;
+
 
   // console.log(attributes.length);
 
@@ -194,6 +197,7 @@ function CartLineItem({ line }) {
 
   if (typeof quantity === 'undefined' || !merchandise?.product) return null;
 
+  const removalArr = builderObj.helpers.update.addOn.remove(line, cartLines);
 
   const size = attributes.find((attribute) => attribute.key === 'Size');
   const price = attributes.find((attribute) => attribute.key === 'Price');
@@ -207,23 +211,13 @@ function CartLineItem({ line }) {
   const upsellPricing = attributes.find((attribute) => attribute.key === 'Pricing')?.value || '';
   var newTitle = '';
 
-  console.log(typeof upsellPricing);
+
+  // concat the removalArr with the current line id
+
   let priceObj = {};
   if (typeof upsellPricing === 'string' && upsellPricing.length > 0) {
     priceObj = JSON.parse(upsellPricing);
   }
-  console.log(priceObj);
-  // const myObj = JSON.parse(upsellPricing);
-  // console.log(myObj);
-  // let jsonObject;
-  // try {
-  //   jsonObject = JSON.parse(upsellPricing);
-  //   console.log('The JSON string is valid.');
-  // } catch (error) {
-  //   console.error('The JSON string is not valid:', error.message);
-  // }
-
-  // console.log(jsonObject);
 
   for (var i = 0; i < attributes.length; i++) {
     if (attributes[i].key === 'Size') {
@@ -237,11 +231,10 @@ function CartLineItem({ line }) {
     }
   }
 
-
+  
 
   // console.log(line);
 
-  console.log(line.attributes);
 
   // console.log(size?.value);
   // console.log(price?.value);
@@ -249,7 +242,7 @@ function CartLineItem({ line }) {
   // console.log(length);
   // console.log(markType?.value);
   // console.log(glowBorder?.value);
-  isAddon = false;
+  //isAddon = false;
   return (
     <>
       {!isAddon ? (
@@ -266,9 +259,9 @@ function CartLineItem({ line }) {
             )}
             <div className="flex items-center gap-4 mt-3">
               <div className="flex justify-start text-copy">
-                <CartLineQuantityAdjust line={line} />
+                <CartLineQuantityAdjust line={line} cart={cartLines} />
               </div>
-              <ItemRemoveButton lineIds={[id]} />
+              <ItemRemoveButton lineIds={removalArr} />
             </div>
           </div>
 
@@ -310,10 +303,12 @@ function CartLineItem({ line }) {
                   <CartLinePrice line={line} />
                 </span>
               </div>
+              { priceObj.size && (
               <div className="flex justify-between">
                 <Text className="font-semibold text-xs sm:text-copy">Size</Text>
                 <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ ${priceObj.size ? priceObj.size : '0'}</span>
               </div>
+              )}
               {priceObj.hiVis && (
                 <>
                   <div className="flex justify-between">
@@ -410,11 +405,14 @@ function ItemRemoveButton({ lineIds }) {
   );
 }
 
-function CartLineQuantityAdjust({ line }) {
+function CartLineQuantityAdjust({ line, cart }) {
   if (!line || typeof line?.quantity === 'undefined') return null;
   const { id: lineId, quantity } = line;
   const prevQuantity = Number(Math.max(0, quantity - 1).toFixed(0));
   const nextQuantity = Number((quantity + 1).toFixed(0));
+
+  const prevUpdateArr = builderObj.helpers.update.addOn.update(line, cart, prevQuantity);
+  const nextUpdateArr = builderObj.helpers.update.addOn.update(line, cart, nextQuantity);
 
   return (
     <>
@@ -422,7 +420,7 @@ function CartLineQuantityAdjust({ line }) {
         Quantity, {quantity}
       </label>
       <div className="flex items-center border rounded text-sm">
-        <UpdateCartButton lines={[{ id: lineId, quantity: prevQuantity }]}>
+        <UpdateCartButton lines={prevUpdateArr}>
           <button
             name="decrease-quantity"
             aria-label="Decrease quantity"
@@ -438,7 +436,7 @@ function CartLineQuantityAdjust({ line }) {
           {quantity}
         </div>
 
-        <UpdateCartButton lines={[{ id: lineId, quantity: nextQuantity }]}>
+        <UpdateCartButton lines={nextUpdateArr}>
           <button
             className="w-7 h-8 transition text-primary/50 hover:text-primary"
             name="increase-quantity"
@@ -454,6 +452,7 @@ function CartLineQuantityAdjust({ line }) {
 }
 
 function UpdateCartButton({ children, lines }) {
+ console.log(lines);
   return (
     <CartForm
       route="/cart"

@@ -20,12 +20,12 @@ export function PatchATCButton({ formData, className, config, currentStep, steps
   const firstVariant = product.variants.nodes[0];
   const selectedVariant = product.selectedVariant ?? firstVariant;
 
-  const addOnVariantIDs = {
-    "hi-vis": "gid://shopify/ProductVariant/42668958318750",
-    "glow-border": "gid://shopify/ProductVariant/42668952420510",
-    "reflective-glow-font-color": "gid://shopify/ProductVariant/42672795189406",
-    "pro-ir-font-color": "gid://shopify/ProductVariant/42672794534046",
-  };
+  // const addOnVariantIDs = {
+  //   "hi-vis": "gid://shopify/ProductVariant/42668958318750",
+  //   "glow-border": "gid://shopify/ProductVariant/42668952420510",
+  //   "reflective-glow-font-color": "gid://shopify/ProductVariant/42672795189406",
+  //   "pro-ir-font-color": "gid://shopify/ProductVariant/42672794534046",
+  // };
 
   function getCart(formData) {
     let lines = [
@@ -43,8 +43,8 @@ export function PatchATCButton({ formData, className, config, currentStep, steps
     // append AddOnLines array to lines array
     let tempLines = lines.concat(addOnLines);
     
-    console.log(addOnLines);
-    console.log(tempLines);
+    // console.log(addOnLines);
+    // console.log(tempLines);
 
     // if (formData.img.markType === "HiVis Flag") {
 
@@ -91,6 +91,7 @@ export function PatchATCButton({ formData, className, config, currentStep, steps
       { key: "Blood Type and Allergies", value: formData.text.secondary.text || "Left Blank" },
       { key: "I agree to the Lead Time", value: formData.formValidation.agreement ? "Yes" : "No" },
       { key: "Pricing", value: formData.price.upsellPricing || "" },
+      { key: "ID", value: formData.id || "" },
     );
 
     return arr;
