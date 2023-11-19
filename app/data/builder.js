@@ -1637,580 +1637,7 @@ const builderData = {
     ]
   },
   imgs: {
-    "hi-vis": [
-      {
-        name: "USA",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa.png?v=1678643329",
-        variants: [
-          {
-            name: "USA Thin Red Line",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-trl.png?v=1678643329"
-          },
-          {
-            name: "USA Thin Blue Line",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-tbl.png?v=1678643329"
-          },
-          {
-            name: "USA Thin Green Line",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-tgl.png?v=1678643329"
-          },
-          {
-            name: "USA Black and White",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-black-and-white.png?v=1678643329"
-          },
-          {
-            name: "USA Black and White Thin Red Line",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-black-and-white-trl.png?v=1678643329"
-          },
-          {
-            name: "USA Black and White Thin Blue Line",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-black-and-white-tbl.png?v=1678643329"
-          },
-          {
-            name: "USA Black and White Thin Green Line",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-black-and-white-tgl.png?v=1678643329"
-          },
-        ]
-      },
-      {
-        name: "Canada",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-canada.png?v=1678643213",
-        variants: [
-          {
-            name: "Canada Thin Red Line",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-canada-trl.png?v=1678643213"
-          },
-          {
-            name: "Canada Thin Blue Line",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-canada-tbl.png?v=1678643213"
-          },
-          {
-            name: "Canada Thin Green Line",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-canada-tgl.png?v=1678643213"
-          },
-          {
-            name: "Canada Black and White",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-canada-black-and-white.png?v=1678643213"
-          },
-          {
-            name: "Canada Thin Red Line",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-canada-black-and-white-trl.png?v=1678643213"
-          },
-          {
-            name: "Canada Thin Blue Line",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-canada-black-and-white-tbl.png?v=1678643213"
-          },
-          {
-            name: "Canada Thin Green Line",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-canada-black-and-white-tgl.png?v=1678643213"
-          }
-        ]
-      },
-      {
-        name: "USA State Flags",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-usa-state-flags.png?v=1678643184",
-        variants: [
-          {
-            name: "Texas",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-texas.png?v=1678643184"
-          },
-          {
-            name: "California",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-california.png?v=1678643184"
-          },
-          {
-            name: "New York",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-new-york.png?v=1678643184"
-          },
-          {
-            name: "Florida",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-florida.png?v=1678643184"
-          },
-          {
-            name: "Hawaii",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-hawaii.png?v=1678643184"
-          },
-          {
-            name: "Alaska",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-alaska.png?v=1678643184"
-          },
-          {
-            name: "Washington",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-washington.png?v=1678643184"
-          },
-          {
-            name: "Oregon",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-oregon.png?v=1678643184"
-          },
-          {
-            name: "Nevada",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-nevada.png?v=1678643184"
-          },
-          {
-            name: "Idaho",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-idaho.png?v=1678643184"
-          },
-          {
-            name: "Utah",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-utah.png?v=1678643184"
-          },
-          {
-            name: "Arizona",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-arizona.png?v=1678643184"
-          },
-          {
-            name: "Montana",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-montana.png?v=1678643184"
-          },
-          {
-            name: "Wyoming",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-wyoming.png?v=1678643184"
-          },
-          {
-            name: "Colorado",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-colorado.png?v=1678643184"
-          },
-          {
-            name: "New Mexico",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-new-mexico.png?v=1678643184"
-          },
-          {
-            name: "North Dakota",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-north-dakota.png?v=1678643184"
-          },
-          {
-            name: "South Dakota",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-south-dakota.png?v=1678643184"
-          },
-          {
-            name: "Nebraska",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-nebraska.png?v=1678643184"
-          },
-          {
-            name: "Kansas",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-kansas.png?v=1678643184"
-          },
-          {
-            name: "Oklahoma",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-oklahoma.png?v=1678643184"
-          },
-          {
-            name: "Texas",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-texas.png?v=1678643184"
-          },
-          {
-            name: "Minnesota",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-minnesota.png?v=1678643184"
-          },
-          {
-            name: "Iowa",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-iowa.png?v=1678643184"
-          },
-          {
-            name: "Missouri",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-missouri.png?v=1678643184"
-          },
-          {
-            name: "Arkansas",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-arkansas.png?v=1678643184"
-          },
-          {
-            name: "Louisiana",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-louisiana.png?v=1678643184"
-          },
-          {
-            name: "Mississippi",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-mississippi.png?v=1678643184"
-          },
-          {
-            name: "Alabama",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-alabama.png?v=1678643184"
-          },
-          {
-            name: "Georgia",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-georgia.png?v=1678643184"
-          },
-          {
-            name: "Florida",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-florida.png?v=1678643184"
-          },
-          {
-            name: "South Carolina",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-south-carolina.png?v=1678643184"
-          },
-          {
-            name: "North Carolina",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-north-carolina.png?v=1678643184"
-          },
-          {
-            name: "Virginia",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-virgina.png?v=1678643183"
-          },
-          {
-            name: "West Virginia",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-west-virgina.png?v=1678643183"
-          },
-          {
-            name: "Maryland",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-maryland.png?v=1678643184"
-          },
-          {
-            name: "Delaware",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-delaware.png?v=1678643184"
-          },
-          {
-            name: "New Jersey",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-new-jersey.png?v=1678643184"
-          },
-          {
-            name: "New York",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-new-york.png?v=1678643184"
-          },
-          {
-            name: "Connecticut",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-connecticut.png?v=1678643184"
-          },
-          {
-            name: "Rhode Island",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-rhode-island.png?v=1678643184"
-          },
-          {
-            name: "Massachusetts",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-massachusetts.png?v=1678643184"
-          },
-          {
-            name: "Maine",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-maine.png?v=1678643184"
-          },
-          {
-            name: "Puerto Rico",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-puerto-rico.png?v=1678643184"
-          },
-          {
-            name: "Guam",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-guam.png?v=1678643184"
-          },
-          {
-            name: "Northern Mariana Islands",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-northern-mariana.png?v=1678643183 "
-          },
-          {
-            name: "U.S. Virgin Islands",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-states-u.s-virgin-islands.png?v=1678643184"
-          }
-        ]
-      },
-      {
-        name: "USA Service Branches",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-usa-service-branches.png?v=1678643183",
-        variants: [
-          { name: "United States Coast Guard", img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-united-states-coast-guard.png?v=1678643225" },
-          { name: "United States Army", img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-united-states-army.png?v=1678643225" },
-          { name: "United States Navy", img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-united-states-navy.png?v=1678643225" },
-          { name: "United States Marine Corps", img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-united-states-marine-corps.png?v=1678643226" },
-          { name: "United States Air Force", img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-united-states-air-force.png?v=1678643226" }
-        ]
-      },
-      {
-        name: "Argentina",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-argentina.png?v=1678643213"
-      },
-      {
-        name: "Armenia",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-armenia.png?v=1678643206"
-      },
-      {
-        name: "Australia",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-australia.png?v=1678643206"
-      },
-      {
-        name: "Austria",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-austria.png?v=1678643207"
-      },
-      {
-        name: "Belarus",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-belarus.png?v=1678643207"
-      },
-      {
-        name: "Belgium",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-belgium.png?v=1678643207"
-      },
-      {
-        name: "Brazil",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-brazil.png?v=1678643207"
-      },
-      {
-        name: "Cambodia",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-cambodia.png?v=1678643208"
-      },
-      {
-        name: "Cayman Islands",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-cayman-islands.png?v=1678643208"
-      },
-      {
-        name: "Chile",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-chile.png?v=1678643208"
-      },
-      {
-        name: "China",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-china.png?v=1678643208"
-      },
-      {
-        name: "Columbia",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-columbia.png?v=1678643209"
-      },
-      {
-        name: "Croatia",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-croatia.png?v=1678643209"
-      },
-      {
-        name: "Cuba",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-cuba.png?v=1678643209"
-      },
-      {
-        name: "Czech Republic",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-czech-republic.png?v=1678643209"
-      },
-      {
-        name: "Denmark",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-denmark.png?v=1678643210"
-      },
-      {
-        name: "Dominican Republic",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-dominican.png?v=1678643210"
-      },
-      {
-        name: "Egypt",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-egypt.png?v=1678643210"
-      },
-      {
-        name: "Estonia",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-estonia.png?v=1678643210"
-      },
-      {
-        name: "Finland",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-finland.png?v=1678643211"
-      },
-      {
-        name: "France",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-france.png?v=1678643211"
-      },
-      {
-        name: "Gadsden",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-gadsdenfc.png?v=1678643183"
-      },
-      {
-        name: "Germany",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-germany.png?v=1678643211"
-      },
-      {
-        name: "Greece",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-greece.png?v=1678643212"
-      },
-      {
-        name: "Guatemala",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-guatemala.png?v=1678643212"
-      },
-      {
-        name: "Guernsey Channel Islands",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-guernsey-channel-islands.png?v=1678643212"
-      },
-      {
-        name: "Hong Kong",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-hong-kong.png?v=1678643212"
-      },
-      {
-        name: "Hong Kong 1959-1997",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-hong-kong-1959-1997.png?v=1678643212"
-      },
-      {
-        name: "Hungary",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-hungary.png?v=1678643212"
-      },
-      {
-        name: "Iceland",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-iceland.png?v=1678643213"
-      },
-      {
-        name: "Indonesia",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-indonesia.png?v=1678643213"
-      },
-      {
-        name: "Iraq",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-iraq.png?v=1678643213"
-      },
-      {
-        name: "Ireland",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-ireland.png?v=1678643213"
-      },
-      {
-        name: "Israel",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-israel.png?v=1678643214"
-      },
-      {
-        name: "Italy",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-italy.png?v=1678643214"
-      },
-      {
-        name: "Jamaica",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-jamaica.png?v=1678643214"
-      },
-      {
-        name: "Japan",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-japan.png?v=1678643214"
-      },
-      {
-        name: "Kosovo",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-kosovo.png?v=1678643215"
-      },
-      {
-        name: "Kurdistan",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-kurdistan.png?v=1678643215"
-      },
-      {
-        name: "Kuwait",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-kuwait.png?v=1678643215"
-      },
-      {
-        name: "Laos",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-laos.png?v=1678643215"
-      },
-      {
-        name: "Latvia",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-latvia.png?v=1678643216"
-      },
-      {
-        name: "Malaysia",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-malaysia.png?v=1678643216"
-      },
-      {
-        name: "Mexico",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-mexico.png?v=1678643216"
-      },
-      {
-        name: "Moldova",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-moldova.png?v=1678643216"
-      },
-      {
-        name: "Netherlands",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-netherlands.png?v=1678643217"
-      },
-      {
-        name: "New Zealand",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-new-zealand.png?v=1678643217"
-      },
-      {
-        name: "Norway",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-norway.png?v=1678643217"
-      },
-      {
-        name: "Pakistan",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-pakistan.png?v=1678643218"
-      },
-      {
-        name: "Philippines",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-philippines.png?v=1678643218"
-      },
-      {
-        name: "Poland",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-poland.png?v=1678643218"
-      },
-      {
-        name: "Portugal",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-portugal.png?v=1678643218"
-      },
-      {
-        name: "Rhodesia",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-rhodesia.png?v=1678643219"
-      },
-      {
-        name: "Romania",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-romania.png?v=1678643219"
-      },
-      {
-        name: "Russia",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-russia.png?v=1678643220"
-      },
-      {
-        name: "Scotland",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-scotland.png?v=1678643220"
-      },
-      {
-        name: "Serbia",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-serbia.png?v=1678643220"
-      },
-      {
-        name: "Singapore",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-singapore.png?v=1678643220"
-      },
-      {
-        name: "Slovakia",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-slovakia.png?v=1678643221"
-      },
-      {
-        name: "South Africa",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-south-africa.png?v=1678643221"
-      },
-      {
-        name: "South Korea",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-south-korea.png?v=1678643221"
-      },
-      {
-        name: "Spain",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-spain.png?v=1678643222"
-      },
-      {
-        name: "Star of Life",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-star-of-life.png?v=1678643371 "
-      },
-      {
-        name: "Sweden",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-sweden.png?v=1678643222"
-      },
-      {
-        name: "Switzerland",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-switzerland.png?v=1678643222"
-      },
-      { name: "Taiwan", img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-taiwan.png?v=1678643223" },
-      { name: "Thailand", img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-thailand.png?v=1678643223" },
-      { name: "Ukraine", img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-ukraine.png?v=1678643224" },
-      { name: "United Kingdom", img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-united-kingdom.png?v=1678643224" },
-      { name: "United Nations", img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-united-nations.png?v=1678643224" },
-      { name: "Venezuela", img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-venezuela.png?v=1678643225" },
-      { name: "Vietnam", img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-vietnam.png?v=1678643225" },
-      {
-        name: "Pirate Jolly Roger",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-jolly-roger.png?v=1678643183"
-      },
-      {
-        name: "Pirate Calico Jack",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-calico-jack.png?v=1678643183"
-      },
-      {
-        name: "Fallout New California Republic",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-fallout-new-california-republic.png?v=1678643329"
-      },
-      {
-        name: "Fallout Brotherhood of Steel",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-fallout-brotherhood-of-steel.png?v=1678643329"
-      },
-      {
-        name: "Guernsey Channel Islands",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-guernsey-channel-islands.png?v=1678643329"
-      },
-      {
-        name: "Fallout Minute Men",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-fallout-minute-men.png?v=1678643329"
-      },
-      {
-        name: "Fallout Enclave",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-fallout-enclave.png?v=1678643329"
-      },
-      {
-        name: "Black Beard",
-        img: "https://cdn.shopify.com/s/files/1/2242/5805/files/flags-black-beard.png?v=1678643329"
-      }
-    ],
+    "hi-vis": initHiVisFlags(),
     "lazer-cut": initLazerCutFlags(),
     symbols: {
       "medical patch": {
@@ -2440,6 +1867,181 @@ const builderData = {
     }
   ]
 };
+
+function initHiVisFlags() {
+  const folder = "https://cdn.shopify.com/s/files/1/2242/5805/files/";  // If you have a common folder path, you can add it here
+  const end = "?v=1698434481j";
+   // If there's a common file extension, you can add it here
+
+  let imageList = [
+    "usa-hivis",
+    "state-alabama-hivis",
+    "state-alaska-hivis",
+    "state-arizona-hivis",
+    "state-arkansas-hivis",
+    "state-california-hivis",
+    "state-colorado-hivis",
+    "state-connecticut-hivis",
+    "state-delaware-hivis",
+    "state-florida-hivis",
+    "state-georgia-hivis",
+    "state-guam-hivis",
+    "state-hawaii-hivis",
+    "state-idaho-hivis",
+    "state-iowa-hivis",
+    "state-kansas-hivis",
+    "state-louisiana-hivis",
+    "state-maine-hivis",
+    "state-maryland-hivis",
+    "state-massachusetts-hivis",
+    "state-minnesota-hivis",
+    "state-mississippi-hivis",
+    "state-missouri-hivis",
+    "state-montana-hivis",
+    "state-nebraska-hivis",
+    "state-nevada-hivis",
+    "state-new-jersey-hivis",
+    "state-new-mexico-hivis",
+    "state-new-york-hivis",
+    "state-north-carolina-hivis",
+    "state-north-dakota-hivis",
+    "state-oklahoma-hivis",
+    "state-oregon-hivis",
+    "state-puerto-rico-hivis",
+    "state-rhode-island-hivis",
+    "state-south-carolina-hivis",
+    "state-south-dakota-hivis",
+    "state-texas-hivis",
+    "state-us-virgin-islands-hivis",
+    "state-utah-hivis",
+    "state-virginia-hivis",
+    "state-washington-hivis",
+    "state-west-virginia-hivis",
+    "state-wyoming-hivis",
+    "usa-black-and-white-hivis",
+    "usa-thin-blue-line-black-and-white-hivis",
+    "usa-thin-blue-line-hivis",
+    "usa-thin-red-line-black-and-white-hivis",
+    "usa-thin-red-line-hivis",
+    "service-branches-united-states-air-force-hivis",
+    "service-branches-united-states-army-hivis",
+    "service-branches-united-states-coast-guard-hivis",
+    "service-branches-united-states-marine-corps-hivis",
+    "service-branches-united-states-navy-hivis",
+    "canada-hivis",
+    "province-british-columbia-hivis",
+    "province-manitoba-hivis",
+    "province-new-brunswick-hivis",
+    "province-newfoundland-and-labrador-hivis",
+    "province-northwest-territories-hivis",
+    "province-nova-scotia-hivis",
+    "province-nunavut-hivis",
+    "province-prince-edward-island-hivis",
+    "province-saskatchewan-hivis",
+    "province-yukon-hivis",
+    "canada-thin-blue-line-black-and-white-hivis",
+    "canada-thin-blue-line-hivis",
+    "canada-thin-green-line-black-and-white-hivis",
+    "canada-thin-green-line-hivis",
+    "canada-thin-red-line-black-and-white-hivis",
+    "canada-thin-red-line-hivis",
+    "argentina-hivis",
+    "armenia-hivis",
+    "austrailia-hivis",
+    "austria-hivis",
+    "belarus-hivis",
+    "belgium-hivis",
+    "brazil-hivis",
+    "cambodia-hivis",
+    "canada-black-and-white-hivis",
+    "cayman-islands-hivis",
+    "chile-hivis",
+    "china-hivis",
+    "columbia-hivis",
+    "croatia-hivis",
+    "cuba-hivis",
+    "czech-republic-hivis",
+    "denmark-hivis",
+    "dominican-republic-hivis",
+    "egypt-hivis",
+    "estonia-hivis",
+    "fallout-brotherhood-of-steel",
+    "fallout-enclave-hivis",
+    "fallout-minute-men-hivis",
+    "fallout-new-california-republic",
+    "finland-hivis",
+    "france-hivis",
+    "germany-hivis",
+    "greece-hivis",
+    "guatemala-hivis",
+    "guernsey-channel-islands-hivis",
+    "hong-kong-1959-1997-hivis",
+    "hong-kong-hivis",
+    "hungary-hivis",
+    "iceland-hivis",
+    "indonesia-hivis",
+    "iraq-hivis",
+    "ireland-hivis",
+    "israel-hivis",
+    "italy-hivis",
+    "jamaica-hivis",
+    "japan-insert",
+    "kosovo-hivis",
+    "kurdistan-hivis",
+    "kuwait-hivis",
+    "laos-hivis",
+    "latvia-hivis",
+    "malaysia-hivis",
+    "mexico-hivis",
+    "moldova-hivis",
+    "netherlands-hivis",
+    "new-zealand-hivis",
+    "norway-hivis",
+    "pakistan-insert",
+    "philippines-hivis",
+    "pirate-black-beard-hivis",
+    "pirate-calico-jack-hivis",
+    "pirate-jolly-roger-hivis",
+    "poland-hivis",
+    "portugal-hivis",
+    "quebec-hivis",
+    "rhodesia-hivis",
+    "romania-hivis",
+    "russia-hivis",
+    "scotland-hivis",
+    "serbia-hivis",
+    "singapore-hivis",
+    "slovakia-hivis",
+    "south-africa-hivis",
+    "south-korea-hivis",
+    "spain-hivis",
+    "star-of-life-hivis",
+    "sweden-hivis",
+    "switzerland-hivis",
+    "taiwan-hivis",
+    "thailand-hivis",
+    "ukraine-hivis",
+    "united-nations-hivis",
+    "venezuela-hivis",
+    "vietnam-hivis"
+  ];
+
+  const formattedArray = imageList.map(image => {
+    const name = image;
+    const titleCaseName = name.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+    const formattedName = titleCaseName.replace(" Hivis", "").replace("Usa", "USA").replace(/^(State)\s(.*)$/, '$2 ($1)').replace(/^(Service Branches)\s(.*)$/, '$2 ($1)').replace("Us", "US").replace(/^(Province)\s(.*)$/, '$2 ($1)');
+    return {
+      name: formattedName,
+      img: `${folder}insert-${name}.png${end}`,
+      icon: `${folder}insert-${name}.png${end}`,
+    };
+  });
+
+  console.log(formattedArray);
+
+  return formattedArray;
+}
+
 
 function initLazerCutFlags() {
   const folder = "https://cdn.shopify.com/s/files/1/2242/5805/files/";  // If you have a common folder path, you can add it here
