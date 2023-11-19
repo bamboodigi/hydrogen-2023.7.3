@@ -279,7 +279,7 @@ function CartLineItem({ line, cartLines }) {
                 </Heading>
                 <span className="block font-bold text-copy whitespace-pre-wrap">
                   {/* <CartLinePrice line={line} /> */}
-                  <Money withoutTrailingZeros data={{ amount: price?.value + ".0", currencyCode: 'USD' }} />
+                  <Money withoutTrailingZeros data={{ amount: price?.value * quantity + ".0", currencyCode: 'USD' }} />
                 </span>
               </div>
               {markType?.value.includes("HiVis") ? (
@@ -306,14 +306,14 @@ function CartLineItem({ line, cartLines }) {
               { priceObj.size && (
               <div className="flex justify-between">
                 <Text className="font-semibold text-xs sm:text-copy">Size</Text>
-                <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ ${priceObj.size ? priceObj.size : '0'}</span>
+                <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ ${priceObj.size * quantity }</span>
               </div>
               )}
               {priceObj.hiVis && (
                 <>
                   <div className="flex justify-between">
                     <Text className="font-semibold text-xs sm:text-copy">HiVis Flag</Text>
-                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ ${priceObj.hiVis}</span>
+                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ ${priceObj.hiVis * quantity}</span>
                   </div>
                 </>
               )}
@@ -321,7 +321,7 @@ function CartLineItem({ line, cartLines }) {
                 <>
                   <div className="flex justify-between">
                     <Text className="font-semibold text-xs sm:text-copy">Upload</Text>
-                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ ${priceObj.badge}</span>
+                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ ${priceObj.badge * quantity}</span>
                   </div>
                 </>
               )}
@@ -329,7 +329,7 @@ function CartLineItem({ line, cartLines }) {
                 <>
                   <div className="flex justify-between">
                     <Text className="font-semibold text-xs sm:text-copy">Pro IR Font Color</Text>
-                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ ${priceObj.proIRFontColor }</span>
+                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ ${priceObj.proIRFontColor * quantity }</span>
                   </div>
                 </>
               )}
@@ -337,7 +337,7 @@ function CartLineItem({ line, cartLines }) {
                 <>
                   <div className="flex justify-between">
                     <Text className="font-semibold text-xs sm:text-copy">Reflective / Glow Font Color</Text>
-                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ ${priceObj.reflectiveGlowFontColor }</span>
+                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ ${priceObj.reflectiveGlowFontColor * quantity }</span>
                   </div>
                 </>
               )}
@@ -345,7 +345,7 @@ function CartLineItem({ line, cartLines }) {
                 <>
                   <div className="flex justify-between">
                     <Text className="font-semibold text-xs sm:text-copy">Glow Border</Text>
-                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ ${priceObj.glowBorder}</span>
+                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ ${priceObj.glowBorder * quantity}</span>
                   </div>
                 </>
               )}
