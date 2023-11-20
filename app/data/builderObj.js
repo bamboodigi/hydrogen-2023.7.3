@@ -142,22 +142,28 @@ const builderObj = {
           formData.img.enabled = true;
           break;
         case 'medical patch':
-          if (formData.size.current == '1” x 1”') {
-            //   console.log('hi')
-            formData.img.markType = 'Symbol';
-            formData.img.name = builderObj.data.symbols['medical patch']['1 x 1'][0].name;
-            formData.img.color.mask.name = builderObj.data.symbols['medical patch']['1 x 1'][0].name;
-            formData.img.color.mask.img = builderObj.data.symbols['medical patch']['1 x 1'][0].img;
-            formData.img.color.mask.icon = builderObj.data.symbols['medical patch']['1 x 1'][0].icon;
-            formData.img.color.mask.glow = builderObj.data.symbols['medical patch']['1 x 1'][0].glow;
-          } else {
-            formData.img.markType = 'Symbol';
-            formData.img.name = builderObj.data.symbols['medical patch']['1 x 1'][0].name;
-            formData.img.color.mask.name = builderObj.data.symbols['medical patch']['2 x 2'][0].name;
-            formData.img.color.mask.img = builderObj.data.symbols['medical patch']['2 x 2'][0].img;
-            formData.img.color.mask.icon = builderObj.data.symbols['medical patch']['2 x 2'][0].icon;
-            formData.img.color.mask.glow = builderObj.data.symbols['medical patch']['2 x 2'][0].glow;
-          }
+          formData.img.markType = 'Symbol';
+          formData.img.name = builderObj.data.symbols['medical patch'][0].name;
+          formData.img.color.mask.name = builderObj.data.symbols['medical patch'][0].name;
+          formData.img.color.mask.img = builderObj.data.symbols['medical patch'][0].img;
+          formData.img.color.mask.icon = builderObj.data.symbols['medical patch'][0].icon;
+          formData.img.color.mask.glow = builderObj.data.symbols['medical patch'][0].glow;
+          // if (formData.size.current == '1” x 1”') {
+          //   //   console.log('hi')
+          //   formData.img.markType = 'Symbol';
+          //   formData.img.name = builderObj.data.symbols['medical patch']['1 x 1'][0].name;
+          //   formData.img.color.mask.name = builderObj.data.symbols['medical patch']['1 x 1'][0].name;
+          //   formData.img.color.mask.img = builderObj.data.symbols['medical patch']['1 x 1'][0].img;
+          //   formData.img.color.mask.icon = builderObj.data.symbols['medical patch']['1 x 1'][0].icon;
+          //   formData.img.color.mask.glow = builderObj.data.symbols['medical patch']['1 x 1'][0].glow;
+          // } else {
+          //   formData.img.markType = 'Symbol';
+          //   formData.img.name = builderObj.data.symbols['medical patch']['1 x 1'][0].name;
+          //   formData.img.color.mask.name = builderObj.data.symbols['medical patch']['2 x 2'][0].name;
+          //   formData.img.color.mask.img = builderObj.data.symbols['medical patch']['2 x 2'][0].img;
+          //   formData.img.color.mask.icon = builderObj.data.symbols['medical patch']['2 x 2'][0].icon;
+          //   formData.img.color.mask.glow = builderObj.data.symbols['medical patch']['2 x 2'][0].glow;
+          // }
           formData.img.enabled = true;
           break;
         case 'jacket panel':

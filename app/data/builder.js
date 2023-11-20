@@ -695,21 +695,21 @@ const builderData = {
       basePrice: 15,
       config: {
         sizes: [
-          // {
-          //   size: '3” x 2”',
-          //   text: {
-          //     primary: {
-          //       placeholder: null,
-          //       maxLength: null,
-          //       lines: null,
-          //     }
-          //   },
-          //   flagEnabled: true,
-          //   upsells: {
-          //     size: 0,
-          //     hiVis: 5,
-          //   },
-          // },
+          {
+            size: '3” x 2”',
+            text: {
+              primary: {
+                placeholder: null,
+                maxLength: null,
+                lines: null,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 0,
+              hiVis: 5,
+            },
+          },
           {
             size: '3.5” x 2”',
             text: {
@@ -739,21 +739,6 @@ const builderData = {
             upsells: {
               size: 5,
               tRexArms: 6,
-              hiVis: 5,
-            },
-          },
-          {
-            size: '6” x 2”',
-            text: {
-              primary: {
-                placeholder: null,
-                maxLength: null,
-                lines: null,
-              }
-            },
-            flagEnabled: true,
-            upsells: {
-              size: 9,
               hiVis: 5,
             },
           },
@@ -1640,108 +1625,13 @@ const builderData = {
     "hi-vis": initHiVisFlags(),
     "lazer-cut": initLazerCutFlags(),
     symbols: {
-      "medical patch": {
-        "1 x 1": [
-          {
-            name: "TQ",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-tq.png?v=1678643371",
-            glow: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-tq-glow-border.png?v=1678643371",
-            icon: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-tq-icon.png?v=1678643371"
-          },
-          {
-            name: "K9",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-k9.png?v=1678643371",
-            glow: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-k9-glow-border.png?v=1678643371",
-            icon: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-k9-icon.png?v=1678643371",
-          },
-          {
-            name: "Maple Leaf Icon",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-maple-leaf.png?v=1678643371",
-            glow: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-maple-leaf-glow-border.png?v=1678643371",
-            icon: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-maple-leaf-icon.png?v=1678643371",
-          },
-          {
-            name: "Med Cross Icon",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-med-cross-cats.png?v=1678643371",
-            glow: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-med-cross-cats-glow-border.png?v=1678643371",
-            icon: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-med-cross-cats-icon.png?v=1678643371",
-          },
-          {
-            name: "Star",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-star-icon.png?v=1678643371",
-            glow: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-star-glow-border.png?v=1678643371",
-            icon: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-star-icon.png?v=1678643371",
-          }
-        ],
-        "2 x 2": [
-          {
-            name: "Star of Life",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2x2-star-of-life.png?v=1678643371",
-            glow: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2x2-star-of-life-glow-border.png?v=1678643371",
-            icon: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2x2-star-of-life-icon.png?v=1678643371",
-          },
-          {
-            name: "Med Cross",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2x2-med-cross.png?v=1678643371",
-            glow: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2x2-med-cross-glow-border.png?v=1678643371",
-            icon: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2x2-med-cross-icon.png?v=1678643371",
-          },
-          {
-            name: "A Positive",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2-a-pos.png?v=1678643370",
-            glow: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2-a-pos-glow-border.png?v=1678643370",
-            icon: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2-a-pos-icon.png?v=1678643370",
-          },
-          {
-            name: "A Negative",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2-a-neg.png?v=1678643370",
-            glow: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2-a-neg-glow-border.png?v=1678643370",
-            icon: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2-a-neg-icon.png?v=1678643370",
-          },
-          {
-            name: "AB Positive",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2-ab-pos.png?v=1678643370",
-            glow: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2-ab-pos-glow-border.png?v=1678643370",
-            icon: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2-ab-pos-icon.png?v=1678643370",
-          },
-          {
-            name: "AB Negative",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2-ab-neg.png?v=1678643370",
-            glow: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2-ab-neg-glow-border.png?v=1678643370",
-            icon: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2-ab-neg-icon.png?v=1678643370",
-          },
-          {
-            name: "B Positive",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2-b-pos.png?v=1678643370",
-            glow: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2-b-pos-glow-border.png?v=1678643370",
-            icon: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2-b-pos-icon.png?v=1678643370",
-          },
-          {
-            name: "B Negative",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2-b-neg.png?v=1678643370",
-            glow: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2-b-neg-glow-border.png?v=1678643370",
-            icon: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2-b-neg-icon.png?v=1678643370",
-          },
-          {
-            name: "O Positive",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2-o-pos.png?v=1678643370",
-            glow: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2-o-pos-glow-border.png?v=1678643370",
-            icon: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2-o-pos-icon.png?v=1678643370",
-          },
-          {
-            name: "O Negative",
-            img: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2-o-neg.png?v=1678643370",
-            glow: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2-o-neg-glow-border.png?v=1678643370",
-            icon: "https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-2-o-neg-icon.png?v=1678643370",
-          }
-        ],
-      },
-      "division jacket panel" : {
-        bird :           {
+      "medical patch": initSymbols(),
+      "division jacket panel": {
+        bird: {
           name: "Bird",
           img: "https://cdn.shopify.com/s/files/1/2242/5805/files/division-bird-img.png?v=1699398852",
         },
-        ring :           {
+        ring: {
           name: "Ring",
           img: "https://cdn.shopify.com/s/files/1/2242/5805/files/division-ring-img.png?v=1699398852",
         },
@@ -1868,10 +1758,50 @@ const builderData = {
   ]
 };
 
+initSymbols();
+
+function initSymbols() {
+  const folder = "https://cdn.shopify.com/s/files/1/2242/5805/files/";  // If you have a common folder path, you can add it here
+  const end = "?v=1698434481j";
+  // If there's a common file extension, you can add it here
+
+  let imageList = [
+    'symbols-tq-img.png',
+    'symbols-star-of-life-img.png',
+    'symbols-maple-leaf-img.png',
+    'symbols-med-cross-img.png',
+    'symbols-o-neg-img.png',
+    'symbols-ab-neg-img.png',
+    'symbols-ab-pos-img.png',
+    'symbols-o-pos-img.png',
+    'symbols-b-pos-img.png',
+    'symbols-a-pos-img.png',
+    'symbols-a-neg-img.png',
+    'symbols-star-img.png',
+    'symbols-k9-img.png'
+  ];
+
+  const formattedArray = imageList.map(image => {
+    const name = image.replace("-img.png", "");
+    const titleCaseName = name.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+    const formattedName = titleCaseName.replace("Symbols ", "").replace("Tq", "TQ").replace("Ab", "AB").replace("Pos", "Positive").replace("Neg", "Negative");
+    return {
+      name: formattedName,
+      img: `${folder}${name}-img.png${end}`,
+      glow: `${folder}${name}-glow-border.png${end}`,
+      icon: `${folder}${name}-icon.png${end}`
+    };
+  });
+
+  console.log(formattedArray);
+
+  return formattedArray;
+}
+
 function initHiVisFlags() {
   const folder = "https://cdn.shopify.com/s/files/1/2242/5805/files/";  // If you have a common folder path, you can add it here
   const end = "?v=1698434481j";
-   // If there's a common file extension, you can add it here
+  // If there's a common file extension, you can add it here
 
   let imageList = [
     "usa-hivis",
@@ -2037,8 +1967,6 @@ function initHiVisFlags() {
     };
   });
 
-  console.log(formattedArray);
-
   return formattedArray;
 }
 
@@ -2067,6 +1995,117 @@ function initLazerCutFlags() {
     iconKey = iconKey === '3x2' ? 'mini-id' : iconKey;
     // iconKey = iconKey === '3.5x2' ? '6x3' : iconKey;
     switch (iconKey) {
+      case '3x2':
+        imageList = [
+          'acadia.png',
+          'alabama.png',
+          'alaska.png',
+          'antartica.png',
+          'argentina.png',
+          'armenia.png',
+          'australia.png',
+          'austria.png',
+          'belgium.png',
+          'betsy-ross.png',
+          'british-columbia.png',
+          'calico-jack.png',
+          'california-republic.png',
+          'canada.png',
+          'chicago.png',
+          'chile.png',
+          'china.png',
+          'christian-flag.png',
+          'coast-guard.png',
+          'colorado.png',
+          'columbia.png',
+          'croatia.png',
+          'cuba.png',
+          'czech-republic.png',
+          'denmark.png',
+          'egypt.png',
+          'european-union.png',
+          'finland.png',
+          'flordia.png',
+          'france.png',
+          'frogman.png',
+          'gadsden.png',
+          'galactic-empire.png',
+          'galactic-republic.png',
+          'georgia-country.png',
+          'georgia-state.png',
+          'germany.png',
+          'greece.png',
+          'guernsey-channel-islands.png',
+          'hawaii.png',
+          'hong-kong.png',
+          'hungary.png',
+          'iceland.png',
+          'imperial-aquila.png',
+          'imperial-japan.png',
+          'indiana.png',
+          'indianapolis.png',
+          'indonesia.png',
+          'iraq.png',
+          'ireland.png',
+          'israel.png',
+          'italy.png',
+          'japan.png',
+          'jedi-order.png',
+          'jolly-roger.png',
+          'jordan.png',
+          'kurdistan.png',
+          'kuwait.png',
+          'kyrgyzstan.png',
+          'laos.png',
+          'latvia.png',
+          'macau.png',
+          'malaysia.png',
+          'maryland.png',
+          'mexico.png',
+          'mississippi.png',
+          'mythosaur.png',
+          'navy-jack.png',
+          'netherlands.png',
+          'new-england.png',
+          'new-mexico.png',
+          'new-orleans.png',
+          'new-zeland.png',
+          'north-carolina.png',
+          'norway.png',
+          'ohio.png',
+          'pakistan.png',
+          'philippines.png',
+          'poland.png',
+          'portugal.png',
+          'puerto-rico.png',
+          'quebec.png',
+          'rebel-alliance.png',
+          'russia.png',
+          'scotland.png',
+          'singapore.png',
+          'sons-of-liberty.png',
+          'south-africa.png',
+          'south-carolina.png',
+          'south-korea.png',
+          'spain.png',
+          'sweden.png',
+          'switzerland.png',
+          'taiwan.png',
+          'tennessee.png',
+          'texas.png',
+          'thailand.png',
+          'tonga.png',
+          'trinidad-and-tobago.png',
+          'turkey.png',
+          'ukraine-standard.png',
+          'united-kingdom.png',
+          'usa.png',
+          'usmc-ega.png',
+          'utah.png',
+          'vader-wants-you.png',
+          'venezuela.png',
+          'vietnam.png'
+        ];
       case '3.5x2':
         imageList = [
           'acadia.png',
@@ -2177,6 +2216,121 @@ function initLazerCutFlags() {
           'vader-wants-you.png',
           'venezuela.png',
           'vietnam.png'
+        ];
+      case '5x3':
+        imageList = [
+          'acadia.png',
+          'alabama.png',
+          'alaska.png',
+          'antartica.png',
+          'aquila.png',
+          'argentina.png',
+          'arizona.png',
+          'arkansas.png',
+          'armenia.png',
+          'australia.png',
+          'austria.png',
+          'belgium.png',
+          'betsy-ross.png',
+          'black-beard.png',
+          'british-columbia.png',
+          'calico-jack.png',
+          'california.png',
+          'canada.png',
+          'chicago.png',
+          'chile.png',
+          'china.png',
+          'christian-flag.png',
+          'coast-guard.png',
+          'colombia.png',
+          'colorado.png',
+          'colombia.png',
+          'croatia.png',
+          'cuba.png',
+          'czech-republic.png',
+          'denmark.png',
+          'egypt.png',
+          'european-union.png',
+          'finland.png',
+          'flordia.png',
+          'france.png',
+          'frogman.png',
+          'gadsden.png',
+          'galactic-empire.png',
+          'galactic-republic.png',
+          'georgia-country.png',
+          'georgia-state.png',
+          'germany.png',
+          'greece.png',
+          'guernsey-channel-islands.png',
+          'hawaii.png',
+          'hong-kong.png',
+          'hungary.png',
+          'iceland.png',
+          'imperial-japan.png',
+          'indiana.png',
+          'indianapolis.png',
+          'indonesia.png',
+          'iraq.png',
+          'ireland.png',
+          'israel.png',
+          'italy.png',
+          'japan.png',
+          'jedi-order.png',
+          'jolly-roger.png',
+          'jordan.png',
+          'krygyzstan.png',
+          'kurdistan.png',
+          'kuwait.png',
+          'laos.png',
+          'latvia.png',
+          'macau.png',
+          'malaysia.png',
+          'maryland.png',
+          'mexico.png',
+          'mississippi.png',
+          'mythosaur.png',
+          'navy-jack.png',
+          'netherlands.png',
+          'new-england.png',
+          'new-mexico.png',
+          'new-orleans.png',
+          'new-zealand.png',
+          'north-carolina.png',
+          'norway.png',
+          'ohio.png',
+          'pakistan.png',
+          'philippines.png',
+          'poland.png',
+          'portugal.png',
+          'puerto-rico.png',
+          'quebec.png',
+          'rebel-alliance.png',
+          'russia.png',
+          'scotland.png',
+          'singapore.png',
+          'sons-of-liberty.png',
+          'south-africa.png',
+          'south-carolina.png',
+          'south-korea.png',
+          'spain.png',
+          'sweden.png',
+          'switzerland.png',
+          'taiwan.png',
+          'tennessee.png',
+          'texas.png',
+          'thailand.png',
+          'tonga.png',
+          'trinidad-and-tobago.png',
+          'turkey.png',
+          'ukraine.png',
+          'united-kingdom.png',
+          'usa.png',
+          'usmc-ega.png',
+          'utah.png',
+          'vader-wants-you.png',
+          'venezuela.png',
+          'virginia.png',
         ];
       case 'mini-id':
         imageList = [
@@ -2384,7 +2538,7 @@ function initLazerCutFlags() {
       const name = image.replace(".png", "");
       const titleCaseName = name.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
       const formattedName = titleCaseName.replace(" Lc ", "").replace("Usa", "USA");
-    //  const formattedName = titleCaseName.replace(" Lc ", "").replace("Uk", "UK").replace("Usa", "USA");
+      //  const formattedName = titleCaseName.replace(" Lc ", "").replace("Uk", "UK").replace("Usa", "USA");
       return {
         name: formattedName,
         img: `${folder}${key}-lc-${name}-img.png${end}`,

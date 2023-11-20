@@ -615,13 +615,13 @@ export function Visualizer({ formData, className, methods, ...props }) {
           ) : formData.type.toLowerCase().includes("medical patch") && formData.size.current == '3.5” x 2”' ? (
             <div className="flex w-full h-full gap-2">
               <div className="flex flex-0  w-[45%] items-center" style={{}}>
-                <div id="icon" className="h-full w-full" style={maskStyle}>
+                <div id="icon" className="h-[83%] w-full relative" style={maskStyle}>
                   <div id="glow"
                     className={classNames(
                       formData.upsells.glowBorder ? "block" : "hidden",
                       "h-full w-full"
                     )}
-                    style={{ backgroundImage: `url("${formData.img.glow}")`, backgroundSize: 'cover', position: 'absolute', backgroundPosition: 'center' }}
+                    style={{ backgroundImage: `url("${formData.img.color.mask.glow}")`, backgroundSize: 'cover', position: 'absolute', backgroundPosition: 'center' }}
                   ></div>
                 </div>
               </div>
@@ -642,13 +642,13 @@ export function Visualizer({ formData, className, methods, ...props }) {
             </div>
           ) : formData.type.toLowerCase().includes("medical patch") ? (
             <div className="h-full w-full text-center overflow-x-hidden overflow-y-hidden flex items-center justify-center">
-              <div id="icon" className="h-4/5 w-4/5" style={maskStyle}>
+              <div id="icon" className="h-4/5 w-4/5 relative" style={maskStyle}>
                 <div id="glow"
                   className={classNames(
                     formData.upsells.glowBorder ? "block" : "hidden",
                     "h-full w-full"
                   )}
-                  style={{ backgroundImage: `url("${formData.img.glow}")`, backgroundSize: 'cover', position: 'absolute' }}
+                  style={{ backgroundImage: `url("${formData.img.color.mask.glow}")`, backgroundSize: 'cover', position: 'absolute' }}
                 ></div>
               </div>
             </div>

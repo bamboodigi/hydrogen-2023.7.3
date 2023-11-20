@@ -323,56 +323,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
     //  console.log(maskName);
     //  console.log(maskObject);
     if (formData.type.toLowerCase() == "medical patch") {
-      if (event.target.value == '1” x 1”') {
-        // setFormData({
-        //   ...formData,
-        //   img: symbols['medical patch']["1 x 1"][0].name,
-        //   imgSrc: symbols['medical patch']["1 x 1"][0].img,
-        //   imgGlow: symbols['medical patch']["1 x 1"][0].glow,
-        //   imgIcon: symbols['medical patch']["1 x 1"][0].icon,
-        //   size: event.target.value,
-        //   textLines: objSizes.lines, textMaxLength: objSizes.maxLength, textPlaceholder: objSizes.placeholder
-        // });
-        setFormData({
-          ...formData,
-          price: {
-            ...formData.price,
-            upsells: {
-              ...formData.price.upsells,
-              size: objSizes.upsells.size,
-              glowBorder: objSizes.upsells.glowInTheDark || 0,
-              hiVis: objSizes.upsells.hiVis || 0,
-              badge: objSizes.upsells.badge || 0,
-            },
-          },
-          img: {
-            ...formData.img,
-            name: symbols['medical patch']["1 x 1"][0].name,
-            img: symbols['medical patch']["1 x 1"][0].img,
-            color: {
-              ...formData.img.color, mask: {
-                name: symbols['medical patch']["1 x 1"][0].name,
-                img: symbols['medical patch']["1 x 1"][0].img,
-                glow: symbols['medical patch']["1 x 1"][0].glow,
-                icon: symbols['medical patch']["1 x 1"][0].icon,
-              },
-            },
-          },
-          size: {
-            ...formData.size,
-            current: event.target.value
-          },
-          text: {
-            ...formData.text,
-            primary: {
-              ...formData.text.primary,
-              lines: objSizes.text.primary.lines,
-              maxLength: objSizes.text.primary.maxLength,
-              placeholder: objSizes.text.primary.placeholder
-            }
-          },
-        });
-      } else if (event.target.value == '3.5” x 2”') {
+    if (event.target.value == '3.5” x 2”') {
         // setFlagStyle(prevStyle => ({ ...prevStyle, transform: `scaleX(1.25)` }));
         setFormData({
           ...formData,
@@ -382,16 +333,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
               ...formData.price.upsells,
               size: objSizes.upsells.size,
               glowBorder: objSizes.upsells.glowInTheDark || 0,
-              hiVis: objSizes.upsells.hiVis || 0,
-              badge: objSizes.upsells.badge || 0,
             },
-          },
-          img: {
-            ...formData.img,
-            name: symbols['medical patch']["2 x 2"][0].name,
-            img: symbols['medical patch']["2 x 2"][0].img,
-            glow: symbols['medical patch']["2 x 2"][0].glow,
-            icon: symbols['medical patch']["2 x 2"][0].icon,
           },
           size: {
             ...formData.size,
@@ -425,21 +367,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
               ...formData.price.upsells,
               size: objSizes.upsells.size,
               glowBorder: objSizes.upsells.glowInTheDark || 0,
-              hiVis: objSizes.upsells.hiVis || 0,
-              badge: objSizes.upsells.badge || 0,
-            },
-          },
-          img: {
-            ...formData.img,
-            name: symbols['medical patch']["2 x 2"][0].name,
-            img: symbols['medical patch']["2 x 2"][0].img,
-            color: {
-              ...formData.img.color, mask: {
-                name: symbols['medical patch']["2 x 2"][0].name,
-                img: symbols['medical patch']["2 x 2"][0].img,
-                glow: symbols['medical patch']["2 x 2"][0].glow,
-                icon: symbols['medical patch']["2 x 2"][0].icon,
-              },
+
             },
           },
           size: {
@@ -576,11 +504,12 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
     let obj = {};
     switch (formData.type.toLowerCase()) {
       case 'medical patch':
-        if (formData.size.current == '1” x 1”') {
-          obj = symbols["medical patch"]['1 x 1'].find(value => value.name === event.name);
-        } else {
-          obj = symbols["medical patch"]['2 x 2'].find(value => value.name === event.name);
-        }
+        obj = symbols["medical patch"].find(value => value.name === event.name);
+        // if (formData.size.current == '1” x 1”') {
+        //   obj = symbols["medical patch"]['1 x 1'].find(value => value.name === event.name);
+        // } else {
+        //   obj = symbols["medical patch"]['2 x 2'].find(value => value.name === event.name);
+        // }
         // Set the form data with the selected hivis flag and its image
         // setFormData({ ...formData, img: event.name, imgSrc: obj.img, imgIcon: obj.icon, imgGlow: obj.glow });
         setFormData({ ...formData, img: { ...formData.img, name: event.name, img: obj.img, icon: obj.icon, glow: obj.glow } });
@@ -1222,30 +1151,41 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
 
                     </>
                   ) : input.id.toLowerCase() == "symbol" ? (
-                    formData.size.current == '1” x 1”' ? (
-                      <>
-                        <AdvancedSelect
-                          // id="bgColor"
-                          title={formData.img.markType}
-                          name={formData.img.markType}
-                          value={formData.img.name}
-                          img={formData.img.color.mask.icon}
-                          onChange={handleImgChange}
-                          options={symbols["medical patch"]["1 x 1"]}
-                        />
-                      </>
-                    ) : (
-                      <>
-                        <AdvancedSelect
-                          title={formData.img.markType}
-                          name={formData.img.markType}
-                          value={formData.img.name}
-                          img={formData.img.color.mask.icon}
-                          onChange={handleImgChange}
-                          options={symbols["medical patch"]["2 x 2"]}
-                        />
-                      </>
-                    )
+                    // formData.size.current == '1” x 1”' ? (
+                    //   <>
+                    //     <AdvancedSelect
+                    //       // id="bgColor"
+                    //       title={formData.img.markType}
+                    //       name={formData.img.markType}
+                    //       value={formData.img.name}
+                    //       img={formData.img.color.mask.icon}
+                    //       onChange={handleImgChange}
+                    //       options={symbols["medical patch"]["1 x 1"]}
+                    //     />
+                    //   </>
+                    // ) : (
+                    //   <>
+                    //     <AdvancedSelect
+                    //       title={formData.img.markType}
+                    //       name={formData.img.markType}
+                    //       value={formData.img.name}
+                    //       img={formData.img.color.mask.icon}
+                    //       onChange={handleImgChange}
+                    //       options={symbols["medical patch"]["2 x 2"]}
+                    //     />
+                    //   </>
+                    // )
+                    <>
+                    <AdvancedSelect
+                      // id="bgColor"
+                      title={formData.img.markType}
+                      name={formData.img.markType}
+                      value={formData.img.name}
+                      img={formData.img.color.mask.icon}
+                      onChange={handleImgChange}
+                      options={symbols["medical patch"]}
+                    />
+                  </>
                   ) : input.id.toLowerCase() == "flag" ? (
                     <>
                       {
