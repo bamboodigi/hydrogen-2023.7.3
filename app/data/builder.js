@@ -708,6 +708,7 @@ const builderData = {
             upsells: {
               size: 0,
               hiVis: 5,
+              glowInTheDark: 5,
             },
           },
           {
@@ -724,6 +725,7 @@ const builderData = {
               size: 1,
               thinLine: 4,
               hiVis: 5,
+              glowInTheDark: 5,
             },
           },
           {
@@ -740,6 +742,7 @@ const builderData = {
               size: 5,
               tRexArms: 6,
               hiVis: 5,
+              glowInTheDark: 10,
             },
           },
           {
@@ -755,6 +758,7 @@ const builderData = {
             upsells: {
               size: 13,
               hiVis: 5,
+              glowInTheDark: 10,
             },
           },
         ],
