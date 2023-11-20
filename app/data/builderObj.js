@@ -6,7 +6,6 @@ const builderObj = {
     //   // initalize the formData Object based on the product and chooses selected
     formData: function (product) {
       const patchType = builderData.type[builderObj.helpers.get.builderTitle(product).toLowerCase()];
-
       let formData = {
         type: patchType.name || '',
         id: patchType.name.toLowerCase() || '',
@@ -647,6 +646,9 @@ const builderObj = {
             ]
           }
         };
+      },
+      routerParams: function () {
+        
       },
     },
     update: {

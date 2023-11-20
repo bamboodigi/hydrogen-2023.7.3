@@ -862,6 +862,9 @@ const builderData = {
             maxLength: null,
             lines: null,
             placeholder: null,
+            upsells: {
+              size: 0,
+            },
           },
         ],
       },
@@ -1420,7 +1423,15 @@ const builderData = {
       base: 36,
       config: {
         "sizes": [
-          { size: '3.5” x 4”', maxLength: 13, lines: 1, placeholder: 'Your Name' },
+          {
+            size: '3.5” x 4”',
+            maxLength: 13,
+            lines: 1,
+            placeholder: 'Your Name',
+            upsells: {
+              size: 0,
+            },
+          },
         ]
       },
       form: {

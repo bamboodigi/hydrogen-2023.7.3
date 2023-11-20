@@ -723,8 +723,8 @@ export function Visualizer({ formData, className, methods, ...props }) {
                 </div>
               </div>
               <div id="division" className="h-full w-full flex justify-center">
-                <div id="bird" className="h-[75%] w-[75%]" style={birdStyle}></div>
-                <div id="ring"className="h-[61%] w-[69%] absolute z-100" style={ringStyle}></div>
+                <div id="bird" className="h-[100%] w-[84%]" style={birdStyle}></div>
+                <div id="ring"className="h-[58%] w-[67%] absolute z-100" style={ringStyle}></div>
               </div>
             </div>
           ) : formData.type.toLowerCase().includes("ranger tabs") ? (
