@@ -452,7 +452,7 @@ function CartLineQuantityAdjust({ line, cart }) {
 }
 
 function UpdateCartButton({ children, lines }) {
- console.log(lines);
+ //console.log(lines);
   return (
     <CartForm
       route="/cart"

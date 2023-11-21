@@ -1232,7 +1232,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
                               value={formData.img.color.mask.name}
                               img={formData.img.color.mask.icon}
                               onChange={handleMaskChange}
-                              options={imgs["lazer-cut"]["large-id"]}
+                              options={imgs["lazer-cut"]["3x2"]}
                             />
                           ) : (
                             <AdvancedSelect

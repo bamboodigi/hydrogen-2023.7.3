@@ -1808,7 +1808,7 @@ function initSymbols() {
     };
   });
 
-  console.log(formattedArray);
+  //console.log(formattedArray);
 
   return formattedArray;
 }
@@ -1994,7 +1994,6 @@ function initLazerCutFlags() {
     "3.5 x 2",
     "5 x 3",
     "6 x 3",
-    "3.5 Hex",
     "Mini-ID",
     "Large-ID"
   ];    // If there's a common file extension, you can add it here
@@ -2007,8 +2006,7 @@ function initLazerCutFlags() {
     let key = size.replace(/ /g, "").toLowerCase();
     let iconKey = key;
     // console.log(iconKey);
-    iconKey = iconKey === '3x2' ? 'mini-id' : iconKey;
-    // iconKey = iconKey === '3.5x2' ? '6x3' : iconKey;
+
     switch (iconKey) {
       case '3x2':
         imageList = [
@@ -2016,7 +2014,10 @@ function initLazerCutFlags() {
           'alabama.png',
           'alaska.png',
           'antartica.png',
+          'aquila.png',
           'argentina.png',
+          'arizona.png',
+          'arkansas.png',
           'armenia.png',
           'australia.png',
           'austria.png',
@@ -2024,7 +2025,7 @@ function initLazerCutFlags() {
           'betsy-ross.png',
           'british-columbia.png',
           'calico-jack.png',
-          'california-republic.png',
+          'california.png',
           'canada.png',
           'chicago.png',
           'chile.png',
@@ -2032,7 +2033,7 @@ function initLazerCutFlags() {
           'christian-flag.png',
           'coast-guard.png',
           'colorado.png',
-          'columbia.png',
+          'colombia.png',
           'croatia.png',
           'cuba.png',
           'czech-republic.png',
@@ -2055,7 +2056,6 @@ function initLazerCutFlags() {
           'hong-kong.png',
           'hungary.png',
           'iceland.png',
-          'imperial-aquila.png',
           'imperial-japan.png',
           'indiana.png',
           'indianapolis.png',
@@ -2112,7 +2112,7 @@ function initLazerCutFlags() {
           'tonga.png',
           'trinidad-and-tobago.png',
           'turkey.png',
-          'ukraine-standard.png',
+          'ukraine.png',
           'united-kingdom.png',
           'usa.png',
           'usmc-ega.png',
@@ -2563,6 +2563,8 @@ function initLazerCutFlags() {
     });
     lazerObj[key] = formattedArray;
   });
+
+  console.log(lazerObj);
 
   return lazerObj;
 }

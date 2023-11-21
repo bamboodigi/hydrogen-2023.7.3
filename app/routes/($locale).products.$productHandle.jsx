@@ -1,7 +1,7 @@
 import { useRef, Suspense, useEffect } from 'react';
 import { Disclosure, Listbox } from '@headlessui/react';
 import { defer, redirect } from '@shopify/remix-oxygen';
-import { useLoaderData, Await, useParams} from '@remix-run/react';
+import { useLoaderData, Await, useParams } from '@remix-run/react';
 
 import {
   AnalyticsPageType,
@@ -27,7 +27,7 @@ import {
   Button,
   PartialStarIcon,
   PatchBuilder,
-  trackViewedProduct, 
+  trackViewedProduct,
   trackAddedToCart,
 } from '~/components';
 import { StarIcon } from '@heroicons/react/20/solid'
@@ -58,8 +58,13 @@ const stars_enabled = configProduct.stars;
 
 export async function loader({ params, request, context }) {
   const { productHandle } = params;
-  const searchParams = new URL(request.url).searchParams;
+  const searchParams = new URL(request.url).searchParams.toString();
+
+  
   invariant(productHandle, 'Missing productHandle param, check route filename');
+
+
+
 
   const selectedOptions = getSelectedProductOptions(request);
 
@@ -80,15 +85,6 @@ export async function loader({ params, request, context }) {
     },
   });
 
-//  console.log(addon);
-
-  // console.log(addon.product);
-  // console.log(addon.product.variants);
-  // console.log(addon.product.variants.nodes[0]);
-
-
-  // console.log(product);
-
   // In order to show which variants are available in the UI, we need to query
   // all of them. But there might be a *lot*, so instead separate the variants
   // into it's own separate query that is deferred. So there's a brief moment
@@ -108,10 +104,17 @@ export async function loader({ params, request, context }) {
   }
 
   // console.log(product);
+  // console.log(product.selectedVariant);
+  // console.log(product);
   // console.log(product.variantBySelectedOptions)
-  if (!product.selectedVariant) {
-    // console.log('redirect');
-    return redirectToFirstVariant({ product, request });
+  console.log(product);
+
+  if (product.tags.includes('custom_patch')) {
+  } else {
+    if (!product.selectedVariant) {
+      console.log('redirect');
+      return redirectToFirstVariant({ product, request });
+    }
   }
 
   const recommended = getRecommendedProducts(context.storefront, product.id);
@@ -134,6 +137,7 @@ export async function loader({ params, request, context }) {
   });
 
   return defer({
+    searchParams,
     variants,
     product,
     shop,
@@ -150,37 +154,55 @@ export async function loader({ params, request, context }) {
   });
 }
 
-// This function redirects the user to the first variant of a product
+// // This function redirects the user to the first variant of a product
+// function redirectToFirstVariant({ product, request }) {
+//   // Get the search parameters from the request URL
+//   const searchParams = new URLSearchParams({});
+//   //const searchParams = new URLSearchParams(new URL(request.url).search);
+//   console.log('searchParms: 1st');
+//   console.log(searchParams);
+
+//   // Get the first variant of the product
+//   const firstVariant = product.variants.nodes[0];
+
+//   // Set the selected options of the first variant as search parameters
+//   for (const option of firstVariant.selectedOptions) {
+//     searchParams.set(option.name, option.value);
+//   }
+
+//   console.log('searchParms: 2nd');
+//   console.log(searchParams);
+
+
+//   // console.log('searchParms: 2nd after set(name and value)');
+//   // console.log(searchParams.toString());
+
+//   // Log the search parameters to the console
+//   // console.log(searchParams.toString());
+//   // console.log(product.variants);
+//   // console.log(request);
+
+//   // Redirect the user to the first variant of the product
+
+//   // console.log(product.variants.nodes.length);
+
+//   // if(product.variants.nodes.length > 1) {
+//   //   throw redirect(`/products/${product.handle}?${searchParams.toString()}`, 302);
+//   // }
+//   throw redirect(`/products/${product.handle}?${searchParams.toString()}`, 302 );
+// }
+
 function redirectToFirstVariant({ product, request }) {
-  // Get the search parameters from the request URL
   const searchParams = new URLSearchParams(new URL(request.url).search);
-  // console.log('searchParms: 1st');
-  // console.log(searchParams);
-
-  // Get the first variant of the product
   const firstVariant = product.variants.nodes[0];
-
-  // Set the selected options of the first variant as search parameters
   for (const option of firstVariant.selectedOptions) {
     searchParams.set(option.name, option.value);
   }
 
-  // console.log('searchParms: 2nd after set(name and value)');
-  // console.log(searchParams.toString());
-
-  // Log the search parameters to the console
-  // console.log(searchParams.toString());
-  // console.log(product.variants);
-  // console.log(request);
-
-  // Redirect the user to the first variant of the product
-
-  // console.log(product.variants.nodes.length);
-
-  // if(product.variants.nodes.length > 1) {
-  //   throw redirect(`/products/${product.handle}?${searchParams.toString()}`, 302);
-  // }
-  throw redirect(`/products/${product.handle}?${searchParams.toString()}`, 302 );
+  return redirect(
+    `/products/${product.handle}?${searchParams.toString()}`,
+    302,
+  );
 }
 
 function classNames(...classes) {
@@ -194,59 +216,59 @@ const bgColor = "bg-[" + bgColors[0] + "]";
 
 
 export default function Product() {
-  const { product, shop, recommended, variants, addon } = useLoaderData();
+  const { searchParams, product, shop, recommended, variants, addon } = useLoaderData();
   const { media, title, vendor, descriptionHtml } = product;
   const { shippingPolicy, refundPolicy } = shop;
 
-//console.log(addon.products.nodes);
+  console.log(searchParams);
 
   let addOnObj = {};
 
-addon.products.nodes.forEach(product => {
- // console.log(product);
-  const handle = product.handle.replace(/^add-on-/, "");
-  const title = product.title.replace(/^Add On - /, "");
-  const id = product.id;
-  const variants = product.variants.nodes;
+  addon.products.nodes.forEach(product => {
+    // console.log(product);
+    const handle = product.handle.replace(/^add-on-/, "");
+    const title = product.title.replace(/^Add On - /, "");
+    const id = product.id;
+    const variants = product.variants.nodes;
 
-  addOnObj[handle] = {};
-  addOnObj[handle].name = title;
-  addOnObj[handle].variants = [];
+    addOnObj[handle] = {};
+    addOnObj[handle].name = title;
+    addOnObj[handle].variants = [];
 
-  // console.log(handle);
-  // console.log(title);
-  // console.log(id);
-  // console.log(variants);
-
-  variants.forEach(variant => {
-    let variantObj = {};
-    const variantId = variant.id;
-    const value = variant.selectedOptions[0].value;
+    // console.log(handle);
+    // console.log(title);
     // console.log(id);
-    // console.log(value);
-    variantObj.id = variantId;
-    variantObj.value = value;
+    // console.log(variants);
 
-    addOnObj[handle].variants.push(variantObj);
+    variants.forEach(variant => {
+      let variantObj = {};
+      const variantId = variant.id;
+      const value = variant.selectedOptions[0].value;
+      // console.log(id);
+      // console.log(value);
+      variantObj.id = variantId;
+      variantObj.value = value;
+
+      addOnObj[handle].variants.push(variantObj);
+    });
+
+    // if (!addOnObj[name]) {
+    //   addOnObj[name] = {
+    //     name: variant.product.title,
+    //     variants: []
+    //   };
+    // }
+
+    // addOnObj[name].variants.push({
+    //   id: id,
+    //   value: value
+    // });
   });
 
-  // if (!addOnObj[name]) {
-  //   addOnObj[name] = {
-  //     name: variant.product.title,
-  //     variants: []
-  //   };
-  // }
-
-  // addOnObj[name].variants.push({
-  //   id: id,
-  //   value: value
-  // });
-});
-
-//console.log(addOnObj);
+  //console.log(addOnObj);
   useEffect(() => {
     trackViewedProduct(product);
-  },[]);
+  }, []);
 
   // console.log(product);
 
@@ -267,8 +289,8 @@ addon.products.nodes.forEach(product => {
               <div className="md:px-0 md:p-20 xl:px-28 xl:p-28 max-w-screen-2xl mx-auto grid 
         items-start md:gap-6 lg:gap-0 md:grid-cols-2"
               >
-                <PatchBuilder product={product} config={configProduct} />
-                </div>
+                <PatchBuilder product={product} config={configProduct} searchParams={searchParams} />
+              </div>
             </Container>
           </>
         ) : (

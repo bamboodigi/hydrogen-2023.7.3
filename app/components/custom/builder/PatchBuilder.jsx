@@ -18,15 +18,16 @@ import builderObj from '~/data/builderObj.js';
 
 
 // Patch Builder Component. This is the component that will show a tailored patch unique to the user's selections.
-export function PatchBuilder({ product, config, ...props }) {
+export function PatchBuilder({ product, config, searchParams, ...props }) {
   const initFormData = builderObj.init.formData;
+  
 
   // Destructure shop from useLoaderData and destructre shippingPolicy and refundPolicy from shop
   const { shop } = useLoaderData();
   const { shippingPolicy, refundPolicy } = shop;
 
   // Set initial state of FormData with useState hook
-  const [formData, setFormData] = useState(initFormData(product));
+  const [formData, setFormData] = useState(initFormData(product, searchParams));
 
   useEffect(() => {
     builderObj.helpers.update.totalPrice(formData, setFormData);
@@ -48,7 +49,7 @@ export function PatchBuilder({ product, config, ...props }) {
             lg:">
           <PatchHeading formData={formData} methods={builderObj} />
           <Form formData={formData} setFormData={setFormData} data={data} config={config} product={product} methods={builderObj} />
-          {/* <pre className="overflow-scroll" style={prestyle}>{JSON.stringify(formData, null, 2)}</pre> */}
+          <pre className="overflow-scroll" style={prestyle}>{JSON.stringify(formData, null, 2)}</pre>
           <ProductDetails shippingPolicy={shippingPolicy} refundPolicy={refundPolicy} />
         </section>
       </div>

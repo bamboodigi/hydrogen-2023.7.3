@@ -4,7 +4,7 @@ const builderObj = {
   // initalize the starting state
   init: {
     //   // initalize the formData Object based on the product and chooses selected
-    formData: function (product) {
+    formData: function (product, searchParams) {
       const patchType = builderData.type[builderObj.helpers.get.builderTitle(product).toLowerCase()];
       let formData = {
         type: patchType.name || '',
@@ -115,9 +115,19 @@ const builderObj = {
           },
         }
       };
+      let paramsList = [];
       // console.log(formData.type.toLowerCase());
       switch (formData.type.toLowerCase()) {
         case 'id panel':
+          paramsList = [
+            'size', 
+            'text',
+            'secondary',
+            'textColor',
+            'backgroundColor',
+            'flagType',
+            'flag',
+          ];
           // console.log('id panel');
           formData.img.type = 'Lazer Cut Flag';
           formData.img.color.mask.img = builderObj.data.imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").img;
@@ -208,11 +218,16 @@ const builderObj = {
           break;
       }
 
-      if (formData.price.upsells.size) {
 
-      }
-      //  console.log(formData);
-      // console.log(formData);
+      // console.log(searchParams);
+      const params = builderObj.helpers.utility.paramsStringToObj(searchParams);
+
+      const filteredParams = builderObj.helpers.update.paramsFilter(params, paramsList);
+      
+      console.log(params);
+      console.log(filteredParams);
+    //  formData = builderObj.helpers.update.paramsFormData(formData, filteredParams);
+
       return formData || {};
     },
 
@@ -648,7 +663,7 @@ const builderObj = {
         };
       },
       routerParams: function () {
-        
+
       },
     },
     update: {
@@ -1028,47 +1043,56 @@ const builderObj = {
 
           arr.push(id);
           cart.forEach((line) => {
-         //   console.log(line);
+            //   console.log(line);
             if (line.attributes.length == 1) {
-            //  console.log(line.attributes[0].value);
+              //  console.log(line.attributes[0].value);
               if (line.attributes[0].value == idTag) {
-              //  console.log(line);
+                //  console.log(line);
                 arr.push(line.id);
               }
             }
           });
 
-         console.log(arr);
+          //  console.log(arr);
 
           return arr;
         },
         update: function (line, cart, quantity) {
-          console.log(line);
-          console.log(cart);
-          console.log(quantity);
+          // console.log(line);
+          // console.log(cart);
+          // console.log(quantity);
           let arr = [];
           const { id, attributes } = line;
           const idTag = attributes.find((attribute) => attribute.key === 'ID')?.value || '';
 
           arr.push({ id: id, quantity: quantity, attributes: attributes });
           cart.forEach((line) => {
-         //   console.log(line);
+            //   console.log(line);
             if (line.attributes.length == 1) {
-            //  console.log(line.attributes[0].value);
+              //  console.log(line.attributes[0].value);
               if (line.attributes[0].value == idTag) {
-              //  console.log(line);
-                arr.push({id: line.id, quantity: quantity, attributes:               {
-                  key: "productID",
-                  value: idTag,
-                }});
+                //  console.log(line);
+                arr.push({
+                  id: line.id, quantity: quantity, attributes: {
+                    key: "productID",
+                    value: idTag,
+                  }
+                });
               }
             }
           });
 
-         console.log(arr);
+          console.log(arr);
 
           return arr;
         },
+      },
+      paramsFilter: function (params, attrList) {     
+        const filteredArray = params.filter(obj =>
+          attrList.some(key => obj.hasOwnProperty(key))
+        );
+
+        return filteredArray;
       },
     },
     is: {
@@ -1157,6 +1181,18 @@ const builderObj = {
       capitalizeWords: function (str) {
         return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
       },
+      paramsStringToObj: function (queryString) {
+        const params = new URLSearchParams(queryString);
+        const result = [];
+
+        for (const [key, value] of params) {
+          const obj = {};
+          obj[key] = value;
+          result.push(obj);
+        }
+       return result;
+      },
+
     },
   },
 };
