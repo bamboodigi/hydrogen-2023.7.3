@@ -49,7 +49,7 @@ export function PatchBuilder({ product, config, searchParams, ...props }) {
             lg:">
           <PatchHeading formData={formData} methods={builderObj} />
           <Form formData={formData} setFormData={setFormData} data={data} config={config} product={product} methods={builderObj} />
-          {/* <pre className="overflow-scroll" style={prestyle}>{JSON.stringify(formData, null, 2)}</pre> */}
+          <pre className="overflow-scroll" style={prestyle}>{JSON.stringify(formData, null, 2)}</pre>
           <ProductDetails shippingPolicy={shippingPolicy} refundPolicy={refundPolicy} />
         </section>
       </div>

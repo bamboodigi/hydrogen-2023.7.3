@@ -64,7 +64,7 @@ export default function initFormDataTest(product, builderData, bgColors, fontCol
         name: fontColors[8].name,
         img: fontColors[8].img,
       },
-      type: 'Lazer Cut Flag',
+      type: 'Laser Cut Flag',
       reversed: false,
       variant: {
         name: '',
@@ -75,13 +75,13 @@ export default function initFormDataTest(product, builderData, bgColors, fontCol
 
   switch(formData.type.toLowerCase()) {
     case 'id panel':
-      formData.img.type = 'Lazer Cut Flag';
+      formData.img.type = 'Laser Cut Flag';
       break;
     case 'name tape':
       formData.img.type = 'HiVis Flag';
       break;
     case 'flag':
-      formData.img.type = 'Lazer Cut Flag';
+      formData.img.type = 'Laser Cut Flag';
       break;
     case 'light sabers':
       formData.bgColor.name = bgColors[0].name;
@@ -185,7 +185,7 @@ let formData = {
   bgColorImg: bgColors[18].img,
   markType: '',
   flagEnabled: false,
-  flagType: 'Lazer Cut Flag',
+  flagType: 'Laser Cut Flag',
   img: data[5].values[0]["hivis-flags"][0].name,
   imgSrc: data[5].values[0]["hivis-flags"][0].img,
   flagReversed: false,
@@ -235,11 +235,11 @@ if (isFlag(formData.type)) {
  // console.log(formData.type.toLowerCase())
   switch (formData.type.toLowerCase()) {
     case 'id panel':
-      formData.flagType = 'Lazer Cut Flag';
+      formData.flagType = 'Laser Cut Flag';
     case 'name tape':
       formData.flagType = 'HiVis Flag';
     case 'flag':
-      formData.flagType = 'Lazer Cut Flag';
+      formData.flagType = 'Laser Cut Flag';
     case 'default':
     // console.log("test");
     // formData.flagType = 'HiVis Flag';

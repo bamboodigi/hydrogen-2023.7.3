@@ -16,7 +16,7 @@ export function IDPanel({ formData, methods, containerRef, secondaryContainerRef
       {formData.size.current == '6” x 2”' ? (
         <div className="w-full h-full flex">
           <div className="w-1/2 flex items-center px-2">
-            {formData.img.type.toLowerCase() === "lazer cut flag" ? (
+            {formData.img.type.toLowerCase() === "laser cut flag" ? (
               <div id="mask" className="h-full w-full" style={maskStyle}>
                 <div id="glow"
                   className={classNames(
@@ -54,7 +54,7 @@ export function IDPanel({ formData, methods, containerRef, secondaryContainerRef
             formData.size.current === '3.5” x 2”' ? "px-1" : "",
             "flex h-1/2 items-center"
           )}>
-            {formData.img.type.toLowerCase() === "lazer cut flag" ? (
+            {formData.img.type.toLowerCase() === "laser cut flag" ? (
               <div id="mask"
                 className={classNames(
                   formData.size.current === '3” x 2”' ? "min-w-3/5" : "min-w-1/2",

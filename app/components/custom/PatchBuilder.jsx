@@ -186,13 +186,13 @@ function initFormData(product) {
         name: fontColors[8].name,
         img: fontColors[8].img,
         mask: {
-          name: imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").name,
-          img: imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").img,
-          glow: imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").glow,
-          icon: imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").icon,
+          name: imgs["laser-cut"]['mini-id'].find(value => value.name == "USA").name,
+          img: imgs["laser-cut"]['mini-id'].find(value => value.name == "USA").img,
+          glow: imgs["laser-cut"]['mini-id'].find(value => value.name == "USA").glow,
+          icon: imgs["laser-cut"]['mini-id'].find(value => value.name == "USA").icon,
         }
       },
-      type: 'Lazer Cut Flag',
+      type: 'Laser Cut Flag',
       reversed: false,
       variant: {
         name: '',
@@ -201,21 +201,21 @@ function initFormData(product) {
     }
   };
 
-  // console.log(imgs["lazer-cut"]['3x2'].find(value => value.name == "USA"));
+  // console.log(imgs["laser-cut"]['3x2'].find(value => value.name == "USA"));
 
   switch (formData.type.toLowerCase()) {
     case 'id panel':
-      formData.img.type = 'Lazer Cut Flag';
-      formData.img.color.mask.img = imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").img;
-      formData.img.color.mask.name = imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").name;
+      formData.img.type = 'Laser Cut Flag';
+      formData.img.color.mask.img = imgs["laser-cut"]['mini-id'].find(value => value.name == "USA").img;
+      formData.img.color.mask.name = imgs["laser-cut"]['mini-id'].find(value => value.name == "USA").name;
       break;
     case 'name tape':
       formData.img.type = 'HiVis Flag';
       break;
     case 'flag':
-      formData.img.type = 'Lazer Cut Flag';
-      formData.img.color.mask.img = imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").img;
-      formData.img.color.mask.name = imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").name;
+      formData.img.type = 'Laser Cut Flag';
+      formData.img.color.mask.img = imgs["laser-cut"]['mini-id'].find(value => value.name == "USA").img;
+      formData.img.color.mask.name = imgs["laser-cut"]['mini-id'].find(value => value.name == "USA").name;
       break;
     case 'light sabers':
       formData.bgColor.name = bgColors[0].name;
@@ -251,9 +251,9 @@ function initFormData(product) {
       formData.text.fifth = tempObj;
       formData.text.sixth = tempObj;
       formData.text.seventh = tempObj;
-      formData.img.type = 'Lazer Cut Flag';
-      formData.img.color.mask.img = imgs["lazer-cut"]['3x2'].find(value => value.name == "USA").img;
-      formData.img.color.mask.name = imgs["lazer-cut"]['3x2'].find(value => value.name == "USA").name;
+      formData.img.type = 'Laser Cut Flag';
+      formData.img.color.mask.img = imgs["laser-cut"]['3x2'].find(value => value.name == "USA").img;
+      formData.img.color.mask.name = imgs["laser-cut"]['3x2'].find(value => value.name == "USA").name;
       break;
     case 'division jacket panel':
       formData.text.primary.maxLength = 15;
@@ -288,7 +288,7 @@ function isGlowBorder(type, size, sizeEnabled) {
 }
 
 function isFlag(type, flagEnabled) {
-  // determine if type == id panel, lazer cut flag, jacket panel, division jacket panel
+  // determine if type == id panel, laser cut flag, jacket panel, division jacket panel
   if (type.toLowerCase().includes("id panel")
     // || type.toLowerCase().includes("jacket panel") || type.toLowerCase().includes("division jacket panel")
   ) {
@@ -879,7 +879,7 @@ function Visualizer({ formData, className, ...props }) {
     };
     if (
       formData.img.markType.toLowerCase() === "symbol" ||
-      formData.img.type.toLowerCase() === "lazer cut flag"
+      formData.img.type.toLowerCase() === "laser cut flag"
     ) {
       obj.type = 'mask';
       obj.src = formData.text.color.img;
@@ -919,7 +919,7 @@ function Visualizer({ formData, className, ...props }) {
     };
     if (
       formData.img.markType.toLowerCase() === "symbol" ||
-      formData.img.type.toLowerCase() === "lazer cut flag"
+      formData.img.type.toLowerCase() === "laser cut flag"
     ) {
       imageLoader(obj, setMaskStyle);
     }
@@ -936,7 +936,7 @@ function Visualizer({ formData, className, ...props }) {
     console.log(formData.img.markType)
     if (
       formData.img.markType.toLowerCase() === "symbol" ||
-      formData.img.type.toLowerCase() === "lazer cut flag"
+      formData.img.type.toLowerCase() === "laser cut flag"
     ) {
       console.log(formData.img.type)
       obj.type = 'mask';
@@ -1051,7 +1051,7 @@ function Visualizer({ formData, className, ...props }) {
       }
     }
 
-    if (formData.img.type.toLowerCase() === "lazer cut flag") {
+    if (formData.img.type.toLowerCase() === "laser cut flag") {
       let obj = {
       };
       obj.type = 'mask';
@@ -1179,7 +1179,7 @@ function Visualizer({ formData, className, ...props }) {
           {formData.type.toLowerCase().includes("id panel") && formData.size.current == '6” x 2”' ? (
             <div className="w-full h-full flex">
               <div className="w-1/2 flex items-center px-2">
-                {formData.img.type.toLowerCase() === "lazer cut flag" ? (
+                {formData.img.type.toLowerCase() === "laser cut flag" ? (
                   <div id="mask" className="h-full w-full" style={maskStyle}>
                     <div id="glow"
                       className={classNames(
@@ -1217,7 +1217,7 @@ function Visualizer({ formData, className, ...props }) {
                 formData.size.current === '3.5” x 2”' ? "px-1" : "",
                 "flex h-1/2 items-center"
               )}>
-                {formData.img.type.toLowerCase() === "lazer cut flag" ? (
+                {formData.img.type.toLowerCase() === "laser cut flag" ? (
                   <div id="mask"
                     className={classNames(
                       formData.size.current === '3” x 2”' ? "min-w-3/5" : "min-w-1/2",
@@ -1606,8 +1606,8 @@ function Form({ formData, setFormData, data, config, product }) {
     // Get the current size key from the event target value
     const sizeKey = convertSizeString(event.target.value);
 
-    // Get the corresponding size object from the imgs['lazer-cut'] object
-    const sizeObject = imgs['lazer-cut'][sizeKey];
+    // Get the corresponding size object from the imgs['laser-cut'] object
+    const sizeObject = imgs['laser-cut'][sizeKey];
 
     // Get the current mask name from the formData object
     const maskName = formData.img.color.mask.name;
@@ -1806,7 +1806,7 @@ function Form({ formData, setFormData, data, config, product }) {
         break;
       default:
         let size = convertSizeString(formData.size.current);
-        obj = imgs["lazer-cut"][size].find(value => value.name === event.name);
+        obj = imgs["laser-cut"][size].find(value => value.name === event.name);
         console.log(obj);
         setFormData({
           ...formData, img: {
@@ -2408,14 +2408,14 @@ function Form({ formData, setFormData, data, config, product }) {
                   ) : input.id.toLowerCase() == "flag" ? (
                     <>
                       {
-                        formData.img.type.toLowerCase() == "lazer cut flag" ? (
+                        formData.img.type.toLowerCase() == "laser cut flag" ? (
                           <AdvancedSelect
                             title={formData.img.markType}
                             name={formData.img.markType}
                             value={formData.img.color.mask.name}
                             img={formData.img.color.mask.icon}
                             onChange={handleMaskChange}
-                            options={imgs["lazer-cut"][convertSizeString(formData.size.current)]}
+                            options={imgs["laser-cut"][convertSizeString(formData.size.current)]}
                           />
                         ) : (
                           <AdvancedSelect

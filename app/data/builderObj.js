@@ -79,10 +79,10 @@ const builderObj = {
             name: builderObj.data.fontColors[8].name,
             img: builderObj.data.fontColors[8].img,
             mask: {
-              name: builderObj.data.imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").name,
-              img: builderObj.data.imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").img,
-              glow: builderObj.data.imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").glow,
-              icon: builderObj.data.imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").icon,
+              name: builderObj.data.imgs["laser-cut"]['mini-id'].find(value => value.name == "USA").name,
+              img: builderObj.data.imgs["laser-cut"]['mini-id'].find(value => value.name == "USA").img,
+              glow: builderObj.data.imgs["laser-cut"]['mini-id'].find(value => value.name == "USA").glow,
+              icon: builderObj.data.imgs["laser-cut"]['mini-id'].find(value => value.name == "USA").icon,
             }
           },
           division: {
@@ -107,7 +107,7 @@ const builderObj = {
               },
             },
           },
-          type: 'Lazer Cut Flag',
+          type: 'Laser Cut Flag',
           reversed: false,
           variant: {
             name: '',
@@ -120,20 +120,20 @@ const builderObj = {
       switch (formData.type.toLowerCase()) {
         case 'id panel':
           // console.log('id panel');
-          formData.img.type = 'Lazer Cut Flag';
-          formData.img.color.mask.img = builderObj.data.imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").img;
-          formData.img.color.mask.name = builderObj.data.imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").name;
+          formData.img.type = 'Laser Cut Flag';
+          formData.img.color.mask.img = builderObj.data.imgs["laser-cut"]['mini-id'].find(value => value.name == "USA").img;
+          formData.img.color.mask.name = builderObj.data.imgs["laser-cut"]['mini-id'].find(value => value.name == "USA").name;
           formData.img.enabled = true;
           break;
         case 'name tape':
           formData.img.type = 'HiVis Flag';
           break;
         case 'flag':
-          formData.img.type = 'Lazer Cut Flag';
-          formData.img.color.mask.img = builderObj.data.imgs["lazer-cut"]['3.5x2'].find(value => value.name == "USA").img;
-          formData.img.color.mask.name = builderObj.data.imgs["lazer-cut"]['3.5x2'].find(value => value.name == "USA").name;
-          formData.img.color.mask.glow = builderObj.data.imgs["lazer-cut"]['3.5x2'].find(value => value.name == "USA").glow;
-          formData.img.color.mask.icon = builderObj.data.imgs["lazer-cut"]['3.5x2'].find(value => value.name == "USA").icon;
+          formData.img.type = 'Laser Cut Flag';
+          formData.img.color.mask.img = builderObj.data.imgs["laser-cut"]['3.5x2'].find(value => value.name == "USA").img;
+          formData.img.color.mask.name = builderObj.data.imgs["laser-cut"]['3.5x2'].find(value => value.name == "USA").name;
+          formData.img.color.mask.glow = builderObj.data.imgs["laser-cut"]['3.5x2'].find(value => value.name == "USA").glow;
+          formData.img.color.mask.icon = builderObj.data.imgs["laser-cut"]['3.5x2'].find(value => value.name == "USA").icon;
           formData.img.enabled = true;
           break;
         case 'light sabers':
@@ -179,11 +179,11 @@ const builderObj = {
           formData.text.fifth = patchType.config.sizes[0].text?.fifth || tempObj;
           formData.text.sixth = patchType.config.sizes[0].text?.sixth || tempObj;
           formData.text.seventh = patchType.config.sizes[0].text?.seventh || tempObj;
-          formData.img.type = 'Lazer Cut Flag';
-          formData.img.color.mask.img = builderObj.data.imgs["lazer-cut"]['3.5x2'].find(value => value.name == "USA").img;
-          formData.img.color.mask.name = builderObj.data.imgs["lazer-cut"]['3.5x2'].find(value => value.name == "USA").name;
-          formData.img.color.mask.glow = builderObj.data.imgs["lazer-cut"]['3.5x2'].find(value => value.name == "USA").glow;
-          formData.img.color.mask.icon = builderObj.data.imgs["lazer-cut"]['3.5x2'].find(value => value.name == "USA").icon;
+          formData.img.type = 'Laser Cut Flag';
+          formData.img.color.mask.img = builderObj.data.imgs["laser-cut"]['3.5x2'].find(value => value.name == "USA").img;
+          formData.img.color.mask.name = builderObj.data.imgs["laser-cut"]['3.5x2'].find(value => value.name == "USA").name;
+          formData.img.color.mask.glow = builderObj.data.imgs["laser-cut"]['3.5x2'].find(value => value.name == "USA").glow;
+          formData.img.color.mask.icon = builderObj.data.imgs["laser-cut"]['3.5x2'].find(value => value.name == "USA").icon;
           formData.img.enabled = true;
           break;
         case 'division jacket panel':
@@ -1163,6 +1163,25 @@ const builderObj = {
               case 'bgcolor':
                 formData.bgColor = this.update.color(value, 'bg');
                 break;
+              case 'flagtype':
+                if(value.indexOf('laser') == -1 || value.indexOf('laser') == -1) {
+                  console.log('laser');
+                  formData.img.type = 'Laser Cut Flag';
+                } else if(value.indexOf('hivis') == -1) {
+                  console.log('hivis');
+                } else {
+
+                }
+                break;
+              case 'flagReversed':
+                switch(value) {
+                  case 'true':
+                    formData.img.reversed = true;
+                    break;
+                  case 'false':
+                    formData.img.reversed = false;
+                    break;
+                }
               case 'sabertype':
                 const saberObj = this.update.saber(value);
                 formData.lightsaber.saberType = saberObj.name;
@@ -1309,7 +1328,7 @@ const builderObj = {
         return sizeEnabled || enabled;
       },
       flag: function (type, flagEnabled) {
-        // determine if type == id panel, lazer cut flag, jacket panel, division jacket panel
+        // determine if type == id panel, laser cut flag, jacket panel, division jacket panel
         if (type.toLowerCase().includes("id panel")
           // || type.toLowerCase().includes("jacket panel") || type.toLowerCase().includes("division jacket panel")
         ) {
@@ -1358,7 +1377,7 @@ const builderObj = {
         customPatch: (formData) => formData.type.toLowerCase() == 'custom printed patch',
       },
       flagType: {
-        lazerCutFlag: (formData) => formData.img.type.toLowerCase() === "lazer cut flag",
+        laserCutFlag: (formData) => formData.img.type.toLowerCase() === "laser cut flag",
         hiVisFlag: (formData) => formData.img.type.toLowerCase() === "hivis flag",
         upload: (formData) => formData.img.type.toLowerCase() === "upload",
       },

@@ -180,7 +180,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
     };
     if (
       formData.img.markType.toLowerCase() === "symbol" ||
-      formData.img.type.toLowerCase() === "lazer cut flag"
+      formData.img.type.toLowerCase() === "laser cut flag"
     ) {
       obj.type = 'mask';
       obj.src = formData.text.color.img;
@@ -225,7 +225,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
     };
     if (
       formData.img.markType.toLowerCase() === "symbol" ||
-      formData.img.type.toLowerCase() === "lazer cut flag"
+      formData.img.type.toLowerCase() === "laser cut flag"
     ) {
       imageLoader(obj, setMaskStyle);
     }
@@ -246,7 +246,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
     //  console.log(formData.img.markType)
     if (
       formData.img.markType.toLowerCase() === "symbol" ||
-      formData.img.type.toLowerCase() === "lazer cut flag"
+      formData.img.type.toLowerCase() === "laser cut flag"
     ) {
       //  console.log(formData.img.type)
       obj.type = 'mask';
@@ -370,7 +370,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
       }
     }
   
-    if (formData.img.type.toLowerCase() === "lazer cut flag") {
+    if (formData.img.type.toLowerCase() === "laser cut flag") {
       let obj = {
       };
       obj.type = 'mask';
@@ -496,7 +496,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
           {formData.type.toLowerCase().includes("id panel") && formData.size.current == '6” x 2”' ? (
             <div className="w-full h-full flex">
               <div className="w-1/2 flex items-center px-2">
-                {formData.img.type.toLowerCase() === "lazer cut flag" ? (
+                {formData.img.type.toLowerCase() === "laser cut flag" ? (
                   <div id="mask" className="h-full w-full" style={maskStyle}>
                     <div id="glow"
                       className={classNames(
@@ -536,7 +536,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
                 formData.size.current === '3.5” x 2”' ? "px-1" : "",
                 "flex h-1/2 items-center"
               )}>
-                {formData.img.type.toLowerCase() === "lazer cut flag" ? (
+                {formData.img.type.toLowerCase() === "laser cut flag" ? (
                   <div id="mask"
                     className={classNames(
                       formData.size.current === '3” x 2”' ? "min-w-3/5" : "min-w-1/2",
@@ -654,7 +654,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
             </div>
           ) : formData.type.toLowerCase() == ("flag") ? (
             <div ref={containerRef} className="h-full w-full overflow-x-hidden flex items-center justify-center">
-              {formData.img.type.toLowerCase() === "lazer cut flag" ? (
+              {formData.img.type.toLowerCase() === "laser cut flag" ? (
                   <div id="mask" className="h-full w-full" style={maskStyle}>
                     <div id="glow"
                       className={classNames(
@@ -699,7 +699,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
                   <p id="text7" className="w-1/2 text-right" style={{ ...fontSecondaryStyle }}>{formData.text.seventh.text.length > 0 ? formData.text.seventh.text : formData.text.seventh.placeholder}</p>
                 </div>
               </div>
-              {formData.img.type.toLowerCase() === "lazer cut flag" ? (
+              {formData.img.type.toLowerCase() === "laser cut flag" ? (
                   <div id="mask" className="h-full w-full" style={maskStyle}>
                     <div id="glow"
                       className={classNames(

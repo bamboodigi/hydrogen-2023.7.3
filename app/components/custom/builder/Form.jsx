@@ -304,17 +304,17 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
 
     if (methods.helpers.is.patchType.idPanel(formData)) {
       if (methods.helpers.is.mini(formData.type, event.target.value)) {
-        sizeObject = imgs['lazer-cut']["mini-id"];
+        sizeObject = imgs['laser-cut']["mini-id"];
       } else {
-        sizeObject = imgs['lazer-cut']["large-id"];
+        sizeObject = imgs['laser-cut']["large-id"];
       }
     } else {
-      sizeObject = imgs['lazer-cut'][sizeKey];
+      sizeObject = imgs['laser-cut'][sizeKey];
     }
 
     // console.log(sizeObject);
 
-    // Get the corresponding size object from the imgs['lazer-cut'] object
+    // Get the corresponding size object from the imgs['laser-cut'] object
     // Get the current mask name from the formData object
     const maskName = formData.img.color.mask.name;
     //  console.log(maskName);
@@ -515,7 +515,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
         setFormData({ ...formData, img: { ...formData.img, name: event.name, img: obj.img, icon: obj.icon, glow: obj.glow } });
         break;
       case 'jacket panel':
-        obj = imgs["lazer-cut"]["3.5x2"].find(value => value.name === event.name);
+        obj = imgs["laser-cut"]["3.5x2"].find(value => value.name === event.name);
         //  console.log(obj);
         setFormData({
           ...formData, img: {
@@ -555,9 +555,9 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
         }
 
         // console.log(size);
-        // console.log( imgs["lazer-cut"][size]);
-        // console.log( imgs["lazer-cut"]);
-        obj = imgs["lazer-cut"][size].find(value => value.name === event.name);
+        // console.log( imgs["laser-cut"][size]);
+        // console.log( imgs["laser-cut"]);
+        obj = imgs["laser-cut"][size].find(value => value.name === event.name);
         //  console.log(obj);
         setFormData({
           ...formData, img: {
@@ -1202,14 +1202,14 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
                           ) : (
                             methods.helpers.is.mini(formData.type, formData.size.current) ? (
                               //    console.log("yes"),
-                              //   console.log(imgs["lazer-cut"]["large-id"]),
+                              //   console.log(imgs["laser-cut"]["large-id"]),
                               <AdvancedSelect
                                 title={formData.img.markType}
                                 name={formData.img.markType}
                                 value={formData.img.color.mask.name}
                                 img={formData.img.color.mask.icon}
                                 onChange={handleMaskChange}
-                                options={imgs["lazer-cut"]["mini-id"]}
+                                options={imgs["laser-cut"]["mini-id"]}
                               />
                             ) : (
                               //        console.log("yes"),
@@ -1219,12 +1219,12 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
                                 value={formData.img.color.mask.name}
                                 img={formData.img.color.mask.icon}
                                 onChange={handleMaskChange}
-                                options={imgs["lazer-cut"]["large-id"]}
+                                options={imgs["laser-cut"]["large-id"]}
                               />
                             )
                           )
                         ) : (
-                          methods.helpers.is.flagType.lazerCutFlag(formData) ? (
+                          methods.helpers.is.flagType.laserCutFlag(formData) ? (
                             console.log("ok"),
                             <AdvancedSelect
                               title={formData.img.markType}
@@ -1232,7 +1232,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
                               value={formData.img.color.mask.name}
                               img={formData.img.color.mask.icon}
                               onChange={handleMaskChange}
-                              options={imgs["lazer-cut"]["3x2"]}
+                              options={imgs["laser-cut"]["3x2"]}
                             />
                           ) : (
                             <AdvancedSelect

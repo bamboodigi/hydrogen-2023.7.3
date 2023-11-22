@@ -189,7 +189,7 @@ let addOnObj = {
 //                         //   flag: 'flagType',
 //                         //   label: 'Flag Type',
 //                         //   type: 'select',
-//                         //   placeholder: 'Lazer Cut Flag',
+//                         //   placeholder: 'Laser Cut Flag',
 //                         // },
 //                         {
 //                             id: 'flag',

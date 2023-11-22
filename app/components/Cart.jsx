@@ -289,9 +289,9 @@ function CartLineItem({ line, cartLines }) {
                     <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ $4</span>
                   </div>
                 </>
-              ) : markType?.value.includes("Lazer Cut") ? (
+              ) : markType?.value.includes("Laser Cut") ? (
                 <>
-                  <Text className="font-semibold text-xs sm:text-copy">with Lazer Cut Flag</Text>
+                  <Text className="font-semibold text-xs sm:text-copy">with Laser Cut Flag</Text>
                 </>
               ) : (
                 <>

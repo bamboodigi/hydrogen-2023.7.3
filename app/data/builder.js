@@ -224,7 +224,7 @@ const builderData = {
                 id: 'flagType',
                 label: 'Flag Type',
                 type: 'select',
-                placeholder: 'Lazer Cut Flag',
+                placeholder: 'Laser Cut Flag',
               },
               {
                 id: 'flag',
@@ -781,7 +781,7 @@ const builderData = {
         ]
       },
       form: {
-        intro: "Our Flag Patches come in Lazer Cut or Reflective Hi Vis.",
+        intro: "Our Flag Patches come in Laser Cut or Reflective Hi Vis.",
         btnText: "Get Started",
         steps: [
           {
@@ -791,7 +791,7 @@ const builderData = {
               //   id: 'flagType',
               //   label: 'Flag Type',
               //   type: 'select',
-              //   placeholder: 'Lazer Cut Flag',
+              //   placeholder: 'Laser Cut Flag',
               // },
               {
                 id: 'size',
@@ -869,7 +869,7 @@ const builderData = {
         ],
       },
       form: {
-        intro: "Our Flag Patches come in Lazer Cut or Reflective Hi Vis.",
+        intro: "Our Flag Patches come in Laser Cut or Reflective Hi Vis.",
         btnText: "Get Started",
         steps: [
           {
@@ -1382,7 +1382,7 @@ const builderData = {
               //   flag: 'flagType',
               //   label: 'Flag Type',
               //   type: 'select',
-              //   placeholder: 'Lazer Cut Flag',
+              //   placeholder: 'Laser Cut Flag',
               // },
               {
                 id: 'flag',
@@ -1638,7 +1638,7 @@ const builderData = {
   },
   imgs: {
     "hi-vis": initHiVisFlags(),
-    "lazer-cut": initLazerCutFlags(),
+    "laser-cut": initLaserCutFlags(),
     symbols: {
       "medical patch": initSymbols(),
       "division jacket panel": {
@@ -1655,7 +1655,7 @@ const builderData = {
   },
   markType: {
     types: [
-      "Lazer Cut Flag",
+      "Laser Cut Flag",
       "HiVis Flag"
     ]
   },
@@ -1986,7 +1986,7 @@ function initHiVisFlags() {
 }
 
 
-function initLazerCutFlags() {
+function initLaserCutFlags() {
   const folder = "https://cdn.shopify.com/s/files/1/2242/5805/files/";  // If you have a common folder path, you can add it here
   const end = "?v=1698434481j";
   const sizes = [
@@ -2000,7 +2000,7 @@ function initLazerCutFlags() {
 
 
 
-  let lazerObj = {};
+  let laserObj = {};
   sizes.forEach(size => {
     let imageList = [];
     let key = size.replace(/ /g, "").toLowerCase();
@@ -2561,12 +2561,12 @@ function initLazerCutFlags() {
         icon: `${folder}${name}-icon.png${end}`
       };
     });
-    lazerObj[key] = formattedArray;
+    laserObj[key] = formattedArray;
   });
 
-  //console.log(lazerObj);
+  //console.log(laserObj);
 
-  return lazerObj;
+  return laserObj;
 }
 
 // const upsellSizesSet = new Set();
@@ -2605,7 +2605,7 @@ function initLazerCutFlags() {
 // console.log(upsellBadge);
 
 
-// console.log(builderData.imgs["lazer-cut"]);
+// console.log(builderData.imgs["laser-cut"]);
 export default builderData;
 
 
