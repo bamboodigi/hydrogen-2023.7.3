@@ -107,7 +107,7 @@ export async function loader({ params, request, context }) {
   // console.log(product.selectedVariant);
   // console.log(product);
   // console.log(product.variantBySelectedOptions)
-  console.log(product);
+  // console.log(product);
 
   if (product.tags.includes('custom_patch')) {
   } else {
@@ -220,7 +220,7 @@ export default function Product() {
   const { media, title, vendor, descriptionHtml } = product;
   const { shippingPolicy, refundPolicy } = shop;
 
-  console.log(searchParams);
+ // console.log(searchParams);
 
   let addOnObj = {};
 

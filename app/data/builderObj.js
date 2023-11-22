@@ -119,15 +119,6 @@ const builderObj = {
       // console.log(formData.type.toLowerCase());
       switch (formData.type.toLowerCase()) {
         case 'id panel':
-          paramsList = [
-            'size', 
-            'text',
-            'secondary',
-            'textColor',
-            'backgroundColor',
-            'flagType',
-            'flag',
-          ];
           // console.log('id panel');
           formData.img.type = 'Lazer Cut Flag';
           formData.img.color.mask.img = builderObj.data.imgs["lazer-cut"]['mini-id'].find(value => value.name == "USA").img;
@@ -219,14 +210,16 @@ const builderObj = {
       }
 
 
-      // console.log(searchParams);
-      const params = builderObj.helpers.utility.paramsStringToObj(searchParams);
+      formData = builderObj.helpers.update.params.updateFormData(formData, searchParams);
 
-      const filteredParams = builderObj.helpers.update.paramsFilter(params, paramsList);
-      
-      console.log(params);
-      console.log(filteredParams);
-    //  formData = builderObj.helpers.update.paramsFormData(formData, filteredParams);
+      // console.log(searchParams);
+      // const params = builderObj.helpers.utility.paramsStringToObj(searchParams);
+
+      // const filteredParams = builderObj.helpers.update.paramsFilter(params, paramsList);
+
+      // console.log(params);
+      // console.log(filteredParams);
+      //  formData = builderObj.helpers.update.paramsFormData(formData, filteredParams);
 
       return formData || {};
     },
@@ -1087,12 +1080,224 @@ const builderObj = {
           return arr;
         },
       },
-      paramsFilter: function (params, attrList) {     
-        const filteredArray = params.filter(obj =>
-          attrList.some(key => obj.hasOwnProperty(key))
-        );
+      params: {
+        update: {
+          color: function (color, type) {
+            console.log(type);
+            const colorOptions = builderObj.data[type + 'Colors'];
+            console.log(colorOptions);
+            let colorObj = {};
+            if(type == 'font') {
+              colorObj = colorOptions.find(obj => obj.name.toLowerCase().includes(color.toLowerCase()));
+            } else {
+              console.log(color);
+              // colorObj = colorOptions.find(obj => obj.name.toLowerCase().includes(color.toLowerCase()));
+              colorObj = colorOptions.find(obj => obj.name.toLowerCase() == color.toLowerCase());   
+            }
+            console.log(colorOptions);
+            console.log(colorObj);
+            return colorObj;
+          },
+          saber: function (type) {
+            const saberOptions = builderObj.data.saberOptions;
+            const saberObj = saberOptions.find(obj => obj.name.toLowerCase().includes(type.toLowerCase()));
+             
+            return saberObj;
+          },
+          flag: function (flag) {
+            const flagOptions = builderObj.data.saberOptions;
+            const flagObj = flagOptions.find(obj => obj.name.toLowerCase().includes(type.toLowerCase()));
+            return flagObj;
+          },
+          symbol: function (symbol) {
+            const symbolOptions = builderObj.data.saberOptions;
+            const saberObj = saberOptions.find(obj => obj.name.toLowerCase().includes(type.toLowerCase()));
+             
+            return saberObj;
+          }
+        },
+        filter: function (params, attrList) {
+          const filteredArray = params.filter(obj =>
+            attrList.some(key => obj.hasOwnProperty(key))
+          );
 
-        return filteredArray;
+          return filteredArray;
+        },
+        updateFormData: function (formData, params) {
+          let filteredParams = this.filter(this.paramsStringToObj(params), this.paramsList(formData));
+
+          console.log(filteredParams);
+          formData = formData;
+          filteredParams.forEach(obj => {
+            const key = Object.keys(obj)[0];
+            const value = obj[key];
+            console.log(key);
+            switch (key.toLowerCase()) {
+              case 'size':
+                formData.size.current = value;
+                break;
+              case 'primary':
+                formData.text.primary.text = builderObj.helpers.utility.limitString(value, formData.text.primary.maxLength);
+                break;
+              case 'secondary':
+                formData.text.secondary.text = builderObj.helpers.utility.limitString(value, formData.text.secondary.maxLength);
+                break;
+              case 'third':
+                formData.text.third.text = builderObj.helpers.utility.limitString(value, formData.text.third.maxLength);
+                break;
+              case 'fourth':
+                formData.text.fourth.text = builderObj.helpers.utility.limitString(value, formData.text.fourth.maxLength);
+                break;
+              case 'fifth':
+                formData.text.fifth.text = builderObj.helpers.utility.limitString(value, formData.text.fifth.maxLength);
+                break;
+              case 'sixth':
+                formData.text.sixth.text = builderObj.helpers.utility.limitString(value, formData.text.sixth.maxLength);
+                break;
+              case 'seventh':
+                formData.text.seventh.text = builderObj.helpers.utility.limitString(value, formData.text.seventh.maxLength);
+                break;
+              case 'textcolor':
+                formData.text.color = this.update.color(value, 'font');
+                break;
+              case 'bgcolor':
+                formData.bgColor = this.update.color(value, 'bg');
+                break;
+              case 'sabertype':
+                const saberObj = this.update.saber(value);
+                formData.lightsaber.saberType = saberObj.name;
+                formData.lightsaber.blade.img = saberObj.blade;
+                formData.lightsaber.hilt.img = saberObj.hilt;
+                break;
+              case 'bladecolor':
+                const bladeObj = this.update.color(value, 'font');
+                formData.lightsaber.blade.name = bladeObj.name;
+                formData.lightsaber.blade.color = bladeObj.img;
+                break;
+              case 'hiltcolor':
+                const hiltObj = this.update.color(value, 'font');
+                formData.lightsaber.hilt.name = hiltObj.name;
+                formData.lightsaber.hilt.color = hiltObj.img;
+
+                break;
+              case 'ringcolor':
+                formData.img.division.ring.color = this.update.color(value, 'font');
+                break;
+              default:
+                break;
+            }
+            console.log(key);
+            console.log(value);
+          });
+          console.log(filteredParams);
+          console.log(formData);
+          return formData;
+        },
+        paramsList: function (formData) {
+          let paramsList = [];
+
+          switch (formData.type.toLowerCase()) {
+            case 'id panel':
+              paramsList = [
+                'size',
+                'primary',
+                'secondary',
+                'textColor',
+                'bgColor',
+                'flagType',
+                'flag',
+                'glowBorder',
+              ];
+              break;
+            case 'name tape':
+              paramsList = [
+                'size',
+                'primary',
+                'secondary',
+                'textColor',
+                'bgColor',
+                'glowBorder',
+              ];
+              if (formData.img.size == '4” x 1”' || formData.img.size == '5” x 1”') {
+                paramsList.push('flagEnabled');
+                paramsList.push('flag');
+                paramsList.push('flagReversed');
+              }
+              break;
+            case 'flag':
+              paramsList = [
+                'size',
+                'textColor',
+                'bgColor',
+                'flag',
+                'flagReversed',
+                'glowBorder',
+              ];
+              break;
+            case 'light sabers':
+              paramsList = [
+                'saberType',
+                'bladeColor',
+                'hiltColor',
+                'bgColor',
+              ];
+              break;
+            case 'medical patch':
+              paramsList = [
+                'size',
+                'textColor',
+                'bgColor',
+                'symbol',
+                'glowBorder',
+              ];
+              if (formData.img.size == '3.5” x 2”') {
+                paramsList.push('primary');
+              }
+              break;
+            case 'jacket panel':
+              paramsList = [
+                'size',
+                'primary',
+                'secondary',
+                'third',
+                'fourth',
+                'fifth',
+                'sixth',
+                'seventh',
+                'textColor',
+                'bgColor',
+                'flag',
+                'glowBorder',
+              ];
+              break;
+            case 'division jacket panel':
+              paramsList = [
+                'size',
+                'primary',
+                'secondary',
+                'third',
+                'textColor',
+                'bgColor',
+                'ringColor',
+              ];
+              break;
+            case 'default':
+              break;
+          }
+          // turn array strings in lowercase and return
+          return paramsList.map(str => str.toLowerCase());;
+        },
+        paramsStringToObj: function (queryString) {
+          const params = new URLSearchParams(queryString);
+          const result = [];
+
+          for (const [key, value] of params) {
+            const obj = {};
+            obj[key] = value;
+            result.push(obj);
+          }
+          return result;
+        },
       },
     },
     is: {
@@ -1181,18 +1386,13 @@ const builderObj = {
       capitalizeWords: function (str) {
         return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
       },
-      paramsStringToObj: function (queryString) {
-        const params = new URLSearchParams(queryString);
-        const result = [];
-
-        for (const [key, value] of params) {
-          const obj = {};
-          obj[key] = value;
-          result.push(obj);
+      limitString: function (str, maxLength) {
+        if (str.length <= maxLength) {
+          return str;
+        } else {
+          return str.slice(0, maxLength);
         }
-       return result;
       },
-
     },
   },
 };

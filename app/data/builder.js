@@ -2564,7 +2564,7 @@ function initLazerCutFlags() {
     lazerObj[key] = formattedArray;
   });
 
-  console.log(lazerObj);
+  //console.log(lazerObj);
 
   return lazerObj;
 }
