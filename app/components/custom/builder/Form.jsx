@@ -35,7 +35,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
   });
 
   const patchType = methods.helpers.get.patchType(product);
-
+  console.log(patchType);
   let tempSteps = [
     { name: 'Text', href: '#', status: 'current', step: 1 },
     { name: 'Patch Size', href: '#', status: 'current', step: 2 },
