@@ -23,47 +23,47 @@ export async function action({ request, context }) {
 
   // console.log("this happens when add to cart");
   console.log(action);
-  // if(action == "LinesAdd") {
-  //   // console.log(inputs.lines[0].attributes);
-  //    let url = inputs.lines[0].attributes[0].value;
-  //  //  console.log(url);
-  //    const apiUrl = "https://hcti.io/v1/image";
+  if(action == "LinesAdd") {
+    // console.log(inputs.lines[0].attributes);
+     let url = inputs.lines[0].attributes[0].value;
+   //  console.log(url);
+     const apiUrl = "https://hcti.io/v1/image";
 
-  //    const apiJson = {
-  //      url: "https://patchpanel.ca/collections/customizable",
-  //     //  selector: "#patch",
-  //     //  ms_delay: 1000,
-  //    };
+     const apiJson = {
+       url: url,
+       selector: "#patch",
+       ms_delay: 1000,
+     };
  
-  //    const username = "ef103b65-4bb9-4f67-acd6-479499ccf68d";
-  //    const password = "ee34894e-ae5f-44eb-81b7-bad40bcf2d68";
+     const username = "ef103b65-4bb9-4f67-acd6-479499ccf68d";
+     const password = "ee34894e-ae5f-44eb-81b7-bad40bcf2d68";
  
-  //    const options = {
-  //      method: 'POST',
-  //      body: JSON.stringify(apiJson),
-  //      headers: {
-  //        'Content-Type': 'application/json',
-  //        'Authorization': 'Basic ' + btoa(username + ":" + password)
-  //      }
-  //    }
+     const options = {
+       method: 'POST',
+       body: JSON.stringify(apiJson),
+       headers: {
+         'Content-Type': 'application/json',
+         'Authorization': 'Basic ' + btoa(username + ":" + password)
+       }
+     }
  
  
-  //    const res = await fetch(apiUrl, options).catch((error) => {
-  //      console.error(error);
-  //    });
+     const res = await fetch(apiUrl, options).catch((error) => {
+       console.error(error);
+     });
 
-  //    const data = await res.json();
-  //    const hctiURL = data.url;
-  //    console.log(data);
+     const data = await res.json();
+     const hctiURL = data.url;
+     console.log(data);
  
  
-  //    const tempObj = {
-  //      key: 'Preview', value: hctiURL
-  //    };
+     const tempObj = {
+       key: 'Preview', value: hctiURL
+     };
 
-  //    inputs.lines[0].attributes.push(tempObj);
-  //    console.log(tempObj);
-  // }
+     inputs.lines[0].attributes.push(tempObj);
+     console.log(tempObj);
+  }
 
 
   let status = 200;
