@@ -9,7 +9,11 @@ import {useEffect} from 'react';
 import {Button} from '~/components';
 import {usePageAnalytics} from '~/hooks/usePageAnalytics';
 
+import builderObj from '~/data/builderObj.js';
+
 export function AddToCartButton({
+  builderFormData,
+  setBuilderFormData,
   children,
   lines,
   className = '',
@@ -39,6 +43,10 @@ export function AddToCartButton({
               as="button"
               type="submit"
               width={width}
+              onClick={() => {
+                builderObj.helpers.update.params.generateURLParams(builderFormData, setBuilderFormData);
+              }
+              }
               variant={variant}
               className={className}
               disabled={disabled ?? fetcher.state !== 'idle'}

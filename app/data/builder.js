@@ -22,7 +22,7 @@ const builderData = {
             flagEnabled: true,
             upsells: {
               size: 0,
-              glowInTheDark: 0,
+              glowBorder: 0,
               hiVis: 3,
               badge: 25,
             }
@@ -44,7 +44,7 @@ const builderData = {
             flagEnabled: true,
             upsells: {
               size: 1,
-              glowInTheDark: 0,
+              glowBorder: 0,
               hiVis: 3,
               badge: 25,
             }
@@ -66,7 +66,7 @@ const builderData = {
             flagEnabled: true,
             upsells: {
               size: 2,
-              glowInTheDark: 5,
+              glowBorder: 5,
               hiVis: 3,
               badge: 25,
             }
@@ -88,7 +88,7 @@ const builderData = {
             flagEnabled: true,
             upsells: {
               size: 8,
-              glowInTheDark: 10,
+              glowBorder: 10,
               hiVis: 5,
               badge: 25,
             }
@@ -110,7 +110,7 @@ const builderData = {
             flagEnabled: true,
             upsells: {
               size: 3,
-              glowInTheDark: 10,
+              glowBorder: 10,
               hiVis: 5,
               badge: 25,
             }
@@ -132,7 +132,7 @@ const builderData = {
             flagEnabled: true,
             upsells: {
               size: 8,
-              glowInTheDark: 10,
+              glowBorder: 10,
               hiVis: 5,
               badge: 25,
               tRexArms: true,
@@ -160,7 +160,7 @@ const builderData = {
             upsells: {
               size: 8,
               hiVis: 5,
-              glowInTheDark: 10,
+              glowBorder: 10,
               badge: 25,
               tRexArms: true,
               policeID: 19,
@@ -244,7 +244,7 @@ const builderData = {
             name: "Almost There",
             input: [
               // {
-              //   id: 'glowInTheDark',
+              //   id: 'glowBorder',
               //   label: 'Add a glow in the dark border? +$10 USD',
               //   type: 'checkmark',
               //   placeholder: '',
@@ -277,7 +277,7 @@ const builderData = {
             flagEnabled: false,
             upsells: {
               size: 0,
-              glowInTheDark: 5,
+              glowBorder: 5,
             }
           },
           {
@@ -292,7 +292,7 @@ const builderData = {
             flagEnabled: true,
             upsells: {
               size: 1,
-              glowInTheDark: 5,
+              glowBorder: 5,
               hiVis: 4,
             }
           },
@@ -308,7 +308,7 @@ const builderData = {
             flagEnabled: false,
             upsells: {
               size: 3,
-              glowInTheDark: 5,
+              glowBorder: 5,
             }
           },
           {
@@ -323,7 +323,7 @@ const builderData = {
             flagEnabled: true,
             upsells: {
               size: 2,
-              glowInTheDark: 5,
+              glowBorder: 5,
               hiVis: 4,
               tacTecCarrier: 2,
               tacTecTrainer: 3,
@@ -342,7 +342,7 @@ const builderData = {
             flagEnabled: false,
             upsells: {
               size: 4,
-              glowInTheDark: 5,
+              glowBorder: 5,
             }
           },
           {
@@ -357,7 +357,7 @@ const builderData = {
             flagEnabled: false,
             upsells: {
               size: 8,
-              glowInTheDark: 10,
+              glowBorder: 10,
               policeBlueLine: 5,
               sheriffBlueLine: 5,
             }
@@ -374,7 +374,7 @@ const builderData = {
             flagEnabled: false,
             upsells: {
               size: 9,
-              glowInTheDark: 10,
+              glowBorder: 10,
               tRexArms: 4,
             }
           },
@@ -390,7 +390,7 @@ const builderData = {
             flagEnabled: false,
             upsells: {
               size: 14,
-              glowInTheDark: 10,
+              glowBorder: 10,
             }
           },
           {
@@ -405,7 +405,7 @@ const builderData = {
             flagEnabled: false,
             upsells: {
               size: 24,
-              glowInTheDark: 10,
+              glowBorder: 10,
             }
           },
           {
@@ -420,7 +420,7 @@ const builderData = {
             flagEnabled: false,
             upsells: {
               size: 15,
-              glowInTheDark: 15,
+              glowBorder: 15,
             }
           },
           {
@@ -435,7 +435,7 @@ const builderData = {
             flagEnabled: false,
             upsells: {
               size: 14,
-              glowInTheDark: 10,
+              glowBorder: 10,
             }
           },
           {
@@ -450,7 +450,7 @@ const builderData = {
             flagEnabled: false,
             upsells: {
               size: 17,
-              glowInTheDark: 15,
+              glowBorder: 15,
             }
           },
           {
@@ -465,7 +465,7 @@ const builderData = {
             flagEnabled: false,
             upsells: {
               size: 41,
-              glowInTheDark: 20,
+              glowBorder: 20,
             }
           }
         ],
@@ -482,7 +482,7 @@ const builderData = {
             flagEnabled: false,
             upsells: {
               size: 1,
-              glowInTheDark: 5,
+              glowBorder: 5,
             },
             name: "Custom ID Tag",
           },
@@ -498,7 +498,7 @@ const builderData = {
             flagEnabled: false,
             upsells: {
               size: 9,
-              glowInTheDark: 7,
+              glowBorder: 7,
             },
             name: "* As Fuck Name Tape",
           },
@@ -549,7 +549,7 @@ const builderData = {
             status: 'upcoming',
             input: [
               {
-                id: 'glowInTheDark',
+                id: 'glowBorder',
                 label: 'Add a glow in the dark border? +$10 USD',
                 type: 'checkmark',
                 placeholder: '',
@@ -582,7 +582,7 @@ const builderData = {
             flagEnabled: true,
             upsells: {
               size: 0,
-              glowInTheDark: 5,
+              glowBorder: 5,
             }
           },
           {
@@ -597,7 +597,7 @@ const builderData = {
             flagEnabled: true,
             upsells: {
               size: 3,
-              glowInTheDark: 5,
+              glowBorder: 5,
             }
           },
           {
@@ -612,7 +612,7 @@ const builderData = {
             flagEnabled: true,
             upsells: {
               size: 9,
-              glowInTheDark: 5,
+              glowBorder: 5,
             }
           },
         ],
@@ -674,7 +674,7 @@ const builderData = {
             status: 'upcoming',
             input: [
               {
-                id: 'glowInTheDark',
+                id: 'glowBorder',
                 label: 'Add a glow in the dark border? +$10 USD',
                 type: 'checkmark',
                 placeholder: '',
@@ -708,7 +708,7 @@ const builderData = {
             upsells: {
               size: 0,
               hiVis: 5,
-              glowInTheDark: 5,
+              glowBorder: 5,
             },
           },
           {
@@ -725,7 +725,7 @@ const builderData = {
               size: 1,
               thinLine: 4,
               hiVis: 5,
-              glowInTheDark: 5,
+              glowBorder: 5,
             },
           },
           {
@@ -742,7 +742,7 @@ const builderData = {
               size: 5,
               tRexArms: 6,
               hiVis: 5,
-              glowInTheDark: 10,
+              glowBorder: 10,
             },
           },
           {
@@ -758,7 +758,7 @@ const builderData = {
             upsells: {
               size: 13,
               hiVis: 5,
-              glowInTheDark: 10,
+              glowBorder: 10,
             },
           },
         ],
@@ -836,7 +836,7 @@ const builderData = {
             status: 'upcoming',
             input: [
               {
-                id: 'glowInTheDark',
+                id: 'glowBorder',
                 label: 'Add a glow in the dark border? +$10 USD',
                 type: 'checkmark',
                 placeholder: '',
@@ -1102,6 +1102,7 @@ const builderData = {
             upsells: {
               size: 0,
               hiVis: 5,
+              glowBorder: 5,
             },
           },
           {
@@ -1147,6 +1148,7 @@ const builderData = {
             upsells: {
               size: 0,
               hiVis: 5,
+              glowBorder: 5,
             },
           },
           {
@@ -1192,6 +1194,7 @@ const builderData = {
             upsells: {
               size: 0,
               hiVis: 5,
+              glowBorder: 5,
             },
           },
           {
@@ -1237,6 +1240,7 @@ const builderData = {
             upsells: {
               size: 0,
               hiVis: 5,
+              glowBorder: 5,
             },
           },
           {
@@ -1282,6 +1286,7 @@ const builderData = {
             upsells: {
               size: 0,
               hiVis: 5,
+              glowBorder: 5,
             },
           },
         ]
@@ -1402,7 +1407,7 @@ const builderData = {
             name: "Almost There",
             input: [
               {
-                id: 'glowInTheDark',
+                id: 'glowBorder',
                 label: 'Add a glow in the dark border? +$10 USD',
                 type: 'checkmark',
                 placeholder: '',
@@ -1425,9 +1430,26 @@ const builderData = {
         "sizes": [
           {
             size: '3.5” x 4”',
-            maxLength: 13,
-            lines: 1,
-            placeholder: 'Your Name',
+            text: {
+              primary: {
+                maxLength: 15,
+                lines: 1,
+                placeholder: 'Your Name',
+              },
+              secondary: {
+                maxLength: 7,
+                lines: 1,
+                placeholder: '2nd Line',
+              },
+              third: {
+                text: '',
+                maxLength: 7,
+                lines: 1,
+                placeholder: '3rd Line',
+              },
+            
+            },
+            flagEnabled: true,
             upsells: {
               size: 0,
             },
@@ -2698,8 +2720,8 @@ function initLaserCutFlags() {
 //       if (sizeObj.upsells && sizeObj.upsells.size) {
 //         upsellSizesSet.add(sizeObj.upsells.size);
 //       }
-//       if (sizeObj.upsells && sizeObj.upsells.glowInTheDark) {
-//         upsellGlowSet.add(sizeObj.upsells.glowInTheDark);
+//       if (sizeObj.upsells && sizeObj.upsells.glowBorder) {
+//         upsellGlowSet.add(sizeObj.upsells.glowBorder);
 //       }
 //       if (sizeObj.upsells && sizeObj.upsells.hiVis) {
 //         upsellHiVisSet.add(sizeObj.upsells.hiVis);

@@ -60,7 +60,6 @@ export async function loader({ params, request, context }) {
   const { productHandle } = params;
   const searchParams = new URL(request.url).searchParams.toString();
 
-  
   invariant(productHandle, 'Missing productHandle param, check route filename');
 
 

@@ -3,7 +3,7 @@ import {
 } from "~/components";
 
 
-export function FormButton({ formData, config, handlePrevious, handleNext, currentStep, steps, methods, ...props }) {
+export function FormButton({ formData, setFormData, config, handlePrevious, handleNext, currentStep, steps, methods, ...props }) {
 
   const classNames = methods.helpers.utility.classNames;
 
@@ -27,6 +27,7 @@ export function FormButton({ formData, config, handlePrevious, handleNext, curre
             "transition bg-transparent border-t-2 border-b-2 border-contrast font-bold px-2")}>
             <PatchATCButton
               formData={formData}
+              setFormData={setFormData}
               config={config}
               currentStep={currentStep}
               steps={steps}

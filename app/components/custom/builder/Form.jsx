@@ -35,7 +35,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
   });
 
   const patchType = methods.helpers.get.patchType(product);
-  console.log(patchType);
+  // (patchType);
   let tempSteps = [
     { name: 'Text', href: '#', status: 'current', step: 1 },
     { name: 'Patch Size', href: '#', status: 'current', step: 2 },
@@ -47,7 +47,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
   const convertSizeString = methods.helpers.utility.convertSizeString;
 
   let upsells = {};
-  // console.log(formData);
+  // (formData);
 
   switch (formData.type.toLowerCase()) {
     case 'name tape':
@@ -84,7 +84,9 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
     obj: tempSteps[0]
   };
 
-  // console.log(tempStepObj);
+  console.log(tempSteps);
+
+  // (tempStepObj);
 
 
 
@@ -97,9 +99,9 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
 
   const [stepForm, setStepForm] = useState(tempStepObj);
 
-  // console.log(steps);
-  // console.log(currentStepObj);
-  // console.log(stepForm);
+  // (steps);
+  // (currentStepObj);
+  // (stepForm);
 
   ///////////////////////////////////////////////////////////////////////////////////////////////
   //  HANDLE EVENTS = TYPE, TEXT, TEXT ADDITIONAL, SIZE, TEXT COLOR, BG COLOR, FLAG, MORE TO ADD
@@ -127,11 +129,11 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
   // };
 
   const handleFlagTypeChange = (event) => {
-    console.log(event.target.value.toLowerCase());
+    (event.target.value.toLowerCase());
     // Find the selected type from data array
-    // console.log(event.target);
-    // console.log(event.target.value);
-    // console.log(methods.helpers.is.flagType.hiVisFlag(formData));
+    // (event.target);
+    // (event.target.value);
+    // (methods.helpers.is.flagType.hiVisFlag(formData));
 
     setFormData({
       ...formData,
@@ -153,7 +155,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
     const obj = saberOptions.find(value => value.name === event.target.value);
     let newHiltColor = '';
     let newBladeColor = '';
-    // console.log(formData.lightsaber.saberType.toLowerCase());
+    // (formData.lightsaber.saberType.toLowerCase());
     switch (obj.name.toLowerCase()) {
       case 'darth vader':
         newHiltColor = fontColors[7];
@@ -280,21 +282,21 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
   const handleSizeChange = (event) => {
     const obj = patchType.config;
 
-    //  console.log(obj.sizes);
+    //  (obj.sizes);
     const objSizes = obj.sizes.find(value => value.size === event.target.value);
 
-    console.log(objSizes.upsells.size);
+    (objSizes.upsells.size);
     // Get the current size key from the event target value
     const sizeKey = convertSizeString(event.target.value);
-    //  console.log(sizeKey);
+    //  (sizeKey);
     upsells = methods.helpers.get.upsells(product, event.target.value);
 
-    //  console.log(upsells);
+    //  (upsells);
     let sizeObject = "";
 
     // // check glowborder then update
     // let formTempObj = {
-    //   id: 'glowInTheDark',
+    //   id: 'glowBorder',
     //   label: 'Add a glow in the dark border? +$10 USD',
     //   type: 'checkmark',
     //   placeholder: '',
@@ -312,16 +314,16 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
       sizeObject = imgs['laser-cut'][sizeKey];
     }
 
-    // console.log(sizeObject);
+    // (sizeObject);
 
     // Get the corresponding size object from the imgs['laser-cut'] object
     // Get the current mask name from the formData object
     const maskName = formData.img.color.mask.name;
-    //  console.log(maskName);
+    //  (maskName);
     // Find the mask object in the size object with a name property equal to the current mask name
     const maskObject = sizeObject?.find(value => value.name === maskName) || {};
-    //  console.log(maskName);
-    //  console.log(maskObject);
+    //  (maskName);
+    //  (maskObject);
     if (formData.type.toLowerCase() == "medical patch") {
     if (event.target.value == '3.5” x 2”') {
         // setFlagStyle(prevStyle => ({ ...prevStyle, transform: `scaleX(1.25)` }));
@@ -332,7 +334,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
             upsells: {
               ...formData.price.upsells,
               size: objSizes.upsells.size,
-              glowBorder: objSizes.upsells.glowInTheDark || 0,
+              glowBorder: objSizes.upsells.glowBorder || 0,
             },
           },
           size: {
@@ -366,7 +368,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
             upsells: {
               ...formData.price.upsells,
               size: objSizes.upsells.size,
-              glowBorder: objSizes.upsells.glowInTheDark || 0,
+              glowBorder: objSizes.upsells.glowBorder || 0,
 
             },
           },
@@ -394,7 +396,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
           upsells: {
             ...formData.price.upsells,
             size: objSizes.upsells.size,
-            glowBorder: objSizes.upsells.glowInTheDark || 0,
+            glowBorder: objSizes.upsells.glowBorder || 0,
             hiVis: objSizes.upsells.hiVis || 0,
             badge: objSizes.upsells.badge || 0,
             proIRFontColor: methods.helpers.get.fontUpsell(event.target.value) || 0,
@@ -433,7 +435,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
   // Define a function to handle the change of the font text color dropdown menu
   const handleTextColorChange = (event) => {
     // Find the selected font text color from data array
-    // console.log(event);
+    // (event);
     const obj = fontColors.find(value => value.img === event.img);
     let isProIR = false;
     let isReflectiveGlow = false;
@@ -465,7 +467,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
   const handleImgChange = (event) => {
     // Find the selected hivis flag from data array
     let obj = {};
-    //  console.log(event);
+    //  (event);
     obj = imgs["hi-vis"].find(value => value.name === event.name);
 
     switch (formData.img.markType.toLowerCase()) {
@@ -479,7 +481,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
         });
         break;
       case 'symbol':
-        console.log("ok");
+        ("ok");
         setFormData({
           ...formData, img: {
             ...formData.img, name: event.name,
@@ -515,11 +517,13 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
         setFormData({ ...formData, img: { ...formData.img, name: event.name, img: obj.img, icon: obj.icon, glow: obj.glow } });
         break;
       case 'jacket panel':
-        obj = imgs["laser-cut"]["3.5x2"].find(value => value.name === event.name);
-        //  console.log(obj);
+        obj = imgs["laser-cut"]["large-id"].find(value => value.name === event.name);
+        //  (obj);
         setFormData({
           ...formData, img: {
-            ...formData.img, color: {
+            ...formData.img, 
+            name: event.name,
+            color: {
               ...formData.img.color, mask: {
                 name: event.name,
                 img: obj.img,
@@ -533,16 +537,16 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
       default:
         let size = "";
         if (formData.type.toLowerCase() == 'id panel') {
-          //  console.log("id panel");
-          //  console.log(formData.size.current);
+          //  ("id panel");
+          //  (formData.size.current);
           //   size = convertSizeString(formData.size.current);
           switch (formData.size.current) {
             case '3” x 2”':
-              //    console.log("yes");
+              //    ("yes");
               size = "mini-id";
               break;
             case '3.5” x 2”':
-              //  console.log("yes");
+              //  ("yes");
               size = "mini-id";
               break;
             case 'default':
@@ -550,18 +554,20 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
               break;
           }
         } else {
-          //  console.log("else");
+          //  ("else");
           size = convertSizeString(formData.size.current);
         }
 
-        // console.log(size);
-        // console.log( imgs["laser-cut"][size]);
-        // console.log( imgs["laser-cut"]);
+        // (size);
+        // ( imgs["laser-cut"][size]);
+        // ( imgs["laser-cut"]);
         obj = imgs["laser-cut"][size].find(value => value.name === event.name);
-        //  console.log(obj);
+        //  (obj);
         setFormData({
           ...formData, img: {
-            ...formData.img, color: {
+            ...formData.img, 
+            name: event.name,
+            color: {
               ...formData.img.color, mask: {
                 name: event.name,
                 img: obj.img,
@@ -571,7 +577,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
             }
           }
         });
-        // console.log(formData.img.color.mask);
+        // (formData.img.color.mask);
         break;
     }
   };
@@ -579,7 +585,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
 
   function handleFileInputChange(event) {
     const file = event.target.files[0];
-    //   console.log(file);
+    //   (file);
     setFormData({
       ...formData, bgColor: {
         ...formData.bgColor,
@@ -643,20 +649,20 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
     if (stepForm.currentStep < stepForm.steps.length) {
       setStepForm({ ...stepForm, currentStep: stepForm.currentStep + 1, obj: stepForm.steps[stepForm.currentStep] });
     }
-    // console.log(formData.type.toLowerCase());
+    // (formData.type.toLowerCase());
     // dynamically update steps
     let glowLabelStart = "Add a glow in the dark border? + $";
     let glowLabelEnd = " USD";
     let glowAmount = formData.price.upsells.glowBorder;
 
     const glowLabel = glowLabelStart + glowAmount + glowLabelEnd;
-    console.log(glowAmount)
+    //(glowAmount)
     let formTempObj = {};
     switch (formData.type.toLowerCase()) {
       case 'id panel':
         // check glowborder then update
         formTempObj = {
-          id: 'glowInTheDark',
+          id: 'glowBorder',
           label: glowLabel,
           type: 'checkmark',
           placeholder: '',
@@ -722,15 +728,15 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
             steps.splice(1, 0, flagStep);
           }
         } else {
-          // console.log(steps);
+          // (steps);
           const textStepIndex = steps.findIndex(step => step.name === 'Text');
-          // console.log(textStepIndex);
+          // (textStepIndex);
 
           if (textStepIndex !== -1) {
             steps.splice(1, 1);
             // const newSteps = steps.filter(step => step.name !== 'Text');
-            // console.log(newSteps);
-            // console.log(steps);
+            // (newSteps);
+            // (steps);
           }
         }
         break;
@@ -1201,8 +1207,8 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
                             />
                           ) : (
                             methods.helpers.is.mini(formData.type, formData.size.current) ? (
-                              //    console.log("yes"),
-                              //   console.log(imgs["laser-cut"]["large-id"]),
+                              //    ("yes"),
+                              //   (imgs["laser-cut"]["large-id"]),
                               <AdvancedSelect
                                 title={formData.img.markType}
                                 name={formData.img.markType}
@@ -1212,7 +1218,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
                                 options={imgs["laser-cut"]["mini-id"]}
                               />
                             ) : (
-                              //        console.log("yes"),
+                              //        ("yes"),
                               <AdvancedSelect
                                 title={formData.img.markType}
                                 name={formData.img.markType}
@@ -1225,7 +1231,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
                           )
                         ) : (
                           methods.helpers.is.flagType.laserCutFlag(formData) ? (
-                            console.log("ok"),
+                            ("ok"),
                             <AdvancedSelect
                               title={formData.img.markType}
                               name={formData.img.markType}
@@ -1295,7 +1301,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
                     </>
 
                   ) : input.id.toLowerCase() == "ringcolor" ? (
-                    console.log(formData.img.division.ring.img),
+                    // (formData.img.division.ring.img),
                     <>
                       <AdvancedSelect
                         id="ringColor"
@@ -1371,7 +1377,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
                         </div>
                       </div>
                     </>
-                  ) : input.id.toLowerCase() == "glowinthedark" ? (
+                  ) : input.id.toLowerCase() == "glowborder" ? (
                     <>
                       <div className="flex items-start">
                         <div className="flex items-center h-5">
@@ -1421,7 +1427,7 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
             })}
           </div>
         </div>
-        <FormButton formData={formData} config={config} handlePrevious={handlePrevious} handleNext={handleNext} currentStep={stepForm.currentStep} steps={stepForm.steps} methods={methods} />
+        <FormButton formData={formData} setFormData={setFormData} config={config} handlePrevious={handlePrevious} handleNext={handleNext} currentStep={stepForm.currentStep} steps={stepForm.steps} methods={methods} />
       </div>
     </>
   );

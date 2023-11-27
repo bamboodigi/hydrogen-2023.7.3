@@ -8,7 +8,7 @@ import {
 import { Money } from '@shopify/hydrogen';
 
 
-export function PatchATCButton({ formData, className, config, currentStep, steps, methods, ...props }) {
+export function PatchATCButton({ formData, setFormData, className, config, currentStep, steps, methods, ...props }) {
   const { product, analytics, storeDomain } = useLoaderData();
 
   const classNames = methods.helpers.utility.classNames;
@@ -119,6 +119,8 @@ export function PatchATCButton({ formData, className, config, currentStep, steps
           totalValue: parseFloat(productAnalytics.price),
         }}
         className={className}
+        builderFormData={formData}
+        setBuilderFormData={setFormData}
       // disabled={disabled}
       >
         <Text
