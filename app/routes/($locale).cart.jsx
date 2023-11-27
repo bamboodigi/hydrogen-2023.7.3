@@ -21,62 +21,48 @@ export async function action({ request, context }) {
   const { action, inputs } = CartForm.getFormInput(formData);
   invariant(action, 'No cartAction defined');
 
-  // if (isPatchBuilder(action, inputs)) {
-  //   const apiUrl = "https://hcti.io/v1/image";
+  // console.log("this happens when add to cart");
+  console.log(action);
+  // if(action == "LinesAdd") {
+  //   // console.log(inputs.lines[0].attributes);
+  //    let url = inputs.lines[0].attributes[0].value;
+  //  //  console.log(url);
+  //    const apiUrl = "https://hcti.io/v1/image";
 
-  //   const apiJson = {
-  //     html: "<div class='test'>Hello!</div>",
-  //     css: ".test { background-color: green; }"
-  //   };
+  //    const apiJson = {
+  //      url: "https://patchpanel.ca/collections/customizable",
+  //     //  selector: "#patch",
+  //     //  ms_delay: 1000,
+  //    };
+ 
+  //    const username = "ef103b65-4bb9-4f67-acd6-479499ccf68d";
+  //    const password = "ee34894e-ae5f-44eb-81b7-bad40bcf2d68";
+ 
+  //    const options = {
+  //      method: 'POST',
+  //      body: JSON.stringify(apiJson),
+  //      headers: {
+  //        'Content-Type': 'application/json',
+  //        'Authorization': 'Basic ' + btoa(username + ":" + password)
+  //      }
+  //    }
+ 
+ 
+  //    const res = await fetch(apiUrl, options).catch((error) => {
+  //      console.error(error);
+  //    });
 
-  //   const username = "8cbaa641-7825-4ba5-b109-8d649d4bfa10";
-  //   const password = "ca03849c-eb30-415b-b54d-aa22bc33deae";
+  //    const data = await res.json();
+  //    const hctiURL = data.url;
+  //    console.log(data);
+ 
+ 
+  //    const tempObj = {
+  //      key: 'Preview', value: hctiURL
+  //    };
 
-  //   const options = {
-  //     method: 'POST',
-  //     body: JSON.stringify(apiJson),
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': 'Basic ' + btoa(username + ":" + password)
-  //     }
-  //   }
-
-
-  //   const res = await fetch(apiUrl, options).catch((error) => {
-  //     console.error(error);
-  //   });
-
-  //   //     // console.log(await res.text());
-
-  //   //     // const jsonString = '{"url":"https://hcti.io/v1/image/cbf786ed-0569-43e6-89a6-de32c11fbffa"}';
-  //   const obj = JSON.parse(await res.text());
-
-  //   const tempObj = {
-  //     key: 'Preview', value: obj.url
-  //   };
-
-  //   console.log(tempObj);
-
-  //   inputs.lines[0].attributes.push(tempObj);
-
-
-
-  //   // if (res.ok) {
-  //   //   console.log("Fetch request successful!");
-  //   // }
-
-  //   // const data = await res.json();
-
-  //   // // const prunedData = data.map((record) => {
-  //   // //   console.log(data);
-  //   // //   return record;
-  //   // //   // return {
-  //   // //   //   id: record.id,
-  //   // //   //   title: record.title,
-  //   // //   //   formattedBody: escapeHtml(record.content),
-  //   // //   // };
-  //   // // });
-  //   // console.log(data);
+  //    inputs.lines[0].attributes.push(tempObj);
+  //    console.log(tempObj);
   // }
 
 
@@ -127,6 +113,8 @@ export async function action({ request, context }) {
   }
 
   const { cart: cartResult, errors } = result;
+
+  console.log(result);
 
   return json(
     {

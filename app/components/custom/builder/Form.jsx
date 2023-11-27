@@ -10,7 +10,7 @@ import {
 import builderData from '~/data/builder.js';
 
 // Form element to customize the patch
-export function Form({ formData, setFormData, data, config, product, methods, ...props }) {
+export function Form({ formData, setFormData, productURL, data, config, product, methods, ...props }) {
 
   const {
     bgColors,
@@ -1427,7 +1427,16 @@ export function Form({ formData, setFormData, data, config, product, methods, ..
             })}
           </div>
         </div>
-        <FormButton formData={formData} setFormData={setFormData} config={config} handlePrevious={handlePrevious} handleNext={handleNext} currentStep={stepForm.currentStep} steps={stepForm.steps} methods={methods} />
+        <FormButton 
+        formData={formData} 
+        setFormData={setFormData} 
+        config={config} 
+        handlePrevious={handlePrevious} 
+        handleNext={handleNext} 
+        currentStep={stepForm.currentStep} 
+        steps={stepForm.steps} 
+        methods={methods}
+        productURL={productURL} />
       </div>
     </>
   );

@@ -652,6 +652,7 @@ const builderObj = {
           }
         };
       },
+      
     },
     update: {
       fontSize: function (containerRef, setFontStyle, formData) {
@@ -1388,6 +1389,38 @@ const builderObj = {
           // console.log(filteredParams);
           // console.log(formData);
           return formData;
+        },
+        createPatchImg : function(){
+          const json = {
+            html: "<div class='test'>Hello, world!</div>",
+            css: ".test { background-color: green; }"
+          };
+          
+          const username = "ef103b65-4bb9-4f67-acd6-479499ccf68d";
+          const passwored = "ee34894e-ae5f-44eb-81b7-bad40bcf2d68";
+          
+          const options = {
+            method: 'POST',
+            body: JSON.stringify(json),
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Basic ' + btoa(username + ":" + password)
+            }
+          }
+          
+          fetch('https://hcti.io/v1/image', options)
+            .then(res => {
+              if (res.ok) {
+                return res.json();
+              } else {
+                return Promise.reject(res.status);
+              }
+            })
+            .then(data => {
+              // Image URL is available here
+              console.log(data.url)
+            })
+            .catch(err => console.error(err));
         },
         paramsList: function (formData) {
           let paramsList = [];

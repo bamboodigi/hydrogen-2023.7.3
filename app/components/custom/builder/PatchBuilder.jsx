@@ -18,7 +18,7 @@ import builderObj from '~/data/builderObj.js';
 
 
 // Patch Builder Component. This is the component that will show a tailored patch unique to the user's selections.
-export function PatchBuilder({ product, config, searchParams, ...props }) {
+export function PatchBuilder({ product, productURL, config, searchParams, ...props }) {
   const initFormData = builderObj.init.formData;
   
 
@@ -48,7 +48,7 @@ export function PatchBuilder({ product, config, searchParams, ...props }) {
             md:mx-auto md:px-0
             lg:">
           <PatchHeading formData={formData} methods={builderObj} />
-          <Form formData={formData} setFormData={setFormData} data={data} config={config} product={product} methods={builderObj} />
+          <Form formData={formData} productURL={productURL} setFormData={setFormData} data={data} config={config} product={product} methods={builderObj} />
           <pre className="overflow-scroll" style={prestyle}>{JSON.stringify(formData, null, 2)}</pre>
           <ProductDetails shippingPolicy={shippingPolicy} refundPolicy={refundPolicy} />
         </section>

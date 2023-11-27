@@ -2666,6 +2666,7 @@ function PatchATCButton({ formData, className, config, currentStep, steps }) {
     const arr = [];
     // console.log(formData);
     arr.push(
+      { key: "Params", value: formData.urlParams },
       { key: "Size", value: formData.size.current },
       { key: "Price", value: formData.price.total + "" },
       { key: "Flag", value: formData.img.name },

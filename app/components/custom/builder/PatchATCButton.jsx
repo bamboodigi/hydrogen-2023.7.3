@@ -8,7 +8,7 @@ import {
 import { Money } from '@shopify/hydrogen';
 
 
-export function PatchATCButton({ formData, setFormData, className, config, currentStep, steps, methods, ...props }) {
+export function PatchATCButton({ formData, setFormData, productURL, className, config, currentStep, steps, methods, ...props }) {
   const { product, analytics, storeDomain } = useLoaderData();
 
   const classNames = methods.helpers.utility.classNames;
@@ -79,6 +79,7 @@ export function PatchATCButton({ formData, setFormData, className, config, curre
     const arr = [];
 
     arr.push(
+      { key: "Params", value: productURL + '?' + formData.urlParams },
       { key: "Size", value: formData.size.current },
       { key: "Price", value: formData.price.total + "" },
       { key: "Flag", value: formData.img.name },

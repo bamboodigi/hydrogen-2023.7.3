@@ -3,7 +3,7 @@ import {
 } from "~/components";
 
 
-export function FormButton({ formData, setFormData, config, handlePrevious, handleNext, currentStep, steps, methods, ...props }) {
+export function FormButton({ formData, setFormData, productURL, config, handlePrevious, handleNext, currentStep, steps, methods, ...props }) {
 
   const classNames = methods.helpers.utility.classNames;
 
@@ -32,6 +32,7 @@ export function FormButton({ formData, setFormData, config, handlePrevious, hand
               currentStep={currentStep}
               steps={steps}
               methods={methods}
+              productURL={productURL}
               className={classNames(
                 currentStep === 1 ? "" :
                   currentStep === steps.length ? "" : "",

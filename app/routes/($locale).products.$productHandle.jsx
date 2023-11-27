@@ -59,6 +59,8 @@ const stars_enabled = configProduct.stars;
 export async function loader({ params, request, context }) {
   const { productHandle } = params;
   const searchParams = new URL(request.url).searchParams.toString();
+  const productURL = request.url;
+
 
   invariant(productHandle, 'Missing productHandle param, check route filename');
 
@@ -137,6 +139,7 @@ export async function loader({ params, request, context }) {
 
   return defer({
     searchParams,
+    productURL,
     variants,
     product,
     shop,
@@ -215,7 +218,7 @@ const bgColor = "bg-[" + bgColors[0] + "]";
 
 
 export default function Product() {
-  const { searchParams, product, shop, recommended, variants, addon } = useLoaderData();
+  const { searchParams, product, shop, recommended, variants, addon, productURL } = useLoaderData();
   const { media, title, vendor, descriptionHtml } = product;
   const { shippingPolicy, refundPolicy } = shop;
 
@@ -288,7 +291,7 @@ export default function Product() {
               <div className="md:px-0 md:p-20 xl:px-28 xl:p-28 max-w-screen-2xl mx-auto grid 
         items-start md:gap-6 lg:gap-0 md:grid-cols-2"
               >
-                <PatchBuilder product={product} config={configProduct} searchParams={searchParams} />
+                <PatchBuilder product={product} config={configProduct} searchParams={searchParams} productURL={productURL.split("?")[0]}/>
               </div>
             </Container>
           </>
