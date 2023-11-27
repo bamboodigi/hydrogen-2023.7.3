@@ -1234,7 +1234,7 @@ const builderObj = {
                 // });
                 objSize = obj.sizes.find(obj => obj.size === value);
                 // let objSizes = obj.sizes.find(value => value.size == value);
-            //     console.log(objSize);
+                console.log(objSize);
             //  console.log(formData.price.upsells);
             //  console.log(objSize.upsells)
              Object.keys(objSize.upsells).forEach(key => {
