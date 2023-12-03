@@ -653,18 +653,13 @@ const builderObj = {
         };
       },
       cartSize : function(cart) {
-        console.log(cart);
-        console.log(cart.lines.edges);
-        console.log(cart.lines.edges.length);
         let size = cart.totalQuantity;
-        console.log(size);
         // loop through cart.lines.edges
         cart.lines.edges.forEach(({ node: { quantity, attributes } }) => {
           if (attributes.some(({ key }) => key === 'productID')) {
             size -= quantity;
           }
         });
-        console.log(size);
         return size;
       }   
     },
@@ -1712,9 +1707,6 @@ const builderObj = {
         upload: (formData) => formData.img.type.toLowerCase() === "upload",
       },
       upsells: {
-        any: function (cartLines) {
-
-        },
         glowBorder: function (type, size, sizeEnabled) {
           const [lengthStr, heightStr] = size.split("x").map(str => str.trim());
           const length = parseInt(lengthStr);

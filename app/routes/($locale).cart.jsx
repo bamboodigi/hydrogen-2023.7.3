@@ -114,7 +114,7 @@ export async function action({ request, context }) {
 
   const { cart: cartResult, errors } = result;
 
-  console.log(result);
+ // console.log(result);
 
   return json(
     {

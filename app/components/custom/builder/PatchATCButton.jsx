@@ -122,7 +122,7 @@ export function PatchATCButton({ formData, setFormData, productURL, className, c
         className={className}
         builderFormData={formData}
         setBuilderFormData={setFormData}
-      // disabled={disabled}
+       disabled={disabled}
       >
         <Text
           as="span"
