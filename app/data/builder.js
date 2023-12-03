@@ -1525,6 +1525,458 @@ const builderData = {
         ]
       },
     },
+    "trex": {
+      name: "T.Rex Arms",
+      base: 15,
+      config: {
+        "sizes": [
+          {
+            size: 'AC1 Name Tape - 6" x 2"',
+            text: {
+              primary: {
+                maxLength: 10,
+                lines: 1,
+                placeholder: 'Your Name',
+              },
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 0,
+              hiVis: 4,
+              glowBorder: 5,
+            },
+          },
+          {
+            size: 'AC1 Cover Panel Set',
+            flagEnabled: false,
+            upsells: {
+              size: 6,
+            },
+          },
+          {
+            size: 'AC1 Front Flag',
+            flagEnabled: true,
+            upsells: {
+              size: 11,
+              glowBorder: 5,
+            },
+          },
+          {
+            size: 'AC1 Front Name Plate',
+            text: {
+              primary: {
+                maxLength: 16,
+                lines: 2,
+                placeholder: 'Police',
+              },
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 11,
+              glowBorder: 10,
+            },
+          },
+          {
+            size: 'AC1 Back Panel Name Tape',
+            text: {
+              primary: {
+                maxLength: 26,
+                lines: 2,
+                placeholder: 'L.T. Curtis',
+              },
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 11,
+              glowBorder: 10,
+            },
+          },
+          {
+            size: 'AC1 ID Panel with HiVis Flag',
+            text: {
+              primary: {
+                maxLength: 12,
+                lines: 1,
+                placeholder: 'Name',
+              },
+              secondary: {
+                maxLength: 14,
+                lines: 2,
+                placeholder: 'APOS\nNKDA',
+              },          
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 14,
+              hiVis: 7,
+              glowBorder: 10,
+            },
+          },
+        ]
+      },
+      form: {
+        intro: "Our T.Rex Arms come in various sizes from blank to Flag to ID Panel.",
+        btnText: "Get Started",
+        steps: [
+          {
+            name: "Text",
+            input: [
+              {
+                id: 'size',
+                label: 'Size',
+                type: 'select',
+                placeholder: 'AC1 Name Tape',
+              },
+              {
+                id: 'text',
+                label: 'Text',
+                type: 'input',
+                placeholder: 'Name',
+              },
+            ],
+          },
+          {
+            name: "Font & Background Colors",
+            input: [
+              {
+                id: 'textColor',
+                label: 'Text Color',
+                type: 'advancedSelect',
+                placeholder: 'Flat Spice Brown',
+              },
+              {
+                id: 'backgroundColor',
+                label: 'Background Color',
+                type: 'advancedSelect',
+                placeholder: 'Multicam Alpine',
+              },
+            ],
+          },
+          {
+            name: "Almost There",
+            input: [
+              {
+                id: 'glowBorder',
+                label: 'Add a glow in the dark border? +$10 USD',
+                type: 'checkmark',
+                placeholder: '',
+              },
+              {
+                id: "leadTime",
+                label: 'I Agree to the Lead Time',
+                type: 'checkmark',
+                placeholder: '<strong>Lead Time:</strong>  - From your order, to design, production, QC, and shipping, takes roughly 10 business days. Don\'t worry, we\'ll keep you updated with what is going on the whole time. Check this box to confirm that you understand that your order will take roughly 10 business days to ship.',
+              },
+            ],
+          },
+        ]
+      },
+    },
+    "call sign": {
+      name: "Call Sign",
+      basePrice: 13,
+      config: {
+        sizes: [
+          {
+            size: '3” x 1”',
+            text: {
+              primary: {
+                placeholder: 'Your Name',
+                maxLength: 9,
+                lines: 1,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 0,
+              glowBorder: 5,
+            }
+          },
+          {
+            size: '4” x 1”',
+            text: {
+              primary: {
+                placeholder: 'Your Name',
+                maxLength: 10,
+                lines: 1,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 1,
+              glowBorder: 5,
+              hiVis: 4,
+            }
+          },
+          {
+            size: '4” x 1.5”',
+            text: {
+              primary: {
+                placeholder: 'Your Name',
+                maxLength: 10,
+                lines: 1,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 3,
+              glowBorder: 5,
+            }
+          },
+          {
+            size: '5” x 1”',
+            text: {
+              primary: {
+                placeholder: 'Your Name',
+                maxLength: 13,
+                lines: 1,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 2,
+              glowBorder: 5,
+              hiVis: 4,
+              tacTecCarrier: 2,
+              tacTecTrainer: 3,
+              tRexArms: 0,
+            }
+          },
+          {
+            size: '5” x 1.5”',
+            text: {
+              primary: {
+                placeholder: 'Your Name',
+                maxLength: 13,
+                lines: 1,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 4,
+              glowBorder: 5,
+            }
+          },
+          {
+            size: '6” x 2”',
+            text: {
+              primary: {
+                placeholder: 'Your Name',
+                maxLength: 10,
+                lines: 1,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 8,
+              glowBorder: 10,
+              policeBlueLine: 5,
+              sheriffBlueLine: 5,
+            }
+          },
+          {
+            size: '8” x 2”',
+            text: {
+              primary: {
+                placeholder: 'Up to \n2 Lines',
+                maxLength: 30,
+                lines: 2,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 9,
+              glowBorder: 10,
+              tRexArms: 4,
+            }
+          },
+          {
+            size: '8” x 3”',
+            text: {
+              primary: {
+                placeholder: 'Up to \n2 Lines',
+                maxLength: 26,
+                lines: 2,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 14,
+              glowBorder: 10,
+            }
+          },
+          {
+            size: '8” x 4”',
+            text: {
+              primary: {
+                placeholder: 'Up to \n3 \nLines',
+                maxLength: 39,
+                lines: 3,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 24,
+              glowBorder: 10,
+            }
+          },
+          {
+            size: '9” x 3”',
+            text: {
+              primary: {
+                placeholder: 'Up to 2\n Lines of Text',
+                maxLength: 26,
+                lines: 2,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 15,
+              glowBorder: 15,
+            }
+          },
+          {
+            size: '10” x 2”',
+            text: {
+              primary: {
+                placeholder: 'Your Name',
+                maxLength: 13,
+                lines: 1,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 14,
+              glowBorder: 10,
+            }
+          },
+          {
+            size: '11” x 3”',
+            text: {
+              primary: {
+                placeholder: 'Up to 2 \nLines of Text',
+                maxLength: 32,
+                lines: 2,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 17,
+              glowBorder: 15,
+            }
+          },
+          {
+            size: '12” x 4”',
+            text: {
+              primary: {
+                placeholder: 'Up to \n3 \nLines of Text',
+                maxLength: 54,
+                lines: 3,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 41,
+              glowBorder: 20,
+            }
+          }
+        ],
+        extra: [
+          {
+            size: '2.5” x 1”',
+            text: {
+              primary: {
+                placeholder: 'Your Nm',
+                maxLength: 7,
+                lines: 1,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 1,
+              glowBorder: 5,
+            },
+            name: "Custom ID Tag",
+          },
+          {
+            size: '5” x 1”',
+            text: {
+              primary: {
+                placeholder: 'Dad',
+                maxLength: 4,
+                lines: 1,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 9,
+              glowBorder: 7,
+            },
+            name: "* As Fuck Name Tape",
+          },
+        ],
+      },
+      form: {
+        intro: "Our Name Tape come in various sizes. For sizes 4 x 1, 5 x1 come with the option to add a flag.",
+        btnText: "Get Started",
+        steps: [
+          {
+            name: "Text & Size",
+            status: 'current',
+            input: [
+              {
+                id: 'text',
+                label: 'Text',
+                type: 'input',
+                placeholder: '',
+              },
+              {
+                id: 'size',
+                label: 'Size',
+                type: 'select',
+                placeholder: '',
+              },
+            ],
+          },
+          {
+            name: "Font & Background Colors",
+            status: 'upcoming',
+            input: [
+              {
+                id: 'textColor',
+                label: 'Text Color',
+                type: 'advancedSelect',
+                placeholder: 'Flat Spice Brown',
+              },
+              {
+                id: 'backgroundColor',
+                label: 'Background Color',
+                type: 'advancedSelect',
+                placeholder: 'Multicam Alpine',
+              },
+            ],
+          },
+          {
+            name: "Almost There",
+            status: 'upcoming',
+            input: [
+              {
+                id: 'glowBorder',
+                label: 'Add a glow in the dark border? +$10 USD',
+                type: 'checkmark',
+                placeholder: '',
+              },
+              {
+                id: 'leadTime',
+                label: 'I Agree to the Lead Time',
+                type: 'checkmark',
+                placeholder: '<strong>Lead Time:</strong>  - From your order, to design, production, QC, and shipping, takes roughly 10 business days. Don\'t worry, we\'ll keep you updated with what is going on the whole time. Check this box to confirm that you understand that your order will take roughly 10 business days to ship.',
+              },
+            ],
+          },
+        ],
+      }
+    },
   },
   colors: {
     bgColors: [
