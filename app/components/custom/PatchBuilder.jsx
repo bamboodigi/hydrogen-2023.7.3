@@ -765,7 +765,7 @@ function Visualizer({ formData, className, ...props }) {
     switch (obj.type.toLowerCase()) {
       case "color":
       case 'image':
-        console.log(bgImg);
+     //   console.log(bgImg);
         img.src = bgImg;
         img.onload = () => {
           setState(prevStyle => ({
@@ -777,7 +777,7 @@ function Visualizer({ formData, className, ...props }) {
       case 'mask':
         if (mask) {
           img.src = mask;
-          console.log(mask);
+      //    console.log(mask);
           setState(prevStyle => ({
             ...prevStyle,
             backgroundImage: `url("${bgImg}")`,
@@ -797,7 +797,7 @@ function Visualizer({ formData, className, ...props }) {
           let newColor = '';
 
           if (setState == setBladeStyle) {
-            console.log("ooo");
+         //   console.log("ooo");
             setState(prevStyle => ({
               ...prevStyle,
               width: '0%'
@@ -832,7 +832,7 @@ function Visualizer({ formData, className, ...props }) {
               break;
           }
           img.src = mask;
-          console.log(mask);
+       //   console.log(mask);
           setState(prevStyle => ({
             ...prevStyle,
             backgroundImage: `url("${bgImg}")`,
@@ -932,13 +932,13 @@ function Visualizer({ formData, className, ...props }) {
   useEffect(() => {
     let obj = {
     };
-    console.log(formData.img.type)
-    console.log(formData.img.markType)
+    // console.log(formData.img.type)
+    // console.log(formData.img.markType)
     if (
       formData.img.markType.toLowerCase() === "symbol" ||
       formData.img.type.toLowerCase() === "laser cut flag"
     ) {
-      console.log(formData.img.type)
+     // console.log(formData.img.type)
       obj.type = 'mask';
       obj.src = formData.text.color.img;
       obj.mask = formData.img.color.mask.img;
@@ -1710,7 +1710,7 @@ function Form({ formData, setFormData, data, config, product }) {
         });
       }
     } else {
-      console.log(formData.img.color.mask.icon)
+     // console.log(formData.img.color.mask.icon)
       // setFormData({
       //   ...formData, size: event.target.value,
       //   textLines: objSizes.lines, textMaxLength: objSizes.maxLength, textPlaceholder: objSizes.placeholder
@@ -1965,7 +1965,7 @@ function Form({ formData, setFormData, data, config, product }) {
     }
   };
 
-  console.log(formData.img.color.mask.icon);
+ // console.log(formData.img.color.mask.icon);
 
   return (
     <>

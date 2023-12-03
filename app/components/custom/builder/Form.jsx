@@ -84,7 +84,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
     obj: tempSteps[0]
   };
 
-  console.log(tempSteps);
+  //console.log(tempSteps);
 
   // (tempStepObj);
 

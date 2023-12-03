@@ -1674,15 +1674,15 @@ const builderData = {
     },
     "call sign": {
       name: "Call Sign",
-      basePrice: 13,
+      basePrice: 15,
       config: {
         sizes: [
           {
-            size: '3” x 1”',
+            size: '3” x 2”',
             text: {
               primary: {
-                placeholder: 'Your Name',
-                maxLength: 9,
+                placeholder: 'Text',
+                maxLength: 4,
                 lines: 1,
               }
             },
@@ -1693,226 +1693,64 @@ const builderData = {
             }
           },
           {
-            size: '4” x 1”',
+            size: '3” x 2” Two Sided',
             text: {
               primary: {
-                placeholder: 'Your Name',
-                maxLength: 10,
-                lines: 1,
-              }
-            },
-            flagEnabled: true,
-            upsells: {
-              size: 1,
-              glowBorder: 5,
-              hiVis: 4,
-            }
-          },
-          {
-            size: '4” x 1.5”',
-            text: {
-              primary: {
-                placeholder: 'Your Name',
-                maxLength: 10,
-                lines: 1,
-              }
-            },
-            flagEnabled: false,
-            upsells: {
-              size: 3,
-              glowBorder: 5,
-            }
-          },
-          {
-            size: '5” x 1”',
-            text: {
-              primary: {
-                placeholder: 'Your Name',
-                maxLength: 13,
-                lines: 1,
-              }
-            },
-            flagEnabled: true,
-            upsells: {
-              size: 2,
-              glowBorder: 5,
-              hiVis: 4,
-              tacTecCarrier: 2,
-              tacTecTrainer: 3,
-              tRexArms: 0,
-            }
-          },
-          {
-            size: '5” x 1.5”',
-            text: {
-              primary: {
-                placeholder: 'Your Name',
-                maxLength: 13,
-                lines: 1,
-              }
-            },
-            flagEnabled: false,
-            upsells: {
-              size: 4,
-              glowBorder: 5,
-            }
-          },
-          {
-            size: '6” x 2”',
-            text: {
-              primary: {
-                placeholder: 'Your Name',
-                maxLength: 10,
-                lines: 1,
-              }
-            },
-            flagEnabled: false,
-            upsells: {
-              size: 8,
-              glowBorder: 10,
-              policeBlueLine: 5,
-              sheriffBlueLine: 5,
-            }
-          },
-          {
-            size: '8” x 2”',
-            text: {
-              primary: {
-                placeholder: 'Up to \n2 Lines',
-                maxLength: 30,
-                lines: 2,
-              }
-            },
-            flagEnabled: false,
-            upsells: {
-              size: 9,
-              glowBorder: 10,
-              tRexArms: 4,
-            }
-          },
-          {
-            size: '8” x 3”',
-            text: {
-              primary: {
-                placeholder: 'Up to \n2 Lines',
-                maxLength: 26,
-                lines: 2,
-              }
-            },
-            flagEnabled: false,
-            upsells: {
-              size: 14,
-              glowBorder: 10,
-            }
-          },
-          {
-            size: '8” x 4”',
-            text: {
-              primary: {
-                placeholder: 'Up to \n3 \nLines',
-                maxLength: 39,
-                lines: 3,
-              }
-            },
-            flagEnabled: false,
-            upsells: {
-              size: 24,
-              glowBorder: 10,
-            }
-          },
-          {
-            size: '9” x 3”',
-            text: {
-              primary: {
-                placeholder: 'Up to 2\n Lines of Text',
-                maxLength: 26,
-                lines: 2,
-              }
-            },
-            flagEnabled: false,
-            upsells: {
-              size: 15,
-              glowBorder: 15,
-            }
-          },
-          {
-            size: '10” x 2”',
-            text: {
-              primary: {
-                placeholder: 'Your Name',
-                maxLength: 13,
-                lines: 1,
-              }
-            },
-            flagEnabled: false,
-            upsells: {
-              size: 14,
-              glowBorder: 10,
-            }
-          },
-          {
-            size: '11” x 3”',
-            text: {
-              primary: {
-                placeholder: 'Up to 2 \nLines of Text',
-                maxLength: 32,
-                lines: 2,
-              }
-            },
-            flagEnabled: false,
-            upsells: {
-              size: 17,
-              glowBorder: 15,
-            }
-          },
-          {
-            size: '12” x 4”',
-            text: {
-              primary: {
-                placeholder: 'Up to \n3 \nLines of Text',
-                maxLength: 54,
-                lines: 3,
-              }
-            },
-            flagEnabled: false,
-            upsells: {
-              size: 41,
-              glowBorder: 20,
-            }
-          }
-        ],
-        extra: [
-          {
-            size: '2.5” x 1”',
-            text: {
-              primary: {
-                placeholder: 'Your Nm',
-                maxLength: 7,
-                lines: 1,
-              }
-            },
-            flagEnabled: false,
-            upsells: {
-              size: 1,
-              glowBorder: 5,
-            },
-            name: "Custom ID Tag",
-          },
-          {
-            size: '5” x 1”',
-            text: {
-              primary: {
-                placeholder: 'Dad',
+                placeholder: 'Text',
                 maxLength: 4,
                 lines: 1,
               }
             },
             flagEnabled: false,
             upsells: {
-              size: 9,
-              glowBorder: 7,
+              size: 15,
+              glowBorder: 0,
+            }
+          },
+          {
+            size: '3.5” x 2”',
+            text: {
+              primary: {
+                placeholder: 'Text',
+                maxLength: 6,
+                lines: 1,
+              }
             },
-            name: "* As Fuck Name Tape",
+            flagEnabled: false,
+            upsells: {
+              size: 0,
+              glowBorder: 5,
+            }
+          },
+          {
+            size: '3.5” x 2” Two Sided',
+            text: {
+              primary: {
+                placeholder: 'OK',
+                maxLength: 5,
+                lines: 1,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 10,
+            }
+          },
+          {
+            size: '4” x 2”',
+            text: {
+              primary: {
+                placeholder: 'Your Name',
+                maxLength: 10,
+                lines: 1,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 1,
+              glowBorder: 5,
+              hiVis: 4,
+            }
           },
         ],
       },

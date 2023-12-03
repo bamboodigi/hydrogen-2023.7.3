@@ -45,6 +45,8 @@ import {
   GiftIcon,
 } from '@heroicons/react/24/outline'
 
+import builderObj from '~/data/builderObj.js';
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -687,15 +689,17 @@ function AccountLink({ className, linkClassName }) {
 
 function CartCount({ isHome, openCart }) {
   const [root] = useMatches();
-
+  console.log(root);
   return (
     <Suspense fallback={<Badge count={0} dark={isHome} openCart={openCart} />}>
       <Await resolve={root.data?.cart}>
         {(cart) => (
+          console.log(cart),
+          console.log(builderObj.helpers.get.cartSize(cart)),
           <Badge
             dark={isHome}
             openCart={openCart}
-            count={cart?.totalQuantity || 0}
+            count={builderObj.helpers.get.cartSize(cart) || 0}
           />
         )}
       </Await>

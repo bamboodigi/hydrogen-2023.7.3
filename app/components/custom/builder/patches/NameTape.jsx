@@ -52,8 +52,8 @@ function initVisualizerStyle(formData) {
   const mask = 'url("' + formData.img.color.mask.img + '")';
   const hiltImg = 'url("' + formData.lightsaber.hilt.img + '")';
   const bladeImg = 'url("' + formData.lightsaber.blade.img + '")';
-  console.log(symbolColor);
-  console.log(mask);
+  // console.log(symbolColor);
+  // console.log(mask);
   // console.log(bladeColor);
   // console.log(hiltColor);
   // console.log(bladeImg);

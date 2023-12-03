@@ -652,7 +652,21 @@ const builderObj = {
           }
         };
       },
-      
+      cartSize : function(cart) {
+        console.log(cart);
+        console.log(cart.lines.edges);
+        console.log(cart.lines.edges.length);
+        let size = cart.totalQuantity;
+        console.log(size);
+        // loop through cart.lines.edges
+        cart.lines.edges.forEach(({ node: { quantity, attributes } }) => {
+          if (attributes.some(({ key }) => key === 'productID')) {
+            size -= quantity;
+          }
+        });
+        console.log(size);
+        return size;
+      }   
     },
     update: {
       fontSize: function (containerRef, setFontStyle, formData) {
@@ -1198,7 +1212,7 @@ const builderObj = {
               }
               break;
           }
-           console.log(attrList);
+       //   console.log(attrList);
           const filteredArray = params.filter(obj =>
             attrList.some(key => obj.hasOwnProperty(key))
           );
@@ -1211,7 +1225,7 @@ const builderObj = {
         updateFormData: function (formData, params, product) {
           let filteredParams = this.filter(this.paramsStringToObj(params), this.paramsList(formData), formData);
           formData = formData;
-          console.log(filteredParams);
+         // console.log(filteredParams);
           filteredParams.forEach(obj => {
             const key = Object.keys(obj)[0];
             const value = obj[key];
@@ -1234,7 +1248,7 @@ const builderObj = {
                 // });
                 objSize = obj.sizes.find(obj => obj.size === value);
                 // let objSizes = obj.sizes.find(value => value.size == value);
-                console.log(objSize);
+              //  console.log(objSize);
             //  console.log(formData.price.upsells);
             //  console.log(objSize.upsells)
              Object.keys(objSize.upsells).forEach(key => {
@@ -1328,7 +1342,7 @@ const builderObj = {
               case 'flag':
               //  console.log(value);
                 let flagObj = this.update.flag(value, filteredParams, formData);
-            console.log(flagObj);
+         //   console.log(flagObj);
                 if(formData.img.type == 'Laser Cut Flag') {
                   formData.img.color.mask.name = flagObj.name;
                   formData.img.name = flagObj.name;
@@ -1698,6 +1712,9 @@ const builderObj = {
         upload: (formData) => formData.img.type.toLowerCase() === "upload",
       },
       upsells: {
+        any: function (cartLines) {
+
+        },
         glowBorder: function (type, size, sizeEnabled) {
           const [lengthStr, heightStr] = size.split("x").map(str => str.trim());
           const length = parseInt(lengthStr);
