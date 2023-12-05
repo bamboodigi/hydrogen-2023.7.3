@@ -7,11 +7,13 @@ import {
 export function PatchHeading({ formData, methods}) {
   const isMini = methods.helpers.is.mini;
   const isFlag = methods.helpers.is.flag;
+
+  const classNames = methods.helpers.utility.classNames;
   
     return (
       <>
         <div className="grid gap-2">
-          <Heading as="h1" className="text-3xl leading-[2rem] pr-5 sm:pr-0 whitespace-normal">
+          <Heading as="h1" className={classNames( formData.type.toLowerCase() == 'jacket panel' ? "text-2xl " : "text-3xl ", "leading-[2rem] pr-5 sm:pr-0 whitespace-normal")}>
             <span className="mr-2">
               {formData.size.current}
             </span>
@@ -40,8 +42,7 @@ export function PatchHeading({ formData, methods}) {
                 </>
               ) : formData.type.toLowerCase() == ("jacket panel") ? (
                 <>
-                  <br></br>
-                  Custom Jacket Panel
+                  - { methods.helpers.get.jacketPanelTitle(formData.size.current) } <br></br>Jacket Panel
                 </>
               ) : (
                 <>

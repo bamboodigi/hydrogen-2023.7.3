@@ -1109,36 +1109,43 @@ const builderData = {
             size: '3.5” x 3.5”',
             text: {
               primary: {
+                text: '',
                 maxLength: 13,
                 lines: 1,
-                placeholder: 'L.T. Curtis',
+                placeholder: 'Name',
               },
               secondary: {
+                text: '',
                 maxLength: 6,
                 lines: 1,
                 placeholder: 'RCSD',
               },
               third: {
+                text: '',
                 maxLength: 6,
                 lines: 1,
                 placeholder: 'S1008',
               },
               fourth: {
+                text: '',
                 maxLength: 6,
                 lines: 1,
                 placeholder: 'NKA',
               },
               fifth: {
+                text: '',
                 maxLength: 6,
                 lines: 1,
                 placeholder: 'SPPROJ',
               },
               sixth: {
+                text: '',
                 maxLength: 6,
                 lines: 1,
                 placeholder: 'BPOS',
               },
               seventh: {
+                text: '',
                 maxLength: 6,
                 lines: 1,
                 placeholder: '011173',
@@ -1398,6 +1405,12 @@ const builderData = {
               {
                 id: 'flagReverse',
                 label: 'Do you want to reverse the flag?',
+                type: 'checkmark',
+                placeholder: '',
+              },
+              {
+                id: 'flagTop',
+                label: 'Do you want to move the flag to the top?',
                 type: 'checkmark',
                 placeholder: '',
               },
@@ -1979,6 +1992,11 @@ const builderData = {
         blade: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-darth-vader-blade.png",
       },
       {
+        name: "Count Dooku",
+        hilt: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-count-dooku-hilt.png",
+        blade: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-count-dooku-blade.png",
+      },
+      {
         name: "Luke Skywalker",
         hilt: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-luke-skywalker-hilt.png",
         blade: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-luke-skywalker-blade.png",
@@ -1992,11 +2010,6 @@ const builderData = {
         name: "Obi Wan Kenobi",
         hilt: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-obi-wan-kenobi-hilt.png",
         blade: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-obi-wan-kenobi-blade.png",
-      },
-      {
-        name: "Count Dooku",
-        hilt: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-count-dooku-hilt.png",
-        blade: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-count-dooku-blade.png",
       },
     ]
   },

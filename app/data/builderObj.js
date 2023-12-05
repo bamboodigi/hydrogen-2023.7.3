@@ -132,10 +132,10 @@ const builderObj = {
           break;
         case 'flag':
           formData.img.type = 'Laser Cut Flag';
-          formData.img.color.mask.img = builderObj.data.imgs["laser-cut"]['3.5x2'].find(value => value.name == "USA").img;
-          formData.img.color.mask.name = builderObj.data.imgs["laser-cut"]['3.5x2'].find(value => value.name == "USA").name;
-          formData.img.color.mask.glow = builderObj.data.imgs["laser-cut"]['3.5x2'].find(value => value.name == "USA").glow;
-          formData.img.color.mask.icon = builderObj.data.imgs["laser-cut"]['3.5x2'].find(value => value.name == "USA").icon;
+          formData.img.color.mask.img = builderObj.data.imgs["laser-cut"]['3x2'].find(value => value.name == "USA").img;
+          formData.img.color.mask.name = builderObj.data.imgs["laser-cut"]['3x2'].find(value => value.name == "USA").name;
+          formData.img.color.mask.glow = builderObj.data.imgs["laser-cut"]['3x2'].find(value => value.name == "USA").glow;
+          formData.img.color.mask.icon = builderObj.data.imgs["laser-cut"]['3x2'].find(value => value.name == "USA").icon;
           formData.img.enabled = true;
           break;
         case 'light sabers':
@@ -182,10 +182,10 @@ const builderObj = {
           formData.text.sixth = patchType.config.sizes[0].text?.sixth || tempObj;
           formData.text.seventh = patchType.config.sizes[0].text?.seventh || tempObj;
           formData.img.type = 'Laser Cut Flag';
-          formData.img.color.mask.img = builderObj.data.imgs["laser-cut"]['3.5x2'].find(value => value.name == "USA").img;
-          formData.img.color.mask.name = builderObj.data.imgs["laser-cut"]['3.5x2'].find(value => value.name == "USA").name;
-          formData.img.color.mask.glow = builderObj.data.imgs["laser-cut"]['3.5x2'].find(value => value.name == "USA").glow;
-          formData.img.color.mask.icon = builderObj.data.imgs["laser-cut"]['3.5x2'].find(value => value.name == "USA").icon;
+          formData.img.color.mask.img = builderObj.data.imgs["laser-cut"]['large-id'].find(value => value.name == "USA").img;
+          formData.img.color.mask.name = builderObj.data.imgs["laser-cut"]['large-id'].find(value => value.name == "USA").name;
+          formData.img.color.mask.glow = builderObj.data.imgs["laser-cut"]['large-id'].find(value => value.name == "USA").glow;
+          formData.img.color.mask.icon = builderObj.data.imgs["laser-cut"]['large-id'].find(value => value.name == "USA").icon;
           formData.img.enabled = true;
           break;
         case 'division jacket panel':
@@ -269,8 +269,8 @@ const builderObj = {
             width: 'auto',
             whiteSpace: 'nowrap',
             textAlign: 'center',
-            lineHeight: '96.66px',
-            fontSize: '96.66px',
+            lineHeight: '45px',
+            fontSize: '45px',
             marginTop: '8.3333px'
           },
           secondary: {
@@ -369,6 +369,8 @@ const builderObj = {
           obj.text.secondary.fontSize = '36.6316px';
           obj.text.secondary.width = 'auto';
           obj.text.secondary.textAlign = 'center';
+          obj.img.mask.minHeight = builderObj.helpers.get.flagHeight(formData.size.current, formData.type);
+          obj.img.mask.maxHeight = builderObj.helpers.get.flagHeight(formData.size.current, formData.type);
           break;
         case 'name tape':
           obj.text.primary.fontSize = '48.6397px';
@@ -386,16 +388,26 @@ const builderObj = {
           obj.patch.height = '58px';
           break;
         case 'flag':
-          obj.patch.padding = '20px';
+          obj.patch.padding = '21px 20px';
           obj.text.secondary.width = 'auto';
           obj.text.secondary.textAlign = 'center';
           break;
         case 'jacket panel':
-          obj.patch.padding = '12px';
-          obj.text.secondary.fontSize = '34px';
-          obj.patch.borderRadius = '.5rem';
+          // if(formData.size.current == '3.5” x 4”') {
+          //   obj.patch.borderRadius = '.5rem';
+          // }
+
+          switch (formData.size.current) {
+            case '3.5” x 3.5”':
+              obj.text.secondary.fontSize = '14px';
+              obj.text.secondary.lineHeight = '14px';
+              obj.img.mask.maxHeight = '84px';
+              obj.patch.padding = '10px 16px';
+              break;
+          }
+          //   obj.patch.padding = '12px';
+          // obj.text.secondary.fontSize = '34px';
           obj.img.flag.aspectRatio = '2/1';
-          obj.img.mask.maxHeight = '136px';
           break;
         case 'division jacket panel':
           obj.text.secondary.fontSize = '27px';
@@ -652,7 +664,7 @@ const builderObj = {
           }
         };
       },
-      cartSize : function(cart) {
+      cartSize: function (cart) {
         let size = cart.totalQuantity;
         // loop through cart.lines.edges
         cart.lines.edges.forEach(({ node: { quantity, attributes } }) => {
@@ -661,7 +673,95 @@ const builderObj = {
           }
         });
         return size;
-      }   
+      },
+      jacketPanelTitle: function (size) {
+        let title = '';
+        switch (size) {
+          case '3.5” x 3.5”':
+            title = 'Arc’teryx';
+            break;
+          case '3.5” x 4”':
+            title = 'Condor';
+            break;
+          case '3.6” x 5”':
+            title = 'Massif';
+            break;
+          case '4.6” x 6.2”':
+            title = 'Hazard';
+            break;
+          case 'TAD':
+            title = 'Tad';
+            break;
+        }
+
+        return title;
+      },
+      flagHeight: function (size, type) {
+        let height = '';
+        console.log(size);
+        console.log(type);
+        switch (type.toLowerCase()) {
+          case 'id panel':
+            switch (size) {
+              case '3” x 2”':
+                height = 'calc(162px/2)';
+                break;
+              case '3.5” x 2”':
+                height = 'calc(131px/2)';
+                break;
+              case '4” x 2”':
+                height = 'calc(135px/2)';
+                break;
+              case '5” x 3”':
+                height = 'calc(135px/2)';
+                break;
+              case '6” x 2”':
+                height = 'calc(119px/2)';
+                break;
+              case '6” x 3”':
+                height = 'calc(135px/2)';
+                break;
+            }
+            break;
+          case 'flag':
+            switch (size) {
+              case '3” x 2”':
+                height = '21px 20px';
+                break;
+              case '3.5” x 2”':
+                height = '20px';
+                break;
+              case '5” x 3”':
+                height = '17px 20px';
+                break;
+              case '6” x 3”':
+                height = '15px 20px';
+                break;
+            }
+            break;
+            case 'jacket panel':
+              switch (size) {
+                case '3.5” x 3.5”':
+                  height = 'calc(168px/2)';
+                  break;
+                case '3.5” x 4”':
+                  height = 'calc(270px/2)';
+                  break;
+                // case '3.5” x 2”':
+                //   height = '20px';
+                //   break;
+                // case '5” x 3”':
+                //   height = '17px 20px';
+                //   break;
+                // case '6” x 3”':
+                //   height = '15px 20px';
+                //   break;
+              }
+              break;
+        }
+        console.log(height);
+        return height;
+      },
     },
     update: {
       fontSize: function (containerRef, setFontStyle, formData) {
@@ -755,8 +855,14 @@ const builderObj = {
                 case '8” x 3”':
                   newFontSize = 43.6253;
                   break;
+                case '8” x 4”':
+                  newFontSize = 51;
+                  break;
                 case '11” x 3”':
                   newFontSize = 30;
+                  break;
+                case '12” x 4”':
+                  newFontSize = 29;
                   break;
               }
             }
@@ -770,6 +876,28 @@ const builderObj = {
             // if (formData.text.primary.text.length == 0) {
             //   newFontSize = 47.1714;
             // }
+            if (formData.text.primary.text.length == 0) {
+              switch (formData.size.current) {
+                case '3.5” x 3.5”':
+                  newFontSize = 50;
+                  break;
+                // case '3.5” x 2”':
+                //   newFontSize = 83;
+                //   break;
+                // case '4” x 2”':
+                //   newFontSize = 73;
+                //   break;
+                // case '5” x 3”':
+                //   newFontSize = 80;
+                //   break;
+                // case '6” x 2”':
+                //   newFontSize = 48.5468;
+                //   break;
+                // case '6” x 3”':
+                //   newFontSize = 48.556;
+                //   break;
+              }
+            }
             break;
         }
 
@@ -837,6 +965,8 @@ const builderObj = {
         if (newFontSize < minFontSize) {
           newFontSize = minFontSize;
         }
+
+        console.log(newFontSize);
 
         switch (formData.type.toLowerCase()) {
           case 'id panel':
@@ -1079,7 +1209,7 @@ const builderObj = {
             }
           });
 
-    //      console.log(arr);
+          //      console.log(arr);
 
           return arr;
         },
@@ -1087,14 +1217,14 @@ const builderObj = {
       params: {
         update: {
           color: function (color, type) {
-          //  console.log(type);
+            //  console.log(type);
             const colorOptions = builderObj.data[type + 'Colors'];
-          //  console.log(colorOptions);
+            //  console.log(colorOptions);
             let colorObj = {};
             if (type == 'font') {
               colorObj = colorOptions.find(obj => obj.name.toLowerCase().includes(color.toLowerCase()));
             } else {
-            //  console.log(color);
+              //  console.log(color);
               // colorObj = colorOptions.find(obj => obj.name.toLowerCase().includes(color.toLowerCase()));
               colorObj = colorOptions.find(obj => obj.name.toLowerCase() == color.toLowerCase());
             }
@@ -1122,7 +1252,7 @@ const builderObj = {
                 if (flagType.toLowerCase().indexOf('hivis') > -1) {
                   flagOptions = hivisOptions;
                 } else {
-                  if(builderObj.helpers.is.mini(formData.type, size || formData.size.current)) {
+                  if (builderObj.helpers.is.mini(formData.type, size || formData.size.current)) {
                     flagOptions = laserOptions['mini-id'];
                   } else {
                     flagOptions = laserOptions['large-id'];
@@ -1207,7 +1337,7 @@ const builderObj = {
               }
               break;
           }
-       //   console.log(attrList);
+          //   console.log(attrList);
           const filteredArray = params.filter(obj =>
             attrList.some(key => obj.hasOwnProperty(key))
           );
@@ -1220,11 +1350,11 @@ const builderObj = {
         updateFormData: function (formData, params, product) {
           let filteredParams = this.filter(this.paramsStringToObj(params), this.paramsList(formData), formData);
           formData = formData;
-         // console.log(filteredParams);
+          // console.log(filteredParams);
           filteredParams.forEach(obj => {
             const key = Object.keys(obj)[0];
             const value = obj[key];
-          //  console.log(key);
+            //  console.log(key);
             switch (key.toLowerCase()) {
               case 'size':
                 formData.size.current = value;
@@ -1243,55 +1373,55 @@ const builderObj = {
                 // });
                 objSize = obj.sizes.find(obj => obj.size === value);
                 // let objSizes = obj.sizes.find(value => value.size == value);
-              //  console.log(objSize);
-            //  console.log(formData.price.upsells);
-            //  console.log(objSize.upsells)
-             Object.keys(objSize.upsells).forEach(key => {
-              formData.price.upsells[key] = objSize.upsells[key];
-            });
+                //  console.log(objSize);
+                //  console.log(formData.price.upsells);
+                //  console.log(objSize.upsells)
+                Object.keys(objSize.upsells).forEach(key => {
+                  formData.price.upsells[key] = objSize.upsells[key];
+                });
 
-            if(objSize.text.primary) {
-              Object.keys(objSize.text.primary).forEach(key => {
-                formData.text.primary[key] = objSize.text.primary[key];
-              });
-            }
+                if (objSize.text.primary) {
+                  Object.keys(objSize.text.primary).forEach(key => {
+                    formData.text.primary[key] = objSize.text.primary[key];
+                  });
+                }
 
-            if(objSize.text.secondary) {
-              Object.keys(objSize.text.secondary).forEach(key => {
-                formData.text.secondary[key] = objSize.text.secondary[key];
-              });
-            }
-            if(objSize.text.third) {
-              Object.keys(objSize.text.third).forEach(key => {
-                formData.text.third[key] = objSize.text.third[key];
-              });
-            }
-            if(objSize.text.fourth) {
-              Object.keys(objSize.text.fourth).forEach(key => {
-                formData.text.fourth[key] = objSize.text.fourth[key];
-              });
-            }
-            if(objSize.text.fifth) {
-              Object.keys(objSize.text.fifth).forEach(key => {
-                formData.text.fifth[key] = objSize.text.fifth[key];
-              });
-            }
-            if(objSize.text.sixth) {
-              Object.keys(objSize.text.sixth).forEach(key => {
-                formData.text.sixth[key] = objSize.text.sixth[key];
-              });
-            }
-            if(objSize.text.seventh) {
-              Object.keys(objSize.text.seventh).forEach(key => {
-                formData.text.seventh[key] = objSize.text.seventh[key];
-              });
-            }
+                if (objSize.text.secondary) {
+                  Object.keys(objSize.text.secondary).forEach(key => {
+                    formData.text.secondary[key] = objSize.text.secondary[key];
+                  });
+                }
+                if (objSize.text.third) {
+                  Object.keys(objSize.text.third).forEach(key => {
+                    formData.text.third[key] = objSize.text.third[key];
+                  });
+                }
+                if (objSize.text.fourth) {
+                  Object.keys(objSize.text.fourth).forEach(key => {
+                    formData.text.fourth[key] = objSize.text.fourth[key];
+                  });
+                }
+                if (objSize.text.fifth) {
+                  Object.keys(objSize.text.fifth).forEach(key => {
+                    formData.text.fifth[key] = objSize.text.fifth[key];
+                  });
+                }
+                if (objSize.text.sixth) {
+                  Object.keys(objSize.text.sixth).forEach(key => {
+                    formData.text.sixth[key] = objSize.text.sixth[key];
+                  });
+                }
+                if (objSize.text.seventh) {
+                  Object.keys(objSize.text.seventh).forEach(key => {
+                    formData.text.seventh[key] = objSize.text.seventh[key];
+                  });
+                }
 
-            // console.log(objSize);
-            // console.log(formData.price.upsells);
-              //formData.price.upsells = objSize.upsells;
-            //    console.log(value);
-            //    console.log(objSizes);
+                // console.log(objSize);
+                // console.log(formData.price.upsells);
+                //formData.price.upsells = objSize.upsells;
+                //    console.log(value);
+                //    console.log(objSizes);
                 break;
               case 'primary':
                 formData.text.primary.text = builderObj.helpers.utility.limitString(value, formData.text.primary.maxLength);
@@ -1323,7 +1453,7 @@ const builderObj = {
                 formData.bgColor = this.update.color(value, 'bg');
                 break;
               case 'flagtype':
-          //      console.log("ok");
+                //      console.log("ok");
                 formData.img.enabled = true;
                 if (value.toLowerCase().indexOf('laser') > -1 || value.indexOf('laser') > -1) {
                   formData.img.type = 'Laser Cut Flag';
@@ -1335,15 +1465,15 @@ const builderObj = {
                 formData.img.reversed = value === 'true' ? true : false;
                 break;
               case 'flag':
-              //  console.log(value);
+                //  console.log(value);
                 let flagObj = this.update.flag(value, filteredParams, formData);
-         //   console.log(flagObj);
-                if(formData.img.type == 'Laser Cut Flag') {
+                //   console.log(flagObj);
+                if (formData.img.type == 'Laser Cut Flag') {
                   formData.img.color.mask.name = flagObj.name;
                   formData.img.name = flagObj.name;
                   formData.img.color.mask.img = flagObj.img;
-                  formData.img.color.mask.icon = flagObj.icon; 
-                  formData.img.color.mask.glow = flagObj.glow; 
+                  formData.img.color.mask.icon = flagObj.icon;
+                  formData.img.color.mask.glow = flagObj.glow;
                   formData.upsells.hiVis = false;
                 } else {
                   formData.img.name = flagObj.name;
@@ -1352,18 +1482,18 @@ const builderObj = {
                   formData.upsells.hiVis = true;
                 }
                 break;
-                case 'symbol':
-                  //  console.log(value);
-                    let symbolObj = this.update.symbol(value);
-                    console.log(symbolObj);
-             //   console.log(flagObj);
-                      formData.img.color.mask.name = symbolObj.name;
-                      formData.img.name = symbolObj.name;
-                      formData.img.color.mask.img = symbolObj.img;
-                      formData.img.color.mask.icon = symbolObj.icon; 
-                      formData.img.color.mask.glow = symbolObj.glow; 
-                      // formData.upsells.hiVis = false;
-                    break;
+              case 'symbol':
+                //  console.log(value);
+                let symbolObj = this.update.symbol(value);
+                console.log(symbolObj);
+                //   console.log(flagObj);
+                formData.img.color.mask.name = symbolObj.name;
+                formData.img.name = symbolObj.name;
+                formData.img.color.mask.img = symbolObj.img;
+                formData.img.color.mask.icon = symbolObj.icon;
+                formData.img.color.mask.glow = symbolObj.glow;
+                // formData.upsells.hiVis = false;
+                break;
               case 'sabertype':
                 const saberObj = this.update.saber(value);
                 formData.lightsaber.saberType = saberObj.name;
@@ -1399,15 +1529,15 @@ const builderObj = {
           // console.log(formData);
           return formData;
         },
-        createPatchImg : function(){
+        createPatchImg: function () {
           const json = {
             html: "<div class='test'>Hello, world!</div>",
             css: ".test { background-color: green; }"
           };
-          
+
           const username = "ef103b65-4bb9-4f67-acd6-479499ccf68d";
           const passwored = "ee34894e-ae5f-44eb-81b7-bad40bcf2d68";
-          
+
           const options = {
             method: 'POST',
             body: JSON.stringify(json),
@@ -1416,7 +1546,7 @@ const builderObj = {
               'Authorization': 'Basic ' + btoa(username + ":" + password)
             }
           }
-          
+
           fetch('https://hcti.io/v1/image', options)
             .then(res => {
               if (res.ok) {
@@ -1523,7 +1653,7 @@ const builderObj = {
             case 'default':
               break;
           }
-         // console.log(paramsList);
+          // console.log(paramsList);
           // turn array strings in lowercase and return
           return paramsList.map(str => str);
         },
@@ -1537,12 +1667,12 @@ const builderObj = {
             result.push(obj);
           }
 
-       //   console.log(result);
+          //   console.log(result);
           return result;
         },
         generateURLParams: function (formData, setFormData) {
           let params = [];
-          switch(formData.type.toLowerCase()) {
+          switch (formData.type.toLowerCase()) {
             case 'id panel':
               params = [
                 { size: formData.size.current },
@@ -1633,8 +1763,8 @@ const builderObj = {
               break;
           }
           // console.log(params);
-           console.log(params.map(obj => Object.keys(obj)[0] + '=' + obj[Object.keys(obj)[0]]).join('&'));
-     //     console.log(params.toString());
+          console.log(params.map(obj => Object.keys(obj)[0] + '=' + obj[Object.keys(obj)[0]]).join('&'));
+          //     console.log(params.toString());
           // turn array in params strings for url
           setFormData({ ...formData, urlParams: params.map(obj => Object.keys(obj)[0] + '=' + obj[Object.keys(obj)[0]]).join('&') });
           return params.map(obj => Object.keys(obj)[0] + '=' + obj[Object.keys(obj)[0]]).join('&');

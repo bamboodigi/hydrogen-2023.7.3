@@ -53,11 +53,13 @@ export function Visualizer({ formData, className, methods, ...props }) {
   // console.log(maskStyle);
   //console.log(flagStyle);
   // A function to load an image and update the state with its URL
-  const imageLoader = (obj, setState) => {
+  const imageLoader = (obj, setState, type) => {
     //  console.log(obj);
+    console.log(type);
     // console.log(obj.type);
     let mask = obj.mask ? obj.mask : null;
     let bgImg = obj.src;
+    let height = obj.height ? obj.height : null;
     // console.log(mask)
     //  console.log(obj.type.toLowerCase());
     const img = new Image();
@@ -76,19 +78,45 @@ export function Visualizer({ formData, className, methods, ...props }) {
         break;
       case 'mask':
         if (mask) {
-          img.src = mask;
-         //  console.log(mask);
-        //   console.log(setState);
-          setState(prevStyle => ({
-            ...prevStyle,
-            backgroundImage: `url("${bgImg}")`,
-            WebkitMaskImage: `url("${mask}")`,
-            WebkitMaskPosition: 'center',
-            WebkitSize: 'cover',
-            maskImage: `url("${mask}")`,
-            maskSize: `cover`,
-            maskPosition: 'center',
-          }));
+          console.log('ok');
+          if(type.toLowerCase() == "flag") {
+            console.log('ok');
+            console.log(height);
+            img.src = mask;
+            setStyle(prevStyle => ({
+              ...prevStyle,
+              padding: height,
+            }));
+            //  console.log(mask);
+           //   console.log(setState);
+             setState(prevStyle => ({
+               ...prevStyle,
+               backgroundImage: `url("${bgImg}")`,
+               WebkitMaskImage: `url("${mask}")`,
+               WebkitMaskPosition: 'center',
+               WebkitSize: 'cover',
+               maskImage: `url("${mask}")`,
+               maskSize: `cover`,
+               maskPosition: 'center',
+             }));
+          } else {
+            img.src = mask;
+
+            //  console.log(mask);
+           //   console.log(setState);
+             setState(prevStyle => ({
+               ...prevStyle,
+               backgroundImage: `url("${bgImg}")`,
+               WebkitMaskImage: `url("${mask}")`,
+               WebkitMaskPosition: 'center',
+               WebkitSize: 'cover',
+               maskImage: `url("${mask}")`,
+               maskSize: `cover`,
+               maskPosition: 'center',
+               minHeight: height,
+               maxHeight: height,
+             }));
+          }
         }
         break;
       case 'light saber':
@@ -186,12 +214,12 @@ export function Visualizer({ formData, className, methods, ...props }) {
       obj.src = formData.text.color.img;
       obj.mask = formData.img.color.mask.img;
     //  console.log(obj);
-      imageLoader(obj, setMaskStyle)
+      imageLoader(obj, setMaskStyle, formData.type)
     } else {
     //  console.log("ahh")
       obj.type = 'image'
       obj.src = formData.img.img;
-      imageLoader(obj, setFlagStyle)
+      imageLoader(obj, setFlagStyle, formData.type)
     }
 
    // console.log(obj)
@@ -204,7 +232,9 @@ export function Visualizer({ formData, className, methods, ...props }) {
     obj.type = 'mask';
     obj.src = formData.text.color.img;
     obj.mask = formData.img.color.mask.img;
-    imageLoader(obj, setMaskStyle)
+    obj.height = methods.helpers.get.flagHeight(formData.size.current, formData.type);
+    //   console.log(obj);
+    imageLoader(obj, setMaskStyle, formData.type)
 
   }, [formData.img.color.mask.img]);
 
@@ -214,7 +244,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
       type: 'color',
       src: formData.bgColor.img,
     };
-    imageLoader(obj, setStyle);
+    imageLoader(obj, setStyle, formData.type);
   }, [formData.bgColor.img]);
 
   // Custom hook to update the font style when the text color image changes
@@ -227,15 +257,15 @@ export function Visualizer({ formData, className, methods, ...props }) {
       formData.img.markType.toLowerCase() === "symbol" ||
       formData.img.type.toLowerCase() === "laser cut flag"
     ) {
-      imageLoader(obj, setMaskStyle);
+      imageLoader(obj, setMaskStyle, formData.type);
     }
 
     if(formData.type.toLowerCase() === "division jacket panel"){
       imageLoader(obj, setBirdStyle);
     }
 
-    imageLoader(obj, setFontStyle);
-    imageLoader(obj, setFontSecondaryStyle);
+    imageLoader(obj, setFontStyle, formData.type);
+    imageLoader(obj, setFontSecondaryStyle, formData.type);
 
   }, [formData.text.color.img]);
 
@@ -252,7 +282,9 @@ export function Visualizer({ formData, className, methods, ...props }) {
       obj.type = 'mask';
       obj.src = formData.text.color.img;
       obj.mask = formData.img.color.mask.img;
-      imageLoader(obj, setMaskStyle)
+      obj.height = methods.helpers.get.flagHeight(formData.size.current, formData.type);
+      //   console.log(obj);
+         imageLoader(obj, setMaskStyle, formData.type)
     } else {
       //  console.log(formData.img.type)
       obj.type = 'image'
@@ -281,14 +313,14 @@ export function Visualizer({ formData, className, methods, ...props }) {
     objHilt.type = 'light saber';
     objHilt.src = formData.lightsaber.hilt.color;
     objHilt.mask = formData.lightsaber.hilt.img;
-    imageLoader(objHilt, setHiltStyle)
+    imageLoader(objHilt, setHiltStyle, formData.type)
 
     let objBlade = {
     };
     objBlade.type = 'light saber';
     objBlade.src = formData.lightsaber.blade.color;
     objBlade.mask = formData.lightsaber.blade.img;
-    imageLoader(objBlade, setBladeStyle)
+    imageLoader(objBlade, setBladeStyle, formData.type)
 
   }, [formData.lightsaber.saberType]);
   // Custom hook to update the font style when the text color image changes
@@ -299,7 +331,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
     objHilt.type = 'mask';
     objHilt.src = formData.lightsaber.hilt.color;
     objHilt.mask = formData.lightsaber.hilt.img;
-    imageLoader(objHilt, setHiltStyle)
+    imageLoader(objHilt, setHiltStyle, formData.type)
 
   }, [formData.lightsaber.hilt.color]);
 
@@ -310,7 +342,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
     objBlade.type = 'mask';
     objBlade.src = formData.lightsaber.blade.color;
     objBlade.mask = formData.lightsaber.blade.img;
-    imageLoader(objBlade, setBladeStyle)
+    imageLoader(objBlade, setBladeStyle, formData.type)
   }, [formData.lightsaber.blade.color]);
 
 
@@ -350,10 +382,20 @@ export function Visualizer({ formData, className, methods, ...props }) {
       }
     }
 
+    // if(formData.type.toLowerCase() == "name tape"){
+    //   console.log(formData.size.current);
+
+    //   if(formData.size.current  == "4” x 1”" || formData.size.current  == "5” x 1”"){
+    //     setCanvasStyle(prevStyle => ({ ...prevStyle, height: '100px' }));
+    //   } else {
+
+    //   }
+    // }
+
     // If the current size does not require a larger canvas, set the default canvas height
-    if (countSize) {
-      setCanvasStyle(prevStyle => ({ ...prevStyle, height: '230px' }));
-    }
+    // if (countSize) {
+    //   setCanvasStyle(prevStyle => ({ ...prevStyle, height: '230px' }));
+    // }
     if (formData.type.toLowerCase().includes("medical patch")) {
       setCanvasStyle(prevStyle => ({ ...prevStyle, height: '230px' }));
       switch (formData.size.current) {
@@ -369,6 +411,9 @@ export function Visualizer({ formData, className, methods, ...props }) {
           break;
       }
     }
+    if(formData.type.toLowerCase() == ("flag")){
+
+    }
   
     if (formData.img.type.toLowerCase() === "laser cut flag") {
       let obj = {
@@ -376,8 +421,9 @@ export function Visualizer({ formData, className, methods, ...props }) {
       obj.type = 'mask';
       obj.src = formData.text.color.img;
       obj.mask = formData.img.color.mask.img;
+      obj.height = methods.helpers.get.flagHeight(formData.size.current, formData.type);
    //   console.log(obj);
-      imageLoader(obj, setMaskStyle)
+      imageLoader(obj, setMaskStyle, formData.type)
     }
   }, [formData.size.current]);
 
@@ -688,15 +734,22 @@ export function Visualizer({ formData, className, methods, ...props }) {
             // </div>
           ) : formData.type.toLowerCase() == "jacket panel" ? (
             <div ref={containerRef} className="h-full w-full overflow-x-hidden flex flex-col items-center justify-between">
-              <div className="mt-2">
-                <p id="main-text" className="text-center" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
+              <div className={classNames(
+                formData.size.current == '3.5” x 4”' ? "mt-2" : "",
+                formData.img.flagTop ? "order-2" : "", ""
+                )}>
+                <p id="main-text" className={classNames(
+                formData.size.current == '3.5” x 4”' ? "mt-2" : "",
+                formData.img.flagTop ? "order-1" : "", "text-center"
+                )}
+                style={{ ...fontStyle }}>{formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
                 <div className="flex flex-wrap">
-                  <p id="text2" className="w-1/2 mb-1" style={{ ...fontSecondaryStyle }}>{formData.text.secondary.text.length > 0 ? formData.text.secondary.text : formData.text.secondary.placeholder}</p>
-                  <p id="text3" className="w-1/2 mb-1 text-right" style={{ ...fontSecondaryStyle }}>{formData.text.third.text.length > 0 ? formData.text.third.text : formData.text.third.placeholder}</p>
-                  <p id="text4" className="w-1/2 mb-1" style={{ ...fontSecondaryStyle }}>{formData.text.fourth.text.length > 0 ? formData.text.fourth.text : formData.text.fourth.placeholder}</p>
-                  <p id="text5" className="w-1/2 mb-1 text-right" style={{ ...fontSecondaryStyle }}>{formData.text.fifth.text.length > 0 ? formData.text.fifth.text : formData.text.fifth.placeholder}</p>
-                  <p id="text6" className="w-1/2" style={{ ...fontSecondaryStyle }}>{formData.text.sixth.text.length > 0 ? formData.text.sixth.text : formData.text.sixth.placeholder}</p>
-                  <p id="text7" className="w-1/2 text-right" style={{ ...fontSecondaryStyle }}>{formData.text.seventh.text.length > 0 ? formData.text.seventh.text : formData.text.seventh.placeholder}</p>
+                  <p id="text2" className="w-1/2 mb-1" style={{ ...fontSecondaryStyle }}>{formData.text.secondary.text?.length > 0 ? formData.text.secondary.text : formData.text.secondary.placeholder}</p>
+                  <p id="text3" className="w-1/2 mb-1 text-right" style={{ ...fontSecondaryStyle }}>{formData.text.third.text?.length > 0 ? formData.text.third.text : formData.text.third.placeholder}</p>
+                  <p id="text4" className="w-1/2 mb-1" style={{ ...fontSecondaryStyle }}>{formData.text.fourth.text?.length > 0 ? formData.text.fourth.text : formData.text.fourth.placeholder}</p>
+                  <p id="text5" className="w-1/2 mb-1 text-right" style={{ ...fontSecondaryStyle }}>{formData.text.fifth.text?.length > 0 ? formData.text.fifth.text : formData.text.fifth.placeholder}</p>
+                  <p id="text6" className="w-1/2" style={{ ...fontSecondaryStyle }}>{formData.text.sixth.text?.length > 0 ? formData.text.sixth.text : formData.text.sixth.placeholder}</p>
+                  <p id="text7" className="w-1/2 text-right" style={{ ...fontSecondaryStyle }}>{formData.text.seventh.text?.length > 0 ? formData.text.seventh.text : formData.text.seventh.placeholder}</p>
                 </div>
               </div>
               {formData.img.type.toLowerCase() === "laser cut flag" ? (

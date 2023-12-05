@@ -325,7 +325,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
     //  (maskName);
     //  (maskObject);
     if (formData.type.toLowerCase() == "medical patch") {
-    if (event.target.value == '3.5” x 2”') {
+      if (event.target.value == '3.5” x 2”') {
         // setFlagStyle(prevStyle => ({ ...prevStyle, transform: `scaleX(1.25)` }));
         setFormData({
           ...formData,
@@ -383,6 +383,99 @@ export function Form({ formData, setFormData, productURL, data, config, product,
               lines: objSizes.text.primary.lines,
               maxLength: objSizes.text.primary.maxLength,
               placeholder: objSizes.text.primary.placeholder
+            }
+          },
+        });
+      }
+    }
+    else if (methods.helpers.is.patchType.nameTape(formData)) {
+      console.log(event.target.value);
+      if (event.target.value == "4” x 1”" || event.target.value == "5” x 1”") {
+        setFormData({
+          ...formData,
+          price: {
+            ...formData.price,
+            upsells: {
+              ...formData.price.upsells,
+              size: objSizes.upsells.size,
+              glowBorder: objSizes.upsells.glowBorder || 0,
+              hiVis: objSizes.upsells.hiVis || 0,
+              badge: objSizes.upsells.badge || 0,
+              proIRFontColor: methods.helpers.get.fontUpsell(event.target.value) || 0,
+              reflectiveGlowFontColor: methods.helpers.get.fontUpsell(event.target.value) || 0,
+            },
+          },
+          size: {
+            ...formData.size,
+            current: event.target.value
+          },
+          text: {
+            ...formData.text,
+            primary: {
+              ...formData.text.primary,
+              lines: objSizes.text.primary.lines,
+              maxLength: objSizes.text.primary.maxLength,
+              placeholder: objSizes.text.primary.placeholder
+            }
+          },
+          img: {
+            ...formData.img,
+            color: {
+              ...formData.img.color,
+              mask: {
+                name: maskObject?.name || maskName,
+                img: maskObject?.img || formData.img.color.mask.img,
+                glow: maskObject?.glow || formData.img.color.mask.glow,
+                icon: maskObject?.icon || formData.img.color.mask.icon,
+              }
+            }
+          },
+        });
+        console.log('set to true');
+      } else {
+        console.log(objSizes.upsells);
+        setFormData({
+          ...formData,
+          upsells: {
+            ...formData.upsells,
+            hiVis: false,
+          },
+          price: {
+            ...formData.price,
+            upsells: {
+              ...formData.price.upsells,
+              size: objSizes.upsells.size,
+              glowBorder: objSizes.upsells.glowBorder || 0,
+              hiVis: objSizes.upsells.hiVis || 0,
+              badge: objSizes.upsells.badge || 0,
+              proIRFontColor: methods.helpers.get.fontUpsell(event.target.value) || 0,
+              reflectiveGlowFontColor: methods.helpers.get.fontUpsell(event.target.value) || 0,
+            },
+          },
+          size: {
+            ...formData.size,
+            current: event.target.value
+          },
+          text: {
+            ...formData.text,
+            primary: {
+              ...formData.text.primary,
+              lines: objSizes.text.primary.lines,
+              maxLength: objSizes.text.primary.maxLength,
+              placeholder: objSizes.text.primary.placeholder
+            }
+          },
+          img: {
+            ...formData.img,
+            enabled: false,
+            color: {
+              ...formData.img.color,
+              mask: {
+                name: maskObject?.name || maskName,
+                img: maskObject?.img || formData.img.color.mask.img,
+                glow: maskObject?.glow || formData.img.color.mask.glow,
+                icon: maskObject?.icon || formData.img.color.mask.icon,
+              }
             }
           },
         });
@@ -521,7 +614,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
         //  (obj);
         setFormData({
           ...formData, img: {
-            ...formData.img, 
+            ...formData.img,
             name: event.name,
             color: {
               ...formData.img.color, mask: {
@@ -565,7 +658,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
         //  (obj);
         setFormData({
           ...formData, img: {
-            ...formData.img, 
+            ...formData.img,
             name: event.name,
             color: {
               ...formData.img.color, mask: {
@@ -626,6 +719,12 @@ export function Form({ formData, setFormData, productURL, data, config, product,
     setFormData({
       ...formData,
       img: { ...formData.img, reversed: event.target.checked }
+    });
+  };
+  const handleFlagTopChange = (event) => {
+    setFormData({
+      ...formData,
+      img: { ...formData.img, flagTop: event.target.checked }
     });
   };
 
@@ -1182,16 +1281,16 @@ export function Form({ formData, setFormData, productURL, data, config, product,
                     //   </>
                     // )
                     <>
-                    <AdvancedSelect
-                      // id="bgColor"
-                      title={formData.img.markType}
-                      name={formData.img.markType}
-                      value={formData.img.name}
-                      img={formData.img.color.mask.icon}
-                      onChange={handleImgChange}
-                      options={symbols["medical patch"]}
-                    />
-                  </>
+                      <AdvancedSelect
+                        // id="bgColor"
+                        title={formData.img.markType}
+                        name={formData.img.markType}
+                        value={formData.img.name}
+                        img={formData.img.color.mask.icon}
+                        onChange={handleImgChange}
+                        options={symbols["medical patch"]}
+                      />
+                    </>
                   ) : input.id.toLowerCase() == "flag" ? (
                     <>
                       {
@@ -1377,6 +1476,26 @@ export function Form({ formData, setFormData, productURL, data, config, product,
                         </div>
                       </div>
                     </>
+                  ) : input.id.toLowerCase() == "flagtop" ? (
+                    <>
+                      <div className="flex items-start">
+                        <div className="flex items-center h-5">
+                          <input
+                            id="flag-reversed"
+                            name="flag-reversed"
+                            type="checkbox"
+                            checked={formData.img.flagTop || false}
+                            onChange={handleFlagTopChange}
+                            className="bg-transparent h-4 w-4 rounded border-contrast text-indigo-600 focus:ring-indigo-500"
+                          />
+                        </div>
+                        <div className="text-sm leading-4">
+                          <label htmlFor="agreeLeadTime" className="ml-3 font-medium">
+                            Do you want to move the flag to the top?
+                          </label>
+                        </div>
+                      </div>
+                    </>
                   ) : input.id.toLowerCase() == "glowborder" ? (
                     <>
                       <div className="flex items-start">
@@ -1427,16 +1546,16 @@ export function Form({ formData, setFormData, productURL, data, config, product,
             })}
           </div>
         </div>
-        <FormButton 
-        formData={formData} 
-        setFormData={setFormData} 
-        config={config} 
-        handlePrevious={handlePrevious} 
-        handleNext={handleNext} 
-        currentStep={stepForm.currentStep} 
-        steps={stepForm.steps} 
-        methods={methods}
-        productURL={productURL} />
+        <FormButton
+          formData={formData}
+          setFormData={setFormData}
+          config={config}
+          handlePrevious={handlePrevious}
+          handleNext={handleNext}
+          currentStep={stepForm.currentStep}
+          steps={stepForm.steps}
+          methods={methods}
+          productURL={productURL} />
       </div>
     </>
   );
