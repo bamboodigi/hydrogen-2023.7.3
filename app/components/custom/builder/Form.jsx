@@ -157,6 +157,10 @@ export function Form({ formData, setFormData, productURL, data, config, product,
     let newBladeColor = '';
     // (formData.lightsaber.saberType.toLowerCase());
     switch (obj.name.toLowerCase()) {
+      case 'kylo ren':
+        newHiltColor = fontColors[7];
+        newBladeColor = fontColors[11];
+        break;
       case 'darth vader':
         newHiltColor = fontColors[7];
         newBladeColor = fontColors[11];

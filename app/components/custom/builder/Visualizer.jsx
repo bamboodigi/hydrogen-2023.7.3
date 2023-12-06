@@ -135,6 +135,10 @@ export function Visualizer({ formData, className, methods, ...props }) {
 
 
           switch (formData.lightsaber.saberType.toLowerCase()) {
+            case 'kylo ren':
+                newWidth = mask.includes("hilt") ? '18.5%' : mask.includes("blade") ? '58%' : '';
+                newColor = mask.includes("hilt") ? fontColors[7].img : mask.includes("blade") ? fontColors[11].img : '';
+                break;
             case 'darth vader':
               newWidth = mask.includes("hilt") ? '27%' : mask.includes("blade") ? '73%' : '';
               newColor = mask.includes("hilt") ? fontColors[7].img : mask.includes("blade") ? fontColors[11].img : '';
@@ -735,11 +739,11 @@ export function Visualizer({ formData, className, methods, ...props }) {
           ) : formData.type.toLowerCase() == "jacket panel" ? (
             <div ref={containerRef} className="h-full w-full overflow-x-hidden flex flex-col items-center justify-between">
               <div className={classNames(
-                formData.size.current == '3.5” x 4”' ? "mt-2" : "",
+                formData.size.current == '3.5” x 4”' && !formData.img.flagTop ? "mt-2" : "",
                 formData.img.flagTop ? "order-2" : "", ""
                 )}>
                 <p id="main-text" className={classNames(
-                formData.size.current == '3.5” x 4”' ? "mt-2" : "",
+                formData.size.current == '3.5” x 4”' && !formData.img.flagTop ? "mt-2" : "",
                 formData.img.flagTop ? "order-1" : "", "text-center"
                 )}
                 style={{ ...fontStyle }}>{formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>

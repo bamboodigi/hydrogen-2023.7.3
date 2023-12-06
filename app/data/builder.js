@@ -1460,7 +1460,7 @@ const builderData = {
                 lines: 1,
                 placeholder: '3rd Line',
               },
-            
+
             },
             flagEnabled: true,
             upsells: {
@@ -1616,7 +1616,7 @@ const builderData = {
                 maxLength: 14,
                 lines: 2,
                 placeholder: 'APOS\nNKDA',
-              },          
+              },
             },
             flagEnabled: true,
             upsells: {
@@ -1992,24 +1992,29 @@ const builderData = {
         blade: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-darth-vader-blade.png",
       },
       {
-        name: "Count Dooku",
-        hilt: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-count-dooku-hilt.png",
-        blade: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-count-dooku-blade.png",
+        name: "Obi Wan Kenobi",
+        hilt: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-obi-wan-kenobi-hilt.png",
+        blade: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-obi-wan-kenobi-blade.png",
       },
+      // {
+      //   name: "Kylo Ren",
+      //   hilt: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-kylo-ren-hilt.png",
+      //   blade: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-kylo-ren-blade.png",
+      // },
       {
         name: "Luke Skywalker",
         hilt: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-luke-skywalker-hilt.png",
         blade: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-luke-skywalker-blade.png",
       },
       {
+        name: "Count Dooku",
+        hilt: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-count-dooku-hilt.png",
+        blade: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-count-dooku-blade.png",
+      },
+      {
         name: "Mace Windu",
         hilt: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-mace-windu-hilt.png",
         blade: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-mace-windu-blade.png",
-      },
-      {
-        name: "Obi Wan Kenobi",
-        hilt: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-obi-wan-kenobi-hilt.png",
-        blade: "https://cdn.shopify.com/s/files/1/2242/5805/files/lightsaber-obi-wan-kenobi-blade.png",
       },
     ]
   },

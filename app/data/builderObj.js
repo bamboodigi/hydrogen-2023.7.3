@@ -386,6 +386,7 @@ const builderObj = {
           break;
         case 'light sabers':
           obj.patch.height = '58px';
+          obj.patch.padding = '5px 10px';
           break;
         case 'flag':
           obj.patch.padding = '21px 20px';
@@ -747,6 +748,9 @@ const builderObj = {
                 case '3.5” x 4”':
                   height = 'calc(270px/2)';
                   break;
+                  case '4.6” x 6.2”':
+                    height = 'calc(270px/2)';
+                    break;
                 // case '3.5” x 2”':
                 //   height = '20px';
                 //   break;
