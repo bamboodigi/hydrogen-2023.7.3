@@ -394,16 +394,19 @@ const builderObj = {
           obj.text.secondary.textAlign = 'center';
           break;
         case 'jacket panel':
-          // if(formData.size.current == '3.5” x 4”') {
-          //   obj.patch.borderRadius = '.5rem';
-          // }
-
+          obj.text.primary.width = '100%';
+          if (formData.size.current == '3.5” x 4”') {
+            //      obj.patch.borderRadius = '.5rem';
+          }
           switch (formData.size.current) {
             case '3.5” x 3.5”':
               obj.text.secondary.fontSize = '14px';
               obj.text.secondary.lineHeight = '14px';
               obj.img.mask.maxHeight = '84px';
               obj.patch.padding = '10px 16px';
+              break;
+            case '3.5” x 4”':
+              obj.patch.padding = 'inherit';
               break;
           }
           //   obj.patch.padding = '12px';
@@ -436,6 +439,113 @@ const builderObj = {
   //  
   helpers: {
     get: {
+      jacketPanel: {
+        title: function (size) {
+          let title = '';
+          switch (size) {
+            case '3.5” x 3.5”':
+              title = 'Arc’teryx';
+              break;
+            case '3.5” x 4”':
+              title = 'Condor';
+              break;
+            case '3.6” x 5”':
+              title = 'Tad';
+              break;
+            case '4” x 4.5”':
+              title = 'Massif';
+              break;
+            case '4.6” x 6.2”':
+              title = 'Hazard';
+              break;
+          }
+          return title;
+        },
+        fontSize: function (size) {
+          let fontSize = null;
+          switch (size) {
+            case '3.5” x 3.5”':
+              fontSize = 50;
+              break;
+            case '3.5” x 4”':
+              fontSize = 80;
+              break;
+            case '3.6” x 5”':
+              fontSize = 80;
+              break;
+            case '4” x 4.5”':
+              fontSize = 80;
+              break;
+            case '4.6” x 6.2”':
+              fontSize = 68;
+              break;
+          }
+          return fontSize;
+        },
+        secondaryFont: function (size) {
+          let fontSize = null;
+          switch (size) {
+            case '3.5” x 3.5”':
+              fontSize = 14;
+              break;
+            case '3.5” x 4”':
+              fontSize = 32;
+              break;
+            case '3.6” x 5”':
+              fontSize = 32;
+              break;
+            case '4” x 4.5”':
+              fontSize = 26;
+              break;
+            case '4.6” x 6.2”':
+              fontSize = 34;
+              break;
+          }
+          return fontSize;
+        },
+        flagHeight: function (size) {
+          let flagHeight = '';
+          switch (size) {
+            case '3.5” x 3.5”':
+              flagHeight = 'calc(168px/2)';
+              break;
+            case '3.5” x 4”':
+              flagHeight = 'calc(250px/2)';
+              break;
+            case '3.6” x 5”':
+              flagHeight = 'calc(240px/2)';
+              break;
+            case '4” x 4.5”':
+              flagHeight = 'calc(258px/2)';
+              break;
+            case '4.6” x 6.2”':
+              flagHeight = 'calc(260px/2)';
+              break;
+          }
+          return flagHeight;
+        },
+        textHeight: function (size) {
+          let textHeight = '';
+          switch (size) {
+            case '3.5” x 3.5”':
+              textHeight = '43.5px';
+              break;
+            case '3.5” x 4”':
+              textHeight = '69.59px';
+              break;
+            case '3.6” x 5”':
+              textHeight = '69.59px';
+              break;
+            case '4” x 4.5”':
+              textHeight = '69.59px';
+              break;
+            case '4.6” x 6.2”':
+              textHeight = '59.15px';
+              break;
+          }
+          return textHeight;
+        },
+      },
       builderTitle: function (product) {
         let result;
         switch (product.handle) {
@@ -699,8 +809,8 @@ const builderObj = {
       },
       flagHeight: function (size, type) {
         let height = '';
-        console.log(size);
-        console.log(type);
+        // console.log(size);
+        // console.log(type);
         switch (type.toLowerCase()) {
           case 'id panel':
             switch (size) {
@@ -740,35 +850,64 @@ const builderObj = {
                 break;
             }
             break;
-            case 'jacket panel':
-              switch (size) {
-                case '3.5” x 3.5”':
-                  height = 'calc(168px/2)';
-                  break;
-                case '3.5” x 4”':
-                  height = 'calc(270px/2)';
-                  break;
-                  case '4.6” x 6.2”':
-                    height = 'calc(270px/2)';
-                    break;
-                // case '3.5” x 2”':
-                //   height = '20px';
-                //   break;
-                // case '5” x 3”':
-                //   height = '17px 20px';
-                //   break;
-                // case '6” x 3”':
-                //   height = '15px 20px';
-                //   break;
-              }
-              break;
+          case 'jacket panel':
+            height = builderObj.helpers.get.jacketPanel.flagHeight(size);
+            break;
         }
-        console.log(height);
         return height;
       },
     },
+    set: {
+      jacketPanel: {
+        patch: function (size, setStyle) {
+          switch (size) {
+            case '3.5” x 3.5”':
+              setStyle(prevStyle => ({
+                ...prevStyle, padding: '10px 16px',
+                WebkitMaskImage: 'none',
+                maskImage: 'none',
+              }));
+              break;
+            case '3.5” x 4”':
+              setStyle(prevStyle => ({
+                ...prevStyle,
+                padding: '20px',
+                WebkitMaskImage: 'none',
+                maskImage: 'none',
+              }));
+              break;
+            case '3.6” x 5”':
+              setStyle(prevStyle => ({
+                ...prevStyle,
+                padding: '50px 25px',
+                WebkitMaskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-tad.png?v=1702040296)',
+                WebkitMaskSize: 'cover',
+                WebkitMaskPosition: 'center',
+                maskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-tad.png?v=1702040296)',
+                maskSize: 'cover',
+                maskPosition: 'center',
+              }));
+              break;
+            case '4” x 4.5”':
+              setStyle(prevStyle => ({
+                ...prevStyle, padding: '24px 20px',
+                WebkitMaskImage: 'none',
+                maskImage: 'none',
+              }));
+              break;
+            case '4.6” x 6.2”':
+              setStyle(prevStyle => ({
+                ...prevStyle, padding: '30px 20px',
+                WebkitMaskImage: 'none',
+                maskImage: 'none',
+              }));
+              break;
+          }
+        },
+      }
+    },
     update: {
-      fontSize: function (containerRef, setFontStyle, formData) {
+      fontSize: function (containerRef, setFontStyle, formData, setFontWrapperStyle) {
         const textLines = formData.text.primary.lines;
         // console.log(textLines)
         // console.log(formData.text.primary.lines)
@@ -817,9 +956,9 @@ const builderObj = {
         // Limit the font size to a maximum value of 96px
         let maxFontSize = containerHeight;
 
-        if (formData.type.toLowerCase() == 'jacket panel') {
-          maxFontSize = 45;
-        }
+        // if (formData.type.toLowerCase() == 'jacket panel') {
+        //   maxFontSize = 45;
+        // }
         if (newFontSize > maxFontSize) {
           newFontSize = maxFontSize;
         }
@@ -881,26 +1020,7 @@ const builderObj = {
             //   newFontSize = 47.1714;
             // }
             if (formData.text.primary.text.length == 0) {
-              switch (formData.size.current) {
-                case '3.5” x 3.5”':
-                  newFontSize = 50;
-                  break;
-                // case '3.5” x 2”':
-                //   newFontSize = 83;
-                //   break;
-                // case '4” x 2”':
-                //   newFontSize = 73;
-                //   break;
-                // case '5” x 3”':
-                //   newFontSize = 80;
-                //   break;
-                // case '6” x 2”':
-                //   newFontSize = 48.5468;
-                //   break;
-                // case '6” x 3”':
-                //   newFontSize = 48.556;
-                //   break;
-              }
+              newFontSize = builderObj.helpers.get.jacketPanel.fontSize(formData.size.current);
             }
             break;
         }
@@ -916,9 +1036,11 @@ const builderObj = {
 
         } else {
           if (formData.type.toLowerCase() == 'jacket panel') {
+            let textHeight = builderObj.helpers.get.jacketPanel.textHeight(formData.size.current);
             marginTop = 0;
             let newLineHeight = newFontSize * .87;
-            setFontStyle(prevStyle => ({ ...prevStyle, fontSize: `${newFontSize}px`, lineHeight: `${newLineHeight}px`, marginTop: `${marginTop}px` }));
+            setFontStyle(prevStyle => ({ ...prevStyle, fontSize: `${newFontSize}px`, lineHeight: `${newLineHeight}px`, marginTop: `${marginTop}px`}));
+            setFontWrapperStyle(prevStyle => ({ ...prevStyle, minHeight: textHeight }));
           } else {
             marginTop = (newFontSize) / 9;
             setFontStyle(prevStyle => ({ ...prevStyle, fontSize: `${newFontSize}px`, lineHeight: `${newFontSize}px`, marginTop: `${marginTop}px` }));
@@ -930,7 +1052,9 @@ const builderObj = {
         // textContainer
         // how many lines
         const container = containerSecondaryRef.current;
-        const textElement = container.querySelector('#secondary-text');
+        console.log(container);
+        const textElement = container.querySelector('#secondary-text') || container.querySelector('#text2');
+        console.log(textElement);
         const textLines = 1;
         // Get the container width and height, text width and height, and current font size
         const containerWidth = container.offsetWidth;
@@ -994,9 +1118,12 @@ const builderObj = {
               }
             }
             break;
+          case 'jacket panel':
+            newFontSize = builderObj.helpers.get.jacketPanel.secondaryFont(formData.size.current);
+            break;
         }
 
-        let newLineHeight = newFontSize * .8421;
+        let newLineHeight = newFontSize * .8621;
 
 
 
@@ -1779,6 +1906,48 @@ const builderObj = {
       },
     },
     is: {
+      jacketPanel: {
+        condor: function (formData) {
+          const type = formData.type;
+          const size = formData.size.current;
+
+          if (type.toLowerCase() == 'jacket panel' && size.toLowerCase() == '3.5” x 4”') {
+            return true;
+          } else {
+            return false;
+          }
+        },
+        hazard: function (formData) {
+          const type = formData.type;
+          const size = formData.size.current;
+
+          if (type.toLowerCase() == 'jacket panel' && size.toLowerCase() == '4.6” x 6.2”') {
+            return true;
+          } else {
+            return false;
+          }
+        },
+        tad: function (formData) {
+          const type = formData.type;
+          const size = formData.size.current;
+
+          if (type.toLowerCase() == 'jacket panel' && size.toLowerCase() == '3.6” x 5”') {
+            return true;
+          } else {
+            return false;
+          }
+        },
+        massif: function (formData) {
+          const type = formData.type;
+          const size = formData.size.current;
+
+          if (type.toLowerCase() == 'jacket panel' && size.toLowerCase() == '4” x 4.5”') {
+            return true;
+          } else {
+            return false;
+          }
+        },
+      },
       glowBorder: function (type, size, sizeEnabled) {
         let enabled = false;
         if (!this.mini(type, size)) {

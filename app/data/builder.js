@@ -1055,57 +1055,6 @@ const builderData = {
       config: {
         "sizes": [
           {
-            size: '3.5” x 4”',
-            text: {
-              primary: {
-                maxLength: 13,
-                lines: 1,
-                placeholder: 'L.T. Curtis',
-              },
-              secondary: {
-                maxLength: 6,
-                lines: 1,
-                placeholder: 'RCSD',
-              },
-              third: {
-                text: '',
-                maxLength: 6,
-                lines: 1,
-                placeholder: 'S1008',
-              },
-              fourth: {
-                text: '',
-                maxLength: 6,
-                lines: 1,
-                placeholder: 'NKA',
-              },
-              fifth: {
-                text: '',
-                maxLength: 6,
-                lines: 1,
-                placeholder: 'SPPROJ',
-              },
-              sixth: {
-                text: '',
-                maxLength: 6,
-                lines: 1,
-                placeholder: 'BPOS',
-              },
-              seventh: {
-                text: '',
-                maxLength: 6,
-                lines: 1,
-                placeholder: '011173',
-              },
-            },
-            flagEnabled: true,
-            upsells: {
-              size: 0,
-              hiVis: 5,
-              glowBorder: 5,
-            },
-          },
-          {
             size: '3.5” x 3.5”',
             text: {
               primary: {
@@ -1159,12 +1108,12 @@ const builderData = {
             },
           },
           {
-            size: '4.6” x 6.2”',
+            size: '3.6” x 5”',
             text: {
               primary: {
                 maxLength: 13,
                 lines: 1,
-                placeholder: 'L.T. Curtis',
+                placeholder: 'Name',
               },
               secondary: {
                 maxLength: 6,
@@ -1205,12 +1154,12 @@ const builderData = {
             },
           },
           {
-            size: '3.6” x 5”',
+            size: '3.5” x 4”',
             text: {
               primary: {
                 maxLength: 13,
                 lines: 1,
-                placeholder: 'L.T. Curtis',
+                placeholder: 'Name',
               },
               secondary: {
                 maxLength: 6,
@@ -1218,26 +1167,31 @@ const builderData = {
                 placeholder: 'RCSD',
               },
               third: {
+                text: '',
                 maxLength: 6,
                 lines: 1,
                 placeholder: 'S1008',
               },
               fourth: {
+                text: '',
                 maxLength: 6,
                 lines: 1,
                 placeholder: 'NKA',
               },
               fifth: {
+                text: '',
                 maxLength: 6,
                 lines: 1,
                 placeholder: 'SPPROJ',
               },
               sixth: {
+                text: '',
                 maxLength: 6,
                 lines: 1,
                 placeholder: 'BPOS',
               },
               seventh: {
+                text: '',
                 maxLength: 6,
                 lines: 1,
                 placeholder: '011173',
@@ -1256,7 +1210,53 @@ const builderData = {
               primary: {
                 maxLength: 13,
                 lines: 1,
-                placeholder: 'L.T. Curtis',
+                placeholder: 'Name',
+              },
+              secondary: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'RCSD',
+              },
+              third: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'S1008',
+              },
+              fourth: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'NKA',
+              },
+              fifth: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'SPPROJ',
+              },
+              sixth: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'BPOS',
+              },
+              seventh: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: '011173',
+              },
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 0,
+              hiVis: 5,
+              glowBorder: 5,
+            },
+          },
+          {
+            size: '4.6” x 6.2”',
+            text: {
+              primary: {
+                maxLength: 13,
+                lines: 1,
+                placeholder: 'Name',
               },
               secondary: {
                 maxLength: 6,

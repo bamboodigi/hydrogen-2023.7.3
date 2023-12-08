@@ -15,7 +15,7 @@ import {
 
 // Patch Visualizer element that shows a tailored patch
 export function Visualizer({ formData, className, methods, ...props }) {
-  
+
   const {
     sizeOptions,
     fontColors,
@@ -32,7 +32,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
 
   //console.log(img);
 
- // console.log(img);
+  // console.log(img);
   // Create a ref to access the container element
   // console.log(img.mask);
   //  console.log(lightsaber);
@@ -42,8 +42,9 @@ export function Visualizer({ formData, className, methods, ...props }) {
   const [canvasStyle, setCanvasStyle] = useState(canvas);
   const [style, setStyle] = useState(patch);
   const [fontStyle, setFontStyle] = useState(text.primary);
+  const [fontWrapperStyle, setFontWrapperStyle] = useState({});
   const [fontSecondaryStyle, setFontSecondaryStyle] = useState(text.secondary);
-  const [flagStyle, setFlagStyle] = useState(formData.type.toLowerCase() === "medical patch" ? img.mask : img.flag );
+  const [flagStyle, setFlagStyle] = useState(formData.type.toLowerCase() === "medical patch" ? img.mask : img.flag);
   const [hiltStyle, setHiltStyle] = useState(lightsaber.hilt);
   const [bladeStyle, setBladeStyle] = useState(lightsaber.blade);
   const [maskStyle, setMaskStyle] = useState(img.mask);
@@ -63,7 +64,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
     // console.log(mask)
     //  console.log(obj.type.toLowerCase());
     const img = new Image();
-  //  console.log(obj.type.toLowerCase());
+    //  console.log(obj.type.toLowerCase());
     switch (obj.type.toLowerCase()) {
       case "color":
       case 'image':
@@ -79,7 +80,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
       case 'mask':
         if (mask) {
           console.log('ok');
-          if(type.toLowerCase() == "flag") {
+          if (type.toLowerCase() == "flag") {
             console.log('ok');
             console.log(height);
             img.src = mask;
@@ -88,34 +89,34 @@ export function Visualizer({ formData, className, methods, ...props }) {
               padding: height,
             }));
             //  console.log(mask);
-           //   console.log(setState);
-             setState(prevStyle => ({
-               ...prevStyle,
-               backgroundImage: `url("${bgImg}")`,
-               WebkitMaskImage: `url("${mask}")`,
-               WebkitMaskPosition: 'center',
-               WebkitSize: 'cover',
-               maskImage: `url("${mask}")`,
-               maskSize: `cover`,
-               maskPosition: 'center',
-             }));
+            //   console.log(setState);
+            setState(prevStyle => ({
+              ...prevStyle,
+              backgroundImage: `url("${bgImg}")`,
+              WebkitMaskImage: `url("${mask}")`,
+              WebkitMaskPosition: 'center',
+              WebkitSize: 'cover',
+              maskImage: `url("${mask}")`,
+              maskSize: `cover`,
+              maskPosition: 'center',
+            }));
           } else {
             img.src = mask;
 
             //  console.log(mask);
-           //   console.log(setState);
-             setState(prevStyle => ({
-               ...prevStyle,
-               backgroundImage: `url("${bgImg}")`,
-               WebkitMaskImage: `url("${mask}")`,
-               WebkitMaskPosition: 'center',
-               WebkitSize: 'cover',
-               maskImage: `url("${mask}")`,
-               maskSize: `cover`,
-               maskPosition: 'center',
-               minHeight: height,
-               maxHeight: height,
-             }));
+            //   console.log(setState);
+            setState(prevStyle => ({
+              ...prevStyle,
+              backgroundImage: `url("${bgImg}")`,
+              WebkitMaskImage: `url("${mask}")`,
+              WebkitMaskPosition: 'center',
+              WebkitSize: 'cover',
+              maskImage: `url("${mask}")`,
+              maskSize: `cover`,
+              maskPosition: 'center',
+              minHeight: height,
+              maxHeight: height,
+            }));
           }
         }
         break;
@@ -136,9 +137,9 @@ export function Visualizer({ formData, className, methods, ...props }) {
 
           switch (formData.lightsaber.saberType.toLowerCase()) {
             case 'kylo ren':
-                newWidth = mask.includes("hilt") ? '18.5%' : mask.includes("blade") ? '58%' : '';
-                newColor = mask.includes("hilt") ? fontColors[7].img : mask.includes("blade") ? fontColors[11].img : '';
-                break;
+              newWidth = mask.includes("hilt") ? '18.5%' : mask.includes("blade") ? '58%' : '';
+              newColor = mask.includes("hilt") ? fontColors[7].img : mask.includes("blade") ? fontColors[11].img : '';
+              break;
             case 'darth vader':
               newWidth = mask.includes("hilt") ? '27%' : mask.includes("blade") ? '73%' : '';
               newColor = mask.includes("hilt") ? fontColors[7].img : mask.includes("blade") ? fontColors[11].img : '';
@@ -217,18 +218,18 @@ export function Visualizer({ formData, className, methods, ...props }) {
       obj.type = 'mask';
       obj.src = formData.text.color.img;
       obj.mask = formData.img.color.mask.img;
-    //  console.log(obj);
+      //  console.log(obj);
       imageLoader(obj, setMaskStyle, formData.type)
     } else {
-    //  console.log("ahh")
+      //  console.log("ahh")
       obj.type = 'image'
       obj.src = formData.img.img;
       imageLoader(obj, setFlagStyle, formData.type)
     }
 
-   // console.log(obj)
+    // console.log(obj)
   }, [formData.img.img]);
-  
+
 
   useEffect(() => {
     let obj = {
@@ -264,7 +265,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
       imageLoader(obj, setMaskStyle, formData.type);
     }
 
-    if(formData.type.toLowerCase() === "division jacket panel"){
+    if (formData.type.toLowerCase() === "division jacket panel") {
       imageLoader(obj, setBirdStyle);
     }
 
@@ -288,7 +289,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
       obj.mask = formData.img.color.mask.img;
       obj.height = methods.helpers.get.flagHeight(formData.size.current, formData.type);
       //   console.log(obj);
-         imageLoader(obj, setMaskStyle, formData.type)
+      imageLoader(obj, setMaskStyle, formData.type)
     } else {
       //  console.log(formData.img.type)
       obj.type = 'image'
@@ -299,14 +300,14 @@ export function Visualizer({ formData, className, methods, ...props }) {
   }, [formData.img.type]);
 
 
-    // Custom hook to update the background color image style when the background color image changes
-    useEffect(() => {
-      const obj = {
-        type: 'color',
-        src: formData.img.division.ring.color.img,
-      };
-      imageLoader(obj, setRingStyle);
-    }, [formData.img.division.ring.color.img]);
+  // Custom hook to update the background color image style when the background color image changes
+  useEffect(() => {
+    const obj = {
+      type: 'color',
+      src: formData.img.division.ring.color.img,
+    };
+    imageLoader(obj, setRingStyle);
+  }, [formData.img.division.ring.color.img]);
 
 
   // Custom hook to update the font style when the text color image changes
@@ -415,10 +416,10 @@ export function Visualizer({ formData, className, methods, ...props }) {
           break;
       }
     }
-    if(formData.type.toLowerCase() == ("flag")){
+    if (formData.type.toLowerCase() == ("flag")) {
 
     }
-  
+
     if (formData.img.type.toLowerCase() === "laser cut flag") {
       let obj = {
       };
@@ -426,8 +427,12 @@ export function Visualizer({ formData, className, methods, ...props }) {
       obj.src = formData.text.color.img;
       obj.mask = formData.img.color.mask.img;
       obj.height = methods.helpers.get.flagHeight(formData.size.current, formData.type);
-   //   console.log(obj);
+      //   console.log(obj);
       imageLoader(obj, setMaskStyle, formData.type)
+    }
+
+    if (methods.helpers.is.patchType.jacketPanel(formData)) {
+      methods.helpers.set.jacketPanel.patch(formData.size.current, setStyle);
     }
   }, [formData.size.current]);
 
@@ -445,7 +450,11 @@ export function Visualizer({ formData, className, methods, ...props }) {
     const adjustFontSize = () => {
       // If the containerRef is not set, return
       if (containerRef.current) {
-        updateFontSize(containerRef, setFontStyle, formData);
+        if(methods.helpers.is.patchType.jacketPanel(formData)){
+         updateFontSize(containerRef, setFontStyle, formData, setFontWrapperStyle);
+        } else {
+         updateFontSize(containerRef, setFontStyle, formData);
+        }
       }
     };
 
@@ -470,10 +479,11 @@ export function Visualizer({ formData, className, methods, ...props }) {
   const count2 = 0;
   //Use the useEffect hook to manage side effects
   useEffect(() => {
+    console.log("ok");
     if (!containerSecondaryRef.current) return;
     const adjustFontSize = () => {
       // If the containerRef is not set, return
-
+      console.log("ok");
       updateAdditionalFontSize(containerSecondaryRef, setFontSecondaryStyle, formData);
     };
 
@@ -540,6 +550,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
         } */}
         <div id="patch" className={classNames(
           formData.type.toLowerCase().includes("flag") ? "justify-center" : "justify-center",
+          methods.helpers.is.jacketPanel.hazard(formData) ? "rounded-[2rem]" : "",
           "flex items-center transform lg:scale-150"
         )} style={style}>
 
@@ -558,8 +569,8 @@ export function Visualizer({ formData, className, methods, ...props }) {
                   </div>
                 ) : (
                   <div id="flag"
-                  className="flex-1 max-h-full max-w-full h-full w-full"
-                  style={flagStyle}></div>
+                    className="flex-1 max-h-full max-w-full h-full w-full"
+                    style={flagStyle}></div>
                 )}
               </div>
               <div className="flex flex-col w-1/2 gap-2" style={{}}>
@@ -705,18 +716,18 @@ export function Visualizer({ formData, className, methods, ...props }) {
           ) : formData.type.toLowerCase() == ("flag") ? (
             <div ref={containerRef} className="h-full w-full overflow-x-hidden flex items-center justify-center">
               {formData.img.type.toLowerCase() === "laser cut flag" ? (
-                  <div id="mask" className="h-full w-full" style={maskStyle}>
-                    <div id="glow"
-                      className={classNames(
-                        formData.upsells.glowBorder ? "block" : "hidden",
-                        "h-full w-full"
-                      )}
-                      style={{ backgroundImage: `url("${formData.img.color.mask.glow}")`, backgroundSize: 'cover', position: 'absolute', backgroundPosition: 'center' }}
-                    ></div>
-                  </div>
-                ) : (
-                  <div id="flag" className="w-full" style={flagStyle}></div>
-                )}
+                <div id="mask" className="h-full w-full" style={maskStyle}>
+                  <div id="glow"
+                    className={classNames(
+                      formData.upsells.glowBorder ? "block" : "hidden",
+                      "h-full w-full"
+                    )}
+                    style={{ backgroundImage: `url("${formData.img.color.mask.glow}")`, backgroundSize: 'cover', position: 'absolute', backgroundPosition: 'center' }}
+                  ></div>
+                </div>
+              ) : (
+                <div id="flag" className="w-full" style={flagStyle}></div>
+              )}
             </div>
           ) : formData.type.toLowerCase().includes("call sign") ? (
             <div ref={containerRef} className="h-full text-center overflow-x-hidden flex items-center justify-center">
@@ -739,15 +750,21 @@ export function Visualizer({ formData, className, methods, ...props }) {
           ) : formData.type.toLowerCase() == "jacket panel" ? (
             <div ref={containerRef} className="h-full w-full overflow-x-hidden flex flex-col items-center justify-between">
               <div className={classNames(
-                formData.size.current == '3.5” x 4”' && !formData.img.flagTop ? "mt-2" : "",
+                formData.size.current == '3.5” x 4”' && !formData.img.flagTop ? "" : "",
                 formData.img.flagTop ? "order-2" : "", ""
-                )}>
+              )}>
+                <div className="flex items-center" style={{ ...fontWrapperStyle }}>
                 <p id="main-text" className={classNames(
-                formData.size.current == '3.5” x 4”' && !formData.img.flagTop ? "mt-2" : "",
-                formData.img.flagTop ? "order-1" : "", "text-center"
+                  formData.size.current == '3.5” x 4”' && !formData.img.flagTop ? "" : "",
+                  formData.img.flagTop ? "order-1" : "", 
+                  methods.helpers.is.jacketPanel.hazard(formData) ? "mb-6" : "", 
+                  methods.helpers.is.jacketPanel.tad(formData) ? "mb-2" : "", 
+                  methods.helpers.is.jacketPanel.massif(formData) ? "" : "", 
+                  "text-center w-screen"
                 )}
-                style={{ ...fontStyle }}>{formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
-                <div className="flex flex-wrap">
+                  style={{ ...fontStyle }}>{formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
+                </div>
+                <div ref={containerSecondaryRef} className="flex flex-wrap">
                   <p id="text2" className="w-1/2 mb-1" style={{ ...fontSecondaryStyle }}>{formData.text.secondary.text?.length > 0 ? formData.text.secondary.text : formData.text.secondary.placeholder}</p>
                   <p id="text3" className="w-1/2 mb-1 text-right" style={{ ...fontSecondaryStyle }}>{formData.text.third.text?.length > 0 ? formData.text.third.text : formData.text.third.placeholder}</p>
                   <p id="text4" className="w-1/2 mb-1" style={{ ...fontSecondaryStyle }}>{formData.text.fourth.text?.length > 0 ? formData.text.fourth.text : formData.text.fourth.placeholder}</p>
@@ -757,18 +774,18 @@ export function Visualizer({ formData, className, methods, ...props }) {
                 </div>
               </div>
               {formData.img.type.toLowerCase() === "laser cut flag" ? (
-                  <div id="mask" className="h-full w-full" style={maskStyle}>
-                    <div id="glow"
-                      className={classNames(
-                        formData.upsells.glowBorder ? "block" : "hidden",
-                        "h-full w-full"
-                      )}
-                      style={{ backgroundImage: `url("${formData.img.color.mask.glow}")`, backgroundSize: 'cover', position: 'absolute', backgroundPosition: 'center' }}
-                    ></div>
-                  </div>
-                ) : (
-                  <div id="flag" className="w-full" style={flagStyle}></div>
-                )}
+                <div id="mask" className="h-full w-full" style={maskStyle}>
+                  <div id="glow"
+                    className={classNames(
+                      formData.upsells.glowBorder ? "block" : "hidden",
+                      "h-full w-full"
+                    )}
+                    style={{ backgroundImage: `url("${formData.img.color.mask.glow}")`, backgroundSize: 'cover', position: 'absolute', backgroundPosition: 'center' }}
+                  ></div>
+                </div>
+              ) : (
+                <div id="flag" className="w-full" style={flagStyle}></div>
+              )}
             </div>
           ) : formData.type.toLowerCase() == ("division jacket panel") ? (
             <div className="h-full w-full overflow-x-hidden flex flex-col items-center justify-between">
@@ -781,7 +798,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
               </div>
               <div id="division" className="h-full w-full flex justify-center">
                 <div id="bird" className="h-[100%] w-[84%]" style={birdStyle}></div>
-                <div id="ring"className="h-[58%] w-[67%] absolute z-100" style={ringStyle}></div>
+                <div id="ring" className="h-[58%] w-[67%] absolute z-100" style={ringStyle}></div>
               </div>
             </div>
           ) : formData.type.toLowerCase().includes("ranger tabs") ? (

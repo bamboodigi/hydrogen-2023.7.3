@@ -42,7 +42,7 @@ export function PatchHeading({ formData, methods}) {
                 </>
               ) : formData.type.toLowerCase() == ("jacket panel") ? (
                 <>
-                  - { methods.helpers.get.jacketPanelTitle(formData.size.current) } <br></br>Jacket Panel
+                  - { methods.helpers.get.jacketPanel.title(formData.size.current) } <br></br>Jacket Panel
                 </>
               ) : (
                 <>
