@@ -190,9 +190,19 @@ export function Form({ formData, setFormData, productURL, data, config, product,
   // Define a function to handle the change of the font text color dropdown menu
   const handleHiltColorChange = (event) => {
     // Find the selected font text color from data array
-    const obj = fontColors.find(value => value.name === event.name);
+    let obj = {};
+    if(event.name.includes("Pro IR")){
+      obj = fontColors.find(value => value.name.includes('Pro IR'));
+      obj.name = 'Pro IR - +$' + formData.price.upsells.proIRFontColor + '(USD)';
+    } else if (event.name.includes("Reflective + Glow")) {
+      obj = fontColors.find(value => value.name.includes('Reflective + Glow'));
+      obj.name = 'Reflective + Glow-in-the-Dark - +$' + formData.price.upsells.reflectiveGlowFontColor + '(USD)';
+    } else {
+      obj = fontColors.find(value => value.name === event.name);
+    }
     var isProIR = false;
     var isReflectiveGlow = false;
+    console.log(obj);
 
     if (event.name.includes("Pro IR")) {
       isProIR = true;
@@ -209,7 +219,16 @@ export function Form({ formData, setFormData, productURL, data, config, product,
   // Define a function to handle the change of the font text color dropdown menu
   const handleBladeColorChange = (event) => {
     // Find the selected font text color from data array
-    const obj = fontColors.find(value => value.name === event.name);
+    let obj = {};
+    if(event.name.includes("Pro IR")){
+      obj = fontColors.find(value => value.name.includes('Pro IR'));
+      obj.name = 'Pro IR - +$' + formData.price.upsells.proIRFontColor + '(USD)';
+    } else if (event.name.includes("Reflective + Glow")) {
+      obj = fontColors.find(value => value.name.includes('Reflective + Glow'));
+      obj.name = 'Reflective + Glow-in-the-Dark - +$' + formData.price.upsells.reflectiveGlowFontColor + '(USD)';
+    } else {
+      obj = fontColors.find(value => value.name === event.name);
+    }
     var isProIR = false;
     var isReflectiveGlow = false;
 
