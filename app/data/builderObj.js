@@ -1,12 +1,11 @@
 import builderData from '~/data/builder.js';
 
-// console.log(builderData.imgs);
 const builderObj = {
   // initalize the starting state
   init: {
     //   // initalize the formData Object based on the product and chooses selected
     formData: function (product, searchParams) {
-      const patchType = builderData.type[builderObj.helpers.get.builderTitle(product).toLowerCase()];
+      const patchType = builderData.type[builderObj.helpers.get.handle(product).toLowerCase()];
       let formData = {
         type: patchType.name || '',
         id: patchType.name.toLowerCase() || '',
@@ -436,9 +435,58 @@ const builderObj = {
     saberOptions: builderData.lightSabers.types,
     type: builderData.type,
   },
-  //  
   helpers: {
     get: {
+      type: function (product) {
+        const patchType = builderData.type[builderObj.helpers.get.handle(product).toLowerCase()];
+        return builderData.type[builderObj.helpers.get.handle(product).toLowerCase()];
+      },
+      handle: function (product) {
+        let result;
+        switch (product.handle) {
+          case 'medical-patch':
+            result = 'medical patch';
+            break;
+          case 'id-panel':
+            result = 'ID panel';
+            break;
+          case 'name-tape':
+            result = 'name tape';
+            break;
+          case 'call-sign':
+            result = 'call sign';
+            break;
+          case 'quote':
+            result = 'quote';
+            break;
+          case 'quotes':
+            result = 'light saber';
+            break;
+          case 'custom-printed-patch-1':
+            result = 'custom printed patch';
+            break;
+          case 'light-sabers':
+            result = 'light sabers'
+            break;
+          case 'jacket-panel':
+            result = 'jacket panel';
+            break;
+          case 'division-jacket-panel-1':
+            result = 'division jacket panel';
+            break;
+          case 'ranger-tabs':
+            result = 'ranger tabs';
+            break;
+          case 'flag-patch':
+            result = 'flag';
+            break;
+          default:
+            result = 'default';
+            break;
+        }
+
+        return builderObj.helpers.utility.capitalizeWords(result);
+      },
       jacketPanel: {
         title: function (size) {
           let title = '';
@@ -604,10 +652,10 @@ const builderObj = {
             case '8” x 4”':
               fontSize = 46;
               break;
-              case '9” x 3”':
+            case '9” x 3”':
               fontSize = 34;
               break;
-              case '10” x 2”':
+            case '10” x 2”':
               fontSize = 40;
               break;
             case '11” x 3”':
@@ -662,59 +710,9 @@ const builderObj = {
           return textHeight;
         },
       },
-      builderTitle: function (product) {
-        let result;
-        switch (product.handle) {
-          case 'medical-patch':
-            result = 'medical patch';
-            break;
-          case 'id-panel':
-            result = 'ID panel';
-            break;
-          case 'name-tape':
-            result = 'name tape';
-            break;
-          case 'call-sign':
-            result = 'call sign';
-            break;
-          case 'quote':
-            result = 'quote';
-            break;
-          case 'quotes':
-            result = 'light saber';
-            break;
-          case 'custom-printed-patch-1':
-            result = 'custom printed patch';
-            break;
-          case 'light-sabers':
-            result = 'light sabers'
-            break;
-          case 'jacket-panel':
-            result = 'jacket panel';
-            break;
-          case 'division-jacket-panel-1':
-            result = 'division jacket panel';
-            break;
-          case 'ranger-tabs':
-            result = 'ranger tabs';
-            break;
-          case 'flag-patch':
-            result = 'flag';
-            break;
-          default:
-            result = 'default';
-            break;
-        }
 
-        // console.log(result);
-        return builderObj.helpers.utility.capitalizeWords(result);
-      },
-      patchType: function (product) {
-        const patchType = builderData.type[builderObj.helpers.get.builderTitle(product).toLowerCase()];
-        return builderData.type[builderObj.helpers.get.builderTitle(product).toLowerCase()];
-      },
       upsells: function (product, size) {
-        const patchType = this.patchType(product);
+        const patchType = this.type(product);
         //      console.log(patchType);
         const config = patchType.config;
         //      console.log(config);
@@ -900,28 +898,6 @@ const builderObj = {
           }
         });
         return size;
-      },
-      jacketPanelTitle: function (size) {
-        let title = '';
-        switch (size) {
-          case '3.5” x 3.5”':
-            title = 'Arc’teryx';
-            break;
-          case '3.5” x 4”':
-            title = 'Condor';
-            break;
-          case '3.6” x 5”':
-            title = 'Massif';
-            break;
-          case '4.6” x 6.2”':
-            title = 'Hazard';
-            break;
-          case 'TAD':
-            title = 'Tad';
-            break;
-        }
-
-        return title;
       },
       flagHeight: function (size, type) {
         let height = '';
@@ -1639,7 +1615,7 @@ const builderObj = {
             switch (key.toLowerCase()) {
               case 'size':
                 formData.size.current = value;
-                const patchType = builderObj.helpers.get.patchType(product);
+                const patchType = builderObj.helpers.get.type(product);
                 const obj = patchType.config;
                 let objSize = {};
                 // console.log(obj);

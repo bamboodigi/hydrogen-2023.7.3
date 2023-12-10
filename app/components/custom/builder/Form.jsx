@@ -23,7 +23,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
 
   const newIRFontName = `Pro IR - +$${formData.price.upsells.proIRFontColor}(USD)`;
   const newReflectiveGlowFontName = `Reflective + Glow-in-the-Dark - +$${formData.price.upsells.reflectiveGlowFontColor}(USD)`;
-  
+
   const newFontColors = fontColors.map((color) => {
     if (color.name === 'Pro IR') {
       return { ...color, name: newIRFontName };
@@ -34,7 +34,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
     return color;
   });
 
-  const patchType = methods.helpers.get.patchType(product);
+  const patchType = methods.helpers.get.type(product);
   let tempSteps = [
     { name: 'Text', href: '#', status: 'current', step: 1 },
     { name: 'Patch Size', href: '#', status: 'current', step: 2 },
@@ -90,12 +90,12 @@ export function Form({ formData, setFormData, productURL, data, config, product,
   const currentStepIndex = steps.findIndex(step => step.status === 'current');
   const [currentStep, setCurrentStep] = useState(currentStepIndex + 1);
   const [currentStepObj, setCurrentStepObj] = useState(steps[currentStepIndex]);
-  
+
   const [stepForm, setStepForm] = useState(tempStepObj);
 
   const handleFlagTypeChange = (event) => {
     const selectedType = event.target.value.toLowerCase();
-  
+
     setFormData((prevFormData) => ({
       ...prevFormData,
       img: {
@@ -114,7 +114,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
     const obj = saberOptions.find(value => value.name === event.target.value);
     let newHiltColor = '';
     let newBladeColor = '';
-  
+
     switch (obj.name.toLowerCase()) {
       case 'kylo ren':
       case 'darth vader':
@@ -134,7 +134,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
       default:
         break;
     }
-  
+
     setFormData((prevFormData) => ({
       ...prevFormData,
       lightsaber: {
@@ -189,7 +189,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
     let obj = {};
     let isProIR = false;
     let isReflectiveGlow = false;
-  
+
     if (event.name.includes("Pro IR")) {
       obj = fontColors.find(value => value.name.includes('Pro IR'));
       obj.name = `Pro IR - +$${formData.price.upsells.proIRFontColor}(USD)`;
@@ -201,7 +201,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
     } else {
       obj = fontColors.find(value => value.name === event.name);
     }
-  
+
     setFormData((prevFormData) => ({
       ...prevFormData,
       lightsaber: {
@@ -225,7 +225,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
     let obj = {};
     let isProIR = false;
     let isReflectiveGlow = false;
-  
+
     if (event.name.includes("Pro IR")) {
       obj = fontColors.find(value => value.name.includes('Pro IR'));
       obj.name = `Pro IR - +$${formData.price.upsells.proIRFontColor}(USD)`;
@@ -237,7 +237,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
     } else {
       obj = fontColors.find(value => value.name === event.name);
     }
-  
+
     setFormData((prevFormData) => ({
       ...prevFormData,
       img: {
@@ -294,16 +294,16 @@ export function Form({ formData, setFormData, productURL, data, config, product,
   const handleSizeChange = (event) => {
     const obj = patchType.config;
 
-    //  (obj.sizes);
+
     const objSizes = obj.sizes.find(value => value.size === event.target.value);
 
-    (objSizes.upsells.size);
+   // (objSizes.upsells.size);
     // Get the current size key from the event target value
     const sizeKey = convertSizeString(event.target.value);
-    //  (sizeKey);
-    upsells = methods.helpers.get.upsells(product, event.target.value);
 
-    //  (upsells);
+    upsells = methods.helpers.get.upsells(product, event.target.value);
+    console.log(upsells);
+
     let sizeObject = "";
 
     if (methods.helpers.is.patchType.idPanel(formData)) {
@@ -315,17 +315,12 @@ export function Form({ formData, setFormData, productURL, data, config, product,
     } else {
       sizeObject = imgs['laser-cut'][sizeKey];
     }
-
-    // (sizeObject);
-
     // Get the corresponding size object from the imgs['laser-cut'] object
     // Get the current mask name from the formData object
     const maskName = formData.img.color.mask.name;
-    //  (maskName);
     // Find the mask object in the size object with a name property equal to the current mask name
     const maskObject = sizeObject?.find(value => value.name === maskName) || {};
-    //  (maskName);
-    //  (maskObject);
+
     if (formData.type.toLowerCase() == "medical patch") {
       if (event.target.value == '3.5” x 2”') {
         setFormData({
@@ -353,15 +348,6 @@ export function Form({ formData, setFormData, productURL, data, config, product,
           },
         });
       } else {
-        // setFormData({
-        //   ...formData,
-        //   img: symbols['medical patch']["2 x 2"][0].name,
-        //   imgSrc: symbols['medical patch']["2 x 2"][0].img,
-        //   imgGlow: symbols['medical patch']["2 x 2"][0].glow,
-        //   imgIcon: symbols['medical patch']["2 x 2"][0].icon,
-        //   size: event.target.value,
-        //   textLines: objSizes.lines, textMaxLength: objSizes.maxLength, textPlaceholder: objSizes.placeholder
-        // });
         setFormData({
           ...formData,
           price: {
@@ -432,9 +418,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
             }
           },
         });
-        console.log('set to true');
       } else {
-        console.log(objSizes.upsells);
         setFormData({
           ...formData,
           upsells: {
@@ -531,7 +515,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
     const obj = fontColors.find(value => value.img === event.img);
     const isProIR = event.name.includes("Pro IR");
     const isReflectiveGlow = event.name.includes("Reflective + Glow");
-  
+
     setFormData((prevFormData) => ({
       ...prevFormData,
       text: {
@@ -682,7 +666,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
   const handleGlowBorderChange = (event) => {
     const isChecked = event.target.checked;
     const priceChange = isChecked ? 10 : -10;
-  
+
     setFormData((prevFormData) => ({
       ...prevFormData,
       upsells: { ...prevFormData.upsells, glowBorder: isChecked },
