@@ -21,9 +21,9 @@ export function Form({ formData, setFormData, productURL, data, config, product,
     saberOptions,
   } = methods.data;
 
-  let newIRFontName = 'Pro IR - +$' + formData.price.upsells.proIRFontColor + '(USD)';
-  let newReflectiveGlowFontName = 'Reflective + Glow-in-the-Dark - +$' + formData.price.upsells.reflectiveGlowFontColor + '(USD)';
-
+  const newIRFontName = `Pro IR - +$${formData.price.upsells.proIRFontColor}(USD)`;
+  const newReflectiveGlowFontName = `Reflective + Glow-in-the-Dark - +$${formData.price.upsells.reflectiveGlowFontColor}(USD)`;
+  
   const newFontColors = fontColors.map((color) => {
     if (color.name === 'Pro IR') {
       return { ...color, name: newIRFontName };
@@ -35,7 +35,6 @@ export function Form({ formData, setFormData, productURL, data, config, product,
   });
 
   const patchType = methods.helpers.get.patchType(product);
-  // (patchType);
   let tempSteps = [
     { name: 'Text', href: '#', status: 'current', step: 1 },
     { name: 'Patch Size', href: '#', status: 'current', step: 2 },
@@ -47,36 +46,38 @@ export function Form({ formData, setFormData, productURL, data, config, product,
   const convertSizeString = methods.helpers.utility.convertSizeString;
 
   let upsells = {};
-  // (formData);
 
-  switch (formData.type.toLowerCase()) {
-    case 'name tape':
-      tempSteps = builderData.type["name tape"].form.steps;
-      break;
-    case 'id panel':
-      tempSteps = builderData.type["id panel"].form.steps;
-      break;
-    case 'medical patch':
-      tempSteps = builderData.type["medical patch"].form.steps;
-      break;
-    case 'flag':
-      tempSteps = builderData.type["flag"].form.steps;
-      break;
-    case 'light sabers':
-      tempSteps = builderData.type["light sabers"].form.steps;
-      break;
-    case 'custom printed patch':
-      tempSteps = builderData.type["custom printed patch"].form.steps;
-      break;
-    case 'jacket panel':
-      tempSteps = builderData.type["jacket panel"].form.steps;
-      break;
-    case 'division jacket panel':
-      tempSteps = builderData.type["division jacket panel"].form.steps;
-      break;
-    default:
-      break;
-  }
+  // switch (formData.type.toLowerCase()) {
+  //   case 'name tape':
+  //     tempSteps = builderData.type["name tape"].form.steps;
+  //     break;
+  //   case 'id panel':
+  //     tempSteps = builderData.type["id panel"].form.steps;
+  //     break;
+  //   case 'medical patch':
+  //     tempSteps = builderData.type["medical patch"].form.steps;
+  //     break;
+  //   case 'flag':
+  //     tempSteps = builderData.type["flag"].form.steps;
+  //     break;
+  //   case 'light sabers':
+  //     tempSteps = builderData.type["light sabers"].form.steps;
+  //     break;
+  //   case 'custom printed patch':
+  //     tempSteps = builderData.type["custom printed patch"].form.steps;
+  //     break;
+  //   case 'jacket panel':
+  //     tempSteps = builderData.type["jacket panel"].form.steps;
+  //     break;
+  //   case 'division jacket panel':
+  //     tempSteps = builderData.type["division jacket panel"].form.steps;
+  //     break;
+  //   default:
+  //     break;
+  // }
+
+  const type = formData.type.toLowerCase();
+  tempSteps = builderData.type[type]?.form.steps || [];
 
   let tempStepObj = {
     steps: tempSteps,
@@ -84,91 +85,44 @@ export function Form({ formData, setFormData, productURL, data, config, product,
     obj: tempSteps[0]
   };
 
-  //console.log(tempSteps);
-
-  // (tempStepObj);
-
-
-
-
   const [steps, setSteps] = useState(tempSteps);
 
-  const [currentStep, setCurrentStep] = useState(steps.indexOf(steps.find(step => step.status === 'current')) + 1);
-  const [currentStepObj, setCurrentStepObj] = useState(steps.find(step => step.status === 'current'));
-
-
+  const currentStepIndex = steps.findIndex(step => step.status === 'current');
+  const [currentStep, setCurrentStep] = useState(currentStepIndex + 1);
+  const [currentStepObj, setCurrentStepObj] = useState(steps[currentStepIndex]);
+  
   const [stepForm, setStepForm] = useState(tempStepObj);
 
-  // (steps);
-  // (currentStepObj);
-  // (stepForm);
-
-  ///////////////////////////////////////////////////////////////////////////////////////////////
-  //  HANDLE EVENTS = TYPE, TEXT, TEXT ADDITIONAL, SIZE, TEXT COLOR, BG COLOR, FLAG, MORE TO ADD
-  ///////////////////////////////////////////////////////////////////////////////////////////////
-  // Define a function to handle the change of the type of customized patches
-  // const handleTypeChange = (event) => {
-
-  //   // Find the selected type from data array
-  //   const obj = data[3].values.find(value => value.name === event.target.value);
-  //   // Check if the selected type contains the string "hivis"
-  //   if (obj.name.toLowerCase().includes('hivis')) {
-  //     // If it does, set the form data with the selected type, its sizes, and the first hivis flag
-  //     setFormData({
-  //       ...formData, type: event.target.value, typeData: obj.sizes, size: obj.sizes[0].size,
-  //       img: data[5].values[0]["hivis-flags"][0].name, imgSrc: data[5].values[0]["hivis-flags"][0].img,
-  //       textLines: obj.sizes[0].lines, textMaxLength: obj.sizes[0].maxLength, textPlaceholder: obj.sizes[0].placeholder
-  //     });
-  //   } else {
-  //     // If it doesn't, set the form data with the selected type and its sizes
-  //     setFormData({
-  //       ...formData, type: event.target.value, typeData: obj.sizes, size: obj.sizes[0].size,
-  //       textLines: obj.sizes[0].lines, textMaxLength: obj.sizes[0].maxLength, textPlaceholder: obj.sizes[0].placeholder
-  //     });
-  //   }
-  // };
-
   const handleFlagTypeChange = (event) => {
-    (event.target.value.toLowerCase());
-    // Find the selected type from data array
-    // (event.target);
-    // (event.target.value);
-    // (methods.helpers.is.flagType.hiVisFlag(formData));
-
-    setFormData({
-      ...formData,
+    const selectedType = event.target.value.toLowerCase();
+  
+    setFormData((prevFormData) => ({
+      ...prevFormData,
       img: {
-        ...formData.img,
+        ...prevFormData.img,
         type: event.target.value,
       },
       upsells: {
-        ...formData.upsells,
-        hiVis: event.target.value.toLowerCase() === "hivis flag",
-        badge: event.target.value.toLowerCase() === "upload",
+        ...prevFormData.upsells,
+        hiVis: selectedType === "hivis flag",
+        badge: selectedType === "upload",
       }
-    });
-
+    }));
   };
 
   const handleSaberTypeChange = (event) => {
-    // Find the selected type from data array
     const obj = saberOptions.find(value => value.name === event.target.value);
     let newHiltColor = '';
     let newBladeColor = '';
-    // (formData.lightsaber.saberType.toLowerCase());
+  
     switch (obj.name.toLowerCase()) {
       case 'kylo ren':
-        newHiltColor = fontColors[7];
-        newBladeColor = fontColors[11];
-        break;
       case 'darth vader':
+      case 'count dooku':
         newHiltColor = fontColors[7];
         newBladeColor = fontColors[11];
         break;
       case 'luke skywalker':
-        newHiltColor = fontColors[7];
-        newBladeColor = fontColors[13];
-        break;
       case 'obi wan kenobi':
         newHiltColor = fontColors[7];
         newBladeColor = fontColors[13];
@@ -177,21 +131,35 @@ export function Form({ formData, setFormData, productURL, data, config, product,
         newHiltColor = fontColors[7];
         newBladeColor = fontColors[15];
         break;
-      case 'count dooku':
-        newHiltColor = fontColors[7];
-        newBladeColor = fontColors[11];
-        break;
       default:
         break;
     }
-
-    setFormData({ ...formData, lightsaber: { ...formData.lightsaber, saberType: event.target.value, hilt: { ...formData.lightsaber.hilt, name: newHiltColor.name, color: newHiltColor.img, img: obj.hilt }, blade: { ...formData.lightsaber.blade, name: newBladeColor.name, color: newBladeColor.img, img: obj.blade } } });
+  
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      lightsaber: {
+        ...prevFormData.lightsaber,
+        saberType: event.target.value,
+        hilt: {
+          ...prevFormData.lightsaber.hilt,
+          name: newHiltColor.name,
+          color: newHiltColor.img,
+          img: obj.hilt
+        },
+        blade: {
+          ...prevFormData.lightsaber.blade,
+          name: newBladeColor.name,
+          color: newBladeColor.img,
+          img: obj.blade
+        }
+      }
+    }));
   };
   // Define a function to handle the change of the font text color dropdown menu
   const handleHiltColorChange = (event) => {
     // Find the selected font text color from data array
     let obj = {};
-    if(event.name.includes("Pro IR")){
+    if (event.name.includes("Pro IR")) {
       obj = fontColors.find(value => value.name.includes('Pro IR'));
       obj.name = 'Pro IR - +$' + formData.price.upsells.proIRFontColor + '(USD)';
     } else if (event.name.includes("Reflective + Glow")) {
@@ -218,58 +186,80 @@ export function Form({ formData, setFormData, productURL, data, config, product,
 
   // Define a function to handle the change of the font text color dropdown menu
   const handleBladeColorChange = (event) => {
-    // Find the selected font text color from data array
     let obj = {};
-    if(event.name.includes("Pro IR")){
+    let isProIR = false;
+    let isReflectiveGlow = false;
+  
+    if (event.name.includes("Pro IR")) {
       obj = fontColors.find(value => value.name.includes('Pro IR'));
-      obj.name = 'Pro IR - +$' + formData.price.upsells.proIRFontColor + '(USD)';
+      obj.name = `Pro IR - +$${formData.price.upsells.proIRFontColor}(USD)`;
+      isProIR = true;
     } else if (event.name.includes("Reflective + Glow")) {
       obj = fontColors.find(value => value.name.includes('Reflective + Glow'));
-      obj.name = 'Reflective + Glow-in-the-Dark - +$' + formData.price.upsells.reflectiveGlowFontColor + '(USD)';
+      obj.name = `Reflective + Glow-in-the-Dark - +$${formData.price.upsells.reflectiveGlowFontColor}(USD)`;
+      isReflectiveGlow = true;
     } else {
       obj = fontColors.find(value => value.name === event.name);
     }
-    var isProIR = false;
-    var isReflectiveGlow = false;
-
-
-    if (event.name.includes("Pro IR")) {
-      isProIR = true;
-    }
-    if (event.name.includes("Reflective + Glow")) {
-      isReflectiveGlow = true;
-    }
-
-    // Set the form data with the selected font text color and its image
-    // setFormData({ ...formData, bladeColor: obj.name, bladeColorImg: obj.img, proIRFontColor: isProIR, reflectiveGlowFontColor: isReflectiveGlow });
-    setFormData({ ...formData, lightsaber: { ...formData.lightsaber, blade: { ...formData.lightsaber.blade, name: obj.name, color: obj.img } }, upsells: { ...formData.upsells, proIRFontColor: isProIR, reflectiveGlowFontColor: isReflectiveGlow } });
-
+  
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      lightsaber: {
+        ...prevFormData.lightsaber,
+        blade: {
+          ...prevFormData.lightsaber.blade,
+          name: obj.name,
+          color: obj.img
+        }
+      },
+      upsells: {
+        ...prevFormData.upsells,
+        proIRFontColor: isProIR,
+        reflectiveGlowFontColor: isReflectiveGlow
+      }
+    }));
   };
 
   // Define a function to handle the change of the font text color dropdown menu
   const handleRingColorChange = (event) => {
-    // Find the selected font text color from data array
-    const obj = fontColors.find(value => value.name === event.name);
-    var isProIR = false;
-    var isReflectiveGlow = false;
-
+    let obj = {};
+    let isProIR = false;
+    let isReflectiveGlow = false;
+  
     if (event.name.includes("Pro IR")) {
+      obj = fontColors.find(value => value.name.includes('Pro IR'));
+      obj.name = `Pro IR - +$${formData.price.upsells.proIRFontColor}(USD)`;
       isProIR = true;
-    }
-    if (event.name.includes("Reflective + Glow")) {
+    } else if (event.name.includes("Reflective + Glow")) {
+      obj = fontColors.find(value => value.name.includes('Reflective + Glow'));
+      obj.name = `Reflective + Glow-in-the-Dark - +$${formData.price.upsells.reflectiveGlowFontColor}(USD)`;
       isReflectiveGlow = true;
+    } else {
+      obj = fontColors.find(value => value.name === event.name);
     }
-
-    // Set the form data with the selected font text color and its image
-    //setFormData({ ...formData, hiltColorImg: obj.img, proIRFontColor: isProIR, reflectiveGlowFontColor: isReflectiveGlow });
-    setFormData({ ...formData, img: { ...formData.img, division: { ...formData.img.division, ring: { ...formData.img.division.ring, color: { ...formData.img.division.ring.color, name: obj.name, img: obj.img } } } }, upsells: { ...formData.upsells, proIRFontColor: isProIR, reflectiveGlowFontColor: isReflectiveGlow } });
+  
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      img: {
+        ...prevFormData.img,
+        division: {
+          ...prevFormData.img.division,
+          ring: {
+            ...prevFormData.img.division.ring,
+            color: { ...prevFormData.img.division.ring.color, name: obj.name, img: obj.img }
+          }
+        }
+      },
+      upsells: {
+        ...prevFormData.upsells,
+        proIRFontColor: isProIR,
+        reflectiveGlowFontColor: isReflectiveGlow
+      }
+    }));
   };
-
-
 
   // Define a function to handle the change of the text input field
   const handleTextChange = (event) => {
-    //  setFormData({ ...formData, text: event.target.value });
     setFormData({ ...formData, text: { ...formData.text, primary: { ...formData.text.primary, text: event.target.value } } });
   };
 
@@ -297,7 +287,6 @@ export function Form({ formData, setFormData, productURL, data, config, product,
   const [rows, setRows] = useState(maxRows);
   // Define a function to handle the change of the additional text input field
   const handleTextAdditionalChange = (event) => {
-    // setFormData({ ...formData, textAdditional: event.target.value });
     setFormData({ ...formData, text: { ...formData.text, secondary: { ...formData.text.secondary, text: event.target.value } } });
   };
 
@@ -316,16 +305,6 @@ export function Form({ formData, setFormData, productURL, data, config, product,
 
     //  (upsells);
     let sizeObject = "";
-
-    // // check glowborder then update
-    // let formTempObj = {
-    //   id: 'glowBorder',
-    //   label: 'Add a glow in the dark border? +$10 USD',
-    //   type: 'checkmark',
-    //   placeholder: '',
-    // };
-
-    // methods.helpers.update.formElement(formTempObj, methods.helpers.is.glowBorder(formData.type, event.target.value));
 
     if (methods.helpers.is.patchType.idPanel(formData)) {
       if (methods.helpers.is.mini(formData.type, event.target.value)) {
@@ -349,7 +328,6 @@ export function Form({ formData, setFormData, productURL, data, config, product,
     //  (maskObject);
     if (formData.type.toLowerCase() == "medical patch") {
       if (event.target.value == '3.5” x 2”') {
-        // setFlagStyle(prevStyle => ({ ...prevStyle, transform: `scaleX(1.25)` }));
         setFormData({
           ...formData,
           price: {
@@ -550,23 +528,22 @@ export function Form({ formData, setFormData, productURL, data, config, product,
 
   // Define a function to handle the change of the font text color dropdown menu
   const handleTextColorChange = (event) => {
-    // Find the selected font text color from data array
-    // (event);
     const obj = fontColors.find(value => value.img === event.img);
-    let isProIR = false;
-    let isReflectiveGlow = false;
-
-    if (event.name.includes("Pro IR")) {
-      isProIR = true;
-    }
-    if (event.name.includes("Reflective + Glow")) {
-      isReflectiveGlow = true;
-    }
-
-    // Set the form data with the selected font text color and its image
-    //setFormData({ ...formData, textColor: event.name, textColorImg: obj.img, proIRFontColor: isProIR, reflectiveGlowFontColor: isReflectiveGlow });
-    setFormData({ ...formData, text: { ...formData.text, color: { ...formData.text.color, name: event.name, img: obj.img } }, upsells: { ...formData.upsells, proIRFontColor: isProIR, reflectiveGlowFontColor: isReflectiveGlow } });
-
+    const isProIR = event.name.includes("Pro IR");
+    const isReflectiveGlow = event.name.includes("Reflective + Glow");
+  
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      text: {
+        ...prevFormData.text,
+        color: { ...prevFormData.text.color, name: event.name, img: obj.img }
+      },
+      upsells: {
+        ...prevFormData.upsells,
+        proIRFontColor: isProIR,
+        reflectiveGlowFontColor: isReflectiveGlow
+      }
+    }));
   };
 
   // Define a function to handle the change of the background color dropdown menu
@@ -583,7 +560,6 @@ export function Form({ formData, setFormData, productURL, data, config, product,
   const handleImgChange = (event) => {
     // Find the selected hivis flag from data array
     let obj = {};
-    //  (event);
     obj = imgs["hi-vis"].find(value => value.name === event.name);
 
     switch (formData.img.markType.toLowerCase()) {
@@ -623,13 +599,6 @@ export function Form({ formData, setFormData, productURL, data, config, product,
     switch (formData.type.toLowerCase()) {
       case 'medical patch':
         obj = symbols["medical patch"].find(value => value.name === event.name);
-        // if (formData.size.current == '1” x 1”') {
-        //   obj = symbols["medical patch"]['1 x 1'].find(value => value.name === event.name);
-        // } else {
-        //   obj = symbols["medical patch"]['2 x 2'].find(value => value.name === event.name);
-        // }
-        // Set the form data with the selected hivis flag and its image
-        // setFormData({ ...formData, img: event.name, imgSrc: obj.img, imgIcon: obj.icon, imgGlow: obj.glow });
         setFormData({ ...formData, img: { ...formData.img, name: event.name, img: obj.img, icon: obj.icon, glow: obj.glow } });
         break;
       case 'jacket panel':
@@ -698,10 +667,8 @@ export function Form({ formData, setFormData, productURL, data, config, product,
     }
   };
 
-
   function handleFileInputChange(event) {
     const file = event.target.files[0];
-    //   (file);
     setFormData({
       ...formData, bgColor: {
         ...formData.bgColor,
@@ -713,32 +680,23 @@ export function Form({ formData, setFormData, productURL, data, config, product,
 
   // Define a function to handle the change of the comments checkbox
   const handleGlowBorderChange = (event) => {
-    if (event.target.checked) {
-      // setFormData({ ...formData, glowBorder: event.target.checked, price: formData.price.total + 10 });
-      setFormData({
-        ...formData,
-        upsells: { ...formData.upsells, glowBorder: event.target.checked },
-        price: { ...formData.price, total: formData.price.total + 10 }
-      });
-    } else {
-      //setFormData({ ...formData, glowBorder: event.target.checked, price: formData.price.total - 10 });
-      setFormData({
-        ...formData,
-        upsells: { ...formData.upsells, glowBorder: event.target.checked },
-        price: { ...formData.price, total: formData.price.total - 10 }
-      });
-    }
+    const isChecked = event.target.checked;
+    const priceChange = isChecked ? 10 : -10;
+  
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      upsells: { ...prevFormData.upsells, glowBorder: isChecked },
+      price: { ...prevFormData.price, total: prevFormData.price.total + priceChange }
+    }));
   };
   // Define a function to handle the change of the comments checkbox
   const handleAgreementChange = (event) => {
-    //  setFormData({ ...formData, agreement: event.target.checked });
     setFormData({
       ...formData,
       formValidation: { ...formData.formValidation, agreement: event.target.checked }
     });
   };
   const handleFlagReversedChange = (event) => {
-    //   setFormData({ ...formData, flagReversed: event.target.checked });
     setFormData({
       ...formData,
       img: { ...formData.img, reversed: event.target.checked }
@@ -752,7 +710,6 @@ export function Form({ formData, setFormData, productURL, data, config, product,
   };
 
   const handleFlagEnabledChange = (event) => {
-    //  setFormData({ ...formData, flagEnabled: event.target.checked });
     setFormData({
       ...formData,
       upsells: { ...formData.upsells, hiVis: event.target.checked },
@@ -764,25 +721,19 @@ export function Form({ formData, setFormData, productURL, data, config, product,
     if (stepForm.currentStep > 1) {
       setStepForm({ ...stepForm, currentStep: stepForm.currentStep - 1, obj: stepForm.steps[stepForm.currentStep - 1] });
     }
-
   };
 
   const handleNext = () => {
     if (stepForm.currentStep < stepForm.steps.length) {
       setStepForm({ ...stepForm, currentStep: stepForm.currentStep + 1, obj: stepForm.steps[stepForm.currentStep] });
     }
-    // (formData.type.toLowerCase());
-    // dynamically update steps
-    let glowLabelStart = "Add a glow in the dark border? + $";
-    let glowLabelEnd = " USD";
-    let glowAmount = formData.price.upsells.glowBorder;
 
-    const glowLabel = glowLabelStart + glowAmount + glowLabelEnd;
-    //(glowAmount)
+    const glowAmount = formData.price.upsells.glowBorder;
+    const glowLabel = `Add a glow in the dark border? + $${glowAmount} USD`;
+
     let formTempObj = {};
     switch (formData.type.toLowerCase()) {
       case 'id panel':
-        // check glowborder then update
         formTempObj = {
           id: 'glowBorder',
           label: glowLabel,
@@ -794,41 +745,37 @@ export function Form({ formData, setFormData, productURL, data, config, product,
 
         break;
       case 'name tape':
-        if ((formData.size.current == '4” x 1”' || formData.size.current == '5” x 1”' || formData.size.current == '6” x 1”' || formData.size.current == '7.125” x 1”' )) {
-          const flagStep = {
-            name: "Flag",
-            status: 'upcoming',
-            input: [
-              {
-                id: 'flagEnabled',
-                label: 'Do you want to add a flag?',
-                type: 'checkmark',
-                placeholder: '',
-              },
-              {
-                id: 'flagReverse',
-                label: 'Do you want to reverse the flag?',
-                type: 'checkmark',
-                placeholder: '',
-              },
-              {
-                id: 'flag',
-                label: 'HiVis Flag',
-                type: 'advancedSelect',
-              },
-            ],
-          };
-          const index = steps.findIndex(step => step.name === flagStep.name);
-          if (index === -1) {
-            steps.splice(2, 0, flagStep);
-          }
-        } else {
-          const flagStepIndex = steps.findIndex(step => step.name === 'Flag');
-          if (flagStepIndex !== -1) {
-            steps.splice(2, 1);
-            // const newSteps = steps.filter(step => step.name !== 'Flag');
-            // steps = newSteps;
-          }
+        const flagStep = {
+          name: "Flag",
+          status: 'upcoming',
+          input: [
+            {
+              id: 'flagEnabled',
+              label: 'Do you want to add a flag?',
+              type: 'checkmark',
+              placeholder: '',
+            },
+            {
+              id: 'flagReverse',
+              label: 'Do you want to reverse the flag?',
+              type: 'checkmark',
+              placeholder: '',
+            },
+            {
+              id: 'flag',
+              label: 'HiVis Flag',
+              type: 'advancedSelect',
+            },
+          ],
+        };
+
+        const isSizeValid = ['4” x 1”', '5” x 1”', '6” x 1”', '7.125” x 1”'].includes(formData.size.current);
+
+        const index = steps.findIndex(step => step.name === flagStep.name);
+        if (isSizeValid && index === -1) {
+          steps.splice(2, 0, flagStep);
+        } else if (!isSizeValid && index !== -1) {
+          steps.splice(2, 1);
         }
         break;
       case 'medical patch':
@@ -845,20 +792,13 @@ export function Form({ formData, setFormData, productURL, data, config, product,
               },
             ],
           };
-          const index = steps.findIndex(step => step.name === flagStep.name);
-          if (index === -1) {
+          if (!steps.some(step => step.name === flagStep.name)) {
             steps.splice(1, 0, flagStep);
           }
         } else {
-          // (steps);
           const textStepIndex = steps.findIndex(step => step.name === 'Text');
-          // (textStepIndex);
-
-          if (textStepIndex !== -1) {
-            steps.splice(1, 1);
-            // const newSteps = steps.filter(step => step.name !== 'Text');
-            // (newSteps);
-            // (steps);
+          if (textStepIndex >= 0) {
+            steps.splice(textStepIndex, 1);
           }
         }
         break;
@@ -895,13 +835,10 @@ export function Form({ formData, setFormData, productURL, data, config, product,
           </div> */}
 
         <div className="flex justify-end items-center">
-          {/* <p className="block text-md mt-0 font-bold" style={{ marginTop: '0 !important' }}>{stepForm.obj.name}</p> */}
           <p className="block text-md mt-0 font-bold">
             Step {stepForm.currentStep} / {stepForm.steps.length}
           </p>
         </div>
-        {/* <div className="grid grid-cols-6 gap-6 min-h-[13rem] xl:min-h-[14rem]">
-            <div className="col-span-6 grid gap-4"> */}
         <div className="flex w-full min-h-[15rem] xl:min-h-[16rem]">
           <div className="flex flex-col w-full space-y-6">
             {stepForm.steps[stepForm.currentStep - 1].input.map((input, i) => {
@@ -1279,33 +1216,8 @@ export function Form({ formData, setFormData, productURL, data, config, product,
 
                     </>
                   ) : input.id.toLowerCase() == "symbol" ? (
-                    // formData.size.current == '1” x 1”' ? (
-                    //   <>
-                    //     <AdvancedSelect
-                    //       // id="bgColor"
-                    //       title={formData.img.markType}
-                    //       name={formData.img.markType}
-                    //       value={formData.img.name}
-                    //       img={formData.img.color.mask.icon}
-                    //       onChange={handleImgChange}
-                    //       options={symbols["medical patch"]["1 x 1"]}
-                    //     />
-                    //   </>
-                    // ) : (
-                    //   <>
-                    //     <AdvancedSelect
-                    //       title={formData.img.markType}
-                    //       name={formData.img.markType}
-                    //       value={formData.img.name}
-                    //       img={formData.img.color.mask.icon}
-                    //       onChange={handleImgChange}
-                    //       options={symbols["medical patch"]["2 x 2"]}
-                    //     />
-                    //   </>
-                    // )
                     <>
                       <AdvancedSelect
-                        // id="bgColor"
                         title={formData.img.markType}
                         name={formData.img.markType}
                         value={formData.img.name}
@@ -1329,8 +1241,6 @@ export function Form({ formData, setFormData, productURL, data, config, product,
                             />
                           ) : (
                             methods.helpers.is.mini(formData.type, formData.size.current) ? (
-                              //    ("yes"),
-                              //   (imgs["laser-cut"]["large-id"]),
                               <AdvancedSelect
                                 title={formData.img.markType}
                                 name={formData.img.markType}
@@ -1340,7 +1250,6 @@ export function Form({ formData, setFormData, productURL, data, config, product,
                                 options={imgs["laser-cut"]["mini-id"]}
                               />
                             ) : (
-                              //        ("yes"),
                               <AdvancedSelect
                                 title={formData.img.markType}
                                 name={formData.img.markType}
@@ -1423,7 +1332,6 @@ export function Form({ formData, setFormData, productURL, data, config, product,
                     </>
 
                   ) : input.id.toLowerCase() == "ringcolor" ? (
-                    // (formData.img.division.ring.img),
                     <>
                       <AdvancedSelect
                         id="ringColor"
