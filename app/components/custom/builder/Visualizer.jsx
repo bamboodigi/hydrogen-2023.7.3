@@ -659,7 +659,8 @@ export function Visualizer({ formData, className, methods, ...props }) {
             <div className={classNames(
               methods.helpers.is.nameTape.tacTec(formData) ? "w-[90%] gap-1" : "",
               methods.helpers.is.nameTape.tacTecTrainer(formData) ? "w-[88%] gap-1" : "",
-              "flex w-full h-full gap-2"
+              !methods.helpers.is.nameTape.tacTec(formData) && !methods.helpers.is.nameTape.tacTecTrainer(formData) ? "w-full" : "",
+              "flex h-full gap-2"
             )}>
               <div className={classNames(
               methods.helpers.is.nameTape.tacTec(formData) ? "w-[26%]" : "",
@@ -677,7 +678,8 @@ export function Visualizer({ formData, className, methods, ...props }) {
             <div ref={containerRef} className={classNames(
               methods.helpers.is.nameTape.tacTec(formData) ? "w-[95%]" : "",
               methods.helpers.is.nameTape.tacTecTrainer(formData) ? "w-[90%]" : "",
-              "h-full w-full text-center overflow-x-hidden overflow-y-hidden flex items-center justify-center"
+              !methods.helpers.is.nameTape.tacTec(formData) && !methods.helpers.is.nameTape.tacTecTrainer(formData) ? "w-full" : "",
+              "h-full text-center overflow-x-hidden overflow-y-hidden flex items-center justify-center"
             )}>
               <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text.split('\n').map((line, index) => (
                 <React.Fragment key={index}>

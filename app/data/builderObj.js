@@ -675,22 +675,37 @@ const builderObj = {
         },
         nameTape: {
           title: function (size) {
-            let title = '';
+            let title = 'Name Tape';
             switch (size) {
-              case '3.5” x 3.5”':
-                title = 'Arc’teryx';
+              case '5.11 Tac Tec Carrier':
                 break;
-              case '3.5” x 4”':
-                title = 'Condor';
+              case '5.11 Tac Tec Carrier Trainer':
                 break;
-              case '3.6” x 5”':
-                title = 'Tad';
+              case '3” x 1”':
                 break;
-              case '4” x 4.5”':
-                title = 'Massif';
+              case '4” x 1”':
                 break;
-              case '4.6” x 6.2”':
-                title = 'Hazard';
+              case '4” x 1.5”':
+                break;
+              case '5” x 1”':
+                break;
+              case '5” x 1.5”':
+                break;
+              case '6” x 2”':
+                break;
+              case '8” x 2”':
+                break;
+              case '8” x 3”':
+                break;
+              case '8” x 4”':
+                break;
+              case '9” x 3”':
+                break;
+              case '10” x 2”':
+                break;
+              case '11” x 3”':
+                break;
+              case '12” x 4”':
                 break;
             }
             return title;
@@ -698,10 +713,10 @@ const builderObj = {
           fontSize: function (size) {
             let fontSize = null;
             switch (size) {
-              case '6” x 1”':
-                fontSize = 40;
+              case '5.11 Tac Tec Carrier':
+                fontSize = 34;
                 break;
-              case '7.125” x 1”':
+              case '5.11 Tac Tec Carrier Trainer':
                 fontSize = 32;
                 break;
               case '3” x 1”':
@@ -751,10 +766,10 @@ const builderObj = {
             console.log(size);
             let flagHeight = '';
             switch (size) {
-              case '6” x 1”':
+              case '5.11 Tac Tec Carrier':
                 flagHeight = '35px';
                 break;
-              case '7.125” x 1”':
+              case '5.11 Tac Tec Carrier Trainer':
                 console.log("ok")
                 flagHeight = '30px';
                 break;
@@ -1008,20 +1023,51 @@ const builderObj = {
         title: function (size) {
           let title = '';
           switch (size) {
-            case '3.5” x 3.5”':
-              title = 'Arc’teryx';
+            case '5.11 Tac Tec Carrier':
+              console.log("ok")
+              fontSize = 34;
               break;
-            case '3.5” x 4”':
-              title = 'Condor';
+            case '5.11 Tac Tec Carrier Trainer':
+              fontSize = 32;
               break;
-            case '3.6” x 5”':
-              title = 'Tad';
+            case '3” x 1”':
+              fontSize = 40;
               break;
-            case '4” x 4.5”':
-              title = 'Massif';
+            case '4” x 1”':
+              fontSize = 40;
               break;
-            case '4.6” x 6.2”':
-              title = 'Hazard';
+            case '4” x 1.5”':
+              fontSize = 47;
+              break;
+            case '5” x 1”':
+              fontSize = 40;
+              break;
+            case '5” x 1.5”':
+              fontSize = 47;
+              break;
+            case '6” x 2”':
+              fontSize = 47;
+              break;
+            case '8” x 2”':
+              fontSize = 28.3729;
+              break;
+            case '8” x 3”':
+              fontSize = 43.6253;
+              break;
+            case '8” x 4”':
+              fontSize = 46;
+              break;
+            case '9” x 3”':
+              fontSize = 34;
+              break;
+            case '10” x 2”':
+              fontSize = 40;
+              break;
+            case '11” x 3”':
+              fontSize = 30;
+              break;
+            case '12” x 4”':
+              fontSize = 29;
               break;
           }
           return title;
@@ -1029,10 +1075,10 @@ const builderObj = {
         fontSize: function (size) {
           let fontSize = null;
           switch (size) {
-            case '6” x 1”':
-              fontSize = 40;
+            case '5.11 Tac Tec Carrier':
+              fontSize = 34;
               break;
-            case '7.125” x 1”':
+            case '5.11 Tac Tec Carrier Trainer':
               fontSize = 32;
               break;
             case '3” x 1”':
@@ -1082,10 +1128,10 @@ const builderObj = {
           console.log(size);
           let flagHeight = '';
           switch (size) {
-            case '6” x 1”':
+            case '5.11 Tac Tec Carrier':
               flagHeight = '35px';
               break;
-            case '7.125” x 1”':
+            case '5.11 Tac Tec Carrier Trainer':
               console.log("ok")
               flagHeight = '30px';
               break;
@@ -1360,7 +1406,8 @@ const builderObj = {
       nameTape: {
         patch: function (size, setStyle) {
           switch (size) {
-            case '6” x 1”':
+            case '5.11 Tac Tec Carrier':
+              console.log("ok")
               setStyle(prevStyle => ({
                 ...prevStyle,
                 padding: '9px',
@@ -1372,7 +1419,8 @@ const builderObj = {
                 maskPosition: 'center',
               }));
               break;
-            case '7.125” x 1”':
+            case '5.11 Tac Tec Carrier Trainer':
+              console.log("ok")
               setStyle(prevStyle => ({
                 ...prevStyle,
                 padding: '9px',
@@ -2436,7 +2484,8 @@ const builderObj = {
           const type = formData.type;
           const size = formData.size.current;
 
-          if (type.toLowerCase() == 'name tape' && size.toLowerCase() == '6” x 1”') {
+          if (type.toLowerCase() == 'name tape' && size == '5.11 Tac Tec Carrier') {
+            console.log('ok');
             return true;
           } else {
             return false;
@@ -2446,7 +2495,7 @@ const builderObj = {
           const type = formData.type;
           const size = formData.size.current;
 
-          if (type.toLowerCase() == 'name tape' && size.toLowerCase() == '7.125” x 1”') {
+          if (type.toLowerCase() == 'name tape' && size.toLowerCase() == '5.11 Tac Tec Carrier Trainer') {
             return true;
           } else {
             return false;
@@ -2460,9 +2509,9 @@ const builderObj = {
         }
         return sizeEnabled || enabled;
       },
-      flag: function (type, flagEnabled) {
+      flag: function (type, imgEnabled, flagEnabled) {
         // determine if type == id panel, laser cut flag, jacket panel, division jacket panel
-        if (type.toLowerCase().includes("id panel")
+        if (type.toLowerCase().includes("id panel") || type.toLowerCase().includes("name tape") && imgEnabled
           // || type.toLowerCase().includes("jacket panel") || type.toLowerCase().includes("division jacket panel")
         ) {
           flagEnabled = true;

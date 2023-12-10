@@ -753,14 +753,10 @@ export function Form({ formData, setFormData, productURL, data, config, product,
           ],
         };
 
-        const isSizeValid = ['4” x 1”', '5” x 1”', '6” x 1”', '7.125” x 1”'].includes(formData.size.current);
-
+        const isValidSize = ['4” x 1”', '5” x 1”', '5.11 Tac Tec Carrier', '5.11 Tac Tec Carrier Trainer'].includes(formData.size.current);
         const index = steps.findIndex(step => step.name === flagStep.name);
-        if (isSizeValid && index === -1) {
-          steps.splice(2, 0, flagStep);
-        } else if (!isSizeValid && index !== -1) {
-          steps.splice(2, 1);
-        }
+        
+        isValidSize && index === -1 ? steps.splice(2, 0, flagStep) : !isValidSize && index !== -1 && steps.splice(2, 1);
         break;
       case 'medical patch':
         if (formData.size.current == '3.5” x 2”') {
