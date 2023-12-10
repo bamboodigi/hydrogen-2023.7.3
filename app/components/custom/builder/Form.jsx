@@ -413,7 +413,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
     }
     else if (methods.helpers.is.patchType.nameTape(formData)) {
       console.log(event.target.value);
-      if (event.target.value == "4” x 1”" || event.target.value == "5” x 1”") {
+      if (event.target.value == "4” x 1”" || event.target.value == "5” x 1”" || event.target.value == "6” x 1”" || event.target.value == "7.125” x 1”") {
         setFormData({
           ...formData,
           price: {
@@ -794,7 +794,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
 
         break;
       case 'name tape':
-        if ((formData.size.current == '4” x 1”' || formData.size.current == '5” x 1”')) {
+        if ((formData.size.current == '4” x 1”' || formData.size.current == '5” x 1”' || formData.size.current == '6” x 1”' || formData.size.current == '7.125” x 1”' )) {
           const flagStep = {
             name: "Flag",
             status: 'upcoming',

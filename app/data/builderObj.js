@@ -376,7 +376,7 @@ const builderObj = {
           obj.text.primary.fontSize = '48.6397px';
           obj.text.primary.lineHeight = '48.6397px';
           obj.text.primary.marginTop = '6.07996px';
-          obj.img.flag.aspectRatio = '2/1';
+          obj.img.flag.aspectRatio = '80/47';
           break;
         case 'medical patch':
           obj.patch.maskImage = 'none';
@@ -520,6 +520,122 @@ const builderObj = {
               break;
             case '4.6” x 6.2”':
               flagHeight = 'calc(260px/2)';
+              break;
+          }
+          return flagHeight;
+        },
+        textHeight: function (size) {
+          let textHeight = '';
+          switch (size) {
+            case '3.5” x 3.5”':
+              textHeight = '43.5px';
+              break;
+            case '3.5” x 4”':
+              textHeight = '69.59px';
+              break;
+            case '3.6” x 5”':
+              textHeight = '69.59px';
+              break;
+            case '4” x 4.5”':
+              textHeight = '69.59px';
+              break;
+            case '4.6” x 6.2”':
+              textHeight = '59.15px';
+              break;
+          }
+          return textHeight;
+        },
+      },
+      nameTape: {
+        title: function (size) {
+          let title = '';
+          switch (size) {
+            case '3.5” x 3.5”':
+              title = 'Arc’teryx';
+              break;
+            case '3.5” x 4”':
+              title = 'Condor';
+              break;
+            case '3.6” x 5”':
+              title = 'Tad';
+              break;
+            case '4” x 4.5”':
+              title = 'Massif';
+              break;
+            case '4.6” x 6.2”':
+              title = 'Hazard';
+              break;
+          }
+          return title;
+        },
+        fontSize: function (size) {
+          let fontSize = null;
+          switch (size) {
+            case '6” x 1”':
+              fontSize = 40;
+              break;
+            case '7.125” x 1”':
+              fontSize = 32;
+              break;
+            case '3” x 1”':
+              fontSize = 40;
+              break;
+            case '4” x 1”':
+              fontSize = 40;
+              break;
+            case '4” x 1.5”':
+              fontSize = 47;
+              break;
+            case '5” x 1”':
+              fontSize = 40;
+              break;
+            case '5” x 1.5”':
+              fontSize = 47;
+              break;
+            case '6” x 2”':
+              fontSize = 47;
+              break;
+            case '8” x 2”':
+              fontSize = 28.3729;
+              break;
+            case '8” x 3”':
+              fontSize = 43.6253;
+              break;
+            case '8” x 4”':
+              fontSize = 46;
+              break;
+              case '9” x 3”':
+              fontSize = 34;
+              break;
+              case '10” x 2”':
+              fontSize = 40;
+              break;
+            case '11” x 3”':
+              fontSize = 30;
+              break;
+            case '12” x 4”':
+              fontSize = 29;
+              break;
+          }
+          console.log(fontSize);
+          return fontSize;
+        },
+        flagHeight: function (size) {
+          console.log(size);
+          let flagHeight = '';
+          switch (size) {
+            case '6” x 1”':
+              flagHeight = '35px';
+              break;
+            case '7.125” x 1”':
+              console.log("ok")
+              flagHeight = '30px';
+              break;
+            case '4” x 1”':
+              flagHeight = 'calc(calc(86.66px/80)*47)';
+              break;
+            case '5” x 1”':
+              flagHeight = 'calc(calc(68.22px/80)*47)';
               break;
           }
           return flagHeight;
@@ -834,6 +950,9 @@ const builderObj = {
                 break;
             }
             break;
+          case 'name tape':
+            height = builderObj.helpers.get.nameTape.flagHeight(size);
+            break;
           case 'flag':
             switch (size) {
               case '3” x 2”':
@@ -896,6 +1015,50 @@ const builderObj = {
               }));
               break;
             case '4.6” x 6.2”':
+              setStyle(prevStyle => ({
+                ...prevStyle, padding: '30px 20px',
+                WebkitMaskImage: 'none',
+                maskImage: 'none',
+              }));
+              break;
+          }
+        },
+      },
+      nameTape: {
+        patch: function (size, setStyle) {
+          switch (size) {
+            case '6” x 1”':
+              setStyle(prevStyle => ({
+                ...prevStyle,
+                padding: '9px',
+                WebkitMaskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-tac-tec.png?v=1702040296)',
+                WebkitMaskSize: 'cover',
+                WebkitMaskPosition: 'center',
+                maskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-tac-tec.png?v=1702040296)',
+                maskSize: 'cover',
+                maskPosition: 'center',
+              }));
+              break;
+            case '7.125” x 1”':
+              setStyle(prevStyle => ({
+                ...prevStyle,
+                padding: '9px',
+                WebkitMaskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-tac-tec-trainer.png?v=1702040296)',
+                WebkitMaskSize: 'cover',
+                WebkitMaskPosition: 'center',
+                maskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-tac-tec-trainer.png?v=1702040296)',
+                maskSize: 'cover',
+                maskPosition: 'center',
+              }));
+              break;
+            case 'default':
+              setStyle(prevStyle => ({
+                ...prevStyle, padding: '10px',
+                WebkitMaskImage: 'none',
+                maskImage: 'none',
+              }));
+              break;
+
               setStyle(prevStyle => ({
                 ...prevStyle, padding: '30px 20px',
                 WebkitMaskImage: 'none',
@@ -991,22 +1154,11 @@ const builderObj = {
           // @@ - This save spot is for setting starting font
           case 'name tape':
             if (formData.text.primary.text.length == 0) {
-              switch (formData.size.current) {
-                case '8” x 2”':
-                  newFontSize = 28.3729;
-                  break;
-                case '8” x 3”':
-                  newFontSize = 43.6253;
-                  break;
-                case '8” x 4”':
-                  newFontSize = 51;
-                  break;
-                case '11” x 3”':
-                  newFontSize = 30;
-                  break;
-                case '12” x 4”':
-                  newFontSize = 29;
-                  break;
+              if (formData.img.enabled) {
+                newFontSize = (builderObj.helpers.get.nameTape.fontSize(formData.size.current)) / 1.35;
+
+              } else {
+                newFontSize = builderObj.helpers.get.nameTape.fontSize(formData.size.current);
               }
             }
             break;
@@ -1016,10 +1168,8 @@ const builderObj = {
             }
             break;
           case 'jacket panel':
-            // if (formData.text.primary.text.length == 0) {
-            //   newFontSize = 47.1714;
-            // }
             if (formData.text.primary.text.length == 0) {
+
               newFontSize = builderObj.helpers.get.jacketPanel.fontSize(formData.size.current);
             }
             break;
@@ -1039,7 +1189,7 @@ const builderObj = {
             let textHeight = builderObj.helpers.get.jacketPanel.textHeight(formData.size.current);
             marginTop = 0;
             let newLineHeight = newFontSize * .87;
-            setFontStyle(prevStyle => ({ ...prevStyle, fontSize: `${newFontSize}px`, lineHeight: `${newLineHeight}px`, marginTop: `${marginTop}px`}));
+            setFontStyle(prevStyle => ({ ...prevStyle, fontSize: `${newFontSize}px`, lineHeight: `${newLineHeight}px`, marginTop: `${marginTop}px` }));
             setFontWrapperStyle(prevStyle => ({ ...prevStyle, minHeight: textHeight }));
           } else {
             marginTop = (newFontSize) / 9;
@@ -1942,6 +2092,28 @@ const builderObj = {
           const size = formData.size.current;
 
           if (type.toLowerCase() == 'jacket panel' && size.toLowerCase() == '4” x 4.5”') {
+            return true;
+          } else {
+            return false;
+          }
+        },
+      },
+      nameTape: {
+        tacTec: function (formData) {
+          const type = formData.type;
+          const size = formData.size.current;
+
+          if (type.toLowerCase() == 'name tape' && size.toLowerCase() == '6” x 1”') {
+            return true;
+          } else {
+            return false;
+          }
+        },
+        tacTecTrainer: function (formData) {
+          const type = formData.type;
+          const size = formData.size.current;
+
+          if (type.toLowerCase() == 'name tape' && size.toLowerCase() == '7.125” x 1”') {
             return true;
           } else {
             return false;

@@ -74,6 +74,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
           setState(prevStyle => ({
             ...prevStyle,
             backgroundImage: `url("${bgImg}")`,
+            minHeight: height,
           }));
         };
         break;
@@ -294,6 +295,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
       //  console.log(formData.img.type)
       obj.type = 'image'
       obj.src = formData.img.img;
+      obj.height = methods.helpers.get.flagHeight(formData.size.current, formData.type);
       imageLoader(obj, setFlagStyle)
     }
     // console.log("yes")
@@ -434,6 +436,9 @@ export function Visualizer({ formData, className, methods, ...props }) {
     if (methods.helpers.is.patchType.jacketPanel(formData)) {
       methods.helpers.set.jacketPanel.patch(formData.size.current, setStyle);
     }
+    if (methods.helpers.is.patchType.nameTape(formData)) {
+      methods.helpers.set.nameTape.patch(formData.size.current, setStyle);
+    }
   }, [formData.size.current]);
 
   //Use the useEffect hook to manage side effects
@@ -442,6 +447,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
   // match the font size.
   let count = 0;
   useEffect(() => {
+    console.log('ok')
     if (formData.type.toLowerCase().includes("light sabers")) return;
     if (formData.type.toLowerCase().includes("flag")) return;
     if (!containerRef.current) return;
@@ -474,7 +480,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
       window.removeEventListener('resize', adjustFontSize());
       observer.disconnect();
     };
-  }, [formData.text.primary.text, formData.size.current]);
+  }, [formData.text.primary.text, formData.size.current, formData.img.enabled]);
 
   const count2 = 0;
   //Use the useEffect hook to manage side effects
@@ -650,8 +656,17 @@ export function Visualizer({ formData, className, methods, ...props }) {
               </div>
             </div>
           ) : formData.type.toLowerCase().includes("name tape") && formData.img.enabled ? (
-            <div className="flex w-full h-full gap-2">
-              <div className="flex flex-0  w-1/3 items-center" style={{}}>
+            <div className={classNames(
+              methods.helpers.is.nameTape.tacTec(formData) ? "w-[90%] gap-1" : "",
+              methods.helpers.is.nameTape.tacTecTrainer(formData) ? "w-[88%] gap-1" : "",
+              "flex w-full h-full gap-2"
+            )}>
+              <div className={classNames(
+              methods.helpers.is.nameTape.tacTec(formData) ? "w-[26%]" : "",
+              methods.helpers.is.nameTape.tacTecTrainer(formData) ? "w-[21.25%]" : "",
+              formData.size.current ==  '5” x 1”' ? "w-[25%]" : "",
+              "flex flex-0  w-1/3 items-center"
+            )}>
                 <div id="flag" className="mr-1 flex-1 max-h-full max-w-full w-auto h-auto" style={flagStyle}></div>
               </div>
               <div ref={containerRef} className="flex flex-1 w-2/3 justify-center overflow-y-hidden items-center">
@@ -659,7 +674,11 @@ export function Visualizer({ formData, className, methods, ...props }) {
               </div>
             </div>
           ) : formData.type.toLowerCase().includes("name tape") ? (
-            <div ref={containerRef} className="h-full w-full text-center overflow-x-hidden overflow-y-hidden flex items-center justify-center">
+            <div ref={containerRef} className={classNames(
+              methods.helpers.is.nameTape.tacTec(formData) ? "w-[95%]" : "",
+              methods.helpers.is.nameTape.tacTecTrainer(formData) ? "w-[90%]" : "",
+              "h-full w-full text-center overflow-x-hidden overflow-y-hidden flex items-center justify-center"
+            )}>
               <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text.split('\n').map((line, index) => (
                 <React.Fragment key={index}>
                   {index > 0 && <br />}

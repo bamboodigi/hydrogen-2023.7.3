@@ -266,6 +266,44 @@ const builderData = {
       config: {
         sizes: [
           {
+            size: '6” x 1”',
+            text: {
+              primary: {
+                placeholder: 'Your Name',
+                maxLength: 13,
+                lines: 1,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 2,
+              glowBorder: 5,
+              hiVis: 4,
+              tacTecCarrier: 2,
+              tacTecTrainer: 3,
+              tRexArms: 0,
+            }
+          },
+          {
+            size: '7.125” x 1”',
+            text: {
+              primary: {
+                placeholder: 'Your Name',
+                maxLength: 13,
+                lines: 1,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 2,
+              glowBorder: 5,
+              hiVis: 4,
+              tacTecCarrier: 2,
+              tacTecTrainer: 3,
+              tRexArms: 0,
+            }
+          },
+          {
             size: '3” x 1”',
             text: {
               primary: {
@@ -2019,6 +2057,12 @@ const builderData = {
     ]
   },
   sizeOptions: [
+    {
+      name: "6” x 1”", ratio: "6:1"
+    },
+    {
+      name: "7.125” x 1”", ratio: "7.125:1"
+    },
     {
       name: "1” x 1”", ratio: "1:1"
     },
