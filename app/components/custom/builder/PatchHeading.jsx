@@ -17,7 +17,8 @@ export function PatchHeading({ formData, methods}) {
             <span className="mr-2">
               {formData.size.current}
             </span>
-            {isMini(formData.type, formData.size.current) && (
+            { methods.helpers.get.title(formData.size.current, formData.type)}
+            {/* {isMini(formData.type, formData.size.current) && (
               <span className="">Mini </span>
             )
             }
@@ -42,7 +43,7 @@ export function PatchHeading({ formData, methods}) {
                 </>
               ) : formData.type.toLowerCase() == ("jacket panel") ? (
                 <>
-                  - { methods.helpers.get.jacketPanel.title(formData.size.current) } <br></br>Jacket Panel
+                  - { methods.helpers.get.patch.jacketPanel.title(formData.size.current) } <br></br>Jacket Panel
                 </>
               ) : (
                 <>
@@ -62,7 +63,7 @@ export function PatchHeading({ formData, methods}) {
                   <span className="text-xl mt-2 uppercase block">{formData.lightsaber.saberType}</span>
                 </>
               )
-            }
+            } */}
           </Heading>
         </div>
       </>
