@@ -50,7 +50,7 @@ export function PatchHeading({ formData, methods }) {
                 {formData.type}
               </>
             )
-          }
+          } */}
 
 
           {
@@ -59,7 +59,7 @@ export function PatchHeading({ formData, methods }) {
                 <span className="text-xl mt-2 uppercase block">{formData.lightsaber.saberType}</span>
               </>
             )
-          } */}
+          }
 
           {isFlag(formData.type, formData.img.enabled) && (
             <span className="text-xl mt-2 uppercase block">with {formData.img.type}</span>

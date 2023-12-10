@@ -491,28 +491,28 @@ const builderObj = {
         let title = '';
         switch (type.toLowerCase()) {
           case 'id panel':
-            title = builderObj.helpers.get.patch.idPanel.title(size);
+            title = this.patch.idPanel.title(size);
             break;
           case 'name tape':
-            title = builderObj.helpers.get.patch.nameTape.title(size);
+            title = this.patch.nameTape.title(size);
             break;
           case 'medical patch':
-            title = builderObj.helpers.get.patch.medicalPatch.title(size);
+            title = this.patch.medicalPatch.title(size);
             break;
           case 'flag':
-            title = builderObj.helpers.get.patch.flag.title(size);
+            title = this.patch.flag.title(size);
             break;
           case 'light sabers':
-            title = builderObj.helpers.get.patch.lightSaber.title(size);
+            title = this.patch.lightSaber.title(size);
             break;
           case 'custom printed patch':
-            title = builderObj.helpers.get.patch.customPatch.title(size);
+            title = this.patch.customPatch.title(size);
             break;
           case 'jacket panel':
-            title = builderObj.helpers.get.patch.jacketPanel.title(size);
+            title = this.patch.jacketPanel.title(size);
             break;
           case 'division jacket panel':
-            title = builderObj.helpers.get.patch.divisionJacketPanel.title(size);
+            title = this.patch.divisionJacketPanel.title(size);
             break;
         }
         return title;
@@ -804,6 +804,193 @@ const builderObj = {
             return textHeight;
           },
         },
+        medicalPatch: {
+          title: function (size) {
+            let title = '';
+            switch (size) {
+              case '1” x 1”':
+                title = 'Cats Eye';
+                break;
+              case '2” x 2”':
+                title = 'Medical Patch';
+                break;
+              case '3.5” x 2”':
+                title = 'Medical ID Panel';
+                break;
+            }
+            return title;
+          },
+          fontSize: function (size) {
+            let fontSize = null;
+            switch (size) {
+              case '1” x 1”':
+                title = 'Cats Eye';
+                break;
+              case '2” x 2”':
+                title = 'Medical Patch';
+                break;
+              case '3.5” x 2”':
+                title = 'Medical ID Panel';
+                break;
+            }
+            console.log(fontSize);
+            return fontSize;
+          },
+        },
+        flag: {
+          title: function (size) {
+            let title = 'Lazer Cut Flag';
+            // switch (size) {
+            //   case '5.11 Tac Tec Carrier':
+            //     break;
+            //   case '5.11 Tac Tec Carrier Trainer':
+            //     break;
+            //   case '3” x 1”':
+            //     break;
+            //   case '4” x 1”':
+            //     break;
+            //   case '4” x 1.5”':
+            //     break;
+            //   case '5” x 1”':
+            //     break;
+            //   case '5” x 1.5”':
+            //     break;
+            //   case '6” x 2”':
+            //     break;
+            //   case '8” x 2”':
+            //     break;
+            //   case '8” x 3”':
+            //     break;
+            //   case '8” x 4”':
+            //     break;
+            //   case '9” x 3”':
+            //     break;
+            //   case '10” x 2”':
+            //     break;
+            //   case '11” x 3”':
+            //     break;
+            //   case '12” x 4”':
+            //     break;
+            // }
+            return title;
+          },
+          flagHeight: function (size) {
+            console.log(size);
+            let flagHeight = '';
+            switch (size) {
+              case '5.11 Tac Tec Carrier':
+                flagHeight = '35px';
+                break;
+              case '5.11 Tac Tec Carrier Trainer':
+                console.log("ok")
+                flagHeight = '30px';
+                break;
+              case '4” x 1”':
+                flagHeight = 'calc(calc(86.66px/80)*47)';
+                break;
+              case '5” x 1”':
+                flagHeight = 'calc(calc(68.22px/80)*47)';
+                break;
+            }
+            return flagHeight;
+          },
+        },
+        lightSaber: {
+          title: function (size) {
+            let title = 'Light Saber';
+            // switch (size) {
+            //   case '5.11 Tac Tec Carrier':
+            //     break;
+            //   case '5.11 Tac Tec Carrier Trainer':
+            //     break;
+            //   case '3” x 1”':
+            //     break;
+            //   case '4” x 1”':
+            //     break;
+            //   case '4” x 1.5”':
+            //     break;
+            //   case '5” x 1”':
+            //     break;
+            //   case '5” x 1.5”':
+            //     break;
+            //   case '6” x 2”':
+            //     break;
+            //   case '8” x 2”':
+            //     break;
+            //   case '8” x 3”':
+            //     break;
+            //   case '8” x 4”':
+            //     break;
+            //   case '9” x 3”':
+            //     break;
+            //   case '10” x 2”':
+            //     break;
+            //   case '11” x 3”':
+            //     break;
+            //   case '12” x 4”':
+            //     break;
+            // }
+            return title;
+          },
+        },
+        customPatch: {
+          title: function (size) {
+            let title = 'Custom Printed Patch';
+            // switch (size) {
+            //   case '5.11 Tac Tec Carrier':
+            //     break;
+            //   case '5.11 Tac Tec Carrier Trainer':
+            //     break;
+            //   case '3” x 1”':
+            //     break;
+            //   case '4” x 1”':
+            //     break;
+            //   case '4” x 1.5”':
+            //     break;
+            //   case '5” x 1”':
+            //     break;
+            //   case '5” x 1.5”':
+            //     break;
+            //   case '6” x 2”':
+            //     break;
+            //   case '8” x 2”':
+            //     break;
+            //   case '8” x 3”':
+            //     break;
+            //   case '8” x 4”':
+            //     break;
+            //   case '9” x 3”':
+            //     break;
+            //   case '10” x 2”':
+            //     break;
+            //   case '11” x 3”':
+            //     break;
+            //   case '12” x 4”':
+            //     break;
+            // }
+            return title;
+          },
+          flagHeight: function (size) {
+            console.log(size);
+            let flagHeight = '';
+            switch (size) {
+              case '5.11 Tac Tec Carrier':
+                flagHeight = '35px';
+                break;
+              case '5.11 Tac Tec Carrier Trainer':
+                console.log("ok")
+                flagHeight = '30px';
+                break;
+              case '4” x 1”':
+                flagHeight = 'calc(calc(86.66px/80)*47)';
+                break;
+              case '5” x 1”':
+                flagHeight = 'calc(calc(68.22px/80)*47)';
+                break;
+            }
+            return flagHeight;
+          },
+        },
         jacketPanel: {
           title: function (size) {
             let title = '';
@@ -824,7 +1011,7 @@ const builderObj = {
                 title = 'Hazard';
                 break;
             }
-            return title;
+            return title + ' Jacket Panel';
           },
           fontSize: function (size) {
             let fontSize = null;
@@ -911,259 +1098,112 @@ const builderObj = {
             return textHeight;
           },
         },
-      },
-      jacketPanel: {
-        title: function (size) {
-          let title = '';
-          switch (size) {
-            case '3.5” x 3.5”':
-              title = 'Arc’teryx';
-              break;
-            case '3.5” x 4”':
-              title = 'Condor';
-              break;
-            case '3.6” x 5”':
-              title = 'Tad';
-              break;
-            case '4” x 4.5”':
-              title = 'Massif';
-              break;
-            case '4.6” x 6.2”':
-              title = 'Hazard';
-              break;
-          }
-          return title;
-        },
-        fontSize: function (size) {
-          let fontSize = null;
-          switch (size) {
-            case '3.5” x 3.5”':
-              fontSize = 50;
-              break;
-            case '3.5” x 4”':
-              fontSize = 80;
-              break;
-            case '3.6” x 5”':
-              fontSize = 80;
-              break;
-            case '4” x 4.5”':
-              fontSize = 80;
-              break;
-            case '4.6” x 6.2”':
-              fontSize = 68;
-              break;
-          }
-          return fontSize;
-        },
-        secondaryFont: function (size) {
-          let fontSize = null;
-          switch (size) {
-            case '3.5” x 3.5”':
-              fontSize = 14;
-              break;
-            case '3.5” x 4”':
-              fontSize = 32;
-              break;
-            case '3.6” x 5”':
-              fontSize = 32;
-              break;
-            case '4” x 4.5”':
-              fontSize = 26;
-              break;
-            case '4.6” x 6.2”':
-              fontSize = 34;
-              break;
-          }
-          return fontSize;
-        },
-        flagHeight: function (size) {
-          let flagHeight = '';
-          switch (size) {
-            case '3.5” x 3.5”':
-              flagHeight = 'calc(168px/2)';
-              break;
-            case '3.5” x 4”':
-              flagHeight = 'calc(250px/2)';
-              break;
-            case '3.6” x 5”':
-              flagHeight = 'calc(240px/2)';
-              break;
-            case '4” x 4.5”':
-              flagHeight = 'calc(258px/2)';
-              break;
-            case '4.6” x 6.2”':
-              flagHeight = 'calc(260px/2)';
-              break;
-          }
-          return flagHeight;
-        },
-        textHeight: function (size) {
-          let textHeight = '';
-          switch (size) {
-            case '3.5” x 3.5”':
-              textHeight = '43.5px';
-              break;
-            case '3.5” x 4”':
-              textHeight = '69.59px';
-              break;
-            case '3.6” x 5”':
-              textHeight = '69.59px';
-              break;
-            case '4” x 4.5”':
-              textHeight = '69.59px';
-              break;
-            case '4.6” x 6.2”':
-              textHeight = '59.15px';
-              break;
-          }
-          return textHeight;
-        },
-      },
-      nameTape: {
-        title: function (size) {
-          let title = '';
-          switch (size) {
-            case '5.11 Tac Tec Carrier':
-              console.log("ok")
-              fontSize = 34;
-              break;
-            case '5.11 Tac Tec Carrier Trainer':
-              fontSize = 32;
-              break;
-            case '3” x 1”':
-              fontSize = 40;
-              break;
-            case '4” x 1”':
-              fontSize = 40;
-              break;
-            case '4” x 1.5”':
-              fontSize = 47;
-              break;
-            case '5” x 1”':
-              fontSize = 40;
-              break;
-            case '5” x 1.5”':
-              fontSize = 47;
-              break;
-            case '6” x 2”':
-              fontSize = 47;
-              break;
-            case '8” x 2”':
-              fontSize = 28.3729;
-              break;
-            case '8” x 3”':
-              fontSize = 43.6253;
-              break;
-            case '8” x 4”':
-              fontSize = 46;
-              break;
-            case '9” x 3”':
-              fontSize = 34;
-              break;
-            case '10” x 2”':
-              fontSize = 40;
-              break;
-            case '11” x 3”':
-              fontSize = 30;
-              break;
-            case '12” x 4”':
-              fontSize = 29;
-              break;
-          }
-          return title;
-        },
-        fontSize: function (size) {
-          let fontSize = null;
-          switch (size) {
-            case '5.11 Tac Tec Carrier':
-              fontSize = 34;
-              break;
-            case '5.11 Tac Tec Carrier Trainer':
-              fontSize = 32;
-              break;
-            case '3” x 1”':
-              fontSize = 40;
-              break;
-            case '4” x 1”':
-              fontSize = 40;
-              break;
-            case '4” x 1.5”':
-              fontSize = 47;
-              break;
-            case '5” x 1”':
-              fontSize = 40;
-              break;
-            case '5” x 1.5”':
-              fontSize = 47;
-              break;
-            case '6” x 2”':
-              fontSize = 47;
-              break;
-            case '8” x 2”':
-              fontSize = 28.3729;
-              break;
-            case '8” x 3”':
-              fontSize = 43.6253;
-              break;
-            case '8” x 4”':
-              fontSize = 46;
-              break;
-            case '9” x 3”':
-              fontSize = 34;
-              break;
-            case '10” x 2”':
-              fontSize = 40;
-              break;
-            case '11” x 3”':
-              fontSize = 30;
-              break;
-            case '12” x 4”':
-              fontSize = 29;
-              break;
-          }
-          console.log(fontSize);
-          return fontSize;
-        },
-        flagHeight: function (size) {
-          console.log(size);
-          let flagHeight = '';
-          switch (size) {
-            case '5.11 Tac Tec Carrier':
-              flagHeight = '35px';
-              break;
-            case '5.11 Tac Tec Carrier Trainer':
-              console.log("ok")
-              flagHeight = '30px';
-              break;
-            case '4” x 1”':
-              flagHeight = 'calc(calc(86.66px/80)*47)';
-              break;
-            case '5” x 1”':
-              flagHeight = 'calc(calc(68.22px/80)*47)';
-              break;
-          }
-          return flagHeight;
-        },
-        textHeight: function (size) {
-          let textHeight = '';
-          switch (size) {
-            case '3.5” x 3.5”':
-              textHeight = '43.5px';
-              break;
-            case '3.5” x 4”':
-              textHeight = '69.59px';
-              break;
-            case '3.6” x 5”':
-              textHeight = '69.59px';
-              break;
-            case '4” x 4.5”':
-              textHeight = '69.59px';
-              break;
-            case '4.6” x 6.2”':
-              textHeight = '59.15px';
-              break;
-          }
-          return textHeight;
+        divisionJacketPanel: {
+          title: function (size) {
+            let title = 'Division Jacket Panel';
+            // switch (size) {
+            //   case '3.5” x 3.5”':
+            //     title = 'Arc’teryx';
+            //     break;
+            //   case '3.5” x 4”':
+            //     title = 'Condor';
+            //     break;
+            //   case '3.6” x 5”':
+            //     title = 'Tad';
+            //     break;
+            //   case '4” x 4.5”':
+            //     title = 'Massif';
+            //     break;
+            //   case '4.6” x 6.2”':
+            //     title = 'Hazard';
+            //     break;
+            // }
+            return title;
+          },
+          fontSize: function (size) {
+            let fontSize = null;
+            switch (size) {
+              case '3.5” x 3.5”':
+                fontSize = 50;
+                break;
+              case '3.5” x 4”':
+                fontSize = 80;
+                break;
+              case '3.6” x 5”':
+                fontSize = 80;
+                break;
+              case '4” x 4.5”':
+                fontSize = 80;
+                break;
+              case '4.6” x 6.2”':
+                fontSize = 68;
+                break;
+            }
+            return fontSize;
+          },
+          secondaryFont: function (size) {
+            let fontSize = null;
+            switch (size) {
+              case '3.5” x 3.5”':
+                fontSize = 14;
+                break;
+              case '3.5” x 4”':
+                fontSize = 32;
+                break;
+              case '3.6” x 5”':
+                fontSize = 32;
+                break;
+              case '4” x 4.5”':
+                fontSize = 26;
+                break;
+              case '4.6” x 6.2”':
+                fontSize = 34;
+                break;
+            }
+            return fontSize;
+          },
+          flagHeight: function (size) {
+            let flagHeight = '';
+            switch (size) {
+              case '3.5” x 3.5”':
+                flagHeight = 'calc(168px/2)';
+                break;
+              case '3.5” x 4”':
+                flagHeight = 'calc(250px/2)';
+                break;
+              case '3.6” x 5”':
+                flagHeight = 'calc(240px/2)';
+                break;
+              case '4” x 4.5”':
+                flagHeight = 'calc(258px/2)';
+                break;
+              case '4.6” x 6.2”':
+                flagHeight = 'calc(260px/2)';
+                break;
+            }
+            return flagHeight;
+          },
+          textHeight: function (size) {
+            let textHeight = '';
+            switch (size) {
+              case '3.5” x 3.5”':
+                textHeight = '43.5px';
+                break;
+              case '3.5” x 4”':
+                textHeight = '69.59px';
+                break;
+              case '3.6” x 5”':
+                textHeight = '69.59px';
+                break;
+              case '4” x 4.5”':
+                textHeight = '69.59px';
+                break;
+              case '4.6” x 6.2”':
+                textHeight = '59.15px';
+                break;
+            }
+            return textHeight;
+          },
         },
       },
       upsells: function (product, size) {
