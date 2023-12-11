@@ -585,26 +585,34 @@ const builderObj = {
                 break;
               case '6” x 3”':
                 break;
+              case 'DeadBug DV2':
+                break;
             }
             return title;
           },
           fontSize: function (size) {
             let fontSize = null;
             switch (size) {
-              case '3.5” x 3.5”':
-                fontSize = 50;
+              case '3” x 2”':
+                fontSize = 97.0787;
                 break;
-              case '3.5” x 4”':
+              case '3.5” x 2”':
+                fontSize = 83;
+                break;
+              case '4” x 2”':
+                fontSize = 73;
+                break;
+              case '5” x 3”':
                 fontSize = 80;
                 break;
-              case '3.6” x 5”':
-                fontSize = 80;
+              case '6” x 2”':
+                fontSize = 48.5468;
                 break;
-              case '4” x 4.5”':
-                fontSize = 80;
+              case '6” x 3”':
+                fontSize = 48.556;
                 break;
-              case '4.6” x 6.2”':
-                fontSize = 68;
+              case 'DeadBug DV2':
+                fontSize = 60;
                 break;
             }
             return fontSize;
@@ -1396,46 +1404,24 @@ const builderObj = {
       },
     },
     set: {
-      jacketPanel: {
+      idPanel: {
         patch: function (size, setStyle) {
           switch (size) {
-            case '3.5” x 3.5”':
-              setStyle(prevStyle => ({
-                ...prevStyle, padding: '10px 16px',
-                WebkitMaskImage: 'none',
-                maskImage: 'none',
-              }));
-              break;
-            case '3.5” x 4”':
+            case 'DeadBug DV2':
               setStyle(prevStyle => ({
                 ...prevStyle,
-                padding: '20px',
-                WebkitMaskImage: 'none',
-                maskImage: 'none',
-              }));
-              break;
-            case '3.6” x 5”':
-              setStyle(prevStyle => ({
-                ...prevStyle,
-                padding: '50px 25px',
-                WebkitMaskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-tad.png?v=1702040296)',
+                padding: '35px',
+                WebkitMaskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-deadbug.png?v=1702040296)',
                 WebkitMaskSize: 'cover',
                 WebkitMaskPosition: 'center',
-                maskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-tad.png?v=1702040296)',
+                maskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-deadbug.png?v=1702040296)',
                 maskSize: 'cover',
                 maskPosition: 'center',
               }));
               break;
-            case '4” x 4.5”':
+            case 'default':
               setStyle(prevStyle => ({
-                ...prevStyle, padding: '24px 20px',
-                WebkitMaskImage: 'none',
-                maskImage: 'none',
-              }));
-              break;
-            case '4.6” x 6.2”':
-              setStyle(prevStyle => ({
-                ...prevStyle, padding: '30px 20px',
+                ...prevStyle, padding: '10px',
                 WebkitMaskImage: 'none',
                 maskImage: 'none',
               }));
@@ -1488,7 +1474,54 @@ const builderObj = {
               break;
           }
         },
-      }
+      },
+      jacketPanel: {
+        patch: function (size, setStyle) {
+          switch (size) {
+            case '3.5” x 3.5”':
+              setStyle(prevStyle => ({
+                ...prevStyle, padding: '10px 16px',
+                WebkitMaskImage: 'none',
+                maskImage: 'none',
+              }));
+              break;
+            case '3.5” x 4”':
+              setStyle(prevStyle => ({
+                ...prevStyle,
+                padding: '20px',
+                WebkitMaskImage: 'none',
+                maskImage: 'none',
+              }));
+              break;
+            case '3.6” x 5”':
+              setStyle(prevStyle => ({
+                ...prevStyle,
+                padding: '50px 25px',
+                WebkitMaskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-tad.png?v=1702040296)',
+                WebkitMaskSize: 'cover',
+                WebkitMaskPosition: 'center',
+                maskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-tad.png?v=1702040296)',
+                maskSize: 'cover',
+                maskPosition: 'center',
+              }));
+              break;
+            case '4” x 4.5”':
+              setStyle(prevStyle => ({
+                ...prevStyle, padding: '24px 20px',
+                WebkitMaskImage: 'none',
+                maskImage: 'none',
+              }));
+              break;
+            case '4.6” x 6.2”':
+              setStyle(prevStyle => ({
+                ...prevStyle, padding: '30px 20px',
+                WebkitMaskImage: 'none',
+                maskImage: 'none',
+              }));
+              break;
+          }
+        },
+      },
     },
     update: {
       fontSize: function (containerRef, setFontStyle, formData, setFontWrapperStyle) {
@@ -1550,26 +1583,7 @@ const builderObj = {
         switch (formData.type.toLowerCase()) {
           case 'id panel':
             if (formData.text.primary.text.length == 0) {
-              switch (formData.size.current) {
-                case '3” x 2”':
-                  newFontSize = 97.0787;
-                  break;
-                case '3.5” x 2”':
-                  newFontSize = 83;
-                  break;
-                case '4” x 2”':
-                  newFontSize = 73;
-                  break;
-                case '5” x 3”':
-                  newFontSize = 80;
-                  break;
-                case '6” x 2”':
-                  newFontSize = 48.5468;
-                  break;
-                case '6” x 3”':
-                  newFontSize = 48.556;
-                  break;
-              }
+              newFontSize = builderObj.helpers.get.patch.idPanel.fontSize(formData.size.current);
             }
             break;
           // @@ - This save spot is for setting starting font
@@ -1606,14 +1620,14 @@ const builderObj = {
           setFontStyle(prevStyle => ({ ...prevStyle, fontSize: `${newFontSize}px`, lineHeight: `${newLineHeight}px`, marginTop: `${marginTop}px` }));
 
         } else {
-          if (formData.type.toLowerCase() == 'jacket panel') {
+          if (formData.type.toLowerCase() == 'jacket panel' ){
             let textHeight = builderObj.helpers.get.patch.jacketPanel.textHeight(formData.size.current);
             marginTop = 0;
             let newLineHeight = newFontSize * .87;
             setFontStyle(prevStyle => ({ ...prevStyle, fontSize: `${newFontSize}px`, lineHeight: `${newLineHeight}px`, marginTop: `${marginTop}px` }));
             setFontWrapperStyle(prevStyle => ({ ...prevStyle, minHeight: textHeight }));
           } else {
-            marginTop = (newFontSize) / 9;
+            marginTop = builderObj.helpers.is.idPanel.deadBug(formData) ? 0 : newFontSize / 9;
             setFontStyle(prevStyle => ({ ...prevStyle, fontSize: `${newFontSize}px`, lineHeight: `${newFontSize}px`, marginTop: `${marginTop}px` }));
           }
         }
@@ -2477,12 +2491,26 @@ const builderObj = {
       },
     },
     is: {
+      idPanel : {
+        deadBug: function (formData) {
+          const type = formData.type;
+          const size = formData.size.current;
+          console.log('ok')
+
+          if (type.toLowerCase() == 'id panel' && size == 'DeadBug DV2') {
+            console.log('ok');
+            return true;
+          } else {
+            return false;
+          }
+        },
+      },
       jacketPanel: {
         condor: function (formData) {
           const type = formData.type;
           const size = formData.size.current;
 
-          if (type.toLowerCase() == 'jacket panel' && size.toLowerCase() == '3.5” x 4”') {
+          if (type.toLowerCase() == 'jacket panel' && size == '3.5” x 4”') {
             return true;
           } else {
             return false;
@@ -2492,7 +2520,7 @@ const builderObj = {
           const type = formData.type;
           const size = formData.size.current;
 
-          if (type.toLowerCase() == 'jacket panel' && size.toLowerCase() == '4.6” x 6.2”') {
+          if (type.toLowerCase() == 'jacket panel' && size == '4.6” x 6.2”') {
             return true;
           } else {
             return false;
@@ -2502,7 +2530,7 @@ const builderObj = {
           const type = formData.type;
           const size = formData.size.current;
 
-          if (type.toLowerCase() == 'jacket panel' && size.toLowerCase() == '3.6” x 5”') {
+          if (type.toLowerCase() == 'jacket panel' && size == '3.6” x 5”') {
             return true;
           } else {
             return false;
@@ -2512,7 +2540,7 @@ const builderObj = {
           const type = formData.type;
           const size = formData.size.current;
 
-          if (type.toLowerCase() == 'jacket panel' && size.toLowerCase() == '4” x 4.5”') {
+          if (type.toLowerCase() == 'jacket panel' && size == '4” x 4.5”') {
             return true;
           } else {
             return false;
@@ -2535,7 +2563,7 @@ const builderObj = {
           const type = formData.type;
           const size = formData.size.current;
 
-          if (type.toLowerCase() == 'name tape' && size.toLowerCase() == '5.11 Tac Tec Carrier Trainer') {
+          if (type.toLowerCase() == 'name tape' && size == '5.11 Tac Tec Carrier Trainer') {
             return true;
           } else {
             return false;

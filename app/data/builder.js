@@ -138,12 +138,9 @@ const builderData = {
               tRexArms: true,
               policeID: 19,
             }
-          }
-        ],
-        extra: [
+          },
           {
-            name: "DeadBug DV2",
-            size: '6” x 4”',
+            size: 'DeadBug DV2',
             text: {
               primary: {
                 placeholder: 'Name',
@@ -166,7 +163,7 @@ const builderData = {
               policeID: 19,
             }
           }
-        ]
+        ],
       },
       form: {
         intro: "Our ID panels come in various sizes. You will be able to custom your ID, blood type or allergy, font & background colors. You will be able to choose from a wide variety of flags or upload one yourself. Get through all the steps and see your patch come to life.",
@@ -2140,6 +2137,10 @@ const builderData = {
     {
       name: "6” x 3”",
       ratio: "2:1"
+    },
+    {
+      name: "Deadbug DV2",
+      ratio: "6.25:4.125"
     },
     {
       name: "5.11 Tac Tec Carrier Trainer",

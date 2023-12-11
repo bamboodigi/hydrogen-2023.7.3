@@ -5,7 +5,6 @@ import {
 
 
 export function PatchHeading({ formData, methods }) {
-  const isMini = methods.helpers.is.mini;
   const isFlag = methods.helpers.is.flag;
 
   const classNames = methods.helpers.utility.classNames;
@@ -18,41 +17,6 @@ export function PatchHeading({ formData, methods }) {
             {formData.size.current}
           </span>
           {methods.helpers.get.title(formData.size.current, formData.type)}
-          {/* {isMini(formData.type, formData.size.current) && (
-            <span className="">Mini </span>
-          )
-          }
-          {
-            formData.type.toLowerCase().includes("medical patch") && formData.size.current == '1” x 1”' ? (
-              <>
-                Cats Eye
-              </>
-            ) : formData.type.toLowerCase().includes("medical patch") && formData.size.current == '3.5” x 2”' ? (
-              <>
-                Medical ID Panel
-              </>
-            ) : formData.type.toLowerCase().includes("light sabers") ? (
-              <>
-                Light Saber
-              </>
-            ) : formData.type.toLowerCase().includes("flag") ? (
-              <>
-                <span className="block mt-2">
-                  {formData.img.type}
-                </span>
-              </>
-            ) : formData.type.toLowerCase() == ("jacket panel") ? (
-              <>
-                - {methods.helpers.get.patch.jacketPanel.title(formData.size.current)} <br></br>Jacket Panel
-              </>
-            ) : (
-              <>
-                {formData.type}
-              </>
-            )
-          } */}
-
-
           {
             formData.type.toLowerCase().includes("light sabers") && (
               <>

@@ -439,6 +439,10 @@ export function Visualizer({ formData, className, methods, ...props }) {
     if (methods.helpers.is.patchType.nameTape(formData)) {
       methods.helpers.set.nameTape.patch(formData.size.current, setStyle);
     }
+
+    if (methods.helpers.is.patchType.idPanel(formData)) {
+      methods.helpers.set.idPanel.patch(formData.size.current, setStyle);
+    }
   }, [formData.size.current]);
 
   //Use the useEffect hook to manage side effects
