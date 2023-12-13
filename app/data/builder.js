@@ -140,6 +140,28 @@ const builderData = {
             }
           },
           {
+            size: 'T.Rex Arms AC1 Front',
+            text: {
+              primary: {
+                placeholder: 'Name',
+                maxLength: 12,
+                lines: 1,
+              },
+              secondary: {
+                placeholder: 'APOS\nNKDA',
+                maxLength: 14,
+                lines: 2,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 8,
+              hiVis: 5,
+              glowBorder: 10,
+              badge: 25,
+            }
+          },
+          {
             size: 'DeadBug DV2',
             text: {
               primary: {

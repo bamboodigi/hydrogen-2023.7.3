@@ -589,6 +589,8 @@ const builderObj = {
                 break;
               case 'DeadBug DV2':
                 break;
+              case 'T.Rex Arms AC1 Front':
+                break;
             }
             return title;
           },
@@ -614,6 +616,9 @@ const builderObj = {
                 fontSize = 48.556;
                 break;
               case 'DeadBug DV2':
+                fontSize = 60;
+                break;
+              case 'T.Rex Arms AC1 Front':
                 fontSize = 60;
                 break;
             }
@@ -663,6 +668,9 @@ const builderObj = {
                 break;
               case 'DeadBug DV2':
                 height = 'calc(110px/2)';
+                break;
+              case 'T.Rex Arms AC1 Front':
+                height = 'calc(135px/2)';
                 break;
             }
             return height;
@@ -1443,6 +1451,18 @@ const builderObj = {
                 maskPosition: 'center',
               }));
               break;
+            case 'T.Rex Arms AC1 Front':
+              setStyle(prevStyle => ({
+                ...prevStyle,
+                padding: '10px',
+                WebkitMaskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-ac1-front.png?v=1702437378)',
+                WebkitMaskSize: 'cover',
+                WebkitMaskPosition: 'center',
+                maskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-ac1-front.png?v=1702437378)',
+                maskSize: 'cover',
+                maskPosition: 'center',
+              }));
+              break;
             case 'default':
               setStyle(prevStyle => ({
                 ...prevStyle, padding: '10px',
@@ -1676,7 +1696,7 @@ const builderObj = {
             setFontStyle(prevStyle => ({ ...prevStyle, fontSize: `${newFontSize}px`, lineHeight: `${newLineHeight}px`, marginTop: `${marginTop}px` }));
             setFontWrapperStyle(prevStyle => ({ ...prevStyle, minHeight: textHeight }));
           } else {
-            marginTop = builderObj.helpers.is.idPanel.deadBug(formData) ? 0 : newFontSize / 9;
+            marginTop = builderObj.helpers.is.idPanel.deadBug(formData) || builderObj.helpers.is.idPanel.ac1Front(formData) ? 0 : newFontSize / 9;
             setFontStyle(prevStyle => ({ ...prevStyle, fontSize: `${newFontSize}px`, lineHeight: `${newFontSize}px`, marginTop: `${marginTop}px` }));
           }
         }
@@ -2553,6 +2573,18 @@ const builderObj = {
             return false;
           }
         },
+        ac1Front: function (formData) {
+          const type = formData.type;
+          const size = formData.size.current;
+          console.log(type);
+          console.log(size);
+          if (type.toLowerCase() == 'id panel' && size == 'T.Rex Arms AC1 Front') {
+            console.log()
+            return true;
+          } else {
+            return false;
+          }
+        },
       },
       nameTape: {
         tacTec: function (formData) {
@@ -2590,7 +2622,7 @@ const builderObj = {
           const type = formData.type;
           const size = formData.size.current;
 
-          if (type.toLowerCase() == 'name tape' && size == 'T.Rex Arms AC1 Front Name Plate') {
+          if (type.toLowerCase() == 'name tape' && size == 'T.Rex Arms AC1 Front') {
             return true;
           } else {
             return false;

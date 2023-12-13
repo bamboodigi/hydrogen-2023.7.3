@@ -460,10 +460,10 @@ export function Visualizer({ formData, className, methods, ...props }) {
     const adjustFontSize = () => {
       // If the containerRef is not set, return
       if (containerRef.current) {
-        if(methods.helpers.is.patchType.jacketPanel(formData)){
-         updateFontSize(containerRef, setFontStyle, formData, setFontWrapperStyle);
+        if (methods.helpers.is.patchType.jacketPanel(formData)) {
+          updateFontSize(containerRef, setFontStyle, formData, setFontWrapperStyle);
         } else {
-         updateFontSize(containerRef, setFontStyle, formData);
+          updateFontSize(containerRef, setFontStyle, formData);
         }
       }
     };
@@ -600,12 +600,16 @@ export function Visualizer({ formData, className, methods, ...props }) {
                 formData.size.current === '4” x 2”' ? "gap-2" : "",
               "flex flex-col w-full h-full"
             )}>
-              <div ref={containerRef} className="h-1/2 justify-center overflow-y-hidden flex items-center">
+              <div ref={containerRef} className={classNames(
+                methods.helpers.is.idPanel.ac1Front(formData) ? "h-[40%] px-10" : "h-1/2",
+                "justify-center overflow-y-hidden flex items-center"
+              )}>
                 <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
               </div>
               <div className={classNames(
-                formData.size.current === '3.5” x 2”' ? "px-1" : "",
-                "flex h-1/2 items-center"
+                formData.size.current === '3.5” x 2”' ? "px-1 h-1/2" : "",
+                methods.helpers.is.idPanel.ac1Front(formData) ? "h-[60%]" : "h-1/2",
+                "flex items-center"
               )}>
                 {formData.img.type.toLowerCase() === "laser cut flag" ? (
                   <div id="mask"
@@ -668,12 +672,12 @@ export function Visualizer({ formData, className, methods, ...props }) {
               "flex h-full gap-2"
             )}>
               <div className={classNames(
-              methods.helpers.is.nameTape.tacTec(formData) ? "w-[26%]" : "",
-              methods.helpers.is.nameTape.ac1NameTape(formData) ? "w-[33%]" : "",
-              methods.helpers.is.nameTape.tacTecTrainer(formData) ? "w-[21.25%]" : "",
-              formData.size.current ==  '5” x 1”' ? "w-[25%]" : "",
-              "flex flex-0  w-1/3 items-center"
-            )}>
+                methods.helpers.is.nameTape.tacTec(formData) ? "w-[26%]" : "",
+                methods.helpers.is.nameTape.ac1NameTape(formData) ? "w-[33%]" : "",
+                methods.helpers.is.nameTape.tacTecTrainer(formData) ? "w-[21.25%]" : "",
+                formData.size.current == '5” x 1”' ? "w-[25%]" : "",
+                "flex flex-0  w-1/3 items-center"
+              )}>
                 <div id="flag" className="mr-1 flex-1 max-h-full max-w-full w-auto h-auto" style={flagStyle}></div>
               </div>
               <div ref={containerRef} className="flex flex-1 w-2/3 justify-center overflow-y-hidden items-center">
@@ -782,15 +786,15 @@ export function Visualizer({ formData, className, methods, ...props }) {
                 formData.img.flagTop ? "order-2" : "", ""
               )}>
                 <div className="flex items-center" style={{ ...fontWrapperStyle }}>
-                <p id="main-text" className={classNames(
-                  formData.size.current == '3.5” x 4”' && !formData.img.flagTop ? "" : "",
-                  formData.img.flagTop ? "order-1" : "", 
-                  methods.helpers.is.jacketPanel.hazard(formData) ? "mb-6" : "", 
-                  methods.helpers.is.jacketPanel.tad(formData) ? "mb-2" : "", 
-                  methods.helpers.is.jacketPanel.massif(formData) ? "" : "", 
-                  "text-center w-screen"
-                )}
-                  style={{ ...fontStyle }}>{formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
+                  <p id="main-text" className={classNames(
+                    formData.size.current == '3.5” x 4”' && !formData.img.flagTop ? "" : "",
+                    formData.img.flagTop ? "order-1" : "",
+                    methods.helpers.is.jacketPanel.hazard(formData) ? "mb-6" : "",
+                    methods.helpers.is.jacketPanel.tad(formData) ? "mb-2" : "",
+                    methods.helpers.is.jacketPanel.massif(formData) ? "" : "",
+                    "text-center w-screen"
+                  )}
+                    style={{ ...fontStyle }}>{formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
                 </div>
                 <div ref={containerSecondaryRef} className="flex flex-wrap">
                   <p id="text2" className="w-1/2 mb-1" style={{ ...fontSecondaryStyle }}>{formData.text.secondary.text?.length > 0 ? formData.text.secondary.text : formData.text.secondary.placeholder}</p>
