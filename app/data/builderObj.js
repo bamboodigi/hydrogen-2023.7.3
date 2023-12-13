@@ -693,6 +693,11 @@ const builderObj = {
           title: function (size) {
             let title = 'Name Tape';
             switch (size) {
+              case 'T.Rex Arms AC1 Back Panel':
+                break;
+              case 'T.Rex Arms AC1 Front':
+                title = 'Name Plate';
+                break;
               case 'T.Rex Arms AC1':
                 break;
               case '5.11 Tac Tec Carrier':
@@ -731,6 +736,12 @@ const builderObj = {
           fontSize: function (size) {
             let fontSize = null;
             switch (size) {
+              case 'T.Rex Arms AC1 Back Panel':
+                fontSize = 40;
+                break;
+              case 'T.Rex Arms AC1 Front':
+                fontSize = 50;
+                break;
               case 'T.Rex Arms AC1':
                 fontSize = 32;
                 break;
@@ -784,7 +795,6 @@ const builderObj = {
             return fontSize;
           },
           flagHeight: function (size) {
-            console.log(size);
             let flagHeight = '';
             switch (size) {
               case 'T.Rex Arms AC1':
@@ -1446,15 +1456,26 @@ const builderObj = {
       nameTape: {
         patch: function (size, setStyle) {
           switch (size) {
-            case 'T.Rex Arms AC1':
-              console.log("ok")
+            case 'T.Rex Arms AC1 Back Panel':
               setStyle(prevStyle => ({
                 ...prevStyle,
-                padding: '9px',
-                WebkitMaskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-ac1-nametape.png?v=1702437378)',
+                padding: '15px 40px',
+                WebkitMaskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-ac1-back.png?v=1702437378)',
                 WebkitMaskSize: 'cover',
                 WebkitMaskPosition: 'center',
-                maskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-ac1-nametape.png?v=1702437378)',
+                maskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-ac1-back.png?v=1702437378)',
+                maskSize: 'cover',
+                maskPosition: 'center',
+              }));
+              break;
+            case 'T.Rex Arms AC1 Front':
+              setStyle(prevStyle => ({
+                ...prevStyle,
+                padding: '15px 40px',
+                WebkitMaskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-ac1-front.png?v=1702437378)',
+                WebkitMaskSize: 'cover',
+                WebkitMaskPosition: 'center',
+                maskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-ac1-front.png?v=1702437378)',
                 maskSize: 'cover',
                 maskPosition: 'center',
               }));
@@ -2560,6 +2581,16 @@ const builderObj = {
           const size = formData.size.current;
 
           if (type.toLowerCase() == 'name tape' && size == 'T.Rex Arms AC1') {
+            return true;
+          } else {
+            return false;
+          }
+        },
+        ac1FrontNamePlate: function (formData) {
+          const type = formData.type;
+          const size = formData.size.current;
+
+          if (type.toLowerCase() == 'name tape' && size == 'T.Rex Arms AC1 Front Name Plate') {
             return true;
           } else {
             return false;

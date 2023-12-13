@@ -359,6 +359,36 @@ const builderData = {
             }
           },
           {
+            size: 'T.Rex Arms AC1 Front',
+            text: {
+              primary: {
+                placeholder: 'Up to \n2 Lines',
+                maxLength: 16,
+                lines: 2,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 13,
+              glowBorder: 10,
+            }
+          },
+          {
+            size: 'T.Rex Arms AC1 Back Panel',
+            text: {
+              primary: {
+                placeholder: 'Up to \n2 Lines',
+                maxLength: 26,
+                lines: 2,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 13,
+              glowBorder: 10,
+            }
+          },
+          {
             size: '5.11 Tac Tec Carrier Trainer',
             text: {
               primary: {
@@ -2148,15 +2178,23 @@ const builderData = {
     },
     {
       name: "T.Rex Arms AC1",
-      ratio: "6:1"
+      ratio: "6:1",
+    },
+    {
+      name: "T.Rex Arms AC1 Front",
+      ratio: "6:3",
+    },
+    {
+      name: "T.Rex Arms AC1 Back Panel",
+      ratio: '8.5:3',
     },
     {
       name: "6” x 2”",
-      ratio: "3:1"
+      ratio: "3:1",
     },
     {
       name: "6” x 3”",
-      ratio: "2:1"
+      ratio: "2:1",
     },
     {
       name: "Deadbug DV2",
