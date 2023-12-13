@@ -601,7 +601,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
               "flex flex-col w-full h-full"
             )}>
               <div ref={containerRef} className={classNames(
-                methods.helpers.is.idPanel.ac1Front(formData) ? "h-[40%] px-10" : "h-1/2",
+                methods.helpers.is.idPanel.ac1Front(formData) ? "h-[40%] w-[70%] ml-[15%]" : "h-1/2",
                 "justify-center overflow-y-hidden flex items-center"
               )}>
                 <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
