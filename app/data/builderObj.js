@@ -289,7 +289,7 @@ const builderObj = {
             // maskSize: 'cover',
             // WebkitMaskImage: img,
             // WebkitMaskSize: 'cover',
-            // // aspectRatio: '2/1',
+            aspectRatio: '80/47',
             backgroundImage: img,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
@@ -519,55 +519,57 @@ const builderObj = {
       },
       flagHeight: function (size, type) {
         let height = '';
-        // console.log(size);
-        // console.log(type);
         switch (type.toLowerCase()) {
           case 'id panel':
-            switch (size) {
-              case '3” x 2”':
-                height = 'calc(162px/2)';
-                break;
-              case '3.5” x 2”':
-                height = 'calc(131px/2)';
-                break;
-              case '4” x 2”':
-                height = 'calc(135px/2)';
-                break;
-              case '5” x 3”':
-                height = 'calc(135px/2)';
-                break;
-              case '6” x 2”':
-                height = 'calc(119px/2)';
-                break;
-              case '6” x 3”':
-                height = 'calc(135px/2)';
-                break;
-            }
+            height = this.patch.idPanel.flagHeight(size);
             break;
           case 'name tape':
-            height = builderObj.helpers.get.patch.nameTape.flagHeight(size);
+            height = this.patch.nameTape.flagHeight(size);
             break;
           case 'flag':
-            switch (size) {
-              case '3” x 2”':
-                height = '21px 20px';
-                break;
-              case '3.5” x 2”':
-                height = '20px';
-                break;
-              case '5” x 3”':
-                height = '17px 20px';
-                break;
-              case '6” x 3”':
-                height = '15px 20px';
-                break;
-            }
+            height = this.patch.flag.flagHeight(size);
             break;
           case 'jacket panel':
-            height = builderObj.helpers.get.patch.jacketPanel.flagHeight(size);
+            height = this.patch.jacketPanel.flagHeight(size);
             break;
         }
         return height;
+      },
+      fontSize: function (size, type) {
+        let fontSize;
+        switch (type.toLowerCase()) {
+          case 'id panel':
+            fontSize = this.patch.idPanel.fontSize(size);
+            break;
+          case 'name tape':
+            fontSize = this.patch.nameTape.fontSize(size);
+            break;
+          case 'medical patch':
+            fontSize = this.patch.medicalPatch.fontSize(size);
+            break;
+          case 'jacket panel':
+            fontSize = this.patch.jacketPanel.fontSize(size);
+            break;
+          case 'division jacket panel':
+            fontSize = this.patch.divisionJacketPanel.fontSize(size);
+            break;
+        }
+        return fontSize;
+      },
+      secondaryFontSize: function (size, type) {
+        let fontSize;
+        switch (type.toLowerCase()) {
+          case 'id panel':
+            fontSize = this.patch.idPanel.secondaryFontSize(size);
+            break;
+          case 'jacket panel':
+            fontSize = this.patch.jacketPanel.secondaryFontSize(size);
+            break;
+          case 'division jacket panel':
+            fontSize = this.patch.divisionJacketPanel.secondaryFontSize(size);
+            break;
+        }
+        return fontSize;
       },
       patch: {
         idPanel: {
@@ -639,25 +641,31 @@ const builderObj = {
             return fontSize;
           },
           flagHeight: function (size) {
-            let flagHeight = '';
+            let height = '';
             switch (size) {
-              case '3.5” x 3.5”':
-                flagHeight = 'calc(168px/2)';
+              case '3” x 2”':
+                height = 'calc(162px/2)';
                 break;
-              case '3.5” x 4”':
-                flagHeight = 'calc(250px/2)';
+              case '3.5” x 2”':
+                height = 'calc(131px/2)';
                 break;
-              case '3.6” x 5”':
-                flagHeight = 'calc(240px/2)';
+              case '4” x 2”':
+                height = 'calc(135px/2)';
                 break;
-              case '4” x 4.5”':
-                flagHeight = 'calc(258px/2)';
+              case '5” x 3”':
+                height = 'calc(135px/2)';
                 break;
-              case '4.6” x 6.2”':
-                flagHeight = 'calc(260px/2)';
+              case '6” x 2”':
+                height = 'calc(119px/2)';
+                break;
+              case '6” x 3”':
+                height = 'calc(135px/2)';
+                break;
+              case 'DeadBug DV2':
+                height = 'calc(110px/2)';
                 break;
             }
-            return flagHeight;
+            return height;
           },
           textHeight: function (size) {
             let textHeight = '';
@@ -685,6 +693,8 @@ const builderObj = {
           title: function (size) {
             let title = 'Name Tape';
             switch (size) {
+              case 'T.Rex Arms AC1':
+                break;
               case '5.11 Tac Tec Carrier':
                 break;
               case '5.11 Tac Tec Carrier Trainer':
@@ -721,6 +731,9 @@ const builderObj = {
           fontSize: function (size) {
             let fontSize = null;
             switch (size) {
+              case 'T.Rex Arms AC1':
+                fontSize = 32;
+                break;
               case '5.11 Tac Tec Carrier':
                 fontSize = 34;
                 break;
@@ -774,6 +787,9 @@ const builderObj = {
             console.log(size);
             let flagHeight = '';
             switch (size) {
+              case 'T.Rex Arms AC1':
+                flagHeight = 'calc(calc(55.63px/80)*47)';
+                break;
               case '5.11 Tac Tec Carrier':
                 flagHeight = '35px';
                 break;
@@ -883,24 +899,22 @@ const builderObj = {
             return title;
           },
           flagHeight: function (size) {
-            console.log(size);
-            let flagHeight = '';
+            let height = '';
             switch (size) {
-              case '5.11 Tac Tec Carrier':
-                flagHeight = '35px';
+              case '3” x 2”':
+                height = '21px 20px';
                 break;
-              case '5.11 Tac Tec Carrier Trainer':
-                console.log("ok")
-                flagHeight = '30px';
+              case '3.5” x 2”':
+                height = '20px';
                 break;
-              case '4” x 1”':
-                flagHeight = 'calc(calc(86.66px/80)*47)';
+              case '5” x 3”':
+                height = '17px 20px';
                 break;
-              case '5” x 1”':
-                flagHeight = 'calc(calc(68.22px/80)*47)';
+              case '6” x 3”':
+                height = '15px 20px';
                 break;
             }
-            return flagHeight;
+            return height;
           },
         },
         lightSaber: {
@@ -1432,8 +1446,20 @@ const builderObj = {
       nameTape: {
         patch: function (size, setStyle) {
           switch (size) {
-            case '5.11 Tac Tec Carrier':
+            case 'T.Rex Arms AC1':
               console.log("ok")
+              setStyle(prevStyle => ({
+                ...prevStyle,
+                padding: '9px',
+                WebkitMaskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-ac1-nametape.png?v=1702437378)',
+                WebkitMaskSize: 'cover',
+                WebkitMaskPosition: 'center',
+                maskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-ac1-nametape.png?v=1702437378)',
+                maskSize: 'cover',
+                maskPosition: 'center',
+              }));
+              break;
+            case '5.11 Tac Tec Carrier':
               setStyle(prevStyle => ({
                 ...prevStyle,
                 padding: '9px',
@@ -1446,7 +1472,6 @@ const builderObj = {
               }));
               break;
             case '5.11 Tac Tec Carrier Trainer':
-              console.log("ok")
               setStyle(prevStyle => ({
                 ...prevStyle,
                 padding: '9px',
@@ -1590,8 +1615,11 @@ const builderObj = {
           case 'name tape':
             if (formData.text.primary.text.length == 0) {
               if (formData.img.enabled) {
-                newFontSize = (builderObj.helpers.get.patch.nameTape.fontSize(formData.size.current)) / 1.35;
-
+                if (builderObj.helpers.is.nameTape.ac1NameTape(formData)) {
+                  newFontSize = (builderObj.helpers.get.patch.nameTape.fontSize(formData.size.current)) / 1.5;
+                } else {
+                  newFontSize = (builderObj.helpers.get.patch.nameTape.fontSize(formData.size.current)) / 1.35;
+                }
               } else {
                 newFontSize = builderObj.helpers.get.patch.nameTape.fontSize(formData.size.current);
               }
@@ -1620,7 +1648,7 @@ const builderObj = {
           setFontStyle(prevStyle => ({ ...prevStyle, fontSize: `${newFontSize}px`, lineHeight: `${newLineHeight}px`, marginTop: `${marginTop}px` }));
 
         } else {
-          if (formData.type.toLowerCase() == 'jacket panel' ){
+          if (formData.type.toLowerCase() == 'jacket panel') {
             let textHeight = builderObj.helpers.get.patch.jacketPanel.textHeight(formData.size.current);
             marginTop = 0;
             let newLineHeight = newFontSize * .87;
@@ -2491,7 +2519,7 @@ const builderObj = {
       },
     },
     is: {
-      idPanel : {
+      idPanel: {
         deadBug: function (formData) {
           const type = formData.type;
           const size = formData.size.current;
@@ -2499,6 +2527,39 @@ const builderObj = {
 
           if (type.toLowerCase() == 'id panel' && size == 'DeadBug DV2') {
             console.log('ok');
+            return true;
+          } else {
+            return false;
+          }
+        },
+      },
+      nameTape: {
+        tacTec: function (formData) {
+          const type = formData.type;
+          const size = formData.size.current;
+
+          if (type.toLowerCase() == 'name tape' && size == '5.11 Tac Tec Carrier') {
+            console.log('ok');
+            return true;
+          } else {
+            return false;
+          }
+        },
+        tacTecTrainer: function (formData) {
+          const type = formData.type;
+          const size = formData.size.current;
+
+          if (type.toLowerCase() == 'name tape' && size == '5.11 Tac Tec Carrier Trainer') {
+            return true;
+          } else {
+            return false;
+          }
+        },
+        ac1NameTape: function (formData) {
+          const type = formData.type;
+          const size = formData.size.current;
+
+          if (type.toLowerCase() == 'name tape' && size == 'T.Rex Arms AC1') {
             return true;
           } else {
             return false;
@@ -2541,29 +2602,6 @@ const builderObj = {
           const size = formData.size.current;
 
           if (type.toLowerCase() == 'jacket panel' && size == '4” x 4.5”') {
-            return true;
-          } else {
-            return false;
-          }
-        },
-      },
-      nameTape: {
-        tacTec: function (formData) {
-          const type = formData.type;
-          const size = formData.size.current;
-
-          if (type.toLowerCase() == 'name tape' && size == '5.11 Tac Tec Carrier') {
-            console.log('ok');
-            return true;
-          } else {
-            return false;
-          }
-        },
-        tacTecTrainer: function (formData) {
-          const type = formData.type;
-          const size = formData.size.current;
-
-          if (type.toLowerCase() == 'name tape' && size == '5.11 Tac Tec Carrier Trainer') {
             return true;
           } else {
             return false;

@@ -662,12 +662,14 @@ export function Visualizer({ formData, className, methods, ...props }) {
           ) : formData.type.toLowerCase().includes("name tape") && formData.img.enabled ? (
             <div className={classNames(
               methods.helpers.is.nameTape.tacTec(formData) ? "w-[90%] gap-1" : "",
+              methods.helpers.is.nameTape.ac1NameTape(formData) ? "w-[70%] gap-1" : "",
               methods.helpers.is.nameTape.tacTecTrainer(formData) ? "w-[88%] gap-1" : "",
-              !methods.helpers.is.nameTape.tacTec(formData) && !methods.helpers.is.nameTape.tacTecTrainer(formData) ? "w-full" : "",
+              !methods.helpers.is.nameTape.tacTec(formData) && !methods.helpers.is.nameTape.tacTecTrainer(formData) && !methods.helpers.is.nameTape.ac1NameTape(formData) ? "w-full" : "",
               "flex h-full gap-2"
             )}>
               <div className={classNames(
               methods.helpers.is.nameTape.tacTec(formData) ? "w-[26%]" : "",
+              methods.helpers.is.nameTape.ac1NameTape(formData) ? "w-[33%]" : "",
               methods.helpers.is.nameTape.tacTecTrainer(formData) ? "w-[21.25%]" : "",
               formData.size.current ==  '5” x 1”' ? "w-[25%]" : "",
               "flex flex-0  w-1/3 items-center"
@@ -682,7 +684,8 @@ export function Visualizer({ formData, className, methods, ...props }) {
             <div ref={containerRef} className={classNames(
               methods.helpers.is.nameTape.tacTec(formData) ? "w-[95%]" : "",
               methods.helpers.is.nameTape.tacTecTrainer(formData) ? "w-[90%]" : "",
-              !methods.helpers.is.nameTape.tacTec(formData) && !methods.helpers.is.nameTape.tacTecTrainer(formData) ? "w-full" : "",
+              methods.helpers.is.nameTape.ac1NameTape(formData) ? "w-[70%] gap-1" : "",
+              !methods.helpers.is.nameTape.tacTec(formData) && !methods.helpers.is.nameTape.tacTecTrainer(formData) && !methods.helpers.is.nameTape.ac1NameTape(formData) ? "w-full" : "",
               "h-full text-center overflow-x-hidden overflow-y-hidden flex items-center justify-center"
             )}>
               <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text.split('\n').map((line, index) => (

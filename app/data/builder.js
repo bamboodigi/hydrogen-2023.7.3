@@ -343,22 +343,19 @@ const builderData = {
             }
           },
           {
-            size: '5.11 Tac Tec Carrier',
+            size: 'T.Rex Arms AC1',
             text: {
               primary: {
                 placeholder: 'Your Name',
-                maxLength: 13,
+                maxLength: 10,
                 lines: 1,
               }
             },
             flagEnabled: true,
             upsells: {
-              size: 4,
+              size: 2,
               glowBorder: 5,
               hiVis: 4,
-              tacTecCarrier: 2,
-              tacTecTrainer: 3,
-              tRexArms: 0,
             }
           },
           {
@@ -373,6 +370,25 @@ const builderData = {
             flagEnabled: true,
             upsells: {
               size: 5,
+              glowBorder: 5,
+              hiVis: 4,
+              tacTecCarrier: 2,
+              tacTecTrainer: 3,
+              tRexArms: 0,
+            }
+          },
+          {
+            size: '5.11 Tac Tec Carrier',
+            text: {
+              primary: {
+                placeholder: 'Your Name',
+                maxLength: 13,
+                lines: 1,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 4,
               glowBorder: 5,
               hiVis: 4,
               tacTecCarrier: 2,
@@ -2128,6 +2144,10 @@ const builderData = {
     },
     {
       name: "5.11 Tac Tec Carrier",
+      ratio: "6:1"
+    },
+    {
+      name: "T.Rex Arms AC1",
       ratio: "6:1"
     },
     {

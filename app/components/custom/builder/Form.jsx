@@ -753,7 +753,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
           ],
         };
 
-        const isValidSize = ['4” x 1”', '5” x 1”', '5.11 Tac Tec Carrier', '5.11 Tac Tec Carrier Trainer'].includes(formData.size.current);
+        const isValidSize = ['4” x 1”', '5” x 1”', '5.11 Tac Tec Carrier', '5.11 Tac Tec Carrier Trainer', 'T.Rex Arms AC1'].includes(formData.size.current);
         const index = steps.findIndex(step => step.name === flagStep.name);
         
         isValidSize && index === -1 ? steps.splice(2, 0, flagStep) : !isValidSize && index !== -1 && steps.splice(2, 1);
