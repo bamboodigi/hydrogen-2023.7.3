@@ -440,6 +440,10 @@ export function Visualizer({ formData, className, methods, ...props }) {
       methods.helpers.set.nameTape.patch(formData.size.current, setStyle);
     }
 
+    if (methods.helpers.is.patchType.flagPatch(formData)) {
+      methods.helpers.set.flag.patch(formData.size.current, setStyle);
+    }
+
     if (methods.helpers.is.patchType.idPanel(formData)) {
       methods.helpers.set.idPanel.patch(formData.size.current, setStyle);
     }

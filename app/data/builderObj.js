@@ -931,6 +931,9 @@ const builderObj = {
               case '6” x 3”':
                 height = '15px 20px';
                 break;
+                case 'T.Rex Arms AC1 Front':
+             //     height = '17px 20px';
+                  break;
             }
             return height;
           },
@@ -1397,6 +1400,10 @@ const builderObj = {
                 "value": "9"
               },
               {
+                "id": "gid://shopify/ProductVariant/43013695078558",
+                "value": "11"
+              },
+              {
                 "id": "gid://shopify/ProductVariant/42908592570526",
                 "value": "13"
               },
@@ -1531,9 +1538,27 @@ const builderObj = {
                 maskImage: 'none',
               }));
               break;
-
+          }
+        },
+      },
+      flag: {
+        patch: function (size, setStyle) {
+          switch (size) {
+            case 'T.Rex Arms AC1 Front':
               setStyle(prevStyle => ({
-                ...prevStyle, padding: '30px 20px',
+                ...prevStyle,
+                padding: '15px 50px',
+                WebkitMaskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-ac1-front.png?v=1702437378)',
+                WebkitMaskSize: 'cover',
+                WebkitMaskPosition: 'center',
+                maskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-ac1-front.png?v=1702437378)',
+                maskSize: 'cover',
+                maskPosition: 'center',
+              }));
+              break;
+            case 'default':
+              setStyle(prevStyle => ({
+                ...prevStyle, padding: '17px 20px',
                 WebkitMaskImage: 'none',
                 maskImage: 'none',
               }));
@@ -1876,7 +1901,7 @@ const builderObj = {
 
           // console.log(upsells);
           // console.log(statusObj);
-
+          console.log(upsells.size);
           if (upsells.size) {
             let obj = {};
             obj.merchandiseId = getAddOnGID(builderObj.helpers.get.addOnObj, 'size', upsells.size).id;
@@ -1933,10 +1958,10 @@ const builderObj = {
           function getAddOnGID(addOnObj, handle, value) {
             let addOn = addOnObj()[handle];
 
-            // console.log(addOnObj());
-            // console.log(addOn);
-            // console.log(handle);
-            // console.log(value);
+            console.log(addOnObj());
+            console.log(addOn);
+            console.log(handle);
+            console.log(value);
 
 
             if (!addOn) {
@@ -1944,7 +1969,7 @@ const builderObj = {
             }
 
             let variant = addOn.variants.find(v => parseInt(v.value) === value);
-
+            console.log(variant);
             return variant || null;
           }
         },
@@ -2576,8 +2601,6 @@ const builderObj = {
         ac1Front: function (formData) {
           const type = formData.type;
           const size = formData.size.current;
-          console.log(type);
-          console.log(size);
           if (type.toLowerCase() == 'id panel' && size == 'T.Rex Arms AC1 Front') {
             console.log()
             return true;
@@ -2590,13 +2613,8 @@ const builderObj = {
         tacTec: function (formData) {
           const type = formData.type;
           const size = formData.size.current;
-
-          if (type.toLowerCase() == 'name tape' && size == '5.11 Tac Tec Carrier') {
-            console.log('ok');
-            return true;
-          } else {
-            return false;
-          }
+        
+          return type.toLowerCase() == 'name tape' && size == '5.11 Tac Tec Carrier';
         },
         tacTecTrainer: function (formData) {
           const type = formData.type;
@@ -2623,6 +2641,18 @@ const builderObj = {
           const size = formData.size.current;
 
           if (type.toLowerCase() == 'name tape' && size == 'T.Rex Arms AC1 Front') {
+            return true;
+          } else {
+            return false;
+          }
+        },
+      },
+      flagPatch: {
+        ac1Front: function (formData) {
+          const type = formData.type;
+          const size = formData.size.current;
+          if (type.toLowerCase() == 'flag' && size == 'T.Rex Arms AC1 Front') {
+            console.log()
             return true;
           } else {
             return false;

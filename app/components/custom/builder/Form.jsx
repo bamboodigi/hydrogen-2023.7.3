@@ -313,7 +313,13 @@ export function Form({ formData, setFormData, productURL, data, config, product,
         sizeObject = imgs['laser-cut']["large-id"];
       }
     } else {
-      sizeObject = imgs['laser-cut'][sizeKey];
+      console.log("ok");
+      if(methods.helpers.is.flagPatch.ac1Front(formData)) {
+        console.log("ok");
+        sizeObject = imgs['laser-cut']['5x3'];
+      } else {
+        sizeObject = imgs['laser-cut'][sizeKey];
+      }
     }
     // Get the corresponding size object from the imgs['laser-cut'] object
     // Get the current mask name from the formData object
@@ -606,9 +612,6 @@ export function Form({ formData, setFormData, productURL, data, config, product,
       default:
         let size = "";
         if (formData.type.toLowerCase() == 'id panel') {
-          //  ("id panel");
-          //  (formData.size.current);
-          //   size = convertSizeString(formData.size.current);
           switch (formData.size.current) {
             case '3” x 2”':
               //    ("yes");
@@ -622,12 +625,21 @@ export function Form({ formData, setFormData, productURL, data, config, product,
               size = "large-id";
               break;
           }
+        } else  if (formData.type.toLowerCase() == 'flag') {
+          switch (formData.size.current) {
+            case 'T.Rex Arms AC1 Front':
+              size = "5x3";
+              break;
+            case 'default':
+              size = convertSizeString(formData.size.current);
+              break;
+          }
         } else {
           //  ("else");
           size = convertSizeString(formData.size.current);
         }
 
-        // (size);
+        console.log(size);
         // ( imgs["laser-cut"][size]);
         // ( imgs["laser-cut"]);
         obj = imgs["laser-cut"][size].find(value => value.name === event.name);
@@ -1242,7 +1254,6 @@ export function Form({ formData, setFormData, productURL, data, config, product,
                           )
                         ) : (
                           methods.helpers.is.flagType.laserCutFlag(formData) ? (
-                            ("ok"),
                             <AdvancedSelect
                               title={formData.img.markType}
                               name={formData.img.markType}

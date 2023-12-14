@@ -864,6 +864,21 @@ const builderData = {
               glowBorder: 10,
             },
           },
+          {
+            size: 'T.Rex Arms AC1 Front',
+            text: {
+              primary: {
+                placeholder: null,
+                maxLength: null,
+                lines: null,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 11,
+              glowBorder: 10,
+            },
+          },
         ],
         extra: [
           {
@@ -3170,166 +3185,4 @@ function initLaserCutFlags() {
   return laserObj;
 }
 
-// const upsellSizesSet = new Set();
-// const upsellGlowSet = new Set();
-// const upsellHiVisSet = new Set();
-// const upsellBadgeSet = new Set();
-
-// for (const type in builderData.type) {
-//   const config = builderData.type[type].config;
-//   if (config && config.sizes) {
-//     for (const sizeObj of config.sizes) {
-//       if (sizeObj.upsells && sizeObj.upsells.size) {
-//         upsellSizesSet.add(sizeObj.upsells.size);
-//       }
-//       if (sizeObj.upsells && sizeObj.upsells.glowBorder) {
-//         upsellGlowSet.add(sizeObj.upsells.glowBorder);
-//       }
-//       if (sizeObj.upsells && sizeObj.upsells.hiVis) {
-//         upsellHiVisSet.add(sizeObj.upsells.hiVis);
-//       }
-//       if (sizeObj.upsells && sizeObj.upsells.badge) {
-//         upsellBadgeSet.add(sizeObj.upsells.badge);
-//       }
-//     }
-//   }
-// }
-
-// const upsellSizes = Array.from(upsellSizesSet).sort((a, b) => a - b);
-// const upsellGlow = Array.from(upsellGlowSet).sort((a, b) => a - b);
-// const upsellHiVis = Array.from(upsellHiVisSet).sort((a, b) => a - b);
-// const upsellBadge = Array.from(upsellBadgeSet).sort((a, b) => a - b);
-
-// console.log(upsellSizes);
-// console.log(upsellGlow);
-// console.log(upsellHiVis);
-// console.log(upsellBadge);
-
-
-// console.log(builderData.imgs["laser-cut"]);
 export default builderData;
-
-
-// [
-//   "acadia.png",//
-//   "alabama.png",
-//   "alaska.png",
-//   "antartica.png",
-//   // "aquila.png",//
-//   // "argentina.png",//
-//   "arizona.png",
-//   "arkansas.png",
-//   //  "armenia.png",//
-//   "australia.png",
-//   "austria.png",
-//   "belgium.png",
-//   "betsy-ross.png",
-//   "black-beard.png",//
-//   "british-columbia.png",
-//   "calico-jack.png",
-//   "california-republic.png",
-//   //  "canada-philippines.png",//
-//   //  "canada-south-korea.png",//
-//   //   "canada-swiss.png",//
-//   //   "canada-uk.png",//
-//   "canada.png",
-//   "chicago.png",
-//   "chile.png",
-//   "china.png",
-//   "coast-guard.png",
-//   "colorado.png",
-//   "columbia.png",
-//   "croatia.png",
-//   "cuba.png",
-//   "czech-republic.png",
-//   "denmark.png",
-//   // "egypt.png", //
-//   "european-union.png",
-//   "finland.png",
-//   "florida.png",
-//   "france.png",
-//   // "frogman.png",
-//   //"gadsden.png", //
-//   "galactic-empire.png",
-//   "galactic-republic.png",
-//   //"georgia-state.png",//
-//   "georgia-country.png",
-//   "germany.png",
-//   "greece.png",
-//   "guernsey-channel-islands.png",
-//   "hawaii.png",
-//   "hong-kong.png",
-//   "hungary.png",
-//   "iceland.png",
-//   "imperial-aquila.png",
-//   "imperial-japan.png",//
-//   "indiana.png",
-//   "indianapolis.png",
-//   "indonesia.png",
-//   "iraq.png",//
-//   "ireland.png",
-//   "israel.png",
-//   "italy.png",
-//   "japan.png",
-//   //"jedi-order.png",
-//   "jolly-roger.png",
-//   "jordan.png",
-//   "kurdistan.png",
-//   "kuwait.png",
-//   //"kyrgyzstan.png",//
-//   "latvia.png",
-//   "malaysia.png",
-//   // "macau.png",//
-//   // "mandalorian.png",//
-//   "maryland.png",
-//   "mexico.png",
-//   "mississippi.png",
-//   "mythosaur.png",
-//   "navy-jack.png",
-//   "netherlands.png",
-//   "new-england.png",
-//   "new-mexico.png",
-//   "new-orleans.png",
-//   "new-zealand.png",
-//   "north-carolina.png",
-//   "norway.png",
-//   "ohio.png",
-//   "pakistan.png",
-//   "philippines.png",
-//   "poland.png",
-//   "portugal.png",
-//   "puerto-rico.png",
-//   "quebec.png",
-//   "rebel-alliance.png",
-//   "russia.png",
-//   "scotland.png",
-//   "singapore.png",
-//   "sons-of-liberty.png",
-//   "south-africa.png",
-//   "south-carolina.png",
-//   "south-korea.png",
-//   //"spain.png",//
-//   "sweden.png",
-//   "switzerland.png",
-//   "taiwan.png",
-//   "tennessee.png",
-//   "texas.png",
-//   "thailand.png",
-//   //"tonga.png",
-//   //"trinidad-and-tobago.png",
-//   "turkey.png",//
-//   "ukraine.png",
-//   "united-kingdom.png",//
-//   // "usa-canada.png",//
-//   // "usa-hong-kong.png",//
-//   // "usa-new-zealand.png",//
-//   // "usa-philippines.png",//
-//   // "usa-south-korea.png",//
-//   // "usa-uk-split.png",//
-//   "usa.png",
-//   //"usmc-ega.png",//
-//   "utah.png",
-//   "vietnam.png",
-//   //"vader-wants-you.png",//
-//   "venezuela.png"
-// ];
