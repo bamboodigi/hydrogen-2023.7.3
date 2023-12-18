@@ -1434,15 +1434,17 @@ const builderObj = {
       cartSize: function (cart) {
         let size = cart?.totalQuantity || 0;
         console.log(cart);
+
+        // filter upsell objects if there is a cart
     //   loop through cart.lines.edges
     // console.log(cart.lines);
-    //     if(cart?.lines) {
-    //       cart.lines.edges.forEach(({ node: { quantity, attributes } }) => {
-    //         if (attributes.some(({ key }) => key === 'productID')) {
-    //           size -= quantity;
-    //         }
-    //       });
-    //     }
+        if(size) {
+          cart.lines.edges.forEach(({ node: { quantity, attributes } }) => {
+            if (attributes.some(({ key }) => key === 'productID')) {
+              size -= quantity;
+            }
+          });
+        }
         return size;
       },
     },
