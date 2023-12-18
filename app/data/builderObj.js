@@ -1435,14 +1435,14 @@ const builderObj = {
         let size = cart?.totalQuantity || 0;
         console.log(cart);
     //   loop through cart.lines.edges
-    console.log(cart.lines);
-        if(cart?.lines) {
-          cart.lines.edges.forEach(({ node: { quantity, attributes } }) => {
-            if (attributes.some(({ key }) => key === 'productID')) {
-              size -= quantity;
-            }
-          });
-        }
+    // console.log(cart.lines);
+    //     if(cart?.lines) {
+    //       cart.lines.edges.forEach(({ node: { quantity, attributes } }) => {
+    //         if (attributes.some(({ key }) => key === 'productID')) {
+    //           size -= quantity;
+    //         }
+    //       });
+    //     }
         return size;
       },
     },
