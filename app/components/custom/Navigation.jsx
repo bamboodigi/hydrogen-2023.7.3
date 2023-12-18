@@ -690,6 +690,7 @@ function AccountLink({ className, linkClassName }) {
 function CartCount({ isHome, openCart }) {
   const [root] = useMatches();
   //console.log(root);
+
   return (
     <Suspense fallback={<Badge count={0} dark={isHome} openCart={openCart} />}>
       <Await resolve={root.data?.cart}>
