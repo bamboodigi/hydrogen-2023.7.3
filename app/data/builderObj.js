@@ -1436,11 +1436,13 @@ const builderObj = {
         console.log(cart);
     //   loop through cart.lines.edges
     console.log(cart.lines);
-        cart?.lines.edges.forEach(({ node: { quantity, attributes } }) => {
-          if (attributes.some(({ key }) => key === 'productID')) {
-            size -= quantity;
-          }
-        });
+        if(cart?.lines) {
+          cart.lines.edges.forEach(({ node: { quantity, attributes } }) => {
+            if (attributes.some(({ key }) => key === 'productID')) {
+              size -= quantity;
+            }
+          });
+        }
         return size;
       },
     },
