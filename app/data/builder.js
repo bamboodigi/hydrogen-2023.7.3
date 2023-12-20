@@ -1953,33 +1953,16 @@ const builderData = {
         sizes: [
           {
             size: '3” x 1”',
-            text: {
-              primary: {
-                placeholder: 'Your Name',
-                maxLength: 9,
-                lines: 1,
-              }
-            },
             flagEnabled: false,
             upsells: {
               size: 0,
-              glowBorder: 5,
             }
           },
           {
             size: '4” x 1”',
-            text: {
-              primary: {
-                placeholder: 'Your Name',
-                maxLength: 10,
-                lines: 1,
-              }
-            },
             flagEnabled: false,
             upsells: {
               size: 1,
-              glowBorder: 5,
-              hiVis: 4,
             }
           },
           {
@@ -1999,21 +1982,9 @@ const builderData = {
           },
           {
             size: '5” x 1”',
-            text: {
-              primary: {
-                placeholder: 'Your Name',
-                maxLength: 13,
-                lines: 1,
-              }
-            },
             flagEnabled: false,
             upsells: {
               size: 2,
-              glowBorder: 5,
-              hiVis: 4,
-              tacTecCarrier: 2,
-              tacTecTrainer: 3,
-              tRexArms: 0,
             }
           },
           {
@@ -2033,244 +2004,110 @@ const builderData = {
           },
           {
             size: 'T.Rex Arms AC1',
-            text: {
-              primary: {
-                placeholder: 'Your Name',
-                maxLength: 10,
-                lines: 1,
-              }
-            },
             flagEnabled: false,
             upsells: {
               size: 2,
-              glowBorder: 5,
-              hiVis: 4,
             }
           },
           {
             size: 'T.Rex Arms AC1 Front',
-            text: {
-              primary: {
-                placeholder: 'Up to \n2 Lines',
-                maxLength: 16,
-                lines: 2,
-              }
-            },
             flagEnabled: false,
             upsells: {
               size: 13,
-              glowBorder: 10,
             }
           },
           {
             size: 'T.Rex Arms AC1 Back Panel',
-            text: {
-              primary: {
-                placeholder: 'Up to \n2 Lines',
-                maxLength: 26,
-                lines: 2,
-              }
-            },
             flagEnabled: false,
             upsells: {
               size: 13,
-              glowBorder: 10,
             }
           },
           {
             size: '5.11 Tac Tec Carrier Trainer',
-            text: {
-              primary: {
-                placeholder: 'Your Name',
-                maxLength: 13,
-                lines: 1,
-              }
-            },
             flagEnabled: false,
             upsells: {
               size: 5,
-              glowBorder: 5,
-              hiVis: 4,
-              tacTecCarrier: 2,
-              tacTecTrainer: 3,
-              tRexArms: 0,
             }
           },
           {
             size: '5.11 Tac Tec Carrier',
-            text: {
-              primary: {
-                placeholder: 'Your Name',
-                maxLength: 13,
-                lines: 1,
-              }
-            },
             flagEnabled: false,
             upsells: {
               size: 4,
-              glowBorder: 5,
-              hiVis: 4,
-              tacTecCarrier: 2,
-              tacTecTrainer: 3,
-              tRexArms: 0,
             }
           },
           {
             size: '6” x 2”',
-            text: {
-              primary: {
-                placeholder: 'Your Name',
-                maxLength: 10,
-                lines: 1,
-              }
-            },
             flagEnabled: false,
             upsells: {
               size: 8,
-              glowBorder: 10,
-              policeBlueLine: 5,
-              sheriffBlueLine: 5,
             }
           },
           {
             size: '8” x 2”',
-            text: {
-              primary: {
-                placeholder: 'Up to \n2 Lines',
-                maxLength: 30,
-                lines: 2,
-              }
-            },
             flagEnabled: false,
             upsells: {
               size: 9,
-              glowBorder: 10,
-              tRexArms: 4,
             }
           },
           {
             size: '8” x 3”',
-            text: {
-              primary: {
-                placeholder: 'Up to \n2 Lines',
-                maxLength: 26,
-                lines: 2,
-              }
-            },
             flagEnabled: false,
             upsells: {
               size: 14,
-              glowBorder: 10,
             }
           },
           {
             size: '8” x 4”',
-            text: {
-              primary: {
-                placeholder: 'Up to \n3 \nLines',
-                maxLength: 39,
-                lines: 3,
-              }
-            },
             flagEnabled: false,
             upsells: {
               size: 24,
-              glowBorder: 10,
             }
           },
           {
             size: '9” x 3”',
-            text: {
-              primary: {
-                placeholder: 'Up to 2\n Lines of Text',
-                maxLength: 26,
-                lines: 2,
-              }
-            },
             flagEnabled: false,
             upsells: {
               size: 15,
-              glowBorder: 15,
             }
           },
           {
             size: '10” x 2”',
-            text: {
-              primary: {
-                placeholder: 'Your Name',
-                maxLength: 13,
-                lines: 1,
-              }
-            },
             flagEnabled: false,
             upsells: {
               size: 14,
-              glowBorder: 10,
             }
           },
           {
             size: '11” x 3”',
-            text: {
-              primary: {
-                placeholder: 'Up to 2 \nLines of Text',
-                maxLength: 32,
-                lines: 2,
-              }
-            },
             flagEnabled: false,
             upsells: {
               size: 17,
-              glowBorder: 15,
             }
           },
           {
             size: '12” x 4”',
-            text: {
-              primary: {
-                placeholder: 'Up to \n3 \nLines of Text',
-                maxLength: 54,
-                lines: 3,
-              }
-            },
             flagEnabled: false,
             upsells: {
               size: 41,
-              glowBorder: 20,
             }
           }
         ],
       },
       form: {
-        intro: "Our Name Tape come in various sizes. For sizes 4 x 1, 5 x1 come with the option to add a flag.",
+        intro: "Our Covers come in various sizes. Covers are the various sizes of patches we create but no flags, symbols or writing will be on them. They are blank.",
         btnText: "Get Started",
         steps: [
           {
-            name: "Text & Size",
+            name: "Size & Color",
             status: 'current',
             input: [
-              {
-                id: 'text',
-                label: 'Text',
-                type: 'input',
-                placeholder: '',
-              },
               {
                 id: 'size',
                 label: 'Size',
                 type: 'select',
                 placeholder: '',
-              },
-            ],
-          },
-          {
-            name: "Font & Background Colors",
-            status: 'upcoming',
-            input: [
-              {
-                id: 'textColor',
-                label: 'Text Color',
-                type: 'advancedSelect',
-                placeholder: 'Flat Spice Brown',
               },
               {
                 id: 'backgroundColor',
@@ -2285,16 +2122,10 @@ const builderData = {
             status: 'upcoming',
             input: [
               {
-                id: 'glowBorder',
-                label: 'Add a glow in the dark border? +$10 USD',
-                type: 'checkmark',
-                placeholder: '',
-              },
-              {
                 id: 'leadTime',
                 label: 'I Agree to the Lead Time',
                 type: 'checkmark',
-                placeholder: '<strong>Lead Time:</strong>  - From your order, to design, production, QC, and shipping, takes roughly 10 business days. Don\'t worry, we\'ll keep you updated with what is going on the whole time. Check this box to confirm that you understand that your order will take roughly 10 business days to ship.',
+                placeholder: '<strong>Lead Time:</strong>  - From your order, to design, production, QC, and shipping, takes roughly 10 business days. If your order only contains Covers, you can expect a much faster production time. Don\'t worry, we\'ll keep you updated with what is going on the whole time. Check this box to confirm that you understand that your order will take roughly 10 business days to ship.',
               },
             ],
           },
