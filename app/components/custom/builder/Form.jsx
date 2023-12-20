@@ -472,6 +472,22 @@ export function Form({ formData, setFormData, productURL, data, config, product,
         });
       }
     }
+    else if (methods.helpers.is.patchType.cover(formData)) {
+      setFormData({
+        ...formData,
+        price: {
+          ...formData.price,
+          upsells: {
+            ...formData.price.upsells,
+            size: objSizes.upsells.size,       
+          },
+        },
+        size: {
+          ...formData.size,
+          current: event.target.value
+        },
+      });
+    }
     else {
       setFormData({
         ...formData,

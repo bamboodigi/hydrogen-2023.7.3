@@ -57,7 +57,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
   const imageLoader = (obj, setState, type) => {
     //  console.log(obj);
     console.log(type);
-    // console.log(obj.type);
+    console.log(obj.type);
     let mask = obj.mask ? obj.mask : null;
     let bgImg = obj.src;
     let height = obj.height ? obj.height : null;
@@ -85,39 +85,42 @@ export function Visualizer({ formData, className, methods, ...props }) {
             console.log('ok');
             console.log(height);
             img.src = mask;
-            setStyle(prevStyle => ({
-              ...prevStyle,
-              padding: height,
-            }));
-            //  console.log(mask);
-            //   console.log(setState);
-            setState(prevStyle => ({
-              ...prevStyle,
-              backgroundImage: `url("${bgImg}")`,
-              WebkitMaskImage: `url("${mask}")`,
-              WebkitMaskPosition: 'center',
-              WebkitSize: 'cover',
-              maskImage: `url("${mask}")`,
-              maskSize: `cover`,
-              maskPosition: 'center',
-            }));
-          } else {
+            img.onload = () => {
+              setStyle(prevStyle => ({
+                ...prevStyle,
+                padding: height,
+              }));
+              //  console.log(mask);
+              //   console.log(setState);
+              setState(prevStyle => ({
+                ...prevStyle,
+                backgroundImage: `url("${bgImg}")`,
+                WebkitMaskImage: `url("${mask}")`,
+                WebkitMaskPosition: 'center',
+                WebkitSize: 'cover',
+                maskImage: `url("${mask}")`,
+                maskSize: `cover`,
+                maskPosition: 'center',
+              }));
+            };
+          } else if(!type.toLowerCase().includes("light sabers")){
             img.src = mask;
-
-            //  console.log(mask);
-            //   console.log(setState);
-            setState(prevStyle => ({
-              ...prevStyle,
-              backgroundImage: `url("${bgImg}")`,
-              WebkitMaskImage: `url("${mask}")`,
-              WebkitMaskPosition: 'center',
-              WebkitSize: 'cover',
-              maskImage: `url("${mask}")`,
-              maskSize: `cover`,
-              maskPosition: 'center',
-              minHeight: height,
-              maxHeight: height,
-            }));
+            img.onload = () => {
+              //  console.log(mask);
+              //   console.log(setState);
+              setState(prevStyle => ({
+                ...prevStyle,
+                backgroundImage: `url("${bgImg}")`,
+                WebkitMaskImage: `url("${mask}")`,
+                WebkitMaskPosition: 'center',
+                WebkitSize: 'cover',
+                maskImage: `url("${mask}")`,
+                maskSize: `cover`,
+                maskPosition: 'center',
+                minHeight: height,
+                maxHeight: height,
+              }));
+            };
           }
         }
         break;
@@ -168,16 +171,19 @@ export function Visualizer({ formData, className, methods, ...props }) {
           }
           img.src = mask;
           //   console.log(mask);
-          setState(prevStyle => ({
-            ...prevStyle,
-            backgroundImage: `url("${bgImg}")`,
-            WebkitMaskImage: `url("${mask}")`,
-            WebkitMaskPosition: 'center',
-            WebkitSize: 'cover',
-            maskImage: `url("${mask}")`,
-            maskSize: `cover`,
-            maskPosition: 'center',
-          }));
+
+          img.onload = () => {
+            setState(prevStyle => ({
+              ...prevStyle,
+              backgroundImage: `url("${bgImg}")`,
+              WebkitMaskImage: `url("${mask}")`,
+              WebkitMaskPosition: 'center',
+              WebkitSize: 'contain',
+              maskImage: `url("${mask}")`,
+              maskSize: `contain`,
+              maskPosition: 'center',
+            }));
+          };
 
           if (newWidth.length > 0) {
             setTimeout(() => {
@@ -202,7 +208,6 @@ export function Visualizer({ formData, className, methods, ...props }) {
           }
         }
         break;
-
     }
   };
 
@@ -444,6 +449,11 @@ export function Visualizer({ formData, className, methods, ...props }) {
       methods.helpers.set.flag.patch(formData.size.current, setStyle);
     }
 
+
+    if (methods.helpers.is.patchType.cover(formData)) {
+      methods.helpers.set.cover.patch(formData.size.current, setStyle);
+    }
+
     if (methods.helpers.is.patchType.idPanel(formData)) {
       methods.helpers.set.idPanel.patch(formData.size.current, setStyle);
     }
@@ -455,9 +465,9 @@ export function Visualizer({ formData, className, methods, ...props }) {
   // match the font size.
   let count = 0;
   useEffect(() => {
-    console.log('ok')
     if (formData.type.toLowerCase().includes("light sabers")) return;
     if (formData.type.toLowerCase().includes("flag")) return;
+    if (formData.type.toLowerCase().includes("cover")) return;
     if (!containerRef.current) return;
 
     // Define a function to adjust the font size
@@ -567,7 +577,6 @@ export function Visualizer({ formData, className, methods, ...props }) {
           methods.helpers.is.jacketPanel.hazard(formData) ? "rounded-[2rem]" : "",
           "flex items-center transform lg:scale-150"
         )} style={style}>
-
           {formData.type.toLowerCase().includes("id panel") && formData.size.current == '6” x 2”' ? (
             <div className="w-full h-full flex">
               <div className="w-1/2 flex items-center px-2">
@@ -837,9 +846,8 @@ export function Visualizer({ formData, className, methods, ...props }) {
                 <div id="ring" className="h-[58%] w-[67%] absolute z-100" style={ringStyle}></div>
               </div>
             </div>
-          ) : formData.type.toLowerCase().includes("ranger tabs") ? (
+          ) : formData.type.toLowerCase() == "cover" ? (
             <div ref={containerRef} className="h-full text-center overflow-x-hidden flex items-center justify-center">
-              <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
             </div>
           ) : (
             <div ref={containerRef} className="h-full text-center overflow-x-hidden flex items-center justify-center">

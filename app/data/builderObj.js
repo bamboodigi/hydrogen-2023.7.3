@@ -6,6 +6,7 @@ const builderObj = {
     //   // initalize the formData Object based on the product and chooses selected
     formData: function (product, searchParams) {
       const patchType = builderData.type[builderObj.helpers.get.handle(product).toLowerCase()];
+      console.log(patchType);
       let formData = {
         type: patchType.name || '',
         id: patchType.name.toLowerCase() || '',
@@ -477,6 +478,9 @@ const builderObj = {
           case 'ranger-tabs':
             result = 'ranger tabs';
             break;
+          case 'cover':
+            result = 'cover';
+            break;
           case 'flag-patch':
             result = 'flag';
             break;
@@ -514,6 +518,9 @@ const builderObj = {
           case 'division jacket panel':
             title = this.patch.divisionJacketPanel.title(size);
             break;
+            case 'cover':
+              title = this.patch.cover.title(size);
+              break;
         }
         return title;
       },
@@ -552,6 +559,9 @@ const builderObj = {
             break;
           case 'division jacket panel':
             fontSize = this.patch.divisionJacketPanel.fontSize(size);
+            break;
+          case 'cover':
+            fontSize = 0;
             break;
         }
         return fontSize;
@@ -931,9 +941,9 @@ const builderObj = {
               case '6” x 3”':
                 height = '15px 20px';
                 break;
-                case 'T.Rex Arms AC1 Front':
-             //     height = '17px 20px';
-                  break;
+              case 'T.Rex Arms AC1 Front':
+                //     height = '17px 20px';
+                break;
             }
             return height;
           },
@@ -1248,6 +1258,51 @@ const builderObj = {
             return textHeight;
           },
         },
+        cover: {
+          title: function (size) {
+            let title = 'Cover';
+            switch (size) {
+              case 'T.Rex Arms AC1 Back Panel':
+                break;
+              case 'T.Rex Arms AC1 Front':
+                title = 'Name Plate';
+                break;
+              case 'T.Rex Arms AC1':
+                break;
+              case '5.11 Tac Tec Carrier':
+                break;
+              case '5.11 Tac Tec Carrier Trainer':
+                break;
+              case '3” x 1”':
+                break;
+              case '4” x 1”':
+                break;
+              case '4” x 1.5”':
+                break;
+              case '5” x 1”':
+                break;
+              case '5” x 1.5”':
+                break;
+              case '6” x 2”':
+                break;
+              case '8” x 2”':
+                break;
+              case '8” x 3”':
+                break;
+              case '8” x 4”':
+                break;
+              case '9” x 3”':
+                break;
+              case '10” x 2”':
+                break;
+              case '11” x 3”':
+                break;
+              case '12” x 4”':
+                break;
+            }
+            return title;
+          },
+        },
       },
       upsells: function (product, size) {
         const patchType = this.type(product);
@@ -1436,9 +1491,9 @@ const builderObj = {
         console.log(cart);
 
         // filter upsell objects if there is a cart
-    //   loop through cart.lines.edges
-    // console.log(cart.lines);
-        if(size) {
+        //   loop through cart.lines.edges
+        // console.log(cart.lines);
+        if (size) {
           cart.lines.edges.forEach(({ node: { quantity, attributes } }) => {
             if (attributes.some(({ key }) => key === 'productID')) {
               size -= quantity;
@@ -1480,7 +1535,9 @@ const builderObj = {
               setStyle(prevStyle => ({
                 ...prevStyle, padding: '10px',
                 WebkitMaskImage: 'none',
+                WebkitMaskSize: 'contain',
                 maskImage: 'none',
+                maskSize: 'contain',
               }));
               break;
           }
@@ -1541,7 +1598,9 @@ const builderObj = {
               setStyle(prevStyle => ({
                 ...prevStyle, padding: '10px',
                 WebkitMaskImage: 'none',
+                WebkitMaskSize: 'contain',
                 maskImage: 'none',
+                maskSize: 'contain',
               }));
               break;
           }
@@ -1566,7 +1625,9 @@ const builderObj = {
               setStyle(prevStyle => ({
                 ...prevStyle, padding: '17px 20px',
                 WebkitMaskImage: 'none',
+                WebkitMaskSize: 'contain',
                 maskImage: 'none',
+                maskSize: 'contain',
               }));
               break;
           }
@@ -1619,6 +1680,69 @@ const builderObj = {
           }
         },
       },
+      cover: {
+        patch: function (size, setStyle) {
+          switch (size) {
+            case 'T.Rex Arms AC1 Back Panel':
+              setStyle(prevStyle => ({
+                ...prevStyle,
+                padding: '15px 40px',
+                WebkitMaskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-ac1-back.png?v=1702437378)',
+                WebkitMaskSize: 'cover',
+                WebkitMaskPosition: 'center',
+                maskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-ac1-back.png?v=1702437378)',
+                maskSize: 'cover',
+                maskPosition: 'center',
+              }));
+              break;
+            case 'T.Rex Arms AC1 Front':
+              setStyle(prevStyle => ({
+                ...prevStyle,
+                padding: '15px 40px',
+                WebkitMaskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-ac1-front.png?v=1702437378)',
+                WebkitMaskSize: 'cover',
+                WebkitMaskPosition: 'center',
+                maskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-ac1-front.png?v=1702437378)',
+                maskSize: 'cover',
+                maskPosition: 'center',
+              }));
+              break;
+            case '5.11 Tac Tec Carrier':
+              setStyle(prevStyle => ({
+                ...prevStyle,
+                padding: '9px',
+                WebkitMaskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-tac-tec.png?v=1702040296)',
+                WebkitMaskSize: 'cover',
+                WebkitMaskPosition: 'center',
+                maskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-tac-tec.png?v=1702040296)',
+                maskSize: 'cover',
+                maskPosition: 'center',
+              }));
+              break;
+            case '5.11 Tac Tec Carrier Trainer':
+              setStyle(prevStyle => ({
+                ...prevStyle,
+                padding: '9px',
+                WebkitMaskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-tac-tec-trainer.png?v=1702040296)',
+                WebkitMaskSize: 'cover',
+                WebkitMaskPosition: 'center',
+                maskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-tac-tec-trainer.png?v=1702040296)',
+                maskSize: 'cover',
+                maskPosition: 'center',
+              }));
+              break;
+            case 'default':
+              setStyle(prevStyle => ({
+                ...prevStyle, padding: '10px',
+                WebkitMaskImage: 'none',
+                WebkitMaskSize: 'contain',
+                maskImage: 'none',
+                maskSize: 'contain',
+              }));
+              break;
+          }
+        },
+      },
     },
     update: {
       fontSize: function (containerRef, setFontStyle, formData, setFontWrapperStyle) {
@@ -1637,14 +1761,14 @@ const builderObj = {
         // console.log(containerRef);
         // console.log(textElement)
         // // Get the container width and height, text width and height, and current font size
-        const containerWidth = container.offsetWidth;
+        const containerWidth = container?.offsetWidth || 0;
         const containerHeight = container.offsetHeight + 10;
-        let textWidth = textElement.offsetWidth;
+        let textWidth = textElement?.offsetWidth || 0;
 
         // if(textWidth > containerWidth) {
         //   textWidth = containerWidth;
         // }
-        const textHeight = textElement.offsetHeight;
+        const textHeight = textElement?.offsetHeight || 0;
         const currentFontSize = parseFloat(getComputedStyle(textElement).fontSize);
 
         // console.log(textWidth);
@@ -2619,7 +2743,7 @@ const builderObj = {
         tacTec: function (formData) {
           const type = formData.type;
           const size = formData.size.current;
-        
+
           return type.toLowerCase() == 'name tape' && size == '5.11 Tac Tec Carrier';
         },
         tacTecTrainer: function (formData) {
@@ -2762,6 +2886,7 @@ const builderObj = {
         flagPatch: (formData) => formData.type.toLowerCase() == ("flag"),
         lightSaber: (formData) => formData.type.toLowerCase().includes("light saber"),
         customPatch: (formData) => formData.type.toLowerCase() == 'custom printed patch',
+        cover: (formData) => formData.type.toLowerCase() == 'cover',
       },
       flagType: {
         laserCutFlag: (formData) => formData.img.type.toLowerCase() === "laser cut flag",
@@ -2780,7 +2905,6 @@ const builderObj = {
           return sizeEnabled || true;
         },
       },
-
     },
     utility: {
       classNames: function (...classes) {
