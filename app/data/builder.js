@@ -2482,8 +2482,6 @@ const builderData = {
   ]
 };
 
-initSymbols();
-
 function initSymbols() {
   const folder = "https://cdn.shopify.com/s/files/1/2242/5805/files/";  // If you have a common folder path, you can add it here
   const end = "?v=1698434481j";
@@ -2516,8 +2514,6 @@ function initSymbols() {
       icon: `${folder}${name}-icon.png${end}`
     };
   });
-
-  //console.log(formattedArray);
 
   return formattedArray;
 }
@@ -2693,7 +2689,6 @@ function initHiVisFlags() {
 
   return formattedArray;
 }
-
 
 function initLaserCutFlags() {
   const folder = "https://cdn.shopify.com/s/files/1/2242/5805/files/";  // If you have a common folder path, you can add it here

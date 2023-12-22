@@ -205,7 +205,7 @@ const builderObj = {
             lines: 1,
           };
           break;
-        case 'default':
+        default:
           formData.img.type = 'HiVis Flag';
           formData.price.total += 4;
           break;
@@ -213,15 +213,6 @@ const builderObj = {
 
 
       formData = builderObj.helpers.update.params.updateFormData(formData, searchParams, product);
-
-      // console.log(searchParams);
-      // const params = builderObj.helpers.utility.paramsStringToObj(searchParams);
-
-      // const filteredParams = builderObj.helpers.update.paramsFilter(params, paramsList);
-
-      // console.log(params);
-      // console.log(filteredParams);
-      //  formData = builderObj.helpers.update.paramsFormData(formData, filteredParams);
 
       return formData || {};
     },
@@ -1531,7 +1522,7 @@ const builderObj = {
                 maskPosition: 'center',
               }));
               break;
-            case 'default':
+            default:
               setStyle(prevStyle => ({
                 ...prevStyle, padding: '10px',
                 WebkitMaskImage: 'none',
@@ -1594,7 +1585,7 @@ const builderObj = {
                 maskPosition: 'center',
               }));
               break;
-            case 'default':
+            default:
               setStyle(prevStyle => ({
                 ...prevStyle, padding: '10px',
                 WebkitMaskImage: 'none',
@@ -1621,7 +1612,7 @@ const builderObj = {
                 maskPosition: 'center',
               }));
               break;
-            case 'default':
+            default:
               setStyle(prevStyle => ({
                 ...prevStyle, padding: '17px 20px',
                 WebkitMaskImage: 'none',
@@ -1682,6 +1673,7 @@ const builderObj = {
       },
       cover: {
         patch: function (size, setStyle) {
+          console.log(size);
           switch (size) {
             case 'T.Rex Arms AC1 Back Panel':
               setStyle(prevStyle => ({
@@ -1731,7 +1723,8 @@ const builderObj = {
                 maskPosition: 'center',
               }));
               break;
-            case 'default':
+            default:
+              console.log("ok");
               setStyle(prevStyle => ({
                 ...prevStyle, padding: '10px',
                 WebkitMaskImage: 'none',
@@ -2590,7 +2583,7 @@ const builderObj = {
                 'ringColor',
               ];
               break;
-            case 'default':
+            default:
               break;
           }
           // console.log(paramsList);
@@ -2699,7 +2692,7 @@ const builderObj = {
                 { ringColor: formData.img.division.ring.color.name },
               ];
               break;
-            case 'default':
+            default:
               break;
           }
           // console.log(params);
