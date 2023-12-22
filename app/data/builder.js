@@ -1140,6 +1140,12 @@ const builderData = {
               //   placeholder: 'Reflective',
               // },
               {
+                id: 'size',
+                label: 'Size',
+                type: 'select',
+                placeholder: 'AC1 Name Tape',
+              },
+              {
                 id: 'upload',
                 label: 'Upload your image',
                 type: 'upload',
