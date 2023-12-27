@@ -1533,6 +1533,18 @@ const builderObj = {
       nameTape: {
         patch: function (size, setStyle) {
           switch (size) {
+            case 'T.Rex Arms AC1':
+              setStyle(prevStyle => ({
+                ...prevStyle,
+                padding: '5px 20px',
+                WebkitMaskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-ac1-nametape.png?v=1702437378)',
+                WebkitMaskSize: 'cover',
+                WebkitMaskPosition: 'center',
+                maskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-ac1-nametape.png?v=1702437378)',
+                maskSize: 'cover',
+                maskPosition: 'center',
+              }));
+              break;
             case 'T.Rex Arms AC1 Back Panel':
               setStyle(prevStyle => ({
                 ...prevStyle,
@@ -1671,6 +1683,18 @@ const builderObj = {
         patch: function (size, setStyle) {
           console.log(size);
           switch (size) {
+            case 'T.Rex Arms AC1':
+              setStyle(prevStyle => ({
+                ...prevStyle,
+                padding: '5px 20px',
+                WebkitMaskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-ac1-nametape.png?v=1702437378)',
+                WebkitMaskSize: 'cover',
+                WebkitMaskPosition: 'center',
+                maskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-ac1-nametape.png?v=1702437378)',
+                maskSize: 'cover',
+                maskPosition: 'center',
+              }));
+              break;
             case 'T.Rex Arms AC1 Back Panel':
               setStyle(prevStyle => ({
                 ...prevStyle,
@@ -1736,14 +1760,8 @@ const builderObj = {
     update: {
       fontSize: function (containerRef, setFontStyle, formData, setFontWrapperStyle) {
         const textLines = formData.text.primary.lines;
-        // console.log(textLines)
-        // console.log(formData.text.primary.lines)
-        // console.log(formData.type.toLowerCase())
-        // console.log(formData.size.current == '6” x 2”')
+       
         const currentLines = formData.text.primary.text.split("\n").length;
-        //  console.log(formData.type.toLowerCase().includes("name tape") && formData.type.toLowerCase().includes("flag"))
-        // console log that formData.type.toLowercase() contains id panel and formData.size.current == '6” x 2”' is true
-        // console.log(formData.type.toLowerCase().includes('id panel') && formData.size.current == '6” x 2”')
         const container = containerRef.current;
 
         const textElement = container.querySelector('#main-text');
@@ -1828,7 +1846,11 @@ const builderObj = {
         let marginTop = null;
         if (textLines > 1) {
           marginTop = (newFontSize) / 7;
-
+          if(textLines == 3) {
+            newFontSize = newFontSize * .9;
+          } else {
+            newFontSize = newFontSize * .95;
+          }
           let newLineHeight = newFontSize * .87;
           setFontStyle(prevStyle => ({ ...prevStyle, fontSize: `${newFontSize}px`, lineHeight: `${newLineHeight}px`, marginTop: `${marginTop}px` }));
 

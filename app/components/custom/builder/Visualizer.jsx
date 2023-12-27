@@ -679,7 +679,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
           ) : formData.type.toLowerCase().includes("name tape") && formData.img.enabled ? (
             <div className={classNames(
               methods.helpers.is.nameTape.tacTec(formData) ? "w-[90%] gap-1" : "",
-              methods.helpers.is.nameTape.ac1NameTape(formData) ? "w-[70%] gap-1" : "",
+              methods.helpers.is.nameTape.ac1NameTape(formData) ? "w-[76%] gap-1" : "",
               methods.helpers.is.nameTape.tacTecTrainer(formData) ? "w-[88%] gap-1" : "",
               !methods.helpers.is.nameTape.tacTec(formData) && !methods.helpers.is.nameTape.tacTecTrainer(formData) && !methods.helpers.is.nameTape.ac1NameTape(formData) ? "w-full" : "",
               "flex h-full gap-2"
