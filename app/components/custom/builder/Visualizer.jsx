@@ -32,6 +32,8 @@ export function Visualizer({ formData, className, methods, ...props }) {
 
   //console.log(img);
 
+ // console.log(patch);
+
   // console.log(img);
   // Create a ref to access the container element
   // console.log(img.mask);
@@ -50,9 +52,8 @@ export function Visualizer({ formData, className, methods, ...props }) {
   const [maskStyle, setMaskStyle] = useState(img.mask);
   const [ringStyle, setRingStyle] = useState(img.division.ring);
   const [birdStyle, setBirdStyle] = useState(img.division.bird);
-  // console.log(img.mask);
-  // console.log(maskStyle);
-  //console.log(flagStyle);
+
+
   // A function to load an image and update the state with its URL
   const imageLoader = (obj, setState, type) => {
     //  console.log(obj);
@@ -82,14 +83,12 @@ export function Visualizer({ formData, className, methods, ...props }) {
         if (mask) {
           console.log('ok');
           if (type.toLowerCase() == "flag") {
-            console.log('ok');
-            console.log(height);
             img.src = mask;
             img.onload = () => {
-              setStyle(prevStyle => ({
-                ...prevStyle,
-                padding: height,
-              }));
+              // setStyle(prevStyle => ({
+              //   ...prevStyle,
+              //   padding: height,
+              // }));
               //  console.log(mask);
               //   console.log(setState);
               setState(prevStyle => ({
@@ -103,7 +102,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
                 maskPosition: 'center',
               }));
             };
-          } else if(!type.toLowerCase().includes("light sabers")){
+          } else if (!type.toLowerCase().includes("light sabers")) {
             img.src = mask;
             img.onload = () => {
               //  console.log(mask);
@@ -759,7 +758,11 @@ export function Visualizer({ formData, className, methods, ...props }) {
               </div>
             </div>
           ) : formData.type.toLowerCase() == ("flag") ? (
-            <div ref={containerRef} className="h-full w-full overflow-x-hidden flex items-center justify-center">
+            <div ref={containerRef}
+              className={classNames(
+                methods.helpers.is.flagPatch.ac1Front(formData) ? "w-[90%]" : "w-full",
+                "h-full overflow-x-hidden flex items-center justify-center"
+              )}>
               {formData.img.type.toLowerCase() === "laser cut flag" ? (
                 <div id="mask" className="h-full w-full" style={maskStyle}>
                   <div id="glow"

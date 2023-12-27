@@ -2330,6 +2330,10 @@ const builderData = {
   },
   sizeOptions: [
     {
+      name: "DeadBug DV2",
+      ratio: "50:33"
+    },
+    {
       name: "1” x 1”",
       ratio: "1:1"
     },

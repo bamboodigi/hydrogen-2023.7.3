@@ -410,8 +410,6 @@ const builderObj = {
           obj.text.primary.fontSize = '52px';
           obj.text.primary.lineHeight = '52px';
       }
-
-
       return obj;
     },
   },
@@ -1611,7 +1609,7 @@ const builderObj = {
             case 'T.Rex Arms AC1 Front':
               setStyle(prevStyle => ({
                 ...prevStyle,
-                padding: '15px 50px',
+                padding: '15px 40px',
                 WebkitMaskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-ac1-front.png?v=1702437378)',
                 WebkitMaskSize: 'cover',
                 WebkitMaskPosition: 'center',
@@ -1622,7 +1620,8 @@ const builderObj = {
               break;
             default:
               setStyle(prevStyle => ({
-                ...prevStyle, padding: '17px 20px',
+                ...prevStyle, 
+                padding: '17px 24px',
                 WebkitMaskImage: 'none',
                 WebkitMaskSize: 'contain',
                 maskImage: 'none',
