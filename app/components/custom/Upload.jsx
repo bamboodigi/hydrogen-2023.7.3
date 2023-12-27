@@ -14,7 +14,8 @@
 */
 import { PhotoIcon } from '@heroicons/react/24/solid'
 
-export function Upload({ label, onChange }) {
+export function Upload({ label, onChange, message }) {
+    console.log(message);
     return (
         <form>
             <div className="col-span-full">
@@ -24,7 +25,7 @@ export function Upload({ label, onChange }) {
                 <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-4">
                     <div className="text-center">
                         <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" />
-                        <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                        <div className="mt-4 flex text-sm leading-6 text-gray-600 justify-center">
                             <label
                                 htmlFor="file-upload"
                                 className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
@@ -34,7 +35,7 @@ export function Upload({ label, onChange }) {
                             </label>
                             <p className="pl-1">or drag and drop</p>
                         </div>
-                        <p className="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
+                        <p className="text-xs leading-5 text-gray-600">PNG, JPG, <span className="font-semibold text-indigo-600">{ message }</span>, up to 10MB. <br></br>Upload must use correct ratio and/or size.</p>
                     </div>
                 </div>
             </div>

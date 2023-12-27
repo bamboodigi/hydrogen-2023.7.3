@@ -1066,7 +1066,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
                     </>
                   ) : input.id.toLowerCase() == "upload" ? (
                     <>
-                      <Upload label="Upload" onChange={handleFileInputChange} />
+                      <Upload label="Upload" onChange={handleFileInputChange} message={methods.helpers.get.patch.customPatch.uploadInfo(formData.size.current)}/>
                     </>
                   ) : input.id.toLowerCase() == "bloodtype" ? (
                     <>

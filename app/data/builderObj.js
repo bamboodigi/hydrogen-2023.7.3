@@ -509,9 +509,9 @@ const builderObj = {
           case 'division jacket panel':
             title = this.patch.divisionJacketPanel.title(size);
             break;
-            case 'cover':
-              title = this.patch.cover.title(size);
-              break;
+          case 'cover':
+            title = this.patch.cover.title(size);
+            break;
         }
         return title;
       },
@@ -1013,26 +1013,22 @@ const builderObj = {
             //     break;
             // }
             return title;
+
           },
-          flagHeight: function (size) {
-            console.log(size);
-            let flagHeight = '';
-            switch (size) {
-              case '5.11 Tac Tec Carrier':
-                flagHeight = '35px';
-                break;
-              case '5.11 Tac Tec Carrier Trainer':
-                console.log("ok")
-                flagHeight = '30px';
-                break;
-              case '4” x 1”':
-                flagHeight = 'calc(calc(86.66px/80)*47)';
-                break;
-              case '5” x 1”':
-                flagHeight = 'calc(calc(68.22px/80)*47)';
-                break;
-            }
-            return flagHeight;
+          uploadInfo: function (size) {
+            let uploadInfo = '';
+            let ratio = '';
+            let pixels = '';
+            let dimensions = size.split(' x ');
+            let width = parseFloat(parseFloat(dimensions[0]).toFixed(2));
+            let height = parseFloat(parseFloat(dimensions[1]).toFixed(2));
+            console.log(width);
+            pixels = (width * 100) + 'x' + (height * 100);
+            ratio = width + ':' + height;
+            uploadInfo = ratio + ', ' + pixels + ' px';
+            console.log(ratio);
+            console.log(uploadInfo);
+            return uploadInfo;
           },
         },
         jacketPanel: {
