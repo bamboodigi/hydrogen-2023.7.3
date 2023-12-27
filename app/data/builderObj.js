@@ -1021,7 +1021,7 @@ const builderObj = {
             let width = parseFloat(parseFloat(dimensions[0]).toFixed(2));
             let height = parseFloat(parseFloat(dimensions[1]).toFixed(2));
             console.log(width);
-            pixels = (width * 100) + 'x' + (height * 100);
+            pixels = (width * 500) + 'x' + (height * 500);
             ratio = width + ':' + height;
             uploadInfo = ratio + ', ' + pixels + ' px';
             console.log(ratio);
@@ -1245,14 +1245,14 @@ const builderObj = {
         },
         cover: {
           title: function (size) {
-            let title = 'Cover';
+            let title = 'Cover Panel';
             switch (size) {
               case 'T.Rex Arms AC1 Back Panel':
                 break;
               case 'T.Rex Arms AC1 Front':
-                title = 'Name Plate';
                 break;
               case 'T.Rex Arms AC1':
+                title = 'Name Tape ' + title;
                 break;
               case '5.11 Tac Tec Carrier':
                 break;

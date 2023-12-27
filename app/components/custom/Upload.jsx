@@ -35,7 +35,7 @@ export function Upload({ label, onChange, message }) {
                             </label>
                             <p className="pl-1">or drag and drop</p>
                         </div>
-                        <p className="text-xs leading-5 text-gray-600">PNG, JPG, <span className="font-semibold text-indigo-600">{ message }</span>, up to 10MB. <br></br>Upload must use correct ratio and/or size.</p>
+                        <p className="text-xs leading-5 text-gray-600">PNG, JPG, <span className="font-semibold text-indigo-600">{ message }</span>, up to 10MB. <br></br>Upload must use correct ratio and/or size.<br></br>Lower resolution images may result in lower quality print results.</p>
                     </div>
                 </div>
             </div>
