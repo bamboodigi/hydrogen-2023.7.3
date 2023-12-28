@@ -1329,6 +1329,57 @@ const builderData = {
             },
           },
           {
+            size: '3.5” x 4.25”',
+            text: {
+              primary: {
+                maxLength: 13,
+                lines: 1,
+                placeholder: 'Name',
+              },
+              secondary: {
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'RCSD',
+              },
+              third: {
+                text: '',
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'S1008',
+              },
+              fourth: {
+                text: '',
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'NKA',
+              },
+              fifth: {
+                text: '',
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'SPPROJ',
+              },
+              sixth: {
+                text: '',
+                maxLength: 6,
+                lines: 1,
+                placeholder: 'BPOS',
+              },
+              seventh: {
+                text: '',
+                maxLength: 6,
+                lines: 1,
+                placeholder: '011173',
+              },
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 0,
+              hiVis: 5,
+              glowBorder: 5,
+            },
+          },
+          {
             size: '4” x 4.5”',
             text: {
               primary: {

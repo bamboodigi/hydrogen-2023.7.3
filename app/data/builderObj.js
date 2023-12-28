@@ -1037,8 +1037,11 @@ const builderObj = {
                 title = 'Arc’teryx';
                 break;
               case '3.5” x 4”':
-                title = 'Condor';
+                title = 'Defensive Mechanisms';
                 break;
+                case '3.5” x 4.25”':
+                  title = 'Condor';
+                  break;
               case '3.6” x 5”':
                 title = 'Tad';
                 break;
@@ -1060,6 +1063,9 @@ const builderObj = {
               case '3.5” x 4”':
                 fontSize = 80;
                 break;
+                case '3.5” x 4.25”':
+                  fontSize = 80;
+                  break;
               case '3.6” x 5”':
                 fontSize = 80;
                 break;
@@ -1079,6 +1085,9 @@ const builderObj = {
                 fontSize = 14;
                 break;
               case '3.5” x 4”':
+                fontSize = 32;
+                break;
+                case '3.5” x 4.25”':
                 fontSize = 32;
                 break;
               case '3.6” x 5”':
@@ -1102,6 +1111,9 @@ const builderObj = {
               case '3.5” x 4”':
                 flagHeight = 'calc(250px/2)';
                 break;
+                case '3.5” x 4.25”':
+                  flagHeight = 'calc(250px/2)';
+                  break;
               case '3.6” x 5”':
                 flagHeight = 'calc(240px/2)';
                 break;
@@ -2800,11 +2812,21 @@ const builderObj = {
         },
       },
       jacketPanel: {
-        condor: function (formData) {
+        defense: function (formData) {
           const type = formData.type;
           const size = formData.size.current;
 
           if (type.toLowerCase() == 'jacket panel' && size == '3.5” x 4”') {
+            return true;
+          } else {
+            return false;
+          }
+        },
+        condor: function (formData) {
+          const type = formData.type;
+          const size = formData.size.current;
+
+          if (type.toLowerCase() == 'jacket panel' && size == '3.5” x 4.25”') {
             return true;
           } else {
             return false;

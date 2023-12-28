@@ -574,6 +574,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
         <div id="patch" className={classNames(
           formData.type.toLowerCase().includes("flag") ? "justify-center" : "justify-center",
           methods.helpers.is.jacketPanel.hazard(formData) ? "rounded-[2rem]" : "",
+          methods.helpers.is.jacketPanel.defense(formData) ? "rounded-[2rem]" : "",
           "flex items-center transform lg:scale-150"
         )} style={style}>
           {formData.type.toLowerCase().includes("id panel") && formData.size.current == '6” x 2”' ? (
@@ -798,12 +799,12 @@ export function Visualizer({ formData, className, methods, ...props }) {
           ) : formData.type.toLowerCase() == "jacket panel" ? (
             <div ref={containerRef} className="h-full w-full overflow-x-hidden flex flex-col items-center justify-between">
               <div className={classNames(
-                formData.size.current == '3.5” x 4”' && !formData.img.flagTop ? "" : "",
+                formData.size.current == '3.5” x 4.25”' && !formData.img.flagTop ? "" : "",
                 formData.img.flagTop ? "order-2" : "", ""
               )}>
                 <div className="flex items-center" style={{ ...fontWrapperStyle }}>
                   <p id="main-text" className={classNames(
-                    formData.size.current == '3.5” x 4”' && !formData.img.flagTop ? "" : "",
+                    formData.size.current == '3.5” x 4.25”' && !formData.img.flagTop ? "" : "",
                     formData.img.flagTop ? "order-1" : "",
                     methods.helpers.is.jacketPanel.hazard(formData) ? "mb-6" : "",
                     methods.helpers.is.jacketPanel.tad(formData) ? "mb-2" : "",
