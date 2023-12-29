@@ -1849,13 +1849,13 @@ const builderObj = {
           maxFontSize = 38;
           let textLength = formData.text.primary.text.length;
 
-          if (textLength >= 4 && textLength <= 6) {
+          if (textLength >= 4 && textLength <= 8) {
             maxFontSize = 38;
-          } else if (textLength >= 7 && textLength <= 9) {
+          } else if (textLength >= 9 && textLength <= 10) {
             maxFontSize = 32;
-          } else if (textLength >= 10 && textLength <= 12) {
+          } else if (textLength >= 11 && textLength <= 13) {
             maxFontSize = 28;
-          } else if (textLength >= 13 && textLength <= 16) {
+          } else if (textLength >= 14 && textLength <= 16) {
             maxFontSize = 24;
           }
         }
