@@ -674,6 +674,22 @@ const builderData = {
       config: {
         sizes: [
           {
+            name: "Hexagonal",
+            size: '3.5” Hexagonal',
+            text: {
+              primary: {
+                placeholder: 'Your Text',
+                maxLength: 15,
+                lines: 1,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 9,
+              glowBorder: 5,
+            },
+          },
+          {
             size: '1” x 1”',
             text: {
               primary: {
@@ -718,22 +734,22 @@ const builderData = {
               glowBorder: 5,
             }
           },
-          {
-            name: "Hexagonal",
-            size: '3.5” Hexagonal',
-            text: {
-              primary: {
-                placeholder: 'Your Text',
-                maxLength: 15,
-                lines: 1,
-              }
-            },
-            flagEnabled: true,
-            upsells: {
-              size: 9,
-              glowBorder: 5,
-            },
-          },
+          // {
+          //   name: "Hexagonal",
+          //   size: '3.5” Hexagonal',
+          //   text: {
+          //     primary: {
+          //       placeholder: 'Your Text',
+          //       maxLength: 15,
+          //       lines: 1,
+          //     }
+          //   },
+          //   flagEnabled: true,
+          //   upsells: {
+          //     size: 9,
+          //     glowBorder: 5,
+          //   },
+          // },
         ],
         extra: [
           {
@@ -2565,8 +2581,8 @@ function initSymbols() {
   // If there's a common file extension, you can add it here
 
   let imageList = [
-    'symbols-tq-img.png',
     'symbols-med-img.png',
+    'symbols-tq-img.png',
     'symbols-star-of-life-img.png',
     'symbols-maple-leaf-img.png',
     'symbols-med-cross-img.png',

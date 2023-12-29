@@ -2,6 +2,8 @@
 import { useState, useEffect, useRef } from 'react';
 import React from 'react';
 
+import ReactCurvedText from 'react-curved-text';
+
 import {
   IDPanel,
   NameTape,
@@ -753,8 +755,8 @@ export function Visualizer({ formData, className, methods, ...props }) {
               </div>
             </div>
           ) : methods.helpers.is.medical.hex(formData) ? (
-            <div className="flex w-full h-full gap-2 justify-center">
-              <div className="flex flex-col gap-3  w-[75%] justify-center items-center" style={{}}>
+            <div className="flex w-full h-full justify-center">
+              <div className="flex flex-col gap-1  w-[75%] justify-center items-center" style={{}}>
                 <div id="icon" className="h-[52%] w-[82%] relative" style={maskStyle}>
                   <div id="glow"
                     className={classNames(
@@ -765,11 +767,34 @@ export function Visualizer({ formData, className, methods, ...props }) {
                   ></div>
                 </div>
                 <div ref={containerRef} className="flex justify-center overflow-y-hidden items-center">
-                <p id="main-text" className={classNames(
+                <ReactCurvedText
+                  width={260}
+                  height={70}
+                  cx={120}
+                  cy={-190}
+                  rx={240}
+                  ry={240}
+                  startOffset={385}
+                  reversed={false}
+                  text={formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}
+                  textProps={
+                    { style: { ...fontStyle },
+                    className: "text-center w-screen",
+                    id : "main-text",
+                    textAnchor: "middle",
+                    }
+                  }
+                  textPathProps={null}
+                  tspanProps={null}
+                  textAnchor="middle"
+                  ellipseProps={null}
+                  svgProps={null}
+                  />
+                {/* <p id="main-text" className={classNames(
                     formData.size.current == '3.5” x 4.25”' && !formData.img.flagTop ? "" : "",
-                    "text-center w-screen"
+                    "text-center w-screen hidden"
                   )}
-                    style={{ ...fontStyle }}>{formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
+                    style={{ ...fontStyle }}>{formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p> */}
              </div>
               </div>
             </div>

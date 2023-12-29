@@ -873,7 +873,7 @@ const builderObj = {
                 fontSize = 47;
                 break;
               case '3.5” Hexagonal':
-                fontSize = 32;
+                fontSize = 38;
                 break;
             }
             console.log(fontSize);
@@ -1845,6 +1845,20 @@ const builderObj = {
         // if (formData.type.toLowerCase() == 'jacket panel') {
         //   maxFontSize = 45;
         // }
+        if(builderObj.helpers.is.medical.hex(formData)) {
+          maxFontSize = 38;
+          let textLength = formData.text.primary.text.length;
+
+          if (textLength >= 4 && textLength <= 6) {
+            maxFontSize = 38;
+          } else if (textLength >= 7 && textLength <= 9) {
+            maxFontSize = 32;
+          } else if (textLength >= 10 && textLength <= 12) {
+            maxFontSize = 28;
+          } else if (textLength >= 13 && textLength <= 16) {
+            maxFontSize = 24;
+          }
+        }
         if (newFontSize > maxFontSize) {
           newFontSize = maxFontSize;
         }
@@ -1870,9 +1884,12 @@ const builderObj = {
             }
             break;
           case 'medical patch':
-            console.log('ok');
             if (formData.text.primary.text.length == 0) {
               newFontSize = builderObj.helpers.get.patch.medicalPatch.fontSize(formData.size.current);
+            }
+            if(builderObj.helpers.is.medical.hex(formData)) {
+    
+              // newFontSize = builderObj.helpers.get.patch.medicalPatch.fontSize(formData.size.current);
             }
             break;
           case 'jacket panel':
@@ -2834,9 +2851,7 @@ const builderObj = {
         hex: function (formData) {
           const type = formData.type;
           const size = formData.size.current;
-          console.log('ok');
-          console.log(type);
-          console.log(size);
+         
           return type.toLowerCase() == 'medical patch' && size == '3.5” Hexagonal';
         },
       },
