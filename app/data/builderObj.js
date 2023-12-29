@@ -858,6 +858,9 @@ const builderObj = {
               case '3.5” x 2”':
                 title = 'Medical ID Panel';
                 break;
+              case '3.5” Hexagonal':
+                title = 'Medical Patch';
+                break;
             }
             return title;
           },
@@ -1634,6 +1637,34 @@ const builderObj = {
               setStyle(prevStyle => ({
                 ...prevStyle, 
                 padding: '17px 24px',
+                WebkitMaskImage: 'none',
+                WebkitMaskSize: 'contain',
+                maskImage: 'none',
+                maskSize: 'contain',
+              }));
+              break;
+          }
+        },
+      },
+      medical: {
+        patch: function (size, setStyle) {
+          switch (size) {
+            case '3.5” Hexagonal':
+              setStyle(prevStyle => ({
+                ...prevStyle,
+                padding: '10px',
+                WebkitMaskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-hex.png?v=1702437378)',
+                WebkitMaskSize: 'cover',
+                WebkitMaskPosition: 'center',
+                maskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-hex.png?v=1702437378)',
+                maskSize: 'cover',
+                maskPosition: 'center',
+              }));
+              break;
+            default:
+              setStyle(prevStyle => ({
+                ...prevStyle, 
+                padding: '10px',
                 WebkitMaskImage: 'none',
                 WebkitMaskSize: 'contain',
                 maskImage: 'none',
@@ -2797,6 +2828,16 @@ const builderObj = {
           } else {
             return false;
           }
+        },
+      },
+      medical: {
+        hex: function (formData) {
+          const type = formData.type;
+          const size = formData.size.current;
+          console.log('ok');
+          console.log(type);
+          console.log(size);
+          return type.toLowerCase() == 'medical patch' && size == '3.5” Hexagonal';
         },
       },
       flagPatch: {

@@ -449,6 +449,11 @@ export function Visualizer({ formData, className, methods, ...props }) {
     }
 
 
+    if (methods.helpers.is.patchType.medicalPatch(formData)) {
+      methods.helpers.set.medical.patch(formData.size.current, setStyle);
+    }
+
+
     if (methods.helpers.is.patchType.cover(formData)) {
       methods.helpers.set.cover.patch(formData.size.current, setStyle);
     }
@@ -744,6 +749,25 @@ export function Visualizer({ formData, className, methods, ...props }) {
                       {line}
                     </React.Fragment>
                   ))}</p>
+              </div>
+            </div>
+          ) : methods.helpers.is.medical.hex(formData) ? (
+            <div className="flex w-full h-full gap-2 justify-center">
+              <div className="flex flex-col  w-[75%] justify-center" style={{}}>
+                <div id="icon" className="h-[83%] w-full relative" style={maskStyle}>
+                  <div id="glow"
+                    className={classNames(
+                      formData.upsells.glowBorder ? "block" : "hidden",
+                      "h-full w-full"
+                    )}
+                    style={{ backgroundImage: `url("${formData.img.color.mask.glow}")`, backgroundSize: 'cover', position: 'absolute', backgroundPosition: 'center' }}
+                  ></div>
+                </div>
+                <p id="main-text" className={classNames(
+                    formData.size.current == '3.5” x 4.25”' && !formData.img.flagTop ? "" : "",
+                    "text-center w-screen"
+                  )}
+                    style={{ ...fontStyle }}>{formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
               </div>
             </div>
           ) : formData.type.toLowerCase().includes("medical patch") ? (

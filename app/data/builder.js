@@ -718,6 +718,22 @@ const builderData = {
               glowBorder: 5,
             }
           },
+          {
+            name: "Hexagonal",
+            size: '3.5” Hexagonal',
+            text: {
+              primary: {
+                placeholder: 'Your Text',
+                maxLength: 15,
+                lines: 1,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 9,
+              glowBorder: 5,
+            },
+          },
         ],
         extra: [
           {
@@ -2409,7 +2425,7 @@ const builderData = {
       ratio: "40:15"
     },
     {
-      name: "3.5” Hex",
+      name: "3.5” Hexagonal",
       ratio: "3:3.5"
     },
     {

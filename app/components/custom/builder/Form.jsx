@@ -328,7 +328,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
     const maskObject = sizeObject?.find(value => value.name === maskName) || {};
 
     if (formData.type.toLowerCase() == "medical patch") {
-      if (event.target.value == '3.5” x 2”') {
+      if (event.target.value == '3.5” x 2”' || event.target.value == '3.5” Hexagonal') {
         setFormData({
           ...formData,
           price: {
@@ -787,7 +787,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
         isValidSize && index === -1 ? steps.splice(2, 0, flagStep) : !isValidSize && index !== -1 && steps.splice(2, 1);
         break;
       case 'medical patch':
-        if (formData.size.current == '3.5” x 2”') {
+        if (formData.size.current == '3.5” x 2”' || methods.helpers.is.medical.hex(formData)) {
           const flagStep = {
             name: "Text",
             status: 'upcoming',
@@ -1223,7 +1223,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
                       />
 
                     </>
-                  ) : input.id.toLowerCase() == "symbol" ? (
+                  ) : input.id.toLowerCase() == "symbol" || !methods.helpers.is.medical.hex(formData) ? (
                     <>
                       <AdvancedSelect
                         title={formData.img.markType}
