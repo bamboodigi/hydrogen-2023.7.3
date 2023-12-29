@@ -448,7 +448,6 @@ export function Visualizer({ formData, className, methods, ...props }) {
       methods.helpers.set.flag.patch(formData.size.current, setStyle);
     }
 
-
     if (methods.helpers.is.patchType.medicalPatch(formData)) {
       methods.helpers.set.medical.patch(formData.size.current, setStyle);
     }
@@ -469,11 +468,12 @@ export function Visualizer({ formData, className, methods, ...props }) {
   // match the font size.
   let count = 0;
   useEffect(() => {
+    console.log(containerRef);
     if (formData.type.toLowerCase().includes("light sabers")) return;
     if (formData.type.toLowerCase().includes("flag")) return;
     if (formData.type.toLowerCase().includes("cover")) return;
     if (!containerRef.current) return;
-
+    console.log('ok');
     // Define a function to adjust the font size
     const adjustFontSize = () => {
       // If the containerRef is not set, return
@@ -481,6 +481,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
         if (methods.helpers.is.patchType.jacketPanel(formData)) {
           updateFontSize(containerRef, setFontStyle, formData, setFontWrapperStyle);
         } else {
+          console.log('ok');
           updateFontSize(containerRef, setFontStyle, formData);
         }
       }
@@ -753,8 +754,8 @@ export function Visualizer({ formData, className, methods, ...props }) {
             </div>
           ) : methods.helpers.is.medical.hex(formData) ? (
             <div className="flex w-full h-full gap-2 justify-center">
-              <div className="flex flex-col  w-[75%] justify-center" style={{}}>
-                <div id="icon" className="h-[83%] w-full relative" style={maskStyle}>
+              <div className="flex flex-col gap-3  w-[75%] justify-center items-center" style={{}}>
+                <div id="icon" className="h-[52%] w-[82%] relative" style={maskStyle}>
                   <div id="glow"
                     className={classNames(
                       formData.upsells.glowBorder ? "block" : "hidden",
@@ -763,11 +764,13 @@ export function Visualizer({ formData, className, methods, ...props }) {
                     style={{ backgroundImage: `url("${formData.img.color.mask.glow}")`, backgroundSize: 'cover', position: 'absolute', backgroundPosition: 'center' }}
                   ></div>
                 </div>
+                <div ref={containerRef} className="flex justify-center overflow-y-hidden items-center">
                 <p id="main-text" className={classNames(
                     formData.size.current == '3.5” x 4.25”' && !formData.img.flagTop ? "" : "",
                     "text-center w-screen"
                   )}
                     style={{ ...fontStyle }}>{formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
+             </div>
               </div>
             </div>
           ) : formData.type.toLowerCase().includes("medical patch") ? (

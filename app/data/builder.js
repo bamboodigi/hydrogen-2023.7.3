@@ -2566,6 +2566,7 @@ function initSymbols() {
 
   let imageList = [
     'symbols-tq-img.png',
+    'symbols-med-img.png',
     'symbols-star-of-life-img.png',
     'symbols-maple-leaf-img.png',
     'symbols-med-cross-img.png',

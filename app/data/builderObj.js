@@ -541,6 +541,7 @@ const builderObj = {
             fontSize = this.patch.nameTape.fontSize(size);
             break;
           case 'medical patch':
+            console.log('ok');
             fontSize = this.patch.medicalPatch.fontSize(size);
             break;
           case 'jacket panel':
@@ -866,15 +867,13 @@ const builderObj = {
           },
           fontSize: function (size) {
             let fontSize = null;
+            console.log(size);
             switch (size) {
-              case '1” x 1”':
-                title = 'Cats Eye';
-                break;
-              case '2” x 2”':
-                title = 'Medical Patch';
-                break;
               case '3.5” x 2”':
-                title = 'Medical ID Panel';
+                fontSize = 47;
+                break;
+              case '3.5” Hexagonal':
+                fontSize = 32;
                 break;
             }
             console.log(fontSize);
@@ -1849,7 +1848,7 @@ const builderObj = {
         if (newFontSize > maxFontSize) {
           newFontSize = maxFontSize;
         }
-
+        console.log('ok');
         switch (formData.type.toLowerCase()) {
           case 'id panel':
             if (formData.text.primary.text.length == 0) {
@@ -1871,8 +1870,9 @@ const builderObj = {
             }
             break;
           case 'medical patch':
+            console.log('ok');
             if (formData.text.primary.text.length == 0) {
-              newFontSize = 47.1714;
+              newFontSize = builderObj.helpers.get.patch.medicalPatch.fontSize(formData.size.current);
             }
             break;
           case 'jacket panel':
