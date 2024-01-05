@@ -313,9 +313,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
         sizeObject = imgs['laser-cut']["large-id"];
       }
     } else {
-      console.log("ok");
       if(methods.helpers.is.flagPatch.ac1Front(formData)) {
-        console.log("ok");
         sizeObject = imgs['laser-cut']['5x3'];
       } else {
         sizeObject = imgs['laser-cut'][sizeKey];
@@ -628,6 +626,8 @@ export function Form({ formData, setFormData, productURL, data, config, product,
       default:
         let size = "";
         if (formData.type.toLowerCase() == 'id panel') {
+          console.log("id panel")
+
           switch (formData.size.current) {
             case '3” x 2”':
               //    ("yes");
@@ -637,8 +637,9 @@ export function Form({ formData, setFormData, productURL, data, config, product,
               //  ("yes");
               size = "mini-id";
               break;
-            case 'default':
+            default:
               size = "large-id";
+              console.log(size);
               break;
           }
         } else  if (formData.type.toLowerCase() == 'flag') {
@@ -646,7 +647,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
             case 'T.Rex Arms AC1 Front':
               size = "5x3";
               break;
-            case 'default':
+            default:
               size = convertSizeString(formData.size.current);
               break;
           }
@@ -1223,7 +1224,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
                       />
 
                     </>
-                  ) : input.id.toLowerCase() == "symbol" || !methods.helpers.is.medical.hex(formData) ? (
+                  ) : input.id.toLowerCase() == "symbol" ? (
                     <>
                       <AdvancedSelect
                         title={formData.img.markType}

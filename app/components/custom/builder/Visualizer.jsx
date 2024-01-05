@@ -56,11 +56,30 @@ export function Visualizer({ formData, className, methods, ...props }) {
   const [birdStyle, setBirdStyle] = useState(img.division.bird);
 
 
+  // useEffect(() => {
+  //   const svg = document.querySelector('.curved-text');
+  //   if (svg && !svg.querySelector('defs')) {
+  //     const defs = document.createElement('defs');
+  //     const pattern = document.createElement('pattern');
+  //     pattern.setAttribute('id', 'image-pattern');
+  //     pattern.setAttribute('patternUnits', 'userSpaceOnUse');
+  //     pattern.setAttribute('width', '100%');
+  //     pattern.setAttribute('height', '100%');
+  //     const image = document.createElement('image');
+  //     image.setAttribute('href', formData.img.color.img);
+  //     image.setAttribute('width', '100%');
+  //     image.setAttribute('height', '100%');
+  //     pattern.appendChild(image);
+  //     defs.appendChild(pattern);
+  //     svg.appendChild(defs);
+  //   }
+  // }, [formData.text.primary.text]);
+
   // A function to load an image and update the state with its URL
   const imageLoader = (obj, setState, type) => {
     //  console.log(obj);
-    console.log(type);
-    console.log(obj.type);
+    // console.log(type);
+    // console.log(obj.type);
     let mask = obj.mask ? obj.mask : null;
     let bgImg = obj.src;
     let height = obj.height ? obj.height : null;
@@ -83,7 +102,6 @@ export function Visualizer({ formData, className, methods, ...props }) {
         break;
       case 'mask':
         if (mask) {
-          console.log('ok');
           if (type.toLowerCase() == "flag") {
             img.src = mask;
             img.onload = () => {
@@ -470,12 +488,11 @@ export function Visualizer({ formData, className, methods, ...props }) {
   // match the font size.
   let count = 0;
   useEffect(() => {
-    console.log(containerRef);
+   // console.log(containerRef);
     if (formData.type.toLowerCase().includes("light sabers")) return;
     if (formData.type.toLowerCase().includes("flag")) return;
     if (formData.type.toLowerCase().includes("cover")) return;
     if (!containerRef.current) return;
-    console.log('ok');
     // Define a function to adjust the font size
     const adjustFontSize = () => {
       // If the containerRef is not set, return
@@ -483,7 +500,6 @@ export function Visualizer({ formData, className, methods, ...props }) {
         if (methods.helpers.is.patchType.jacketPanel(formData)) {
           updateFontSize(containerRef, setFontStyle, formData, setFontWrapperStyle);
         } else {
-          console.log('ok');
           updateFontSize(containerRef, setFontStyle, formData);
         }
       }
@@ -510,11 +526,9 @@ export function Visualizer({ formData, className, methods, ...props }) {
   const count2 = 0;
   //Use the useEffect hook to manage side effects
   useEffect(() => {
-    console.log("ok");
     if (!containerSecondaryRef.current) return;
     const adjustFontSize = () => {
       // If the containerRef is not set, return
-      console.log("ok");
       updateAdditionalFontSize(containerSecondaryRef, setFontSecondaryStyle, formData);
     };
 
@@ -788,7 +802,11 @@ export function Visualizer({ formData, className, methods, ...props }) {
                   tspanProps={null}
                   textAnchor="middle"
                   ellipseProps={null}
-                  svgProps={null}
+                  svgProps={
+                    { 
+                    className: "curved-text",
+                    }
+                  }
                   />
                 {/* <p id="main-text" className={classNames(
                     formData.size.current == '3.5” x 4.25”' && !formData.img.flagTop ? "" : "",

@@ -6,7 +6,7 @@ const builderObj = {
     //   // initalize the formData Object based on the product and chooses selected
     formData: function (product, searchParams) {
       const patchType = builderData.type[builderObj.helpers.get.handle(product).toLowerCase()];
-      console.log(patchType);
+     // console.log(patchType);
       let formData = {
         type: patchType.name || '',
         id: patchType.name.toLowerCase() || '',
@@ -541,7 +541,6 @@ const builderObj = {
             fontSize = this.patch.nameTape.fontSize(size);
             break;
           case 'medical patch':
-            console.log('ok');
             fontSize = this.patch.medicalPatch.fontSize(size);
             break;
           case 'jacket panel':
@@ -799,7 +798,7 @@ const builderObj = {
                 fontSize = 29;
                 break;
             }
-            console.log(fontSize);
+      //      console.log(fontSize);
             return fontSize;
           },
           flagHeight: function (size) {
@@ -812,7 +811,6 @@ const builderObj = {
                 flagHeight = '35px';
                 break;
               case '5.11 Tac Tec Carrier Trainer':
-                console.log("ok")
                 flagHeight = '30px';
                 break;
               case '4” x 1”':
@@ -867,7 +865,7 @@ const builderObj = {
           },
           fontSize: function (size) {
             let fontSize = null;
-            console.log(size);
+    //        console.log(size);
             switch (size) {
               case '3.5” x 2”':
                 fontSize = 47;
@@ -876,7 +874,7 @@ const builderObj = {
                 fontSize = 38;
                 break;
             }
-            console.log(fontSize);
+        //    console.log(fontSize);
             return fontSize;
           },
         },
@@ -1022,12 +1020,12 @@ const builderObj = {
             let dimensions = size.split(' x ');
             let width = parseFloat(parseFloat(dimensions[0]).toFixed(2));
             let height = parseFloat(parseFloat(dimensions[1]).toFixed(2));
-            console.log(width);
+       //     console.log(width);
             pixels = (width * 500) + 'x' + (height * 500);
             ratio = width + ':' + height;
             uploadInfo = ratio + ', ' + pixels + ' px';
-            console.log(ratio);
-            console.log(uploadInfo);
+            // console.log(ratio);
+            // console.log(uploadInfo);
             return uploadInfo;
           },
         },
@@ -1487,7 +1485,7 @@ const builderObj = {
       },
       cartSize: function (cart) {
         let size = cart?.totalQuantity || 0;
-        console.log(cart);
+     //   console.log(cart);
 
         // filter upsell objects if there is a cart
         //   loop through cart.lines.edges
@@ -1722,7 +1720,7 @@ const builderObj = {
       },
       cover: {
         patch: function (size, setStyle) {
-          console.log(size);
+        //  console.log(size);
           switch (size) {
             case 'T.Rex Arms AC1':
               setStyle(prevStyle => ({
@@ -1785,7 +1783,6 @@ const builderObj = {
               }));
               break;
             default:
-              console.log("ok");
               setStyle(prevStyle => ({
                 ...prevStyle, padding: '10px',
                 WebkitMaskImage: 'none',
@@ -1862,7 +1859,6 @@ const builderObj = {
         if (newFontSize > maxFontSize) {
           newFontSize = maxFontSize;
         }
-        console.log('ok');
         switch (formData.type.toLowerCase()) {
           case 'id panel':
             if (formData.text.primary.text.length == 0) {
@@ -1931,9 +1927,9 @@ const builderObj = {
         // textContainer
         // how many lines
         const container = containerSecondaryRef.current;
-        console.log(container);
+     //   console.log(container);
         const textElement = container.querySelector('#secondary-text') || container.querySelector('#text2');
-        console.log(textElement);
+      //  console.log(textElement);
         const textLines = 1;
         // Get the container width and height, text width and height, and current font size
         const containerWidth = container.offsetWidth;
@@ -1973,7 +1969,7 @@ const builderObj = {
           newFontSize = minFontSize;
         }
 
-        console.log(newFontSize);
+    //    console.log(newFontSize);
 
         switch (formData.type.toLowerCase()) {
           case 'id panel':
@@ -2101,7 +2097,7 @@ const builderObj = {
 
           // console.log(upsells);
           // console.log(statusObj);
-          console.log(upsells.size);
+      //    console.log(upsells.size);
           if (upsells.size) {
             let obj = {};
             obj.merchandiseId = getAddOnGID(builderObj.helpers.get.addOnObj, 'size', upsells.size).id;
@@ -2158,10 +2154,10 @@ const builderObj = {
           function getAddOnGID(addOnObj, handle, value) {
             let addOn = addOnObj()[handle];
 
-            console.log(addOnObj());
-            console.log(addOn);
-            console.log(handle);
-            console.log(value);
+            // console.log(addOnObj());
+            // console.log(addOn);
+            // console.log(handle);
+            // console.log(value);
 
 
             if (!addOn) {
@@ -2169,7 +2165,7 @@ const builderObj = {
             }
 
             let variant = addOn.variants.find(v => parseInt(v.value) === value);
-            console.log(variant);
+        //    console.log(variant);
             return variant || null;
           }
         },
@@ -2495,7 +2491,7 @@ const builderObj = {
               case 'symbol':
                 //  console.log(value);
                 let symbolObj = this.update.symbol(value);
-                console.log(symbolObj);
+            //    console.log(symbolObj);
                 //   console.log(flagObj);
                 formData.img.color.mask.name = symbolObj.name;
                 formData.img.name = symbolObj.name;
@@ -2773,7 +2769,7 @@ const builderObj = {
               break;
           }
           // console.log(params);
-          console.log(params.map(obj => Object.keys(obj)[0] + '=' + obj[Object.keys(obj)[0]]).join('&'));
+       //   console.log(params.map(obj => Object.keys(obj)[0] + '=' + obj[Object.keys(obj)[0]]).join('&'));
           //     console.log(params.toString());
           // turn array in params strings for url
           setFormData({ ...formData, urlParams: params.map(obj => Object.keys(obj)[0] + '=' + obj[Object.keys(obj)[0]]).join('&') });
@@ -2789,10 +2785,8 @@ const builderObj = {
         deadBug: function (formData) {
           const type = formData.type;
           const size = formData.size.current;
-          console.log('ok')
 
           if (type.toLowerCase() == 'id panel' && size == 'DeadBug DV2') {
-            console.log('ok');
             return true;
           } else {
             return false;
@@ -2802,7 +2796,6 @@ const builderObj = {
           const type = formData.type;
           const size = formData.size.current;
           if (type.toLowerCase() == 'id panel' && size == 'T.Rex Arms AC1 Front') {
-            console.log()
             return true;
           } else {
             return false;
@@ -2860,7 +2853,6 @@ const builderObj = {
           const type = formData.type;
           const size = formData.size.current;
           if (type.toLowerCase() == 'flag' && size == 'T.Rex Arms AC1 Front') {
-            console.log()
             return true;
           } else {
             return false;
