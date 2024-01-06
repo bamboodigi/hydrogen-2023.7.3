@@ -1814,7 +1814,11 @@ const builderObj = {
         //   textWidth = containerWidth;
         // }
         const textHeight = textElement?.offsetHeight || 0;
-        const currentFontSize = parseFloat(getComputedStyle(textElement).fontSize);
+        let currentFontSize = 0;
+        if(formData.type.toLowerCase() !== 'medical patch') {
+          currentFontSize = parseFloat(getComputedStyle(textElement).fontSize)
+        }
+
 
         // console.log(textWidth);
 
@@ -1916,9 +1920,11 @@ const builderObj = {
             let newLineHeight = newFontSize * .87;
             setFontStyle(prevStyle => ({ ...prevStyle, fontSize: `${newFontSize}px`, lineHeight: `${newLineHeight}px`, marginTop: `${marginTop}px` }));
             setFontWrapperStyle(prevStyle => ({ ...prevStyle, minHeight: textHeight }));
-          } else {
+          } else if(builderObj.helpers.is.medical.hex(formData)) {
+
+          }else {
             marginTop = builderObj.helpers.is.idPanel.deadBug(formData) || builderObj.helpers.is.idPanel.ac1Front(formData) ? 0 : newFontSize / 9;
-            setFontStyle(prevStyle => ({ ...prevStyle, fontSize: `${newFontSize}px`, lineHeight: `${newFontSize}px`, marginTop: `${marginTop}px` }));
+           setFontStyle(prevStyle => ({ ...prevStyle, fontSize: `${newFontSize}px`, lineHeight: `${newFontSize}px`, marginTop: `${marginTop}px` }));
           }
         }
       },

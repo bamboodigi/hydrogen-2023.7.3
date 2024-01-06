@@ -34,7 +34,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
 
   //console.log(img);
 
- // console.log(patch);
+  // console.log(patch);
 
   // console.log(img);
   // Create a ref to access the container element
@@ -55,25 +55,6 @@ export function Visualizer({ formData, className, methods, ...props }) {
   const [ringStyle, setRingStyle] = useState(img.division.ring);
   const [birdStyle, setBirdStyle] = useState(img.division.bird);
 
-
-  // useEffect(() => {
-  //   const svg = document.querySelector('.curved-text');
-  //   if (svg && !svg.querySelector('defs')) {
-  //     const defs = document.createElement('defs');
-  //     const pattern = document.createElement('pattern');
-  //     pattern.setAttribute('id', 'image-pattern');
-  //     pattern.setAttribute('patternUnits', 'userSpaceOnUse');
-  //     pattern.setAttribute('width', '100%');
-  //     pattern.setAttribute('height', '100%');
-  //     const image = document.createElement('image');
-  //     image.setAttribute('href', formData.img.color.img);
-  //     image.setAttribute('width', '100%');
-  //     image.setAttribute('height', '100%');
-  //     pattern.appendChild(image);
-  //     defs.appendChild(pattern);
-  //     svg.appendChild(defs);
-  //   }
-  // }, [formData.text.primary.text]);
 
   // A function to load an image and update the state with its URL
   const imageLoader = (obj, setState, type) => {
@@ -488,7 +469,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
   // match the font size.
   let count = 0;
   useEffect(() => {
-   // console.log(containerRef);
+    // console.log(containerRef);
     if (formData.type.toLowerCase().includes("light sabers")) return;
     if (formData.type.toLowerCase().includes("flag")) return;
     if (formData.type.toLowerCase().includes("cover")) return;
@@ -781,14 +762,14 @@ export function Visualizer({ formData, className, methods, ...props }) {
                   ></div>
                 </div>
                 <div ref={containerRef} className="flex justify-center overflow-y-hidden items-center">
-                <ReactCurvedText
+                  {/* <ReactCurvedText
                   width={260}
                   height={70}
                   cx={120}
-                  cy={-190}
+                  cy={-185}
                   rx={240}
                   ry={240}
-                  startOffset={385}
+                  startOffset={380}
                   reversed={false}
                   text={formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}
                   textProps={
@@ -796,10 +777,20 @@ export function Visualizer({ formData, className, methods, ...props }) {
                     className: "text-center w-screen",
                     id : "main-text",
                     textAnchor: "middle",
+                  //  fill: "url(#image-background)",
                     }
                   }
                   textPathProps={null}
                   tspanProps={null}
+                  defsProps={
+                    {
+                      children: (
+                        <pattern id="image-background" patternUnits="userSpaceOnUse" width="430" height="216">
+                          <image xlinkHref="https://cdn.shopify.com/s/files/1/2242/5805/files/flat-spice-brown.jpg?v=1692905056" width="430" height="216" />
+                        </pattern>
+                      )
+                    }
+                  }
                   textAnchor="middle"
                   ellipseProps={null}
                   svgProps={
@@ -807,13 +798,21 @@ export function Visualizer({ formData, className, methods, ...props }) {
                     className: "curved-text",
                     }
                   }
-                  />
-                {/* <p id="main-text" className={classNames(
-                    formData.size.current == '3.5” x 4.25”' && !formData.img.flagTop ? "" : "",
-                    "text-center w-screen hidden"
-                  )}
-                    style={{ ...fontStyle }}>{formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p> */}
-             </div>
+                  /> */}
+                  <svg height="70" width="260" className="curved-text">
+  <path id="ellipse-id-rv" style={{fill: 'none'}} d="M-115 -185a240 240 0 1 0 480 0a240 240 0 1 0 -480 0"></path>
+  <defs>
+    <pattern id="image" patternUnits="userSpaceOnUse" width="430" height="216">
+      <image xlinkHref={formData.text.color.img} width="430" height="216"></image>
+    </pattern>
+  </defs>
+  <text className="text-center w-screen" style={fontStyle} id="main-text" text-anchor="middle" fill="url(#image)" >
+    <textPath xlinkHref="#ellipse-id-rv" startOffset="380">
+      <tspan>{formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</tspan>
+    </textPath>
+  </text>
+</svg>
+                </div>
               </div>
             </div>
           ) : formData.type.toLowerCase().includes("medical patch") ? (
