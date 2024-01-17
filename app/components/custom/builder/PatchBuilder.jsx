@@ -42,14 +42,13 @@ export function PatchBuilder({ product, productURL, config, searchParams, ...pro
   return (
     <>
       <Visualizer formData={formData} methods={builderObj} className="" />
-      <div className="flex justify-center sm:mt-auto sticky md:pr-4 xl:pr-16 md:-mb-nav md:top-nav md:-translate-y-nav md:pt-nav hiddenScroll md:overflow-y-scroll bg-white md:bg-transparent text-contrast border-2 border-t-2 border-l-2 border-r-2 border-black md:border-none rounded-t-2xl"
-      >
+      <div className="flex justify-center sm:mt-auto sticky md:pr-4 xl:pr-16 md:-mb-nav md:top-nav md:-translate-y-nav md:pt-nav hiddenScroll md:overflow-y-scroll bg-white md:bg-transparent text-contrast border-2 border-t-2 border-l-2 border-r-2 border-black md:border-none rounded-t-2xl">
         <section className="flex flex-col w-full max-w-[33rem] gap-6 p-7 lg:pb-0
             md:mx-auto md:px-0
             lg:">
           <PatchHeading formData={formData} methods={builderObj} />
           <Form formData={formData} productURL={productURL} setFormData={setFormData} data={data} config={config} product={product} methods={builderObj} />
-          {/* <pre className="overflow-scroll max-w-full" style={prestyle}>{JSON.stringify(formData, null, 2)}</pre> */}
+          <pre className="overflow-scroll max-w-full" style={prestyle}>{JSON.stringify(formData, null, 2)}</pre>
           <ProductDetails shippingPolicy={shippingPolicy} refundPolicy={refundPolicy} />
         </section>
       </div>

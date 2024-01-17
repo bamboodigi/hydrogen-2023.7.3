@@ -103,6 +103,11 @@ const builderObj = {
             img: builderObj.data.fontColors[8].img,
           },
         },
+        rod : {
+          name: builderObj.data.fontColors[4].name,
+          color: builderObj.data.fontColors[4].img,
+          img: builderObj.data.rod,
+        },
         lightsaber: {
           saberType: builderObj.data.saberOptions[0].name,
           hilt: {
@@ -220,11 +225,13 @@ const builderObj = {
     visualizer: function (formData) {
       const bgColor = 'url("' + formData.bgColor.img + '")';
       const textColor = 'url("' + formData.text.color.img + '")';
+      const rodColor = 'url("' + formData.rod.color + '")';
       const hiltColor = 'url("' + formData.lightsaber.hilt.color + '")';
       const bladeColor = 'url("' + formData.lightsaber.blade.color + '")';
       const symbolColor = 'url("' + formData.img.color.color + '")';
       const img = formData.type.toLowerCase() === "medical patch" ? 'url("' + formData.img.symbol + '")' : 'url("' + formData.img.img + '")';
       const mask = 'url("' + formData.img.color.mask.img + '")';
+      const rod = 'url("' + formData.rod.img + '")';
       const hiltImg = 'url("' + formData.lightsaber.hilt.img + '")';
       const bladeImg = 'url("' + formData.lightsaber.blade.img + '")';
       const ringImg = 'url("' + formData.img.division.ring.mask.img + '")';
@@ -285,6 +292,15 @@ const builderObj = {
             backgroundImage: img,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
+          },
+          rod: {
+            backgroundImage: rodColor,
+            maskImage: rod,
+            maskSize: 'cover',
+            WebkitMaskImage: rod,
+            WebkitMaskSize: 'cover',
+            width: '21%',
+            margin: '0 auto',
           },
           mask: {
             backgroundImage: textColor,
@@ -410,6 +426,7 @@ const builderObj = {
           obj.text.primary.fontSize = '52px';
           obj.text.primary.lineHeight = '52px';
       }
+      
       return obj;
     },
   },
@@ -424,6 +441,7 @@ const builderObj = {
     markTypeOptions: builderData.markType.types,
     saberOptions: builderData.lightSabers.types,
     type: builderData.type,
+    rod : 'https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-med-img-rod.png',
   },
   helpers: {
     get: {
@@ -2047,15 +2065,17 @@ const builderObj = {
         //  console.log(myObjStr);
         setFormData({ ...formData, id: newID, price: { ...formData.price, total: totalPrice, upsellPricing: myObjStr } });
       },
-      formElement: function (element, trigger, steps) {
-        // console.log(element);
-        // console.log(trigger);
-        // console.log(steps);
+      formElement: function (element, steps, trigger) {
+        console.log(element);
+        console.log(trigger);
+        console.log(steps);
         const foundElement = steps.some(step => {
           return step.input.some(input => {
             return input.id === element.id;
           });
         });
+
+
 
         if (trigger) {
           addElement(element);

@@ -155,6 +155,8 @@ export function Form({ formData, setFormData, productURL, data, config, product,
       }
     }));
   };
+
+
   // Define a function to handle the change of the font text color dropdown menu
   const handleHiltColorChange = (event) => {
     // Find the selected font text color from data array
@@ -297,7 +299,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
 
     const objSizes = obj.sizes.find(value => value.size === event.target.value);
 
-   // (objSizes.upsells.size);
+    // (objSizes.upsells.size);
     // Get the current size key from the event target value
     const sizeKey = convertSizeString(event.target.value);
 
@@ -313,7 +315,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
         sizeObject = imgs['laser-cut']["large-id"];
       }
     } else {
-      if(methods.helpers.is.flagPatch.ac1Front(formData)) {
+      if (methods.helpers.is.flagPatch.ac1Front(formData)) {
         sizeObject = imgs['laser-cut']['5x3'];
       } else {
         sizeObject = imgs['laser-cut'][sizeKey];
@@ -326,7 +328,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
     const maskObject = sizeObject?.find(value => value.name === maskName) || {};
 
     if (formData.type.toLowerCase() == "medical patch") {
-      if (event.target.value == '3.5” x 2”' || event.target.value == '3.5” Hexagonal') {
+      if (event.target.value == '3.5” x 2”') {
         setFormData({
           ...formData,
           price: {
@@ -350,7 +352,61 @@ export function Form({ formData, setFormData, productURL, data, config, product,
               placeholder: objSizes.text.primary.placeholder
             }
           },
+          img: {
+            ...formData.img,
+            name: methods.data.imgs["symbols"]['medical patch'].find(value => value.name == "TQ").name,
+            img: methods.data.imgs["symbols"]['medical patch'].find(value => value.name == "TQ").img,
+            color: {
+              ...formData.img.color,
+              mask: {
+                name: methods.data.imgs["symbols"]['medical patch'].find(value => value.name == "TQ").name,
+                img: methods.data.imgs["symbols"]['medical patch'].find(value => value.name == "TQ").img,
+                glow: methods.data.imgs["symbols"]['medical patch'].find(value => value.name == "TQ").glow,
+                icon: methods.data.imgs["symbols"]['medical patch'].find(value => value.name == "TQ").icon,
+              }
+            }
+          },
         });
+      } else if (event.target.value == '3.5” Hexagonal') {
+        setFormData({
+          ...formData,
+          price: {
+            ...formData.price,
+            upsells: {
+              ...formData.price.upsells,
+              size: objSizes.upsells.size,
+              glowBorder: objSizes.upsells.glowBorder || 0,
+            },
+          },
+          size: {
+            ...formData.size,
+            current: event.target.value
+          },
+          text: {
+            ...formData.text,
+            primary: {
+              ...formData.text.primary,
+              lines: objSizes.text.primary.lines,
+              maxLength: objSizes.text.primary.maxLength,
+              placeholder: objSizes.text.primary.placeholder
+            }
+          },
+          img: {
+            ...formData.img,
+            name: methods.data.imgs["symbols"]['hex'].find(value => value.name == "Med").name,
+            img: methods.data.imgs["symbols"]['hex'].find(value => value.name == "Med").img,
+            color: {
+              ...formData.img.color,
+              mask: {
+                name: methods.data.imgs["symbols"]['hex'].find(value => value.name == "Med").name,
+                img: methods.data.imgs["symbols"]['hex'].find(value => value.name == "Med").img,
+                glow: methods.data.imgs["symbols"]['hex'].find(value => value.name == "Med").glow,
+                icon: methods.data.imgs["symbols"]['hex'].find(value => value.name == "Med").icon,
+              }
+            }
+          },
+        });
+        console.log(methods.data.imgs["symbols"])
       } else {
         setFormData({
           ...formData,
@@ -376,6 +432,20 @@ export function Form({ formData, setFormData, productURL, data, config, product,
               placeholder: objSizes.text.primary.placeholder
             }
           },
+          img: {
+            ...formData.img,
+            name: methods.data.imgs["symbols"]['medical patch'].find(value => value.name == "TQ").name,
+            img: methods.data.imgs["symbols"]['medical patch'].find(value => value.name == "TQ").img,
+            color: {
+              ...formData.img.color,
+              mask: {
+                name: methods.data.imgs["symbols"]['medical patch'].find(value => value.name == "TQ").name,
+                img: methods.data.imgs["symbols"]['medical patch'].find(value => value.name == "TQ").img,
+                glow: methods.data.imgs["symbols"]['medical patch'].find(value => value.name == "TQ").glow,
+                icon: methods.data.imgs["symbols"]['medical patch'].find(value => value.name == "TQ").icon,
+              }
+            }
+          }
         });
       }
     }
@@ -477,7 +547,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
           ...formData.price,
           upsells: {
             ...formData.price.upsells,
-            size: objSizes.upsells.size,       
+            size: objSizes.upsells.size,
           },
         },
         size: {
@@ -541,6 +611,26 @@ export function Form({ formData, setFormData, productURL, data, config, product,
       text: {
         ...prevFormData.text,
         color: { ...prevFormData.text.color, name: event.name, img: obj.img }
+      },
+      upsells: {
+        ...prevFormData.upsells,
+        proIRFontColor: isProIR,
+        reflectiveGlowFontColor: isReflectiveGlow
+      }
+    }));
+  };
+
+  const handleRodColorChange = (event) => {
+    const obj = fontColors.find(value => value.img === event.img);
+    const isProIR = event.name.includes("Pro IR");
+    const isReflectiveGlow = event.name.includes("Reflective + Glow");
+    console.log(obj);
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      rod: {
+        ...prevFormData.rod,
+        color: obj.img,
+        name: event.name,
       },
       upsells: {
         ...prevFormData.upsells,
@@ -642,7 +732,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
               console.log(size);
               break;
           }
-        } else  if (formData.type.toLowerCase() == 'flag') {
+        } else if (formData.type.toLowerCase() == 'flag') {
           switch (formData.size.current) {
             case 'T.Rex Arms AC1 Front':
               size = "5x3";
@@ -740,7 +830,6 @@ export function Form({ formData, setFormData, productURL, data, config, product,
     if (stepForm.currentStep < stepForm.steps.length) {
       setStepForm({ ...stepForm, currentStep: stepForm.currentStep + 1, obj: stepForm.steps[stepForm.currentStep] });
     }
-
     const glowAmount = formData.price.upsells.glowBorder;
     const glowLabel = `Add a glow in the dark border? + $${glowAmount} USD`;
 
@@ -754,7 +843,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
           placeholder: '',
         };
 
-        methods.helpers.update.formElement(formTempObj, methods.helpers.is.glowBorder(formData.type, formData.size.current), steps);
+        methods.helpers.update.formElement(formTempObj, steps, methods.helpers.is.glowBorder(formData.type, formData.size.current));
 
         break;
       case 'name tape':
@@ -784,11 +873,17 @@ export function Form({ formData, setFormData, productURL, data, config, product,
 
         const isValidSize = ['4” x 1”', '5” x 1”', '5.11 Tac Tec Carrier', '5.11 Tac Tec Carrier Trainer', 'T.Rex Arms AC1'].includes(formData.size.current);
         const index = steps.findIndex(step => step.name === flagStep.name);
-        
+
         isValidSize && index === -1 ? steps.splice(2, 0, flagStep) : !isValidSize && index !== -1 && steps.splice(2, 1);
         break;
       case 'medical patch':
-        if (formData.size.current == '3.5” x 2”' || methods.helpers.is.medical.hex(formData)) {
+        formTempObj = {
+          id: 'glowBorder',
+          label: glowLabel,
+          type: 'checkmark',
+          placeholder: '',
+        };
+        if (formData.size.current == '3.5” x 2”') {
           const flagStep = {
             name: "Text",
             status: 'upcoming',
@@ -804,11 +899,46 @@ export function Form({ formData, setFormData, productURL, data, config, product,
           if (!steps.some(step => step.name === flagStep.name)) {
             steps.splice(1, 0, flagStep);
           }
+          methods.helpers.update.formElement(formTempObj, steps, methods.helpers.is.glowBorder(formData.type, formData.size.current));
+        } else if (methods.helpers.is.medical.hex(formData)) {
+          methods.helpers.update.formElement(formTempObj, steps);
+          if (formData.img.name.toLowerCase() == "med") {
+            const flagStep = {
+              name: "Text",
+              status: 'upcoming',
+              input: [
+                {
+                  id: 'text',
+                  label: 'Text',
+                  type: 'input',
+                  placeholder: '',
+                },
+                {
+                  id: 'rodColor',
+                  label: 'Rod Color',
+                  type: 'input',
+                  placeholder: '',
+                },
+              ],
+            };
+            console.log("really");
+            if (!steps.some(step => step.name === flagStep.name)) {
+              steps.splice(1, 0, flagStep);
+            }
+          } else {
+            const textStepIndex = steps.findIndex(step => step.name === 'Text');
+            console.log(textStepIndex);
+            if (textStepIndex >= 0) {
+              steps.splice(textStepIndex, 1);
+            }
+          }
         } else {
+          methods.helpers.update.formElement(formTempObj, steps, methods.helpers.is.glowBorder(formData.type, formData.size.current));
           const textStepIndex = steps.findIndex(step => step.name === 'Text');
           if (textStepIndex >= 0) {
             steps.splice(textStepIndex, 1);
           }
+          console.log('ok')
         }
         break;
     }
@@ -1067,7 +1197,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
                     </>
                   ) : input.id.toLowerCase() == "upload" ? (
                     <>
-                      <Upload label="Upload" onChange={handleFileInputChange} message={methods.helpers.get.patch.customPatch.uploadInfo(formData.size.current)}/>
+                      <Upload label="Upload" onChange={handleFileInputChange} message={methods.helpers.get.patch.customPatch.uploadInfo(formData.size.current)} />
                     </>
                   ) : input.id.toLowerCase() == "bloodtype" ? (
                     <>
@@ -1224,17 +1354,42 @@ export function Form({ formData, setFormData, productURL, data, config, product,
                       />
 
                     </>
-                  ) : input.id.toLowerCase() == "symbol" ? (
+                  ) : input.id.toLowerCase() == "rodcolor" ? (
                     <>
+                      <AdvancedSelect
+                        id="rodColor"
+                        title="Rod Color"
+                        name="rodColor"
+                        value={formData.rod.name}
+                        img={formData.rod.color}
+                        onChange={handleRodColorChange}
+                        options={newFontColors}
+                      />
+
+                    </>
+                  ) : input.id.toLowerCase() == "symbol" ? (
+                    methods.helpers.is.medical.hex(formData) ? (<>
                       <AdvancedSelect
                         title={formData.img.markType}
                         name={formData.img.markType}
                         value={formData.img.name}
                         img={formData.img.color.mask.icon}
                         onChange={handleImgChange}
-                        options={symbols["medical patch"]}
+                        options={symbols["hex"]}
                       />
                     </>
+                    ) : (
+                      <>
+                        <AdvancedSelect
+                          title={formData.img.markType}
+                          name={formData.img.markType}
+                          value={formData.img.name}
+                          img={formData.img.color.mask.icon}
+                          onChange={handleImgChange}
+                          options={symbols["medical patch"]}
+                        />
+                      </>
+                    )
                   ) : input.id.toLowerCase() == "flag" ? (
                     <>
                       {

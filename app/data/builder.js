@@ -674,22 +674,6 @@ const builderData = {
       config: {
         sizes: [
           {
-            name: "Hexagonal",
-            size: '3.5” Hexagonal',
-            text: {
-              primary: {
-                placeholder: 'Your Text',
-                maxLength: 15,
-                lines: 1,
-              }
-            },
-            flagEnabled: true,
-            upsells: {
-              size: 9,
-              glowBorder: 5,
-            },
-          },
-          {
             size: '1” x 1”',
             text: {
               primary: {
@@ -733,6 +717,23 @@ const builderData = {
               size: 9,
               glowBorder: 5,
             }
+          },
+          {
+            name: "Hexagonal",
+            size: '3.5” Hexagonal',
+            text: {
+              primary: {
+                placeholder: 'Your Text',
+                maxLength: 15,
+                lines: 1,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 14,
+              med: 7,
+              glowBorder: 5,
+            },
           },
           // {
           //   name: "Hexagonal",
@@ -808,12 +809,6 @@ const builderData = {
             name: "Almost There",
             status: 'upcoming',
             input: [
-              {
-                id: 'glowBorder',
-                label: 'Add a glow in the dark border? +$10 USD',
-                type: 'checkmark',
-                placeholder: '',
-              },
               {
                 id: 'leadTime',
                 label: 'I Agree to the Lead Time',
@@ -2359,6 +2354,7 @@ const builderData = {
     "laser-cut": initLaserCutFlags(),
     symbols: {
       "medical patch": initSymbols(),
+      "hex" : initHex(),
       "division jacket panel": {
         bird: {
           name: "Bird",
@@ -2581,7 +2577,6 @@ function initSymbols() {
   // If there's a common file extension, you can add it here
 
   let imageList = [
-    'symbols-med-img.png',
     'symbols-tq-img.png',
     'symbols-star-of-life-img.png',
     'symbols-maple-leaf-img.png',
@@ -2611,6 +2606,32 @@ function initSymbols() {
 
   return formattedArray;
 }
+
+function initHex() {
+  const folder = "https://cdn.shopify.com/s/files/1/2242/5805/files/";  // If you have a common folder path, you can add it here
+  const end = "?v=1698434481j";
+  // If there's a common file extension, you can add it here
+
+  let imageList = [
+    'symbols-med-img.png',
+    'symbols-paw-k9-img.png',
+  ];
+
+  const formattedArray = imageList.map(image => {
+    const name = image.replace("-img.png", "");
+    const titleCaseName = name.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+    const formattedName = titleCaseName.replace("Symbols ", "").replace("Tq", "TQ").replace("Ab", "AB").replace("Pos", "Positive").replace("Neg", "Negative");
+    return {
+      name: formattedName,
+      img: `${folder}${name}-img.png${end}`,
+      glow: `${folder}${name}-glow-border.png${end}`,
+      icon: `${folder}${name}-icon.png${end}`
+    };
+  });
+
+  return formattedArray;
+}
+
 
 function initHiVisFlags() {
   const folder = "https://cdn.shopify.com/s/files/1/2242/5805/files/";  // If you have a common folder path, you can add it here
