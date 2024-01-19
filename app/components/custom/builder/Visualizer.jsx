@@ -708,18 +708,81 @@ export function Visualizer({ formData, className, methods, ...props }) {
               !methods.helpers.is.nameTape.tacTec(formData) && !methods.helpers.is.nameTape.tacTecTrainer(formData) && !methods.helpers.is.nameTape.ac1NameTape(formData) ? "w-full" : "",
               "h-full text-center overflow-x-hidden overflow-y-hidden flex items-center justify-center"
             )}>
-              <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text.split('\n').map((line, index) => (
-                <React.Fragment key={index}>
-                  {index > 0 && <br />}
-                  {line}
-                </React.Fragment>
-              )) :
-                formData.text.primary.placeholder.split('\n').map((line, index) => (
-                  <React.Fragment key={index}>
-                    {index > 0 && <br />}
-                    {line}
-                  </React.Fragment>
-                ))}</p>
+              {methods.helpers.is.nameTape.ranger(formData) ? (
+                <>
+                {/* <ReactCurvedText
+                  width={260}
+                  height={70}
+                  cx={120}
+                  cy={-185}
+                  rx={240}
+                  ry={240}
+                  startOffset={380}
+                  reversed={true}
+                  text={formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}
+                  textProps={
+                    { style: { ...fontStyle },
+                    className: "text-center w-screen",
+                    id : "main-text",
+                    textAnchor: "middle",
+                    }
+                  }
+                  textPathProps={null}
+                  tspanProps={null}
+                  textAnchor="middle"
+                  ellipseProps={null}
+                  svgProps={
+                    { 
+                    className: "curved-text",
+                    }
+                  }
+                  />  */}
+                  {/* <ReactCurvedText
+            width={300}
+            height={300}
+            cx={150}
+            cy={150}
+            rx={100}
+            ry={100}
+            startOffset={50}
+            reversed={false}
+            text="react-curved-text"
+            textProps={{ style: { fontSize: 24 } }}
+            textPathProps={null}
+            tspanProps={null}
+            ellipseProps={null}
+            svgProps={null}
+        /> */}
+   <svg height="70" width="260" className="curved-text">
+                    <path id="ellipse-id-rv" style={{ fill: 'none' }} d="M-215 375A340 340 0 1 1 465 375A340 340 0 1 1 -215 375"></path>
+                    <defs>
+                      <pattern id="image" patternUnits="userSpaceOnUse" width="430" height="216">
+                        <image xlinkHref={formData.text.color.img} width="430" height="216"></image>
+                      </pattern>
+                    </defs>
+                    <text className="text-center w-screen" style={fontStyle} id="main-text" textAnchor="middle" fill="url(#image)" >
+                      <textPath xlinkHref="#ellipse-id-rv" startOffset="530">
+                        <tspan>{formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</tspan>
+                      </textPath>
+                    </text>
+                  </svg>
+                </>
+              ) : (
+                <>
+                  <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text.split('\n').map((line, index) => (
+                    <React.Fragment key={index}>
+                      {index > 0 && <br />}
+                      {line}
+                    </React.Fragment>
+                  )) :
+                    formData.text.primary.placeholder.split('\n').map((line, index) => (
+                      <React.Fragment key={index}>
+                        {index > 0 && <br />}
+                        {line}
+                      </React.Fragment>
+                    ))}</p>
+                </>
+              )}
             </div>
           ) : formData.type.toLowerCase().includes("medical patch") && formData.size.current == '3.5” x 2”' ? (
             <div className="flex w-full h-full gap-2">
@@ -762,15 +825,15 @@ export function Visualizer({ formData, className, methods, ...props }) {
                   ></div>
                 </div>
                 <div ref={containerRef} className="flex justify-center overflow-y-hidden items-center">
-                  {/* <ReactCurvedText
+                  <ReactCurvedText
                   width={260}
                   height={70}
-                  cx={120}
-                  cy={-185}
-                  rx={240}
-                  ry={240}
-                  startOffset={380}
-                  reversed={false}
+                  cx={125}
+                  cy={35}
+                  rx={340}
+                  ry={340}
+                  startOffset={530}
+                  reversed={true}
                   text={formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}
                   textProps={
                     { style: { ...fontStyle },
@@ -798,20 +861,20 @@ export function Visualizer({ formData, className, methods, ...props }) {
                     className: "curved-text",
                     }
                   }
-                  /> */}
-                  <svg height="70" width="260" className="curved-text">
-  <path id="ellipse-id-rv" style={{fill: 'none'}} d="M-115 -185a240 240 0 1 0 480 0a240 240 0 1 0 -480 0"></path>
-  <defs>
-    <pattern id="image" patternUnits="userSpaceOnUse" width="430" height="216">
-      <image xlinkHref={formData.text.color.img} width="430" height="216"></image>
-    </pattern>
-  </defs>
-  <text className="text-center w-screen" style={fontStyle} id="main-text" text-anchor="middle" fill="url(#image)" >
-    <textPath xlinkHref="#ellipse-id-rv" startOffset="380">
-      <tspan>{formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</tspan>
-    </textPath>
-  </text>
-</svg>
+                  />
+                  {/* <svg height="70" width="260" className="curved-text">
+                    <path id="ellipse-id-rv" style={{ fill: 'none' }} d="M-115 -185a240 240 0 1 0 480 0a240 240 0 1 0 -480 0"></path>
+                    <defs>
+                      <pattern id="image" patternUnits="userSpaceOnUse" width="430" height="216">
+                        <image xlinkHref={formData.text.color.img} width="430" height="216"></image>
+                      </pattern>
+                    </defs>
+                    <text className="text-center w-screen" style={fontStyle} id="main-text" textAnchor="middle" fill="url(#image)" >
+                      <textPath xlinkHref="#ellipse-id-rv" startOffset="380">
+                        <tspan>{formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</tspan>
+                      </textPath>
+                    </text>
+                  </svg> */}
                 </div>
               </div>
             </div>

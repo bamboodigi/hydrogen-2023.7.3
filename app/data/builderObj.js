@@ -700,6 +700,9 @@ const builderObj = {
           title: function (size) {
             let title = 'Name Tape';
             switch (size) {
+              case '3.5” Ranger Tab':
+                title = '';
+                break;
               case 'T.Rex Arms AC1 Back Panel':
                 break;
               case 'T.Rex Arms AC1 Front':
@@ -743,6 +746,9 @@ const builderObj = {
           fontSize: function (size) {
             let fontSize = null;
             switch (size) {
+              case '3.5” Ranger Tab':
+                fontSize = 35;
+                break;
               case 'T.Rex Arms AC1 Back Panel':
                 fontSize = 40;
                 break;
@@ -1543,6 +1549,18 @@ const builderObj = {
       nameTape: {
         patch: function (size, setStyle) {
           switch (size) {
+            case '3.5” Ranger Tab':
+              setStyle(prevStyle => ({
+                ...prevStyle,
+                padding: '5px 20px',
+                WebkitMaskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-ranger.png?v=1702437378)',
+                WebkitMaskSize: 'cover',
+                WebkitMaskPosition: 'center',
+                maskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-ranger.png?v=1702437378)',
+                maskSize: 'cover',
+                maskPosition: 'center',
+              }));
+              break;
             case 'T.Rex Arms AC1':
               setStyle(prevStyle => ({
                 ...prevStyle,
@@ -1815,10 +1833,13 @@ const builderObj = {
         // }
         const textHeight = textElement?.offsetHeight || 0;
         let currentFontSize = 0;
-        if(formData.type.toLowerCase() !== 'medical patch') {
-          currentFontSize = parseFloat(getComputedStyle(textElement).fontSize)
+        console.log(!builderObj.helpers.is.nameTape.ranger(formData))
+        if(formData.type.toLowerCase() !== 'medical patch' && !builderObj.helpers.is.nameTape.ranger(formData)) {
+          console.log(currentFontSize);
+          currentFontSize = parseFloat(getComputedStyle(textElement).fontSize);
+          console.log(currentFontSize);
         }
-
+console.log(currentFontSize);
 
         // console.log(textWidth);
 
@@ -2840,6 +2861,16 @@ const builderObj = {
           const size = formData.size.current;
 
           if (type.toLowerCase() == 'name tape' && size == 'T.Rex Arms AC1 Front') {
+            return true;
+          } else {
+            return false;
+          }
+        },
+        ranger: function (formData) {
+          const type = formData.type;
+          const size = formData.size.current;
+
+          if (type.toLowerCase() == 'name tape' && size == '3.5” Ranger Tab') {
             return true;
           } else {
             return false;
