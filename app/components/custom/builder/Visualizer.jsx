@@ -719,18 +719,81 @@ export function Visualizer({ formData, className, methods, ...props }) {
               !methods.helpers.is.nameTape.tacTec(formData) && !methods.helpers.is.nameTape.tacTecTrainer(formData) && !methods.helpers.is.nameTape.ac1NameTape(formData) ? "w-full" : "",
               "h-full text-center overflow-x-hidden overflow-y-hidden flex items-center justify-center"
             )}>
-              <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text.split('\n').map((line, index) => (
-                <React.Fragment key={index}>
-                  {index > 0 && <br />}
-                  {line}
-                </React.Fragment>
-              )) :
-                formData.text.primary.placeholder.split('\n').map((line, index) => (
-                  <React.Fragment key={index}>
-                    {index > 0 && <br />}
-                    {line}
-                  </React.Fragment>
-                ))}</p>
+              {methods.helpers.is.nameTape.ranger(formData) ? (
+                <>
+                {/* <ReactCurvedText
+                  width={260}
+                  height={70}
+                  cx={120}
+                  cy={-185}
+                  rx={240}
+                  ry={240}
+                  startOffset={380}
+                  reversed={true}
+                  text={formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}
+                  textProps={
+                    { style: { ...fontStyle },
+                    className: "text-center w-screen",
+                    id : "main-text",
+                    textAnchor: "middle",
+                    }
+                  }
+                  textPathProps={null}
+                  tspanProps={null}
+                  textAnchor="middle"
+                  ellipseProps={null}
+                  svgProps={
+                    { 
+                    className: "curved-text",
+                    }
+                  }
+                  />  */}
+                  {/* <ReactCurvedText
+            width={300}
+            height={300}
+            cx={150}
+            cy={150}
+            rx={100}
+            ry={100}
+            startOffset={50}
+            reversed={false}
+            text="react-curved-text"
+            textProps={{ style: { fontSize: 24 } }}
+            textPathProps={null}
+            tspanProps={null}
+            ellipseProps={null}
+            svgProps={null}
+        /> */}
+   <svg height="70" width="260" className="curved-text">
+                    <path id="ellipse-id-rv" style={{ fill: 'none' }} d="M-215 375A340 340 0 1 1 465 375A340 340 0 1 1 -215 375"></path>
+                    <defs>
+                      <pattern id="image" patternUnits="userSpaceOnUse" width="430" height="216">
+                        <image xlinkHref={formData.text.color.img} width="430" height="216"></image>
+                      </pattern>
+                    </defs>
+                    <text className="text-center w-screen" style={fontStyle} id="main-text" textAnchor="middle" fill="url(#image)" >
+                      <textPath xlinkHref="#ellipse-id-rv" startOffset="530">
+                        <tspan>{formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</tspan>
+                      </textPath>
+                    </text>
+                  </svg>
+                </>
+              ) : (
+                <>
+                  <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text.split('\n').map((line, index) => (
+                    <React.Fragment key={index}>
+                      {index > 0 && <br />}
+                      {line}
+                    </React.Fragment>
+                  )) :
+                    formData.text.primary.placeholder.split('\n').map((line, index) => (
+                      <React.Fragment key={index}>
+                        {index > 0 && <br />}
+                        {line}
+                      </React.Fragment>
+                    ))}</p>
+                </>
+              )}
             </div>
           ) : formData.type.toLowerCase().includes("medical patch") && formData.size.current == '3.5” x 2”' ? (
             <div className="flex w-full h-full gap-2">
@@ -761,47 +824,71 @@ export function Visualizer({ formData, className, methods, ...props }) {
               </div>
             </div>
           ) : methods.helpers.is.medical.hex(formData) ? (
-            formData.img.name.toLowerCase() == "med" ? (
-              <div className="flex w-full h-full justify-center">
-                <div className="flex flex-col gap-1  w-[75%] justify-center items-center" style={{}}>
-                  <div id="icon" className="h-[52%] w-[82%] relative" style={maskStyle}>
-                    {/* <div id="glow"
-                      className={classNames(
-                        formData.upsells.glowBorder ? "block" : "hidden",
-                        "h-full w-full"
-                      )}
-                      style={{ backgroundImage: `url("${formData.img.color.mask.glow}")`, backgroundSize: 'cover', position: 'absolute', backgroundPosition: 'center' }}
-                    ></div> */}
-                    <div id="rod"
-                      className="h-full w-full"
-                      style={rodStyle}
-                    ></div>
-                  </div>
-                  <div ref={containerRef} className="flex justify-center overflow-y-hidden items-center">
-                    <svg height="70" width="260" className="curved-text">
-                      <path id="ellipse-id-rv" style={{ fill: 'none' }} d="M-115 -185a240 240 0 1 0 480 0a240 240 0 1 0 -480 0"></path>
-                      <defs>
-                        <pattern id="image" patternUnits="userSpaceOnUse" width="430" height="216">
-                          <image xlinkHref={formData.text.color.img} width="430" height="216"></image>
+            <div className="flex w-full h-full justify-center">
+              <div className="flex flex-col gap-1  w-[75%] justify-center items-center" style={{}}>
+                <div id="icon" className="h-[52%] w-[82%] relative" style={maskStyle}>
+                  <div id="glow"
+                    className={classNames(
+                      formData.upsells.glowBorder ? "block" : "hidden",
+                      "h-full w-full"
+                    )}
+                    style={{ backgroundImage: `url("${formData.img.color.mask.glow}")`, backgroundSize: 'cover', position: 'absolute', backgroundPosition: 'center' }}
+                  ></div>
+                </div>
+                <div ref={containerRef} className="flex justify-center overflow-y-hidden items-center">
+                  {/* <ReactCurvedText
+                  width={260}
+                  height={70}
+                  cx={120}
+                  cy={-185}
+                  rx={240}
+                  ry={240}
+                  startOffset={380}
+                  reversed={false}
+                  text={formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}
+                  textProps={
+                    { style: { ...fontStyle },
+                    className: "text-center w-screen",
+                    id : "main-text",
+                    textAnchor: "middle",
+                  //  fill: "url(#image-background)",
+                    }
+                  }
+                  textPathProps={null}
+                  tspanProps={null}
+                  defsProps={
+                    {
+                      children: (
+                        <pattern id="image-background" patternUnits="userSpaceOnUse" width="430" height="216">
+                          <image xlinkHref="https://cdn.shopify.com/s/files/1/2242/5805/files/flat-spice-brown.jpg?v=1692905056" width="430" height="216" />
                         </pattern>
-                      </defs>
-                      <text className="text-center w-screen" style={fontStyle} id="main-text" textAnchor="middle" fill="url(#image)" >
-                        <textPath xlinkHref="#ellipse-id-rv" startOffset="380">
-                          <tspan>{formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</tspan>
-                        </textPath>
-                      </text>
-                    </svg>
-                  </div>
+                      )
+                    }
+                  }
+                  textAnchor="middle"
+                  ellipseProps={null}
+                  svgProps={
+                    { 
+                    className: "curved-text",
+                    }
+                  }
+                  /> */}
+                  <svg height="70" width="260" className="curved-text">
+  <path id="ellipse-id-rv" style={{fill: 'none'}} d="M-115 -185a240 240 0 1 0 480 0a240 240 0 1 0 -480 0"></path>
+  <defs>
+    <pattern id="image" patternUnits="userSpaceOnUse" width="430" height="216">
+      <image xlinkHref={formData.text.color.img} width="430" height="216"></image>
+    </pattern>
+  </defs>
+  <text className="text-center w-screen" style={fontStyle} id="main-text" text-anchor="middle" fill="url(#image)" >
+    <textPath xlinkHref="#ellipse-id-rv" startOffset="380">
+      <tspan>{formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</tspan>
+    </textPath>
+  </text>
+</svg>
                 </div>
               </div>
-            ) : (
-              <div className="flex w-full h-full justify-center">
-                <div className="flex flex-col gap-1  w-[50%] justify-center items-center" style={{}}>
-                  <div id="icon" className="h-[77%] w-full relative" style={maskStyle}>
-                  </div>
-                </div>
-              </div>
-            )
+            </div>
           ) : formData.type.toLowerCase().includes("medical patch") ? (
             <div className="h-full w-full text-center overflow-x-hidden overflow-y-hidden flex items-center justify-center">
               <div id="icon" className="h-4/5 w-4/5 relative" style={maskStyle}>

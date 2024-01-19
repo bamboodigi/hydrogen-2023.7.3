@@ -300,6 +300,21 @@ const builderData = {
             }
           },
           {
+            size: '3.5” Ranger Tab',
+            text: {
+              primary: {
+                placeholder: 'Your Name',
+                maxLength: 13,
+                lines: 1,
+              }
+            },
+            flagEnabled: false,
+            upsells: {
+              size: 0,
+              glowBorder: 5,
+            }
+          },
+          {
             size: '4” x 1”',
             text: {
               primary: {
@@ -2433,8 +2448,8 @@ const builderData = {
       ratio: "3:2"
     },
     {
-      name: "Ranger Tab",
-      ratio: "40:15"
+      name: "3.5” Ranger Tab",
+      ratio: "200:73"
     },
     {
       name: "3.5” Hexagonal",
