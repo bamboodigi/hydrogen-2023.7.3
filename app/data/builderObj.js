@@ -6,7 +6,7 @@ const builderObj = {
     //   // initalize the formData Object based on the product and chooses selected
     formData: function (product, searchParams) {
       const patchType = builderData.type[builderObj.helpers.get.handle(product).toLowerCase()];
-     // console.log(patchType);
+      // console.log(patchType);
       let formData = {
         type: patchType.name || '',
         id: patchType.name.toLowerCase() || '',
@@ -428,6 +428,7 @@ const builderObj = {
   helpers: {
     get: {
       type: function (product) {
+        console.log(product);
         const patchType = builderData.type[builderObj.helpers.get.handle(product).toLowerCase()];
         return builderData.type[builderObj.helpers.get.handle(product).toLowerCase()];
       },
@@ -473,6 +474,9 @@ const builderObj = {
           case 'flag-patch':
             result = 'flag';
             break;
+          case 'call-sign':
+            result = 'call sign';
+            break;
           default:
             result = 'default';
             break;
@@ -509,6 +513,9 @@ const builderObj = {
             break;
           case 'cover':
             title = this.patch.cover.title(size);
+            break;
+          case 'call sign':
+            title = this.patch.callSign.title(size);
             break;
         }
         return title;
@@ -548,6 +555,9 @@ const builderObj = {
             break;
           case 'division jacket panel':
             fontSize = this.patch.divisionJacketPanel.fontSize(size);
+            break;
+          case 'call sign':
+            fontSize = this.patch.callSign.fontSize(size);
             break;
           case 'cover':
             fontSize = 0;
@@ -804,7 +814,7 @@ const builderObj = {
                 fontSize = 29;
                 break;
             }
-      //      console.log(fontSize);
+            //      console.log(fontSize);
             return fontSize;
           },
           flagHeight: function (size) {
@@ -871,7 +881,7 @@ const builderObj = {
           },
           fontSize: function (size) {
             let fontSize = null;
-    //        console.log(size);
+            //        console.log(size);
             switch (size) {
               case '3.5” x 2”':
                 fontSize = 47;
@@ -880,7 +890,7 @@ const builderObj = {
                 fontSize = 38;
                 break;
             }
-        //    console.log(fontSize);
+            //    console.log(fontSize);
             return fontSize;
           },
         },
@@ -1026,7 +1036,7 @@ const builderObj = {
             let dimensions = size.split(' x ');
             let width = parseFloat(parseFloat(dimensions[0]).toFixed(2));
             let height = parseFloat(parseFloat(dimensions[1]).toFixed(2));
-       //     console.log(width);
+            //     console.log(width);
             pixels = (width * 500) + 'x' + (height * 500);
             ratio = width + ':' + height;
             uploadInfo = ratio + ', ' + pixels + ' px';
@@ -1045,9 +1055,9 @@ const builderObj = {
               case '3.5” x 4”':
                 title = 'Defensive Mechanisms';
                 break;
-                case '3.5” x 4.25”':
-                  title = 'Condor';
-                  break;
+              case '3.5” x 4.25”':
+                title = 'Condor';
+                break;
               case '3.6” x 5”':
                 title = 'Tad';
                 break;
@@ -1069,9 +1079,9 @@ const builderObj = {
               case '3.5” x 4”':
                 fontSize = 80;
                 break;
-                case '3.5” x 4.25”':
-                  fontSize = 80;
-                  break;
+              case '3.5” x 4.25”':
+                fontSize = 80;
+                break;
               case '3.6” x 5”':
                 fontSize = 80;
                 break;
@@ -1093,7 +1103,7 @@ const builderObj = {
               case '3.5” x 4”':
                 fontSize = 32;
                 break;
-                case '3.5” x 4.25”':
+              case '3.5” x 4.25”':
                 fontSize = 32;
                 break;
               case '3.6” x 5”':
@@ -1117,9 +1127,9 @@ const builderObj = {
               case '3.5” x 4”':
                 flagHeight = 'calc(250px/2)';
                 break;
-                case '3.5” x 4.25”':
-                  flagHeight = 'calc(250px/2)';
-                  break;
+              case '3.5” x 4.25”':
+                flagHeight = 'calc(250px/2)';
+                break;
               case '3.6” x 5”':
                 flagHeight = 'calc(240px/2)';
                 break;
@@ -1304,6 +1314,37 @@ const builderObj = {
                 break;
             }
             return title;
+          },
+        },
+        callSign: {
+          title: function (size) {
+            let title = 'Call Sign One Sided';
+            switch (size) {
+              case '3” x 2”':
+                break;
+              case '3.5” x 2”':
+                break;
+              case '4” x 2”':
+                title = 'Name Plate';
+                break;
+            }
+            return title;
+          },
+          fontSize: function (size) {
+            let fontSize = null;
+            switch (size) {
+              case '3” x 2”':
+                fontSize = 35;
+                break;
+              case '3.5” x 2”':
+                fontSize = 35;
+                break;
+              case '4” x 2”':
+                fontSize = 35;
+                break;
+            }
+            //      console.log(fontSize);
+            return fontSize;
           },
         },
       },
@@ -1491,7 +1532,7 @@ const builderObj = {
       },
       cartSize: function (cart) {
         let size = cart?.totalQuantity || 0;
-     //   console.log(cart);
+        //   console.log(cart);
 
         // filter upsell objects if there is a cart
         //   loop through cart.lines.edges
@@ -1650,7 +1691,7 @@ const builderObj = {
               break;
             default:
               setStyle(prevStyle => ({
-                ...prevStyle, 
+                ...prevStyle,
                 padding: '17px 24px',
                 WebkitMaskImage: 'none',
                 WebkitMaskSize: 'contain',
@@ -1678,7 +1719,7 @@ const builderObj = {
               break;
             default:
               setStyle(prevStyle => ({
-                ...prevStyle, 
+                ...prevStyle,
                 padding: '10px',
                 WebkitMaskImage: 'none',
                 WebkitMaskSize: 'contain',
@@ -1738,7 +1779,7 @@ const builderObj = {
       },
       cover: {
         patch: function (size, setStyle) {
-        //  console.log(size);
+          //  console.log(size);
           switch (size) {
             case 'T.Rex Arms AC1':
               setStyle(prevStyle => ({
@@ -1816,7 +1857,7 @@ const builderObj = {
     update: {
       fontSize: function (containerRef, setFontStyle, formData, setFontWrapperStyle) {
         const textLines = formData.text.primary.lines;
-       
+
         const currentLines = formData.text.primary.text.split("\n").length;
         const container = containerRef.current;
 
@@ -1834,12 +1875,12 @@ const builderObj = {
         const textHeight = textElement?.offsetHeight || 0;
         let currentFontSize = 0;
         console.log(!builderObj.helpers.is.nameTape.ranger(formData))
-        if(formData.type.toLowerCase() !== 'medical patch' && !builderObj.helpers.is.nameTape.ranger(formData)) {
+        if (formData.type.toLowerCase() !== 'medical patch' && !builderObj.helpers.is.nameTape.ranger(formData)) {
           console.log(currentFontSize);
           currentFontSize = parseFloat(getComputedStyle(textElement).fontSize);
           console.log(currentFontSize);
         }
-console.log(currentFontSize);
+        console.log(currentFontSize);
 
         // console.log(textWidth);
 
@@ -1867,7 +1908,7 @@ console.log(currentFontSize);
         // if (formData.type.toLowerCase() == 'jacket panel') {
         //   maxFontSize = 45;
         // }
-        if(builderObj.helpers.is.medical.hex(formData)) {
+        if (builderObj.helpers.is.medical.hex(formData)) {
           maxFontSize = 38;
           let textLength = formData.text.primary.text.length;
 
@@ -1908,8 +1949,8 @@ console.log(currentFontSize);
             if (formData.text.primary.text.length == 0) {
               newFontSize = builderObj.helpers.get.patch.medicalPatch.fontSize(formData.size.current);
             }
-            if(builderObj.helpers.is.medical.hex(formData)) {
-    
+            if (builderObj.helpers.is.medical.hex(formData)) {
+
               // newFontSize = builderObj.helpers.get.patch.medicalPatch.fontSize(formData.size.current);
             }
             break;
@@ -1926,7 +1967,7 @@ console.log(currentFontSize);
         let marginTop = null;
         if (textLines > 1) {
           marginTop = (newFontSize) / 7;
-          if(textLines == 3) {
+          if (textLines == 3) {
             newFontSize = newFontSize * .9;
           } else {
             newFontSize = newFontSize * .95;
@@ -1941,11 +1982,11 @@ console.log(currentFontSize);
             let newLineHeight = newFontSize * .87;
             setFontStyle(prevStyle => ({ ...prevStyle, fontSize: `${newFontSize}px`, lineHeight: `${newLineHeight}px`, marginTop: `${marginTop}px` }));
             setFontWrapperStyle(prevStyle => ({ ...prevStyle, minHeight: textHeight }));
-          } else if(builderObj.helpers.is.medical.hex(formData)) {
+          } else if (builderObj.helpers.is.medical.hex(formData)) {
 
-          }else {
+          } else {
             marginTop = builderObj.helpers.is.idPanel.deadBug(formData) || builderObj.helpers.is.idPanel.ac1Front(formData) ? 0 : newFontSize / 9;
-           setFontStyle(prevStyle => ({ ...prevStyle, fontSize: `${newFontSize}px`, lineHeight: `${newFontSize}px`, marginTop: `${marginTop}px` }));
+            setFontStyle(prevStyle => ({ ...prevStyle, fontSize: `${newFontSize}px`, lineHeight: `${newFontSize}px`, marginTop: `${marginTop}px` }));
           }
         }
       },
@@ -1954,9 +1995,9 @@ console.log(currentFontSize);
         // textContainer
         // how many lines
         const container = containerSecondaryRef.current;
-     //   console.log(container);
+        //   console.log(container);
         const textElement = container.querySelector('#secondary-text') || container.querySelector('#text2');
-      //  console.log(textElement);
+        //  console.log(textElement);
         const textLines = 1;
         // Get the container width and height, text width and height, and current font size
         const containerWidth = container.offsetWidth;
@@ -1996,7 +2037,7 @@ console.log(currentFontSize);
           newFontSize = minFontSize;
         }
 
-    //    console.log(newFontSize);
+        //    console.log(newFontSize);
 
         switch (formData.type.toLowerCase()) {
           case 'id panel':
@@ -2124,7 +2165,7 @@ console.log(currentFontSize);
 
           // console.log(upsells);
           // console.log(statusObj);
-      //    console.log(upsells.size);
+          //    console.log(upsells.size);
           if (upsells.size) {
             let obj = {};
             obj.merchandiseId = getAddOnGID(builderObj.helpers.get.addOnObj, 'size', upsells.size).id;
@@ -2192,7 +2233,7 @@ console.log(currentFontSize);
             }
 
             let variant = addOn.variants.find(v => parseInt(v.value) === value);
-        //    console.log(variant);
+            //    console.log(variant);
             return variant || null;
           }
         },
@@ -2518,7 +2559,7 @@ console.log(currentFontSize);
               case 'symbol':
                 //  console.log(value);
                 let symbolObj = this.update.symbol(value);
-            //    console.log(symbolObj);
+                //    console.log(symbolObj);
                 //   console.log(flagObj);
                 formData.img.color.mask.name = symbolObj.name;
                 formData.img.name = symbolObj.name;
@@ -2796,7 +2837,7 @@ console.log(currentFontSize);
               break;
           }
           // console.log(params);
-       //   console.log(params.map(obj => Object.keys(obj)[0] + '=' + obj[Object.keys(obj)[0]]).join('&'));
+          //   console.log(params.map(obj => Object.keys(obj)[0] + '=' + obj[Object.keys(obj)[0]]).join('&'));
           //     console.log(params.toString());
           // turn array in params strings for url
           setFormData({ ...formData, urlParams: params.map(obj => Object.keys(obj)[0] + '=' + obj[Object.keys(obj)[0]]).join('&') });
@@ -2881,7 +2922,7 @@ console.log(currentFontSize);
         hex: function (formData) {
           const type = formData.type;
           const size = formData.size.current;
-         
+
           return type.toLowerCase() == 'medical patch' && size == '3.5” Hexagonal';
         },
       },
