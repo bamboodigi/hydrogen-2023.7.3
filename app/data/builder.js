@@ -1923,21 +1923,6 @@ const builderData = {
             }
           },
           {
-            size: '3” x 2” Two Sided',
-            text: {
-              primary: {
-                placeholder: 'Text',
-                maxLength: 4,
-                lines: 1,
-              }
-            },
-            flagEnabled: false,
-            upsells: {
-              size: 15,
-              glowBorder: 0,
-            }
-          },
-          {
             size: '3.5” x 2”',
             text: {
               primary: {
@@ -1950,20 +1935,6 @@ const builderData = {
             upsells: {
               size: 0,
               glowBorder: 5,
-            }
-          },
-          {
-            size: '3.5” x 2” Two Sided',
-            text: {
-              primary: {
-                placeholder: 'OK',
-                maxLength: 5,
-                lines: 1,
-              }
-            },
-            flagEnabled: false,
-            upsells: {
-              size: 10,
             }
           },
           {

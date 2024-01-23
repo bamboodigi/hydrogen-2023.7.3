@@ -591,7 +591,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
           methods.helpers.is.jacketPanel.defense(formData) ? "rounded-[2rem]" : "",
           "flex items-center transform lg:scale-150"
         )} style={style}>
-          {formData.type.toLowerCase().includes("id panel") && formData.size.current == '6” x 2”' ? (
+          {   formData.type.toLowerCase().includes("id panel") && formData.size.current == '6” x 2”' ? (
             <div className="w-full h-full flex">
               <div className="w-1/2 flex items-center px-2">
                 {formData.img.type.toLowerCase() === "laser cut flag" ? (
@@ -721,7 +721,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
             )}>
               {methods.helpers.is.nameTape.ranger(formData) ? (
                 <>
-                {/* <ReactCurvedText
+                  {/* <ReactCurvedText
                   width={260}
                   height={70}
                   cx={120}
@@ -764,7 +764,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
             ellipseProps={null}
             svgProps={null}
         /> */}
-   <svg height="70" width="260" className="curved-text">
+                  <svg height="70" width="260" className="curved-text">
                     <path id="ellipse-id-rv" style={{ fill: 'none' }} d="M-215 375A340 340 0 1 1 465 375A340 340 0 1 1 -215 375"></path>
                     <defs>
                       <pattern id="image" patternUnits="userSpaceOnUse" width="430" height="216">
@@ -872,20 +872,20 @@ export function Visualizer({ formData, className, methods, ...props }) {
                     className: "curved-text",
                     }
                   }
-                  /> */}
-                  <svg height="70" width="260" className="curved-text">
-  <path id="ellipse-id-rv" style={{fill: 'none'}} d="M-115 -185a240 240 0 1 0 480 0a240 240 0 1 0 -480 0"></path>
-  <defs>
-    <pattern id="image" patternUnits="userSpaceOnUse" width="430" height="216">
-      <image xlinkHref={formData.text.color.img} width="430" height="216"></image>
-    </pattern>
-  </defs>
-  <text className="text-center w-screen" style={fontStyle} id="main-text" text-anchor="middle" fill="url(#image)" >
-    <textPath xlinkHref="#ellipse-id-rv" startOffset="380">
-      <tspan>{formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</tspan>
-    </textPath>
-  </text>
-</svg>
+                  />
+                  {/* <svg height="70" width="260" className="curved-text">
+                    <path id="ellipse-id-rv" style={{ fill: 'none' }} d="M-115 -185a240 240 0 1 0 480 0a240 240 0 1 0 -480 0"></path>
+                    <defs>
+                      <pattern id="image" patternUnits="userSpaceOnUse" width="430" height="216">
+                        <image xlinkHref={formData.text.color.img} width="430" height="216"></image>
+                      </pattern>
+                    </defs>
+                    <text className="text-center w-screen" style={fontStyle} id="main-text" textAnchor="middle" fill="url(#image)" >
+                      <textPath xlinkHref="#ellipse-id-rv" startOffset="380">
+                        <tspan>{formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</tspan>
+                      </textPath>
+                    </text>
+                  </svg> */}
                 </div>
               </div>
             </div>
