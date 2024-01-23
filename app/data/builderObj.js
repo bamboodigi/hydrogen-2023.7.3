@@ -1352,13 +1352,13 @@ const builderObj = {
             let fontSize = null;
             switch (size) {
               case '3” x 2”':
-                fontSize = 35;
+                fontSize = 100;
                 break;
               case '3.5” x 2”':
-                fontSize = 35;
+                fontSize = 100;
                 break;
               case '4” x 2”':
-                fontSize = 35;
+                fontSize = 80;
                 break;
             }
             //      console.log(fontSize);
