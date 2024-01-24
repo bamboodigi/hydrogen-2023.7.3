@@ -190,6 +190,7 @@ function CartLineItem({ line, cartLines }) {
 
   const { id, quantity, merchandise, attributes } = line;
 
+  console.log(attributes);
 
   // console.log(attributes.length);
 
@@ -208,6 +209,7 @@ function CartLineItem({ line, cartLines }) {
   const length = parseInt(size?.value?.match(/\d+/g)[0]);
   let isAddon = line.merchandise?.product.handle.includes("add-on");
   const glowBorder = attributes.find((attribute) => attribute.key === 'Glow Border');
+  const sides = attributes.find((attribute) => attribute.key === 'Sides');
   const upsellPricing = attributes.find((attribute) => attribute.key === 'Pricing')?.value || '';
   var newTitle = '';
 
@@ -231,7 +233,7 @@ function CartLineItem({ line, cartLines }) {
     }
   }
 
-  
+
 
   // console.log(line);
 
@@ -303,11 +305,11 @@ function CartLineItem({ line, cartLines }) {
                   <CartLinePrice line={line} />
                 </span>
               </div>
-              { priceObj.size && (
-              <div className="flex justify-between">
-                <Text className="font-semibold text-xs sm:text-copy">Size</Text>
-                <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ ${priceObj.size * quantity }</span>
-              </div>
+              {priceObj.size && (
+                <div className="flex justify-between">
+                  <Text className="font-semibold text-xs sm:text-copy">Size</Text>
+                  <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ ${priceObj.size * quantity}</span>
+                </div>
               )}
               {priceObj.hiVis && (
                 <>
@@ -329,7 +331,7 @@ function CartLineItem({ line, cartLines }) {
                 <>
                   <div className="flex justify-between">
                     <Text className="font-semibold text-xs sm:text-copy">Pro IR Font Color</Text>
-                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ ${priceObj.proIRFontColor * quantity }</span>
+                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ ${priceObj.proIRFontColor * quantity}</span>
                   </div>
                 </>
               )}
@@ -337,7 +339,7 @@ function CartLineItem({ line, cartLines }) {
                 <>
                   <div className="flex justify-between">
                     <Text className="font-semibold text-xs sm:text-copy">Reflective / Glow Font Color</Text>
-                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ ${priceObj.reflectiveGlowFontColor * quantity }</span>
+                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ ${priceObj.reflectiveGlowFontColor * quantity}</span>
                   </div>
                 </>
               )}
@@ -346,6 +348,15 @@ function CartLineItem({ line, cartLines }) {
                   <div className="flex justify-between">
                     <Text className="font-semibold text-xs sm:text-copy">Glow Border</Text>
                     <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ ${priceObj.glowBorder * quantity}</span>
+                  </div>
+                </>
+              )}
+
+              {sides && (
+                <>
+                  <div className="flex justify-between">
+                    <Text className="font-semibold text-xs sm:text-copy">Sides</Text>
+                    <span className="block font-semibold text-xs sm:text-copy whitespace-pre-wrap">+ ${priceObj.sides * quantity}</span>
                   </div>
                 </>
               )}
@@ -452,7 +463,7 @@ function CartLineQuantityAdjust({ line, cart }) {
 }
 
 function UpdateCartButton({ children, lines }) {
- //console.log(lines);
+  //console.log(lines);
   return (
     <CartForm
       route="/cart"

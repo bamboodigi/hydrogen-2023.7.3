@@ -68,6 +68,7 @@ const builderObj = {
             badge: patchType.config.sizes[0].upsells.badge || 0,
             proIRFontColor: builderObj.helpers.get.fontUpsell(patchType.config.sizes[0].size) || 0,
             reflectiveGlowFontColor: builderObj.helpers.get.fontUpsell(patchType.config.sizes[0].size) || 0,
+            sides:  patchType.config.sizes[0].upsells.sides || 10,
           }
         },
         upsells: {
@@ -76,10 +77,15 @@ const builderObj = {
           reflectiveGlowFontColor: false,
           hiVis: false,
           badge: false,
+          sides: false,
         },
         size: {
           current: patchType.config.sizes[0].size || '',
           list: patchType.config.sizes || [],
+        },
+        sides: {
+          current: 1,
+          options: [1, 2],
         },
         bgColor: {
           name: builderObj.data.bgColors[18].name,
@@ -103,7 +109,7 @@ const builderObj = {
             img: builderObj.data.fontColors[8].img,
           },
         },
-        rod : {
+        rod: {
           name: builderObj.data.fontColors[4].name,
           color: builderObj.data.fontColors[4].img,
           img: builderObj.data.rod,
@@ -425,8 +431,13 @@ const builderObj = {
           obj.text.secondary.lineHeight = '29px';
           obj.text.primary.fontSize = '52px';
           obj.text.primary.lineHeight = '52px';
+        case 'call sign':
+          obj.text.primary.fontSize = '100px';
+          obj.text.primary.lineHeight = '100px';
+          obj.text.primary.marginTop = '9.07996px';
+          break;
       }
-      
+
       return obj;
     },
   },
@@ -441,7 +452,7 @@ const builderObj = {
     markTypeOptions: builderData.markType.types,
     saberOptions: builderData.lightSabers.types,
     type: builderData.type,
-    rod : 'https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-med-img-rod.png',
+    rod: 'https://cdn.shopify.com/s/files/1/2242/5805/files/symbols-med-img-rod.png',
   },
   helpers: {
     get: {
@@ -1361,7 +1372,7 @@ const builderObj = {
                 fontSize = 80;
                 break;
             }
-            //      console.log(fontSize);
+            console.log(fontSize);
             return fontSize;
           },
         },
@@ -1482,6 +1493,15 @@ const builderObj = {
               {
                 "id": "gid://shopify/ProductVariant/42893376127134",
                 "value": "25"
+              }
+            ]
+          },
+          "sides": {
+            "name": "Add-on - Sides",
+            "variants": [
+              {
+                "id": "gid://shopify/ProductVariant/43119045738654",
+                "value": "10"
               }
             ]
           },
@@ -1887,6 +1907,9 @@ const builderObj = {
         const containerHeight = container.offsetHeight + 10;
         let textWidth = textElement?.offsetWidth || 0;
 
+        console.log(textWidth);
+        console.log(containerWidth);
+
         // if(textWidth > containerWidth) {
         //   textWidth = containerWidth;
         // }
@@ -2183,7 +2206,7 @@ const builderObj = {
           // arr to store addon project objects for
           let addOnArr = [];
 
-          // console.log(upsells);
+          console.log(upsells);
           // console.log(statusObj);
           //    console.log(upsells.size);
           if (upsells.size) {
@@ -2219,6 +2242,9 @@ const builderObj = {
               case 'badge':
                 type = 'badge';
                 break;
+              case 'sides':
+                type = 'sides';
+                break;
             }
             if (value) {
               //        console.log(key);
@@ -2242,10 +2268,10 @@ const builderObj = {
           function getAddOnGID(addOnObj, handle, value) {
             let addOn = addOnObj()[handle];
 
-            // console.log(addOnObj());
-            // console.log(addOn);
-            // console.log(handle);
-            // console.log(value);
+            console.log(addOnObj());
+            console.log(addOn);
+            console.log(handle);
+            console.log(value);
 
 
             if (!addOn) {

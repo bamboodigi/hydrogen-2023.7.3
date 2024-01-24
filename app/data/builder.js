@@ -1920,6 +1920,7 @@ const builderData = {
             upsells: {
               size: 0,
               glowBorder: 5,
+              sides : 10,
             }
           },
           {
@@ -1935,6 +1936,7 @@ const builderData = {
             upsells: {
               size: 0,
               glowBorder: 5,
+              sides : 10,
             }
           },
           {
@@ -1950,7 +1952,7 @@ const builderData = {
             upsells: {
               size: 1,
               glowBorder: 5,
-              hiVis: 4,
+              sides : 10,
             }
           },
         ],
@@ -1960,19 +1962,19 @@ const builderData = {
         btnText: "Get Started",
         steps: [
           {
-            name: "Text & Size",
+            name: "Size & Sides",
             status: 'current',
             input: [
-              {
-                id: 'text',
-                label: 'Text',
-                type: 'input',
-                placeholder: '',
-              },
               {
                 id: 'size',
                 label: 'Size',
                 type: 'select',
+                placeholder: '',
+              },
+              {
+                id: 'sides',
+                label: 'Sides',
+                type: 'input',
                 placeholder: '',
               },
             ],
@@ -1992,6 +1994,18 @@ const builderData = {
                 label: 'Background Color',
                 type: 'advancedSelect',
                 placeholder: 'Multicam Alpine',
+              },
+            ],
+          },
+          {
+            name: "Text",
+            status: 'current',
+            input: [
+              {
+                id: 'text',
+                label: 'Text',
+                type: 'input',
+                placeholder: '',
               },
             ],
           },

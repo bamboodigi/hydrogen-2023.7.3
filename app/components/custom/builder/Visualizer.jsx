@@ -46,6 +46,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
   const [canvasStyle, setCanvasStyle] = useState(canvas);
   const [style, setStyle] = useState(patch);
   const [fontStyle, setFontStyle] = useState(text.primary);
+  const [backFontStyle, setBackFontStyle] = useState(text.primary);
   const [fontWrapperStyle, setFontWrapperStyle] = useState({});
   const [fontSecondaryStyle, setFontSecondaryStyle] = useState(text.secondary);
   const [flagStyle, setFlagStyle] = useState(formData.type.toLowerCase() === "medical patch" ? img.mask : img.flag);
@@ -57,11 +58,12 @@ export function Visualizer({ formData, className, methods, ...props }) {
   const [birdStyle, setBirdStyle] = useState(img.division.bird);
 
 
+
   // A function to load an image and update the state with its URL
   const imageLoader = (obj, setState, type) => {
-    //  console.log(obj);
-    // console.log(type);
-    // console.log(obj.type);
+     console.log(obj);
+    console.log(type);
+    console.log(obj.type);
     let mask = obj.mask ? obj.mask : null;
     let bgImg = obj.src;
     let height = obj.height ? obj.height : null;
@@ -74,6 +76,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
       case 'image':
         //   console.log(bgImg);
         img.src = bgImg;
+        console.log(img.src);
         img.onload = () => {
           setState(prevStyle => ({
             ...prevStyle,
@@ -212,6 +215,37 @@ export function Visualizer({ formData, className, methods, ...props }) {
     }
   };
 
+
+  useEffect(() => {
+console.log(formData.sides.current);
+    console.log('ok');
+    let obj = {
+    };
+
+    if (formData.sides.current == '2') {
+      console.log("ok");
+      const white = methods.data.fontColors.find(value => value.name.includes('Flat White'));
+      const black = methods.data.fontColors.find(value => value.name.includes('Basic IR'));
+     
+     
+      obj.type = 'color';
+      obj.src = black;
+      console.log(obj);
+      imageLoader(obj, setFontStyle, formData.type);
+
+      obj.src = white;
+
+      imageLoader(obj, setBackFontStyle, formData.type);
+    } else {
+      obj.type = 'color';
+      obj.src = formData.text.color.img;
+
+      imageLoader(obj, setFontStyle, formData.type);
+    }
+
+
+
+  }, [formData.sides.current]);
 
 
   // // // Custom hook to update the flag style when the flag image changes
@@ -581,6 +615,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
     <div className="swimlane md:grid-flow-row hiddenScroll md:p-0 md:overflow-x-auto md:grid-cols-2 w-full justify-center lg:pr-16">
       <div id="visualizer" className={classNames(
         className,
+        formData.sides.current == 2 ? "flex-col" : "",
         "md:col-span-2 aspect-square snap-center flex items-center justify-center overflow-clip rounded-sm w-full max-h-1/2 p-6 py-4 sm:relative"
       )}>
         {/* ${scrollPosition >= 100 ? ' w-100 fixed z-50' : ' transition relative'
@@ -591,7 +626,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
           methods.helpers.is.jacketPanel.defense(formData) ? "rounded-[2rem]" : "",
           "flex items-center transform lg:scale-150"
         )} style={style}>
-          {   formData.type.toLowerCase().includes("id panel") && formData.size.current == '6” x 2”' ? (
+          {formData.type.toLowerCase().includes("id panel") && formData.size.current == '6” x 2”' ? (
             <div className="w-full h-full flex">
               <div className="w-1/2 flex items-center px-2">
                 {formData.img.type.toLowerCase() === "laser cut flag" ? (
@@ -922,9 +957,15 @@ export function Visualizer({ formData, className, methods, ...props }) {
               )}
             </div>
           ) : formData.type.toLowerCase().includes("call sign") ? (
-            <div ref={containerRef} className="h-full text-center overflow-x-hidden flex items-center justify-center">
-              <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
-            </div>
+            <>
+              <div ref={containerRef} className="h-full w-full text-center overflow-x-hidden flex items-center justify-center">
+                <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
+              </div>
+              {/* <div  className="h-full w-full text-center overflow-x-hidden flex items-center justify-center">
+                <p id="back-main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
+              </div> */}
+            </>
+
           ) : formData.type.toLowerCase().includes("quote") ? (
             <div ref={containerRef} className="h-full text-center overflow-x-hidden flex items-center justify-center">
               <p id="main-text" className="inline-block" style={{ ...fontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
@@ -1002,8 +1043,20 @@ export function Visualizer({ formData, className, methods, ...props }) {
             </div>
           )}
         </div>
+        {
+          formData.sides.current == 2 && (
+            <>
+              <div id="back-patch" className="flex items-center transform lg:scale-150 mt-6"
+                style={style}>
+                <div className="h-full w-full text-center overflow-x-hidden flex items-center justify-center">
+                  <p id="back-main-text" className="inline-block" style={{ ...backFontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
+                </div>
+              </div>
+            </>
+          )
+        }
       </div>
-    </div >
+    </div>
   );
   // // format by option
   // return (

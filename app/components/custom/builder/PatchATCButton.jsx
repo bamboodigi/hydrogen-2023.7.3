@@ -38,11 +38,11 @@ export function PatchATCButton({ formData, setFormData, productURL, className, c
 
 
     // use the addOn method to get an array of addOnLines
-     const addOnLines = methods.helpers.update.addOn.add(formData);
+    const addOnLines = methods.helpers.update.addOn.add(formData);
 
     // append AddOnLines array to lines array
     let tempLines = lines.concat(addOnLines);
-    
+
     // console.log(addOnLines);
     // console.log(tempLines);
 
@@ -81,6 +81,7 @@ export function PatchATCButton({ formData, setFormData, productURL, className, c
     arr.push(
       { key: "Params", value: productURL + '?' + formData.urlParams },
       { key: "Size", value: formData.size.current },
+      { key: "Sides", value: formData.sides.current },
       { key: "Price", value: formData.price.total + "" },
       { key: "Flag", value: formData.img.name },
       { key: "Mark Type", value: formData.img.markType || "n/a" },
@@ -122,7 +123,7 @@ export function PatchATCButton({ formData, setFormData, productURL, className, c
         className={className}
         builderFormData={formData}
         setBuilderFormData={setFormData}
-       disabled={disabled}
+        disabled={disabled}
       >
         <Text
           as="span"

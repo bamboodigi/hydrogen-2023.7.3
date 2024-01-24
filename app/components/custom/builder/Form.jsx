@@ -600,6 +600,21 @@ export function Form({ formData, setFormData, productURL, data, config, product,
     }
   };
 
+  // Define a function to handle the change of the size dropdown menu
+  const handleSidesChange = (event) => {
+    console.log(event.target.value);
+    let twoSides = event.target.value == 2 ? true : false;
+    setFormData((prevFormData) =>({
+      ...formData,
+      upsells: { ...prevFormData.upsells, 
+        sides: twoSides },
+      sides: {
+        ...formData.sides,
+        current: event.target.value
+      },
+    }));
+  };
+
   // Define a function to handle the change of the font text color dropdown menu
   const handleTextColorChange = (event) => {
     const obj = fontColors.find(value => value.img === event.img);
@@ -1325,6 +1340,28 @@ export function Form({ formData, setFormData, productURL, data, config, product,
                           const key = index.toString();
                           return (
                             <option key={key} value={val.size}>{val.size}</option>
+                          );
+                        })}
+                      </select>
+                    </>
+                  ) : input.id.toLowerCase() == "sides" ? (
+                    <>
+                      <label htmlFor="size" className="block text-sm xl:text-lg font-medium">
+                        Sides
+                      </label>
+                      <select
+
+                        id="sides"
+                        name="sides"
+                        value={formData.sides.current}
+                        onChange={handleSidesChange}
+                        className="bg-transparent mt-1 block w-full rounded-md border border-contrast py-3 xl:py-4 xl:px-5 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 xl:text-lg"
+                      >
+                        <option value="">Select 1 or 2 Sides</option>
+                        {formData.sides.options.map((val, index) => {
+                          const key = index.toString();
+                          return (
+                            <option key={key} value={val}>{val}</option>
                           );
                         })}
                       </select>
