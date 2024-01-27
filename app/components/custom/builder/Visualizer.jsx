@@ -30,7 +30,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
 
   const classNames = methods.helpers.utility.classNames;
 
-  const { canvas, patch, text, img, lightsaber } = initVisualizerStyle(formData);
+  const { canvas, patch, backPatch, text, img, lightsaber } = initVisualizerStyle(formData);
 
   //console.log(img);
 
@@ -45,8 +45,9 @@ export function Visualizer({ formData, className, methods, ...props }) {
 
   const [canvasStyle, setCanvasStyle] = useState(canvas);
   const [style, setStyle] = useState(patch);
+  const [backStyle, setBackStyle] = useState(backPatch);
   const [fontStyle, setFontStyle] = useState(text.primary);
-  const [backFontStyle, setBackFontStyle] = useState(text.primary);
+  const [backFontStyle, setBackFontStyle] = useState(text.back);
   const [fontWrapperStyle, setFontWrapperStyle] = useState({});
   const [fontSecondaryStyle, setFontSecondaryStyle] = useState(text.secondary);
   const [flagStyle, setFlagStyle] = useState(formData.type.toLowerCase() === "medical patch" ? img.mask : img.flag);
@@ -218,29 +219,15 @@ export function Visualizer({ formData, className, methods, ...props }) {
 
   useEffect(() => {
 console.log(formData.sides.current);
+console.log(typeof formData.sides.current);
     console.log('ok');
     let obj = {
     };
 
     if (formData.sides.current == '2') {
-      console.log("ok");
-      const white = methods.data.fontColors.find(value => value.name.includes('Flat White'));
-      const black = methods.data.fontColors.find(value => value.name.includes('Basic IR'));
-     
-     
-      obj.type = 'color';
-      obj.src = black;
-      console.log(obj);
-      imageLoader(obj, setFontStyle, formData.type);
-
-      obj.src = white;
-
-      imageLoader(obj, setBackFontStyle, formData.type);
+      setStyle(prevStyle => ({ ...prevStyle, padding: '30px'}));
     } else {
-      obj.type = 'color';
-      obj.src = formData.text.color.img;
-
-      imageLoader(obj, setFontStyle, formData.type);
+      setStyle(prevStyle => ({ ...prevStyle, padding: '10px'}));
     }
 
 
@@ -419,6 +406,7 @@ console.log(formData.sides.current);
         // Set the style for non-square sizes
         const [width, height] = value.ratio.split(':').map(Number);
         setStyle(prevStyle => ({ ...prevStyle, width: '290px', height: `${290 * height / width}px` }));
+        setBackStyle(prevStyle => ({ ...prevStyle, width: '290px', height: `${290 * height / width}px` }));
       }
     }
   }, [formData.size.current]);
@@ -527,6 +515,7 @@ console.log(formData.sides.current);
           updateFontSize(containerRef, setFontStyle, formData, setFontWrapperStyle);
         } else {
           updateFontSize(containerRef, setFontStyle, formData);
+          updateFontSize(containerRef, setBackFontStyle, formData);
         }
       }
     };
@@ -1047,7 +1036,7 @@ console.log(formData.sides.current);
           formData.sides.current == 2 && (
             <>
               <div id="back-patch" className="flex items-center transform lg:scale-150 mt-6"
-                style={style}>
+                style={backStyle}>
                 <div className="h-full w-full text-center overflow-x-hidden flex items-center justify-center">
                   <p id="back-main-text" className="inline-block" style={{ ...backFontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
                 </div>

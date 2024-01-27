@@ -231,6 +231,8 @@ const builderObj = {
     visualizer: function (formData) {
       const bgColor = 'url("' + formData.bgColor.img + '")';
       const textColor = 'url("' + formData.text.color.img + '")';
+      const backTextColor = 'url("' + builderObj.data.fontColors.find(value => value.name.includes('Glow in the Dark')).img + '")';
+      const backBGColor = 'url("' + builderObj.data.fontColors.find(value => value.name.includes('Basic IR')).img + '")';
       const rodColor = 'url("' + formData.rod.color + '")';
       const hiltColor = 'url("' + formData.lightsaber.hilt.color + '")';
       const bladeColor = 'url("' + formData.lightsaber.blade.color + '")';
@@ -263,6 +265,18 @@ const builderObj = {
           OTransition: 'background-image 0.3s ease-in-out, height 0.2s ease-in-out, width 0.4s ease-in-out !important',
           transition: 'background-image 0.3s ease-in-out, height 0.2s ease-in-out, width 0.4s ease-in-out !important',
         },
+        backPatch: {
+          backgroundImage: backBGColor,
+          width: '290px',
+          height: 'calc(290px/3)',
+          textTransform: 'uppercase',
+          padding: '30px',
+          WebkitTransition: 'background-image 0.3s ease-in-out, height 0.2s ease-in-out, width 0.4s ease-in-out !important',
+          MozTransition: 'background-image 0.3s ease-in-out, height 0.2s ease-in-out, width 0.4s ease-in-out !important',
+          msTransition: 'background-image 0.3s ease-in-out, height 0.2s ease-in-out, width 0.4s ease-in-out !important',
+          OTransition: 'background-image 0.3s ease-in-out, height 0.2s ease-in-out, width 0.4s ease-in-out !important',
+          transition: 'background-image 0.3s ease-in-out, height 0.2s ease-in-out, width 0.4s ease-in-out !important',
+        },
         text: {
           primary: {
             backgroundImage: textColor,
@@ -285,6 +299,19 @@ const builderObj = {
             backgroundClip: 'text',
             lineHeight: '34px',
             fontSize: '32px',
+          },
+          back: {
+            backgroundImage: backTextColor,
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            fontFamily: 'WMIStencil-Black',
+            backgroundClip: 'text',
+            width: 'auto',
+            whiteSpace: 'nowrap',
+            textAlign: 'center',
+            lineHeight: '45px',
+            fontSize: '45px',
+            marginTop: '8.3333px'
           },
         },
         img: {
@@ -3033,6 +3060,14 @@ const builderObj = {
           } else {
             return false;
           }
+        },
+      },
+      callSign: {
+        double: function (formData) {
+          const type = formData.type;
+          const sides = formData.sides.current;
+
+          return type.toLowerCase() == 'call sign' && sides == 2;
         },
       },
       glowBorder: function (type, size, sizeEnabled) {
