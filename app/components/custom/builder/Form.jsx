@@ -959,7 +959,6 @@ export function Form({ formData, setFormData, productURL, data, config, product,
                 },
               ],
             };
-            console.log("really");
             if (!steps.some(step => step.name === flagStep.name)) {
               steps.splice(1, 0, flagStep);
             }
@@ -979,6 +978,41 @@ export function Form({ formData, setFormData, productURL, data, config, product,
           console.log('ok')
         }
         break;
+      case 'call sign': 
+      let removeObj = {};
+        if(methods.helpers.is.callSign.double(formData)) {
+          console.log('ok');
+          formTempObj = {
+            id: 'irOption',
+            label: 'IR Option',
+            type: 'select',
+            placeholder: '',
+          };
+          removeObj = {
+            id: 'textColor',
+            label: 'Text Color',
+            type: 'advancedSelect',
+            placeholder: 'Flat Spice Brown',
+          };
+
+          methods.helpers.update.formElement(removeObj, steps);
+          methods.helpers.update.formElement(formTempObj, steps, methods.helpers.is.callSign.double(formData) );
+
+        } else {
+          removeObj = {
+            id: 'irOption',
+            label: 'IR Option',
+            type: 'select',
+            placeholder: '',
+          };
+          formTempObj = {
+            id: 'textColor',
+            label: 'Text Color',
+            type: 'advancedSelect',
+            placeholder: '', 
+          }
+        }
+      break;
     }
   };
 
@@ -1373,20 +1407,16 @@ export function Form({ formData, setFormData, productURL, data, config, product,
                         Select IR Option
                       </label>
                       <select
-
                         id="iroptions"
+                        title="IR Options"
                         name="iroptions"
-                        value={formData.sides.current}
-                        onChange={handleSidesChange}
+                        value={formData.bgColor.ir.name}
+                        onChange={handleIRChange}
                         className="bg-transparent mt-1 block w-full rounded-md border border-contrast py-3 xl:py-4 xl:px-5 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 xl:text-lg"
                       >
-                        <option value="">Select 1 or 2 Sides</option>
-                        {formData.sides.options.map((val, index) => {
-                          const key = index.toString();
-                          return (
-                            <option key={key} value={val}>{val}</option>
-                          );
-                        })}
+                        <option value="">Select IR Option</option>
+                        <option value={newFontColors.find(value => value.name.includes('Basic IR')).name}>{newFontColors.find(value => value.name.includes('Basic IR')).name}</option>
+                        <option value={newFontColors.find(value => value.name.includes('Pro IR')).name}>{newFontColors.find(value => value.name.includes('Pro IR')).name}</option>
                       </select>
                     </>
                   ) : input.id.toLowerCase() == "sides" ? (

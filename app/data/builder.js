@@ -2347,7 +2347,45 @@ const builderData = {
       { name: 'Blue Reflective', img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/blue-reflective.jpg?v=1692905056' },
       { name: 'Silver Reflective', img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/silver-reflective.jpg?v=1692905056' },
       { name: 'Purple Reflective', img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/purple-reflective.jpg?v=1692905056' },
-    ]
+    ],
+    textures: [
+      {
+        name: 'Black',
+        img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/two-sided-black.jpg?v=1706460565'
+      },
+      {
+        name: 'Blue',
+        img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/two-sided-blue.png?v=1706460565'
+      },
+      {
+        name: 'Coyote Brown',
+        img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/two-sided-coyote-brown.png?v=1706460565'
+      },
+      {
+        name: 'OD Green',
+        img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/two-sided-od-green.png?v=1706460565'
+      },
+      {
+        name: 'Orange',
+        img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/two-sided-orange.png?v=1706460565'
+      },
+      {
+        name: 'Wolf Grey',
+        img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/two-sided-wolf-grey.png?v=1706460565'
+      },
+      {
+        name: 'Red',
+        img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/two-sided-red.png?v=1706460565'
+      },
+      {
+        name: 'Safety Yellow',
+        img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/two-sided-safety-yellow.png?v=1706460565'
+      },
+      {
+        name: 'White',
+        img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/two-sided-white.png?v=1706460565'
+      }
+    ],
   },
   imgs: {
     "hi-vis": initHiVisFlags(),
@@ -3504,5 +3542,7 @@ function initLaserCutFlags() {
 
   return laserObj;
 }
+
+
 
 export default builderData;
