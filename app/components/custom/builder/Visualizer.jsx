@@ -70,10 +70,10 @@ export function Visualizer({ formData, className, methods, ...props }) {
     let mask = obj.mask ? obj.mask : null;
     let bgImg = obj.src;
     let height = obj.height ? obj.height : null;
-    // console.log(mask)
+    console.log(mask)
     //  console.log(obj.type.toLowerCase());
     const img = new Image();
-    //  console.log(obj.type.toLowerCase());
+     console.log(obj.type.toLowerCase());
     switch (obj.type.toLowerCase()) {
       case "color":
       case "texture":
@@ -90,7 +90,9 @@ export function Visualizer({ formData, className, methods, ...props }) {
         };
         break;
       case 'mask':
+        console.log('ok');
         if (mask) {
+          console.log('ok');
           if (type.toLowerCase() == "flag") {
             img.src = mask;
             img.onload = () => {
@@ -113,8 +115,9 @@ export function Visualizer({ formData, className, methods, ...props }) {
             };
           } else if (!type.toLowerCase().includes("light sabers")) {
             img.src = mask;
+            console.log('ok');
             img.onload = () => {
-              //  console.log(mask);
+              console.log(mask);
               //   console.log(setState);
               setState(prevStyle => ({
                 ...prevStyle,
@@ -137,7 +140,6 @@ export function Visualizer({ formData, className, methods, ...props }) {
           let newWidth = '';
           let newMarginLeft = '';
           let newColor = '';
-
           if (setState == setBladeStyle) {
             // console.log("ooo");
             setState(prevStyle => ({
@@ -145,7 +147,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
               width: '0%'
             }));
           }
-
+          console.log(mask);
 
           switch (formData.lightsaber.saberType.toLowerCase()) {
             case 'kylo ren':
@@ -179,7 +181,8 @@ export function Visualizer({ formData, className, methods, ...props }) {
           }
           img.src = mask;
           //   console.log(mask);
-
+          console.log(img);
+          console.log(mask);
           img.onload = () => {
             setState(prevStyle => ({
               ...prevStyle,
@@ -368,14 +371,14 @@ export function Visualizer({ formData, className, methods, ...props }) {
 
     let objHilt = {
     };
-    objHilt.type = 'light saber';
+    objHilt.type = 'mask';
     objHilt.src = formData.lightsaber.hilt.color;
     objHilt.mask = formData.lightsaber.hilt.img;
     imageLoader(objHilt, setHiltStyle, formData.type)
 
     let objBlade = {
     };
-    objBlade.type = 'light saber';
+    objBlade.type = 'mask';
     objBlade.src = formData.lightsaber.blade.color;
     objBlade.mask = formData.lightsaber.blade.img;
     imageLoader(objBlade, setBladeStyle, formData.type)
@@ -386,9 +389,10 @@ export function Visualizer({ formData, className, methods, ...props }) {
     // console.log(formData.lightsaber.hilt.color)
     let objHilt = {
     };
-    objHilt.type = 'mask';
+    objHilt.type = 'light saber';
     objHilt.src = formData.lightsaber.hilt.color;
     objHilt.mask = formData.lightsaber.hilt.img;
+    console.log(objHilt);
     imageLoader(objHilt, setHiltStyle, formData.type)
 
   }, [formData.lightsaber.hilt.color]);
@@ -397,7 +401,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
   useEffect(() => {
     let objBlade = {
     };
-    objBlade.type = 'mask';
+    objBlade.type = 'light saber';
     objBlade.src = formData.lightsaber.blade.color;
     objBlade.mask = formData.lightsaber.blade.img;
     imageLoader(objBlade, setBladeStyle, formData.type)
