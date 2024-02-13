@@ -81,7 +81,6 @@ export function PatchATCButton({ formData, setFormData, productURL, className, c
     arr.push(
       { key: "Params", value: productURL + '?' + formData.urlParams },
       { key: "Size", value: formData.size.current },
-      { key: "Sides", value: formData.sides.current },
       { key: "Price", value: formData.price.total + "" },
       { key: "Flag", value: formData.img.name },
       { key: "Mark Type", value: formData.img.markType || "n/a" },
@@ -95,7 +94,13 @@ export function PatchATCButton({ formData, setFormData, productURL, className, c
       { key: "Pricing", value: formData.price.upsellPricing || "" },
       { key: "ID", value: formData.id || "" },
     );
-
+    
+    if(methods.helpers.is.patchType.callSign(formData)) {
+      arr.push(
+        { key: "Sides", value: formData.sides.current },
+      )
+    }
+    
     return arr;
   }
 

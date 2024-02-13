@@ -2465,79 +2465,112 @@ const builderObj = {
         setFormData({ ...formData, id: newID, price: { ...formData.price, total: totalPrice, upsellPricing: myObjStr } });
       },
       formElement: function (element, steps, trigger) {
-        console.log(element);
-        console.log(trigger);
-        console.log(steps);
         const foundElement = steps.some(step => {
           return step.input.some(input => {
             return input.id === element.id;
           });
         });
-        
-        //
+      
         const index = steps.findIndex(item => item.input.some(input => input.id === element.id));
-        console.log(index);
+        if (index === -1) {
+          return; // Element not found in steps
+        }
+      
         const i = steps[index].input.findIndex(item => item.id === element.id);
         const step = steps[index];
-
-        console.log(index);
-        console.log(i);
-        console.log(steps);
-
-        console.log(steps[index].input[i]);
-
+      
         if (trigger) {
           addElement(element, step, index);
         } else {
-          removeElement(element, step, index);
+          removeElement(element, step, i);
         }
-
+      
         function addElement(element, step, index) {
-
           if(!foundElement) {
             step.input.splice(index, 0, element);
-          } else {
-
           }
-          // check if element already exists, if not add element
-          // if (foundElement) {
-          //   //    console.log('element already exists');
-          // } else {
-          //   if (element.id === 'glowBorder') {
-          //     //      console.log("ok");
-          //     let lastElement = steps[steps.length - 1];
-          //     //     console.log(lastElement);
-          //     lastElement.input.unshift(element);
-          //     //     console.log(steps);
-          //   }
-          // }
         }
-
-        function removeElement(element, step, index) {
-          console.log(element);
-          console.log(step);
-          console.log(index);
-          // check if element already exists, if so remove element
+      
+        function removeElement(element, step, i) {
           if(foundElement) {
-            console.log(steps);
-            step.input.splice(element, 1);
-            console.log(steps);
-          } else {
-
+            step.input.splice(i, 1);
           }
-          // if (foundElement) {
-          //   console.log(foundElement);
-          //   if (element.id === 'glowBorder') {
-          //     //   console.log("ok");
-          //     let lastElement = steps[steps.length - 1];
-          //     //    console.log(lastElement);
-          //     lastElement.input.shift();
-          //     //   console.log(steps);
-          //   }
-          // } else {
-          // }
         }
       },
+      // formElement: function (element, steps, trigger) {
+      //   console.log(element);
+      //   console.log(trigger);
+      //   console.log(steps);
+      //   const foundElement = steps.some(step => {
+      //     return step.input.some(input => {
+      //       return input.id === element.id;
+      //     });
+      //   });
+        
+      //   //
+      //   const index = steps.findIndex(item => item.input.some(input => input.id === element.id));
+      //   console.log(index);
+      //   const i = steps[index].input.findIndex(item => item.id === element.id);
+      //   const step = steps[index];
+
+      //   console.log(index);
+      //   console.log(i);
+      //   console.log(steps);
+
+      //   console.log(steps[index].input[i]);
+
+      //   if (trigger) {
+      //     addElement(element, step, index);
+      //   } else {
+      //     removeElement(element, step, index);
+      //   }
+
+      //   function addElement(element, step, index) {
+
+      //     if(!foundElement) {
+      //       step.input.splice(index, 0, element);
+      //     } else {
+
+      //     }
+      //     // check if element already exists, if not add element
+      //     // if (foundElement) {
+      //     //   //    console.log('element already exists');
+      //     // } else {
+      //     //   if (element.id === 'glowBorder') {
+      //     //     //      console.log("ok");
+      //     //     let lastElement = steps[steps.length - 1];
+      //     //     //     console.log(lastElement);
+      //     //     lastElement.input.unshift(element);
+      //     //     //     console.log(steps);
+      //     //   }
+      //     // }
+      //   }
+
+      //   function removeElement(element, step, index) {
+      //     console.log(element);
+      //     console.log(step);
+      //     console.log(index);
+      //     // check if element already exists, if so remove element
+      //     if(foundElement) {
+      //       console.log(steps);
+      //       step.input.splice(element, 1);
+      //       console.log(steps);
+      //     } else {
+
+      //     }
+      //     // if (foundElement) {
+      //     //   console.log(foundElement);
+      //     //   if (element.id === 'glowBorder') {
+      //     //     //   console.log("ok");
+      //     //     let lastElement = steps[steps.length - 1];
+      //     //     //    console.log(lastElement);
+      //     //     lastElement.input.shift();
+      //     //     //   console.log(steps);
+      //     //   }
+      //     // } else {
+      //     // }
+      //   }
+      // },
       addOn: {
         add: function (formData) {
 
@@ -3440,6 +3473,7 @@ const builderObj = {
         lightSaber: (formData) => formData.type.toLowerCase().includes("light saber"),
         customPatch: (formData) => formData.type.toLowerCase() == 'custom printed patch',
         cover: (formData) => formData.type.toLowerCase() == 'cover',
+        callSign: (formData) => formData.type.toLowerCase() == 'call sign',
       },
       flagType: {
         laserCutFlag: (formData) => formData.img.type.toLowerCase() === "laser cut flag",
