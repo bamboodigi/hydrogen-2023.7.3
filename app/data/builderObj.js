@@ -68,7 +68,7 @@ const builderObj = {
             badge: patchType.config.sizes[0].upsells.badge || 0,
             proIRFontColor: builderObj.helpers.get.fontUpsell(patchType.config.sizes[0].size) || 0,
             reflectiveGlowFontColor: builderObj.helpers.get.fontUpsell(patchType.config.sizes[0].size) || 0,
-            sides:  patchType.config.sizes[0].upsells.sides || 10,
+            sides: patchType.config.sizes[0].upsells.sides || 10,
           }
         },
         upsells: {
@@ -90,7 +90,7 @@ const builderObj = {
         bgColor: {
           name: builderObj.data.bgColors[18].name,
           img: builderObj.data.bgColors[18].img,
-          texture : builderObj.data.textures.find(value => value.name.includes('White')),
+          texture: builderObj.data.textures.find(value => value.name.includes('White')),
           ir: {
             name: builderObj.data.fontColors.find(value => value.name.includes('Basic IR')).name,
             img: builderObj.data.fontColors.find(value => value.name.includes('Basic IR')).img,
@@ -260,7 +260,7 @@ const builderObj = {
         canvas: {
           height: '230px'
         },
-        patch : {
+        patch: {
           patch: {
             backgroundImage: bgColor,
             width: '290px',
@@ -297,7 +297,7 @@ const builderObj = {
             OTransition: 'background-image 0.3s ease-in-out, height 0.2s ease-in-out, width 0.4s ease-in-out !important',
             transition: 'background-image 0.3s ease-in-out, height 0.2s ease-in-out, width 0.4s ease-in-out !important',
           },
-          patch : {
+          patch: {
             backgroundImage: backBGColor,
             width: '100%',
             height: '100%',
@@ -1277,20 +1277,8 @@ const builderObj = {
           fontSize: function (size) {
             let fontSize = null;
             switch (size) {
-              case '3.5” x 3.5”':
-                fontSize = 50;
-                break;
               case '3.5” x 4”':
-                fontSize = 80;
-                break;
-              case '3.6” x 5”':
-                fontSize = 80;
-                break;
-              case '4” x 4.5”':
-                fontSize = 80;
-                break;
-              case '4.6” x 6.2”':
-                fontSize = 68;
+                fontSize = 40;
                 break;
             }
             return fontSize;
@@ -1437,255 +1425,255 @@ const builderObj = {
           texture: function (bgColor) {
             const name = bgColor.name;
             const textures = [
-                {
-                  name: 'Black',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/black.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Black')).img,
-                },
-                {
-                  name: 'Coyote Brown',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/coyote-brown.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
-                },
-                {
-                  name: 'Tan 499',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/tan499.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
-                },
-                {
-                  name: 'OD Green',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/od-green.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('OD Green')).img,
-                },
-                {
-                  name: 'Ranger Green',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/ranger-green.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('OD Green')).img,
-                },
-                {
-                  name: 'Wolf Grey',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/wolf-grey.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Wolf Grey')).img,
-                },
-                {
-                  name: 'Navy Blue',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/navy-blue.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Blue')).img,
-                },
-                {
-                  name: 'Black Blue',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/blue-black.jpg?v=1678555190',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Blue')).img,
-                },
-                {
-                  name: 'Blaze Orange',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/blaze-orange.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Orange')).img,
-                },
-                {
-                  name: 'Red',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/red.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Red')).img,
-                },
-                {
-                  name: 'Lime Green',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/lime-green.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Black')).img,
-                },
-                {
-                  name: 'Flourescent Pink',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/pink.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Black')).img,
-                },
-                {
-                  name: 'Safety Yellow',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/saftey-yellow.jpg?v=1678555190',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Safety Yellow')).img,
-                },
-                {
-                  name: 'Purple',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/purple.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Black')).img,
-                },
-                {
-                  name: 'Multicam',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/multicam.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
-                },
-                {
-                  name: 'Multicam Black',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/multicam-black.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Black')).img,
-                },
-                {
-                  name: 'Multicam Tropic',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/multicam-tropic.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('OD Green')).img,
-                },
-                {
-                  name: 'Multicam Arid',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/multicam-arid.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
-                },
-                {
-                  name: 'Multicam Alpine',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/multicam-alpine.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('White')).img,
-                },
-                {
-                  name: 'Desert MARPAT',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/desert-marpat.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
-                },
-                {
-                  name: 'MARPAT',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/marpat.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
-                },
-                {
-                  name: 'M05 Woodland',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/marpat.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('OD Green')).img,
-                },
-                {
-                  name: 'M81 Woodland',
-                  img: 'https://cdn-zeptoapps.com/product-personalizer/images/patchpanel.myshopify.com/Small-RF-M81-Woodland.jpg?v=12330',
-                  texture: builderObj.data.textures.find(value => value.name.includes('OD Green')).img,
-                },
-                {
-                  name: 'Kryptek Typhon',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/typhon.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Black')).img,
-                },
-                {
-                  name: 'Kryptek Mandrake',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/mandrake.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('OD Green')).img,
-                },
-                {
-                  name: 'Flourescent Splatter with Hot Pink thread',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/splatter.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Black')).img,
-                },
-                {
-                  name: 'Flecktarn',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/flactarn.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
-                },
-                {
-                  name: 'WZ93 PANTERA',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/wz93.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
-                },
-                {
-                  name: 'U.S. Desert Night Camo',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/desert-night.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('OD Green')).img,
-                },
-                {
-                  name: 'CADPAT AR',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/cadpat-ar.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
-                },
-                {
-                  name: 'CADPAT TW',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/cadpat-tw.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('OD Green')).img,
-                },
-                {
-                  name: 'AOR1',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/aor1.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
-                },
-                {
-                  name: 'AOR2',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/aor2.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
-                },
-                {
-                  name: 'A-TACS IX',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/a-tacs-ix.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
-                },
-                {
-                  name: 'A-TACS UCON',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/a-tacs-ucon.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
-                },
-                {
-                  name: 'A-TACS LE',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/a-tacs-le.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Black')).img,
-                },
-                {
-                  name: 'A-TACS GHOST',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/a-tacs-ghost.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Black')).img,
-                },
-                {
-                  name: 'A-TACS FG',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/a-tacs-fg.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('OD Green')).img,
-                },
-                {
-                  name: 'PenCott GreenZone',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/pencott-greenzone.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('OD Green')).img,
-                },
-                {
-                  name: 'PenCott BadLands',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/pencott-badlands.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
-                },
-                {
-                  name: 'PenCott Sandstorm',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/pencott-sandstorm.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
-                },
-                {
-                  name: 'PenCott SnowDrift',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/pencott-snowdrift.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('White')).img,
-                },
-                {
-                  name: 'Blue Plaid',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/blue-plaid.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Blue')).img,
-                },
-                {
-                  name: 'FlockCam with Orange thread',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/flockam-with-orange-thread.jpg?v=1678555191',
-                  texture: null,
-                },
-                {
-                  name: 'Tadpole Tigerstripe',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/tadpole-tigerstripe.jpg?v=1678555191',
-                  texture: null,
-                },
-                {
-                  name: '6 Colour - Chocolate Chip',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/chocolate-chip.jpg?v=1678555191'
-                },
-                {
-                  name: 'WWII FrogSkin Brownside',
-                  img: 'https://cdn-zeptoapps.com/product-personalizer/images/patchpanel.myshopify.com/Small-RF-WWII-FrogSkin-Brownside.jpg?v=12330',
-                  texture: null,
-                },
-                {
-                  name: 'WWII FrogSkin Greenside',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/wwii-frogskin.jpg?v=1678555191',
-                  texture: null,
-                },
-                {
-                  name: 'Tie Dye (Limited Time)',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/tie-dye.jpg?v=1678555191',
-                  texture: null,
-                },
-                {
-                  name: 'Tropical (Limited Time)',
-                  img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/tropical.jpg?v=1678555191',
-                  texture: builderObj.data.textures.find(value => value.name.includes('Black')).img,
-                }
+              {
+                name: 'Black',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/black.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Black')).img,
+              },
+              {
+                name: 'Coyote Brown',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/coyote-brown.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
+              },
+              {
+                name: 'Tan 499',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/tan499.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
+              },
+              {
+                name: 'OD Green',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/od-green.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('OD Green')).img,
+              },
+              {
+                name: 'Ranger Green',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/ranger-green.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('OD Green')).img,
+              },
+              {
+                name: 'Wolf Grey',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/wolf-grey.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Wolf Grey')).img,
+              },
+              {
+                name: 'Navy Blue',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/navy-blue.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Blue')).img,
+              },
+              {
+                name: 'Black Blue',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/blue-black.jpg?v=1678555190',
+                texture: builderObj.data.textures.find(value => value.name.includes('Blue')).img,
+              },
+              {
+                name: 'Blaze Orange',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/blaze-orange.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Orange')).img,
+              },
+              {
+                name: 'Red',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/red.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Red')).img,
+              },
+              {
+                name: 'Lime Green',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/lime-green.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Black')).img,
+              },
+              {
+                name: 'Flourescent Pink',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/pink.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Black')).img,
+              },
+              {
+                name: 'Safety Yellow',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/saftey-yellow.jpg?v=1678555190',
+                texture: builderObj.data.textures.find(value => value.name.includes('Safety Yellow')).img,
+              },
+              {
+                name: 'Purple',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/purple.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Black')).img,
+              },
+              {
+                name: 'Multicam',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/multicam.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
+              },
+              {
+                name: 'Multicam Black',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/multicam-black.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Black')).img,
+              },
+              {
+                name: 'Multicam Tropic',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/multicam-tropic.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('OD Green')).img,
+              },
+              {
+                name: 'Multicam Arid',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/multicam-arid.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
+              },
+              {
+                name: 'Multicam Alpine',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/multicam-alpine.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('White')).img,
+              },
+              {
+                name: 'Desert MARPAT',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/desert-marpat.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
+              },
+              {
+                name: 'MARPAT',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/marpat.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
+              },
+              {
+                name: 'M05 Woodland',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/marpat.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('OD Green')).img,
+              },
+              {
+                name: 'M81 Woodland',
+                img: 'https://cdn-zeptoapps.com/product-personalizer/images/patchpanel.myshopify.com/Small-RF-M81-Woodland.jpg?v=12330',
+                texture: builderObj.data.textures.find(value => value.name.includes('OD Green')).img,
+              },
+              {
+                name: 'Kryptek Typhon',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/typhon.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Black')).img,
+              },
+              {
+                name: 'Kryptek Mandrake',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/mandrake.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('OD Green')).img,
+              },
+              {
+                name: 'Flourescent Splatter with Hot Pink thread',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/splatter.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Black')).img,
+              },
+              {
+                name: 'Flecktarn',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/flactarn.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
+              },
+              {
+                name: 'WZ93 PANTERA',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/wz93.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
+              },
+              {
+                name: 'U.S. Desert Night Camo',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/desert-night.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('OD Green')).img,
+              },
+              {
+                name: 'CADPAT AR',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/cadpat-ar.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
+              },
+              {
+                name: 'CADPAT TW',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/cadpat-tw.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('OD Green')).img,
+              },
+              {
+                name: 'AOR1',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/aor1.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
+              },
+              {
+                name: 'AOR2',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/aor2.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
+              },
+              {
+                name: 'A-TACS IX',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/a-tacs-ix.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
+              },
+              {
+                name: 'A-TACS UCON',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/a-tacs-ucon.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
+              },
+              {
+                name: 'A-TACS LE',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/a-tacs-le.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Black')).img,
+              },
+              {
+                name: 'A-TACS GHOST',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/a-tacs-ghost.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Black')).img,
+              },
+              {
+                name: 'A-TACS FG',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/a-tacs-fg.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('OD Green')).img,
+              },
+              {
+                name: 'PenCott GreenZone',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/pencott-greenzone.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('OD Green')).img,
+              },
+              {
+                name: 'PenCott BadLands',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/pencott-badlands.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
+              },
+              {
+                name: 'PenCott Sandstorm',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/pencott-sandstorm.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Coyote Brown')).img,
+              },
+              {
+                name: 'PenCott SnowDrift',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/pencott-snowdrift.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('White')).img,
+              },
+              {
+                name: 'Blue Plaid',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/blue-plaid.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Blue')).img,
+              },
+              {
+                name: 'FlockCam with Orange thread',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/flockam-with-orange-thread.jpg?v=1678555191',
+                texture: null,
+              },
+              {
+                name: 'Tadpole Tigerstripe',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/tadpole-tigerstripe.jpg?v=1678555191',
+                texture: null,
+              },
+              {
+                name: '6 Colour - Chocolate Chip',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/chocolate-chip.jpg?v=1678555191'
+              },
+              {
+                name: 'WWII FrogSkin Brownside',
+                img: 'https://cdn-zeptoapps.com/product-personalizer/images/patchpanel.myshopify.com/Small-RF-WWII-FrogSkin-Brownside.jpg?v=12330',
+                texture: null,
+              },
+              {
+                name: 'WWII FrogSkin Greenside',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/wwii-frogskin.jpg?v=1678555191',
+                texture: null,
+              },
+              {
+                name: 'Tie Dye (Limited Time)',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/tie-dye.jpg?v=1678555191',
+                texture: null,
+              },
+              {
+                name: 'Tropical (Limited Time)',
+                img: 'https://cdn.shopify.com/s/files/1/2242/5805/files/tropical.jpg?v=1678555191',
+                texture: builderObj.data.textures.find(value => value.name.includes('Black')).img,
+              }
             ];
             return textures.find(value => value.name == name).texture;
           }
@@ -2315,6 +2303,11 @@ const builderObj = {
               newFontSize = builderObj.helpers.get.patch.jacketPanel.fontSize(formData.size.current);
             }
             break;
+          case 'division jacket panel':
+            if (formData.text.primary.text.length == 0) {
+              newFontSize = builderObj.helpers.get.patch.divisionJacketPanel.fontSize(formData.size.current);
+            }
+            break;
         }
 
 
@@ -2470,29 +2463,29 @@ const builderObj = {
             return input.id === element.id;
           });
         });
-      
+
         const index = steps.findIndex(item => item.input.some(input => input.id === element.id));
         if (index === -1) {
           return; // Element not found in steps
         }
-      
+
         const i = steps[index].input.findIndex(item => item.id === element.id);
         const step = steps[index];
-      
+
         if (trigger) {
           addElement(element, step, index);
         } else {
           removeElement(element, step, i);
         }
-      
+
         function addElement(element, step, index) {
-          if(!foundElement) {
+          if (!foundElement) {
             step.input.splice(index, 0, element);
           }
         }
-      
+
         function removeElement(element, step, i) {
-          if(foundElement) {
+          if (foundElement) {
             step.input.splice(i, 1);
           }
         }
@@ -2506,7 +2499,7 @@ const builderObj = {
       //       return input.id === element.id;
       //     });
       //   });
-        
+
       //   //
       //   const index = steps.findIndex(item => item.input.some(input => input.id === element.id));
       //   console.log(index);
@@ -3345,7 +3338,7 @@ const builderObj = {
 
           return type.toLowerCase() == 'medical patch' && size == '3.5” Hexagonal';
         },
-        med : function (formData) {
+        med: function (formData) {
           const isMedPatch = builderObj.helpers.is.medical.hex(formData);
           const name = formData.img.name;
           if (isMedPatch && name.toLowerCase() == 'med') {
@@ -3356,7 +3349,7 @@ const builderObj = {
             return false;
           }
         },
-        k9 : function (formData) {
+        k9: function (formData) {
           const isMedPatch = builderObj.helpers.is.medical.hex(formData);
           const name = formData.img.name;
 
