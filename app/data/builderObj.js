@@ -3345,6 +3345,27 @@ const builderObj = {
 
           return type.toLowerCase() == 'medical patch' && size == '3.5” Hexagonal';
         },
+        med : function (formData) {
+          const isMedPatch = builderObj.helpers.is.medical.hex(formData);
+          const name = formData.img.name;
+          if (isMedPatch && name.toLowerCase() == 'med') {
+            console.log(true);
+            return true;
+          } else {
+            console.log(false);
+            return false;
+          }
+        },
+        k9 : function (formData) {
+          const isMedPatch = builderObj.helpers.is.medical.hex(formData);
+          const name = formData.img.name;
+
+          if (isMedPatch && name.toLowerCase() == 'paw k9') {
+            return true;
+          } else {
+            return false;
+          }
+        },
       },
       flagPatch: {
         ac1Front: function (formData) {

@@ -73,7 +73,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
     console.log(mask)
     //  console.log(obj.type.toLowerCase());
     const img = new Image();
-     console.log(obj.type.toLowerCase());
+    console.log(obj.type.toLowerCase());
     switch (obj.type.toLowerCase()) {
       case "color":
       case "texture":
@@ -634,7 +634,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
         {/* ${scrollPosition >= 100 ? ' w-100 fixed z-50' : ' transition relative'
         } */}
         <div
-        style={methods.helpers.is.callSign.double(formData) ? textureStyle : null}
+          style={methods.helpers.is.callSign.double(formData) ? textureStyle : null}
           className={classNames(
             methods.helpers.is.callSign.double(formData) ? "flex items-center" : "",
             ""
@@ -879,9 +879,16 @@ export function Visualizer({ formData, className, methods, ...props }) {
                 </div>
               </div>
             ) : methods.helpers.is.medical.hex(formData) ? (
+              console.log('ok'),
               <div className="flex w-full h-full justify-center">
                 <div className="flex flex-col gap-1  w-[75%] justify-center items-center" style={{}}>
-                  <div id="icon" className="h-[52%] w-[82%] relative" style={maskStyle}>
+                  <div id="icon"
+                    className={classNames(
+                      methods.helpers.is.medical.med(formData) ? "h-[52%] w-[82%]" : "",
+                      methods.helpers.is.medical.k9(formData) ? "h-[81%] w-[71%]" : "",
+                      "relative"
+                    )}
+                    style={maskStyle}>
                     <div id="glow"
                       className={classNames(
                         formData.upsells.glowBorder ? "block" : "hidden",
@@ -941,6 +948,23 @@ export function Visualizer({ formData, className, methods, ...props }) {
                       </textPath>
                     </text>
                   </svg> */}
+                    {
+                      methods.helpers.is.medical.med(formData) && (
+                        <svg height="70" width="260" className="curved-text">
+                          <path id="ellipse-id-rv" style={{ fill: 'none' }} d="M-115 -185a240 240 0 1 0 480 0a240 240 0 1 0 -480 0"></path>
+                          <defs>
+                            <pattern id="image" patternUnits="userSpaceOnUse" width="430" height="216">
+                              <image xlinkHref={formData.text.color.img} width="430" height="216"></image>
+                            </pattern>
+                          </defs>
+                          <text className="text-center w-screen" style={fontStyle} id="main-text" text-anchor="middle" fill="url(#image)" >
+                            <textPath xlinkHref="#ellipse-id-rv" startOffset="380">
+                              <tspan>{formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</tspan>
+                            </textPath>
+                          </text>
+                        </svg>
+                      )
+                    }
                   </div>
                 </div>
               </div>
