@@ -879,7 +879,6 @@ export function Visualizer({ formData, className, methods, ...props }) {
                 </div>
               </div>
             ) : methods.helpers.is.medical.hex(formData) ? (
-              console.log('ok'),
               <div className="flex w-full h-full justify-center">
                 <div className="flex flex-col gap-1  w-[75%] justify-center items-center" style={{}}>
                   <div id="icon"
@@ -896,58 +895,15 @@ export function Visualizer({ formData, className, methods, ...props }) {
                       )}
                       style={{ backgroundImage: `url("${formData.img.color.mask.glow}")`, backgroundSize: 'cover', position: 'absolute', backgroundPosition: 'center' }}
                     ></div>
+                      <div id="rod"
+                      className={classNames(
+                        1 ? "block" : "hidden",
+                        "h-full w-full"
+                      )}
+                      style={rodStyle}
+                    ></div>
                   </div>
                   <div ref={containerRef} className="flex justify-center overflow-y-hidden items-center">
-                    {/* <ReactCurvedText
-                  width={260}
-                  height={70}
-                  cx={120}
-                  cy={-185}
-                  rx={240}
-                  ry={240}
-                  startOffset={380}
-                  reversed={false}
-                  text={formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}
-                  textProps={
-                    { style: { ...fontStyle },
-                    className: "text-center w-screen",
-                    id : "main-text",
-                    textAnchor: "middle",
-                  //  fill: "url(#image-background)",
-                    }
-                  }
-                  textPathProps={null}
-                  tspanProps={null}
-                  defsProps={
-                    {
-                      children: (
-                        <pattern id="image-background" patternUnits="userSpaceOnUse" width="430" height="216">
-                          <image xlinkHref="https://cdn.shopify.com/s/files/1/2242/5805/files/flat-spice-brown.jpg?v=1692905056" width="430" height="216" />
-                        </pattern>
-                      )
-                    }
-                  }
-                  textAnchor="middle"
-                  ellipseProps={null}
-                  svgProps={
-                    { 
-                    className: "curved-text",
-                    }
-                  }
-                  />
-                  {/* <svg height="70" width="260" className="curved-text">
-                    <path id="ellipse-id-rv" style={{ fill: 'none' }} d="M-115 -185a240 240 0 1 0 480 0a240 240 0 1 0 -480 0"></path>
-                    <defs>
-                      <pattern id="image" patternUnits="userSpaceOnUse" width="430" height="216">
-                        <image xlinkHref={formData.text.color.img} width="430" height="216"></image>
-                      </pattern>
-                    </defs>
-                    <text className="text-center w-screen" style={fontStyle} id="main-text" textAnchor="middle" fill="url(#image)" >
-                      <textPath xlinkHref="#ellipse-id-rv" startOffset="380">
-                        <tspan>{formData.text.primary.text?.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</tspan>
-                      </textPath>
-                    </text>
-                  </svg> */}
                     {
                       methods.helpers.is.medical.med(formData) && (
                         <svg height="70" width="260" className="curved-text">
