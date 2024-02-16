@@ -895,13 +895,15 @@ export function Visualizer({ formData, className, methods, ...props }) {
                       )}
                       style={{ backgroundImage: `url("${formData.img.color.mask.glow}")`, backgroundSize: 'cover', position: 'absolute', backgroundPosition: 'center' }}
                     ></div>
+                    {methods.helpers.is.medical.med(formData) && (
                       <div id="rod"
-                      className={classNames(
-                        1 ? "block" : "hidden",
-                        "h-full w-full"
-                      )}
-                      style={rodStyle}
-                    ></div>
+                        className={classNames(
+                          1 ? "block" : "hidden",
+                          "h-full w-full"
+                        )}
+                        style={rodStyle}
+                      ></div>
+                    )}
                   </div>
                   <div ref={containerRef} className="flex justify-center overflow-y-hidden items-center">
                     {

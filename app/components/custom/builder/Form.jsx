@@ -934,10 +934,18 @@ export function Form({ formData, setFormData, productURL, data, config, product,
               },
             ],
           };
+
           if (!steps.some(step => step.name === flagStep.name)) {
             steps.splice(1, 0, flagStep);
           }
+          const rodObj = {
+            id: 'rodColor',
+            label: 'Rod Color',
+            type: 'input',
+            placeholder: '',
+          };
           methods.helpers.update.formElement(formTempObj, steps, methods.helpers.is.glowBorder(formData.type, formData.size.current));
+          methods.helpers.update.formElement(rodObj, steps);
         } else if (methods.helpers.is.medical.hex(formData)) {
           methods.helpers.update.formElement(formTempObj, steps);
           if (formData.img.name.toLowerCase() == "med") {
