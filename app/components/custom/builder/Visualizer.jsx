@@ -237,7 +237,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
 
     if (methods.helpers.is.callSign.double(formData)) {
       setTextureStyle(prevStyle => ({ ...prevStyle, width: '290px', height: `${290 * height / width}px` }));
-      setStyle(prevStyle => ({ ...prevStyle, width: '100%', height: '100%', padding: '0' }));
+      setStyle(prevStyle => ({ ...prevStyle, width: '100%', height: '100%', padding: '2px' }));
     } else {
       setStyle(prevStyle => ({ ...prevStyle, width: '290px', height: `${290 * height / width}px`, padding: '10px' }));
     }
@@ -643,8 +643,8 @@ export function Visualizer({ formData, className, methods, ...props }) {
             formData.type.toLowerCase().includes("flag") ? "justify-center" : "justify-center",
             methods.helpers.is.jacketPanel.hazard(formData) ? "rounded-[2rem]" : "",
             methods.helpers.is.jacketPanel.defense(formData) ? "rounded-[2rem]" : "",
-            !methods.helpers.is.callSign.double(formData) ? "shadow-medium" : "",
-            "flex items-center transform lg:scale-150"
+            !methods.helpers.is.callSign.double(formData) ? "shadow-medium transform lg:scale-150" : "",
+            "flex items-center"
           )} style={style}>
             {formData.type.toLowerCase().includes("id panel") && formData.size.current == '6” x 2”' ? (
               <div className="w-full h-full flex">
@@ -1050,7 +1050,7 @@ export function Visualizer({ formData, className, methods, ...props }) {
           formData.sides.current == 2 && (
             <>
               <div style={backTextureStyle} className="mt-6 flex items-center">
-                <div id="back-patch" className="flex items-center transform lg:scale-150"
+                <div id="back-patch" className="flex items-center"
                   style={backStyle}>
                   <div className="h-full w-full text-center overflow-x-hidden flex items-center justify-center">
                     <p id="back-main-text" className="inline-block" style={{ ...backFontStyle }}>{formData.text.primary.text.length > 0 ? formData.text.primary.text : formData.text.primary.placeholder}</p>
