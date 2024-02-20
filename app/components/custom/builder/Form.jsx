@@ -5,6 +5,15 @@ import {
   Upload,
   AdvancedSelect,
   FormButton,
+  Dialog,
+  DialogTitle,
+  DialogDescription,
+  DialogBody,
+  DialogActions,
+  Field,
+  Label,
+  Input,
+  Button,
 } from '~/components';
 
 import builderData from '~/data/builder.js';
@@ -20,6 +29,8 @@ export function Form({ formData, setFormData, productURL, data, config, product,
     markTypeOptions,
     saberOptions,
   } = methods.data;
+
+  const [open, setOpen] = useState(false);
 
   const newIRFontName = `Pro IR - +$${formData.price.upsells.proIRFontColor}(USD)`;
   const newReflectiveGlowFontName = `Reflective + Glow-in-the-Dark - +$${formData.price.upsells.reflectiveGlowFontColor}(USD)`;
@@ -607,11 +618,13 @@ export function Form({ formData, setFormData, productURL, data, config, product,
     let twoSides = event.target.value == 2 ? true : false;
     const tempColor = formData.img.color;
 
-    if(event.target.value == 2){
-      setFormData((prevFormData) =>({
+    if (event.target.value == 2) {
+      setFormData((prevFormData) => ({
         ...formData,
-        upsells: { ...prevFormData.upsells, 
-          sides: twoSides },
+        upsells: {
+          ...prevFormData.upsells,
+          sides: twoSides
+        },
         sides: {
           ...formData.sides,
           current: event.target.value
@@ -622,20 +635,22 @@ export function Form({ formData, setFormData, productURL, data, config, product,
         },
       }));
     } else {
-    setFormData((prevFormData) =>({
-      ...formData,
-      upsells: { ...prevFormData.upsells, 
-        sides: twoSides },
-      sides: {
-        ...formData.sides,
-        current: event.target.value
-      },
-      text: {
-        ...prevFormData.text,
-        color: { ...prevFormData.text.color, name: tempColor.name, img: tempColor.img }
-      },
-    }));
-  }
+      setFormData((prevFormData) => ({
+        ...formData,
+        upsells: {
+          ...prevFormData.upsells,
+          sides: twoSides
+        },
+        sides: {
+          ...formData.sides,
+          current: event.target.value
+        },
+        text: {
+          ...prevFormData.text,
+          color: { ...prevFormData.text.color, name: tempColor.name, img: tempColor.img }
+        },
+      }));
+    }
   };
 
   // Define a function to handle the change of the font text color dropdown menu
@@ -810,13 +825,17 @@ export function Form({ formData, setFormData, productURL, data, config, product,
 
   function handleFileInputChange(event) {
     const file = event.target.files[0];
-    setFormData({
-      ...formData, bgColor: {
-        ...formData.bgColor,
-        img: URL.createObjectURL(file)
-      }
-    });
-    // setFormData(prevStyle => ({ ...prevStyle, backgroundImage: `url("${URL.createObjectURL(file)}")` }));
+    console.log(event);
+    console.log(file);
+    if (file) {
+      setOpen(true);
+      setFormData({
+        ...formData, bgColor: {
+          ...formData.bgColor,
+          img: URL.createObjectURL(file)
+        }
+      });
+    }
   }
 
   // Define a function to handle the change of the comments checkbox
@@ -986,9 +1005,9 @@ export function Form({ formData, setFormData, productURL, data, config, product,
           console.log('ok')
         }
         break;
-      case 'call sign': 
-      let removeObj = {};
-        if(methods.helpers.is.callSign.double(formData)) {
+      case 'call sign':
+        let removeObj = {};
+        if (methods.helpers.is.callSign.double(formData)) {
           console.log('ok');
           formTempObj = {
             id: 'irOption',
@@ -1004,7 +1023,7 @@ export function Form({ formData, setFormData, productURL, data, config, product,
           };
 
           methods.helpers.update.formElement(removeObj, steps);
-          methods.helpers.update.formElement(formTempObj, steps, methods.helpers.is.callSign.double(formData) );
+          methods.helpers.update.formElement(formTempObj, steps, methods.helpers.is.callSign.double(formData));
 
         } else {
           removeObj = {
@@ -1017,10 +1036,10 @@ export function Form({ formData, setFormData, productURL, data, config, product,
             id: 'textColor',
             label: 'Text Color',
             type: 'advancedSelect',
-            placeholder: '', 
+            placeholder: '',
           }
         }
-      break;
+        break;
     }
   };
 
@@ -1278,6 +1297,18 @@ export function Form({ formData, setFormData, productURL, data, config, product,
                   ) : input.id.toLowerCase() == "upload" ? (
                     <>
                       <Upload label="Upload" onChange={handleFileInputChange} message={methods.helpers.get.patch.customPatch.uploadInfo(formData.size.current)} />
+                      <Dialog open={open} onClose={setOpen}>
+                        <DialogTitle>Refund payment</DialogTitle>
+                        <DialogDescription>
+                          The refund will be reflected in the customer’s bank account 2 to 3 business days after processing.
+                        </DialogDescription>
+                        <DialogActions>
+                          <Button plain onClick={() => setIsOpen(false)}>
+                            Cancel
+                          </Button>
+                          <Button onClick={() => setIsOpen(false)}>Refund</Button>
+                        </DialogActions>
+                      </Dialog>
                     </>
                   ) : input.id.toLowerCase() == "bloodtype" ? (
                     <>

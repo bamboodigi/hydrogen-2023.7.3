@@ -60,4 +60,9 @@ export {
     CustomPatch,
     JacketPanel,
     DivisionJacketPanel,
+    Dialog,
+    DialogTitle, 
+    DialogDescription, 
+    DialogBody, 
+    DialogActions,
   } from './custom';

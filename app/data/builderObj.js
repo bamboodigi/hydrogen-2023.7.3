@@ -532,9 +532,6 @@ const builderObj = {
           case 'name-tape':
             result = 'name tape';
             break;
-          case 'call-sign':
-            result = 'call sign';
-            break;
           case 'quote':
             result = 'quote';
             break;

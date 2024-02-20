@@ -15,7 +15,7 @@
 import { PhotoIcon } from '@heroicons/react/24/solid'
 
 export function Upload({ label, onChange, message }) {
-    console.log(message);
+   // console.log(message);
     return (
         <form>
             <div className="col-span-full">
