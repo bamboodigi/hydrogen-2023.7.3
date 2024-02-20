@@ -712,6 +712,12 @@ const builderObj = {
               case '6” x 3”':
                 fontSize = 48.556;
                 break;
+              case 'Agilite Plate Carrier':
+                fontSize = 60;
+                break;
+              case 'GearDynamics Plate Carrier':
+                fontSize = 40;
+                break;
               case 'DeadBug DV2':
                 fontSize = 60;
                 break;
@@ -739,6 +745,12 @@ const builderObj = {
               case '4.6” x 6.2”':
                 fontSize = 34;
                 break;
+              case 'Agilite Plate Carrier':
+                fontSize = 30;
+                break;
+              case 'GearDynamics Plate Carrier':
+                fontSize = 20;
+                break;
             }
             return fontSize;
           },
@@ -762,6 +774,12 @@ const builderObj = {
                 break;
               case '6” x 3”':
                 height = 'calc(135px/2)';
+                break;
+              case 'Agilite Plate Carrier':
+                height = 'calc(97px/2)';
+                break;
+              case 'GearDynamics Plate Carrier':
+                height = 'calc(67px/2)';
                 break;
               case 'DeadBug DV2':
                 height = 'calc(110px/2)';
@@ -1899,6 +1917,30 @@ const builderObj = {
                 WebkitMaskSize: 'cover',
                 WebkitMaskPosition: 'center',
                 maskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-deadbug.png?v=1702040296)',
+                maskSize: 'cover',
+                maskPosition: 'center',
+              }));
+              break;
+            case 'Agilite Plate Carrier':
+              setStyle(prevStyle => ({
+                ...prevStyle,
+                padding: '5px 46px',
+                WebkitMaskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-agilite.png?v=1702040296)',
+                WebkitMaskSize: 'cover',
+                WebkitMaskPosition: 'center',
+                maskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-agilite.png?v=1702040296)',
+                maskSize: 'cover',
+                maskPosition: 'center',
+              }));
+              break;
+            case "GearDynamics Plate Carrier":
+              setStyle(prevStyle => ({
+                ...prevStyle,
+                padding: '5px 47px',
+                WebkitMaskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-gear-dynamics.png?v=1702040296)',
+                WebkitMaskSize: 'cover',
+                WebkitMaskPosition: 'center',
+                maskImage: 'url(https://cdn.shopify.com/s/files/1/2242/5805/files/mask-gear-dynamics.png?v=1702040296)',
                 maskSize: 'cover',
                 maskPosition: 'center',
               }));
@@ -3268,6 +3310,26 @@ const builderObj = {
           const size = formData.size.current;
 
           if (type.toLowerCase() == 'id panel' && size == 'DeadBug DV2') {
+            return true;
+          } else {
+            return false;
+          }
+        },
+        agilite: function (formData) {
+          const type = formData.type;
+          const size = formData.size.current;
+
+          if (type.toLowerCase() == 'id panel' && size == 'Agilite Plate Carrier') {
+            return true;
+          } else {
+            return false;
+          }
+        },
+        gearDynamics: function (formData) {
+          const type = formData.type;
+          const size = formData.size.current;
+
+          if (type.toLowerCase() == 'id panel' && size == 'GearDynamics Plate Carrier') {
             return true;
           } else {
             return false;

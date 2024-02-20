@@ -6,6 +6,50 @@ const builderData = {
       config: {
         sizes: [
           {
+            size: "Agilite Plate Carrier",
+            text: {
+              primary: {
+                placeholder: 'Name',
+                maxLength: 13,
+                lines: 1,
+              },
+              secondary: {
+                placeholder: 'APOS\nNKDA',
+                maxLength: 12,
+                lines: 2,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 0,
+              glowBorder: 0,
+              hiVis: 3,
+              badge: 25,
+            }
+          },
+          {
+            size: "GearDynamics Plate Carrier",
+            text: {
+              primary: {
+                placeholder: 'Name',
+                maxLength: 13,
+                lines: 1,
+              },
+              secondary: {
+                placeholder: 'APOS\nNKDA',
+                maxLength: 12,
+                lines: 2,
+              }
+            },
+            flagEnabled: true,
+            upsells: {
+              size: 0,
+              glowBorder: 0,
+              hiVis: 3,
+              badge: 25,
+            }
+          },
+          {
             size: '3” x 2”',
             text: {
               primary: {
