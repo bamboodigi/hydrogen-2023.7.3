@@ -17,7 +17,7 @@ export { CTASection } from './CTASection';
 export { Upload } from './Upload';
 export { trackViewedProduct, trackAddedToCart, trackLoggedInUsers } from './Klaviyo';
 export { Dialog, DialogTitle, DialogDescription, DialogBody, DialogActions } from './Dialog';
-
+export { ImageCrop } from './ImageCrop';
 
 export {
     Form,

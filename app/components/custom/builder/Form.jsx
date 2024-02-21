@@ -13,6 +13,7 @@ import {
   Field,
   Label,
   Input,
+  ImageCrop,
   Button,
 } from '~/components';
 
@@ -1297,11 +1298,13 @@ export function Form({ formData, setFormData, productURL, data, config, product,
                   ) : input.id.toLowerCase() == "upload" ? (
                     <>
                       <Upload label="Upload" onChange={handleFileInputChange} message={methods.helpers.get.patch.customPatch.uploadInfo(formData.size.current)} />
+                      <ImageCrop />
                       <Dialog open={open} onClose={setOpen}>
                         <DialogTitle>Refund payment</DialogTitle>
                         <DialogDescription>
                           The refund will be reflected in the customer’s bank account 2 to 3 business days after processing.
                         </DialogDescription>
+                        <ImageCrop />
                         <DialogActions>
                           <Button plain onClick={() => setIsOpen(false)}>
                             Cancel

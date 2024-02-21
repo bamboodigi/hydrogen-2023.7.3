@@ -65,4 +65,5 @@ export {
     DialogDescription, 
     DialogBody, 
     DialogActions,
+    ImageCrop,
   } from './custom';
