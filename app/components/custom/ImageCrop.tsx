@@ -115,8 +115,9 @@ async function canvasPreview(
 }
 
 
-export function ImageCrop() {
-  const [imgSrc, setImgSrc] = useState('')
+export function ImageCrop({formData, setFormData}) {
+  console.log(formData.bgColor);
+  const [imgSrc, setImgSrc] = useState(formData.bgColor.img)
   const previewCanvasRef = useRef<HTMLCanvasElement>(null)
   const imgRef = useRef<HTMLImageElement>(null)
   const hiddenAnchorRef = useRef<HTMLAnchorElement>(null)
@@ -189,10 +190,12 @@ export function ImageCrop() {
     }
     blobUrlRef.current = URL.createObjectURL(blob)
 
-    if (hiddenAnchorRef.current) {
-      hiddenAnchorRef.current.href = blobUrlRef.current
-      hiddenAnchorRef.current.click()
-    }
+    console.log(blobUrlRef);
+
+    // if (hiddenAnchorRef.current) {
+    //   hiddenAnchorRef.current.href = blobUrlRef.current
+    //   hiddenAnchorRef.current.click()
+    // }
   }
 
   useDebounceEffect(
@@ -236,8 +239,8 @@ export function ImageCrop() {
   return (
     <div className="App">
       <div className="Crop-Controls">
-        <input type="file" accept="image/*" onChange={onSelectFile} />
-        <div>
+        {/* <input type="file" accept="image/*" onChange={onSelectFile} /> */}
+        {/* <div>
           <label htmlFor="scale-input">Scale: </label>
           <input
             id="scale-input"
@@ -264,7 +267,7 @@ export function ImageCrop() {
           <button onClick={handleToggleAspectClick}>
             Toggle aspect {aspect ? 'off' : 'on'}
           </button>
-        </div>
+        </div> */}
       </div>
       {!!imgSrc && (
         <ReactCrop
